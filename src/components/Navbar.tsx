@@ -38,7 +38,7 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full", 
         isScrolled 
-          ? "bg-chef-warm-ivory/95 backdrop-blur-sm shadow-sm border-b border-chef-gold/20" 
+          ? "bg-chef-warm-ivory/95 backdrop-blur-sm shadow-sm border-b border-chef-royal-blue/20" 
           : "bg-chef-charcoal/20 backdrop-blur-sm"
       )} 
       initial={{ opacity: 1, y: 0 }} 
@@ -67,7 +67,7 @@ const Navbar = () => {
                       navigationMenuTriggerStyle(), 
                       isScrolled 
                         ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
-                        : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                        : "text-chef-warm-ivory hover:text-chef-royal-blue bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
                     )}>
                       Home
                     </NavigationMenuLink>
@@ -80,7 +80,7 @@ const Navbar = () => {
                       navigationMenuTriggerStyle(), 
                       isScrolled 
                         ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
-                        : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                        : "text-chef-warm-ivory hover:text-chef-royal-blue bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
                     )}>
                       About
                     </NavigationMenuLink>
@@ -91,7 +91,7 @@ const Navbar = () => {
                   <NavigationMenuTrigger className={cn(
                     isScrolled 
                       ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
-                      : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                      : "text-chef-warm-ivory hover:text-chef-royal-blue bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
                   )}>
                     Cook-Alongs
                   </NavigationMenuTrigger>
@@ -123,7 +123,7 @@ const Navbar = () => {
                   <NavigationMenuTrigger className={cn(
                     isScrolled 
                       ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
-                      : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                      : "text-chef-warm-ivory hover:text-chef-royal-blue bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
                   )}>
                     Membership
                   </NavigationMenuTrigger>
@@ -151,7 +151,7 @@ const Navbar = () => {
                       navigationMenuTriggerStyle(), 
                       isScrolled 
                         ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
-                        : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                        : "text-chef-warm-ivory hover:text-chef-royal-blue bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
                     )}>
                       Recipes
                     </NavigationMenuLink>
@@ -165,7 +165,7 @@ const Navbar = () => {
                       "px-6 py-2 rounded-lg transition-all duration-300 font-inter font-medium",
                       isScrolled 
                         ? "bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light shadow-md hover:shadow-lg" 
-                        : "bg-chef-gold text-chef-charcoal hover:bg-chef-gold/90 shadow-md hover:shadow-lg"
+                        : "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light shadow-md hover:shadow-lg"
                     )}
                   >
                     Book a Class
@@ -282,7 +282,7 @@ const Navbar = () => {
             Recipes
           </Link>
           
-          <button onClick={() => scrollToSection('contact')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal bg-chef-royal-green hover:bg-chef-green-light" : "text-chef-warm-ivory bg-chef-gold hover:bg-chef-gold/90")}>
+          <button onClick={() => scrollToSection('contact')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-chef-warm-ivory bg-chef-royal-green hover:bg-chef-green-light" : "text-chef-warm-ivory bg-chef-royal-blue hover:bg-chef-blue-light")}>
             Book a Class
           </button>
         </div>

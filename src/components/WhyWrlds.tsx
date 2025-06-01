@@ -115,8 +115,8 @@ const WhyChefCircle = () => {
           variants={containerVariants}
         >
           <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
-            <div className="w-16 h-16 rounded-full bg-chef-gold/20 flex items-center justify-center mx-auto mb-6">
-              <Users className="w-8 h-8 text-chef-gold" />
+            <div className="w-16 h-16 rounded-full bg-chef-royal-blue/20 flex items-center justify-center mx-auto mb-6">
+              <Users className="w-8 h-8 text-chef-royal-blue" />
             </div>
             <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
               <AnimatedCounter end={2500} suffix="+" />
@@ -157,7 +157,7 @@ const WhyChefCircle = () => {
           variants={containerVariants}
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-blue/20 text-chef-royal-blue rounded-full text-sm font-medium">
               <Sparkles className="w-4 h-4" />
               What ChefCircle Offers You
             </div>
@@ -184,8 +184,8 @@ const WhyChefCircle = () => {
             
             <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
               <div className="flex items-start">
-                <div className="bg-chef-gold/20 rounded-full p-4 mr-6">
-                  <Users className="w-8 h-8 text-chef-gold" />
+                <div className="bg-chef-royal-blue/20 rounded-full p-4 mr-6">
+                  <Users className="w-8 h-8 text-chef-royal-blue" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Vibrant Community</h4>
@@ -208,8 +208,8 @@ const WhyChefCircle = () => {
             
             <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
               <div className="flex items-start">
-                <div className="bg-chef-bronze/20 rounded-full p-4 mr-6">
-                  <Award className="w-8 h-8 text-chef-bronze" />
+                <div className="bg-chef-royal-blue/20 rounded-full p-4 mr-6">
+                  <Award className="w-8 h-8 text-chef-royal-blue" />
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Recognition & Growth</h4>
