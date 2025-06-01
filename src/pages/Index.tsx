@@ -21,10 +21,10 @@ const Index = () => {
   return (
     <PageLayout>
       <SEO 
-        title="WRLDS - Smart Textile Technology" 
-        description="WRLDS Technologies: Pioneering smart engineering solutions with textile sensors for sports, safety, and performance monitoring."
+        title="ChefCircle - Exclusive Online Culinary Club for Gen Z & Millennials" 
+        description="Join ChefCircle, the premium online culinary club for passionate home cooks. Master cooking skills through live cook-alongs, exclusive classes, and an elite community of culinary enthusiasts."
         imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
-        keywords={['smart textiles', 'wearable technology', 'textile sensors', 'sports tech', 'safety monitoring', 'performance analytics', 'manufacturing']}
+        keywords={['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'gen z cooking', 'millennial chefs', 'gourmet cooking', 'culinary community']}
       />
       <Hero />
       <Features />

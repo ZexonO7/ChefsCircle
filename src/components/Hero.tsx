@@ -1,15 +1,13 @@
 
-import { ArrowRight, Code, Cpu, Layers, MessageSquare } from "lucide-react";
+import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   const isMobile = useIsMobile();
+  
   const containerVariants = {
-    hidden: {
-      opacity: 0
-    },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
@@ -19,17 +17,13 @@ const Hero = () => {
       }
     }
   };
+  
   const itemVariants = {
-    hidden: {
-      y: 20,
-      opacity: 0
-    },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.6
-      }
+      transition: { duration: 0.6 }
     }
   };
   
@@ -37,51 +31,65 @@ const Hero = () => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({
-        behavior: 'smooth'
-      });
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
   
-  return <motion.div className="relative mt-16 md:mt-0 w-full max-w-[100vw]" initial="hidden" animate="visible" variants={containerVariants}>
-      <div className="banner-container bg-black relative overflow-hidden h-[700px] md:h-[750px] w-full">
-        <div className="absolute inset-0 bg-black w-full">
-          <img src="/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png" alt="WRLDS Technologies Connected People" className={`w-full h-full object-cover opacity-70 grayscale ${isMobile ? 'object-right' : 'object-center'}`} />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-white"></div>
+  return (
+    <motion.div 
+      className="relative mt-16 md:mt-0 w-full max-w-[100vw]" 
+      initial="hidden" 
+      animate="visible" 
+      variants={containerVariants}
+    >
+      <div className="banner-container chef-gradient relative overflow-hidden h-[700px] md:h-[750px] w-full">
+        <div className="absolute inset-0 w-full">
+          <img 
+            src="/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png" 
+            alt="ChefCircle - Luxury Culinary Experience" 
+            className={`w-full h-full object-cover opacity-40 ${isMobile ? 'object-right' : 'object-center'}`} 
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-chef-charcoal/70 via-chef-royal-green/60 to-chef-warm-ivory"></div>
         </div>
         
         <div className="banner-overlay bg-transparent pt-21 md:pt-24 w-full">
           <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full">
             <motion.div className="w-full max-w-4xl text-center" variants={itemVariants}>
-              <motion.h1 className="banner-title text-white text-3xl md:text-5xl lg:text-6xl font-bold" variants={itemVariants}>The Future of Smart Textile Technology is here.</motion.h1>
-              <motion.p className="banner-subtitle text-gray-300 mt-4 md:mt-6 text-sm md:text-base max-w-2xl mx-auto" variants={itemVariants}>
-                We integrate AI-powered textile sensors into clothing, footwear, and wearables.
+              <motion.div className="inline-flex items-center gap-2 bg-chef-gold/20 text-chef-gold px-4 py-2 rounded-full mb-6" variants={itemVariants}>
+                <Star className="w-4 h-4 fill-current" />
+                <span className="text-sm font-medium">Exclusive Culinary Club</span>
+              </motion.div>
+              
+              <motion.h1 className="banner-title text-chef-warm-ivory text-4xl md:text-6xl lg:text-7xl font-bold font-playfair" variants={itemVariants}>
+                Master the Art of 
+                <span className="block text-chef-gold">Culinary Excellence</span>
+              </motion.h1>
+              
+              <motion.p className="banner-subtitle text-chef-warm-ivory/90 mt-6 text-lg md:text-xl max-w-3xl mx-auto font-inter" variants={itemVariants}>
+                Join ChefCircle, the exclusive online culinary club where passionate Gen Z and millennial home chefs elevate their skills through live cook-alongs, premium courses, and an elite community.
               </motion.p>
-              <motion.div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8 justify-center" variants={itemVariants}>
-                {/* Styled as a button but using an anchor tag for project navigation */}
+              
+              <motion.div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center" variants={itemVariants}>
                 <button 
-                  className="px-6 md:px-8 py-2 md:py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-all shadow-lg hover:shadow-xl hover:shadow-gray-300/20 flex items-center justify-center group text-sm md:text-base"
+                  className="chef-button-primary flex items-center justify-center group text-lg"
                   onClick={e => {
                     e.preventDefault();
                     const projectsSection = document.getElementById('projects');
                     if (projectsSection) {
-                      projectsSection.scrollIntoView({
-                        behavior: 'smooth'
-                      });
+                      projectsSection.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
                 >
-                  Explore Projects
-                  <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                  Join the Club
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
                 
-                {/* Using the Button component from shadcn but with custom styling to match the explore button */}
                 <button 
-                  className="px-6 md:px-8 py-2 md:py-3 bg-gray-700 text-white rounded-md hover:bg-gray-800 transition-all shadow-lg hover:shadow-xl hover:shadow-gray-300/20 flex items-center justify-center group text-sm md:text-base"
+                  className="chef-button-gold flex items-center justify-center group text-lg"
                   onClick={scrollToContact}
                 >
-                  Contact Us
-                  <MessageSquare className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" />
+                  Cook With Us
+                  <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
                 </button>
               </motion.div>
             </motion.div>
@@ -90,35 +98,40 @@ const Hero = () => {
       </div>
       
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 mx-auto">
-        <motion.div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4" variants={containerVariants} initial="hidden" animate="visible" transition={{
-        delay: 0.6
-      }}>
-          <motion.div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md" variants={itemVariants}>
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 flex items-center justify-center rounded-lg text-gray-500 mb-2 md:mb-3">
-              <Cpu className="w-5 h-5 md:w-6 md:h-6" />
+        <motion.div 
+          className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6" 
+          variants={containerVariants} 
+          initial="hidden" 
+          animate="visible" 
+          transition={{ delay: 0.6 }}
+        >
+          <motion.div className="chef-card p-6" variants={itemVariants}>
+            <div className="w-12 h-12 bg-chef-royal-green/10 flex items-center justify-center rounded-lg text-chef-royal-green mb-4">
+              <ChefHat className="w-6 h-6" />
             </div>
-            <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-gray-800">Smart Textiles</h3>
-            <p className="text-gray-600 text-xs md:text-sm">Intelligent fabric sensors that seamlessly integrate into clothing and footwear.</p>
+            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Live Cook-Alongs</h3>
+            <p className="text-chef-charcoal/70 font-inter">Interactive cooking sessions with renowned chefs, perfecting techniques in real-time.</p>
           </motion.div>
           
-          <motion.div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md" variants={itemVariants}>
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 flex items-center justify-center rounded-lg text-gray-500 mb-2 md:mb-3">
-              <Code className="w-5 h-5 md:w-6 md:h-6" />
+          <motion.div className="chef-card p-6" variants={itemVariants}>
+            <div className="w-12 h-12 bg-chef-royal-blue/10 flex items-center justify-center rounded-lg text-chef-royal-blue mb-4">
+              <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-gray-800">Adaptive AI</h3>
-            <p className="text-gray-600 text-xs md:text-sm">Industry-specific algorithms that transform textile sensor data into meaningful insights.</p>
+            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Elite Community</h3>
+            <p className="text-chef-charcoal/70 font-inter">Connect with passionate culinary enthusiasts and share your gastronomic journey.</p>
           </motion.div>
           
-          <motion.div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-md" variants={itemVariants}>
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-gray-100 flex items-center justify-center rounded-lg text-gray-500 mb-2 md:mb-3">
-              <Layers className="w-5 h-5 md:w-6 md:h-6" />
+          <motion.div className="chef-card p-6" variants={itemVariants}>
+            <div className="w-12 h-12 bg-chef-gold/10 flex items-center justify-center rounded-lg text-chef-gold mb-4">
+              <Star className="w-6 h-6 fill-current" />
             </div>
-            <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2 text-gray-800">Cross-Industry</h3>
-            <p className="text-gray-600 text-xs md:text-sm">Solutions for sports, military, healthcare, industrial, and professional environments.</p>
+            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Premium Content</h3>
+            <p className="text-chef-charcoal/70 font-inter">Exclusive recipes, advanced techniques, and insider culinary secrets from industry experts.</p>
           </motion.div>
         </motion.div>
       </div>
-    </motion.div>;
+    </motion.div>
+  );
 };
 
 export default Hero;

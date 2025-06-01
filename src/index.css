@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 15%;
+    --background: 249 246 241;
+    --foreground: 28 28 28;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 15%;
+    --card: 249 246 241;
+    --card-foreground: 28 28 28;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 15%;
+    --popover: 249 246 241;
+    --popover-foreground: 28 28 28;
 
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 1 68 33;
+    --primary-foreground: 249 246 241;
 
-    --secondary: 0 0% 95%;
-    --secondary-foreground: 0 0% 15%;
+    --secondary: 11 31 102;
+    --secondary-foreground: 249 246 241;
 
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 240 240 240;
+    --muted-foreground: 115 115 115;
 
-    --accent: 0 0% 95%;
-    --accent-foreground: 0 0% 15%;
+    --accent: 194 168 62;
+    --accent-foreground: 28 28 28;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 50%;
+    --border: 220 220 220;
+    --input: 220 220 220;
+    --ring: 1 68 33;
 
     --radius: 0.5rem;
   }
@@ -46,17 +46,21 @@
 
   html, body {
     @apply m-0 p-0 overflow-x-hidden;
-    width: 100vw; /* Changed from w-full to 100vw */
-    max-width: 100%; /* Added max-width */
+    width: 100vw;
+    max-width: 100%;
   }
 
   body {
-    @apply bg-white text-foreground font-space;
+    @apply bg-chef-warm-ivory text-foreground font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
   }
 }
 
 .section-container {
-  @apply w-full px-4 sm:px-6 lg:px-8 py-12; /* Removed max-w-7xl mx-auto */
+  @apply w-full px-4 sm:px-6 lg:px-8 py-12;
 }
 
 .hover-lift {
@@ -74,7 +78,7 @@
 /* Banner styles */
 .banner-container {
   position: relative;
-  width: 100vw; /* Changed from 100% to 100vw */
+  width: 100vw;
   overflow: hidden;
 }
 
@@ -96,7 +100,7 @@
 .banner-title {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1.5rem; /* Adjusted to match 20-30px spacing */
+  margin-bottom: 1.5rem;
 }
 
 .banner-subtitle {
@@ -261,4 +265,29 @@
 
 .animate-pulse-slow {
   animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* ChefCircle luxury styles */
+.chef-button {
+  @apply px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl;
+}
+
+.chef-button-primary {
+  @apply chef-button bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light;
+}
+
+.chef-button-secondary {
+  @apply chef-button bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light;
+}
+
+.chef-button-gold {
+  @apply chef-button bg-chef-gold text-chef-charcoal hover:opacity-90;
+}
+
+.chef-card {
+  @apply bg-chef-warm-ivory border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300;
+}
+
+.chef-gradient {
+  background: linear-gradient(135deg, #014421 0%, #0B1F66 100%);
 }

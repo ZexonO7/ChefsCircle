@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -29,26 +28,32 @@ const Navbar = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
   };
 
   return (
-    <motion.nav className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full", isScrolled ? "bg-white shadow-sm" : "bg-black")} initial={{
-      opacity: 1,
-      y: 0
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }}>
+    <motion.nav 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full", 
+        isScrolled 
+          ? "bg-chef-warm-ivory/95 backdrop-blur-sm shadow-sm border-b border-chef-gold/20" 
+          : "bg-chef-charcoal/20 backdrop-blur-sm"
+      )} 
+      initial={{ opacity: 1, y: 0 }} 
+      animate={{ opacity: 1, y: 0 }}
+    >
       <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <img src="/lovable-uploads/7d120ee6-3614-4b75-9c35-716d54490d67.png" alt="WRLDS Technologies Logo" className={cn("h-8 w-auto", isScrolled ? "" : "brightness-0 invert")} />
+              <div className={cn(
+                "text-2xl font-bold font-playfair transition-colors",
+                isScrolled ? "text-chef-royal-green" : "text-chef-warm-ivory"
+              )}>
+                ChefCircle
+              </div>
             </Link>
           </div>
           
@@ -58,7 +63,12 @@ const Navbar = () => {
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link to="/">
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
+                    <NavigationMenuLink className={cn(
+                      navigationMenuTriggerStyle(), 
+                      isScrolled 
+                        ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
+                        : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                    )}>
                       Home
                     </NavigationMenuLink>
                   </Link>
@@ -66,46 +76,43 @@ const Navbar = () => {
                 
                 <NavigationMenuItem>
                   <Link to="/about">
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
-                      About Us
+                    <NavigationMenuLink className={cn(
+                      navigationMenuTriggerStyle(), 
+                      isScrolled 
+                        ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
+                        : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                    )}>
+                      About
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={cn(isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
-                    Customer Cases
+                  <NavigationMenuTrigger className={cn(
+                    isScrolled 
+                      ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
+                      : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                  )}>
+                    Cook-Alongs
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 w-[400px]">
+                    <ul className="grid gap-3 p-4 w-[400px] bg-chef-warm-ivory">
                       <li>
-                        <Link to="/projects/firecat" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">FireCat 6th SENSE</div>
-                          <p className="text-sm text-gray-500">Smart textiles for firefighter safety</p>
+                        <Link to="/projects/firecat" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Live Cooking Sessions</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Interactive culinary experiences with master chefs</p>
                         </Link>
                       </li>
                       <li>
-                        <Link to="/projects/sport-retail" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">Sports Performance</div>
-                          <p className="text-sm text-gray-500">Advanced tracking for athletes</p>
+                        <Link to="/projects/sport-retail" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Technique Masterclasses</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Advanced culinary skills and methods</p>
                         </Link>
                       </li>
                       <li>
-                        <Link to="/projects/workwear" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">Workwear Climate Control</div>
-                          <p className="text-sm text-gray-500">Temperature regulation for extreme environments</p>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/projects/hockey" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">Ice Hockey Elite Tracker</div>
-                          <p className="text-sm text-gray-500">Performance tracking for ice hockey</p>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/projects/pet-tracker" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">Pet Activity Counter</div>
-                          <p className="text-sm text-gray-500">Smart collars for pet activity monitoring</p>
+                        <Link to="/projects/workwear" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Seasonal Menus</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Farm-to-table cooking with seasonal ingredients</p>
                         </Link>
                       </li>
                     </ul>
@@ -113,25 +120,26 @@ const Navbar = () => {
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={cn(isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
-                    Learn More
+                  <NavigationMenuTrigger className={cn(
+                    isScrolled 
+                      ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
+                      : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                  )}>
+                    Membership
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 w-[400px]">
+                    <ul className="grid gap-3 p-4 w-[400px] bg-chef-warm-ivory">
                       <li>
-                        <Link to="/tech-details" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">Technology Details</div>
-                          <p className="text-sm text-gray-500">How our smart textile platform works</p>
+                        <Link to="/tech-details" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Exclusive Clubs</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Join specialized culinary communities</p>
                         </Link>
                       </li>
                       <li>
-                        <Link to="/development-process" className="block p-3 space-y-1 rounded-md hover:bg-gray-100">
-                          <div className="font-medium">Development Process</div>
-                          <p className="text-sm text-gray-500">Our approach to creating custom solutions</p>
+                        <Link to="/development-process" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Pricing Tiers</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Choose your culinary journey level</p>
                         </Link>
-                      </li>
-                      <li>
-                        
                       </li>
                     </ul>
                   </NavigationMenuContent>
@@ -139,23 +147,28 @@ const Navbar = () => {
                 
                 <NavigationMenuItem>
                   <Link to="/blog">
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
-                      News
+                    <NavigationMenuLink className={cn(
+                      navigationMenuTriggerStyle(), 
+                      isScrolled 
+                        ? "text-chef-charcoal hover:text-chef-royal-green font-inter" 
+                        : "text-chef-warm-ivory hover:text-chef-gold bg-transparent hover:bg-chef-warm-ivory/10 font-inter"
+                    )}>
+                      Recipes
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <Link to="/careers">
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), isScrolled ? "text-gray-700 hover:text-gray-900" : "text-gray-100 hover:text-white bg-transparent hover:bg-gray-800")}>
-                      Careers
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-                
-                <NavigationMenuItem>
-                  <button onClick={() => scrollToSection('contact')} className={cn("px-4 py-2 rounded-md transition-colors", isScrolled ? "bg-gray-200 text-gray-700 hover:bg-gray-300" : "bg-gray-700 text-white hover:bg-gray-600")}>
-                    Contact Us
+                  <button 
+                    onClick={() => scrollToSection('contact')} 
+                    className={cn(
+                      "px-6 py-2 rounded-lg transition-all duration-300 font-inter font-medium",
+                      isScrolled 
+                        ? "bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light shadow-md hover:shadow-lg" 
+                        : "bg-chef-gold text-chef-charcoal hover:bg-chef-gold/90 shadow-md hover:shadow-lg"
+                    )}
+                  >
+                    Book a Class
                   </button>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -164,7 +177,13 @@ const Navbar = () => {
           
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button onClick={toggleMenu} className={cn("focus:outline-none", isScrolled ? "text-gray-700" : "text-white")}>
+            <button 
+              onClick={toggleMenu} 
+              className={cn(
+                "focus:outline-none", 
+                isScrolled ? "text-chef-charcoal" : "text-chef-warm-ivory"
+              )}
+            >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -172,20 +191,26 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <div className={cn("md:hidden transition-all duration-300 overflow-hidden w-full", isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0")}>
-        <div className={cn("px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-sm", isScrolled ? "bg-white" : "bg-black")}>
-          <Link to="/" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+      <div className={cn(
+        "md:hidden transition-all duration-300 overflow-hidden w-full", 
+        isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+      )}>
+        <div className={cn(
+          "px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-sm backdrop-blur-sm", 
+          isScrolled ? "bg-chef-warm-ivory/95" : "bg-chef-charcoal/90"
+        )}>
+          <Link to="/" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
             setIsMenuOpen(false);
             window.scrollTo(0, 0);
           }}>
             Home
           </Link>
           
-          <Link to="/about" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/about" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
             setIsMenuOpen(false);
             window.scrollTo(0, 0);
           }}>
-            About Us
+            About
           </Link>
           
           <div className="block">
@@ -195,41 +220,29 @@ const Navbar = () => {
               if (submenu) {
                 submenu.classList.toggle('hidden');
               }
-            }} className={cn("flex w-full justify-between items-center px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")}>
-              <span>Customer Cases</span>
+            }} className={cn("flex w-full justify-between items-center px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")}>
+              <span>Cook-Alongs</span>
               <ChevronDown className="h-4 w-4" />
             </button>
             
             <div className="hidden ml-4 mt-1 space-y-1">
-              <Link to="/projects/firecat" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+              <Link to="/projects/firecat" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo(0, 0);
               }}>
-                FireCat 6th SENSE
+                Live Cooking Sessions
               </Link>
-              <Link to="/projects/sport-retail" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+              <Link to="/projects/sport-retail" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo(0, 0);
               }}>
-                Sports Performance
+                Technique Masterclasses
               </Link>
-              <Link to="/projects/workwear" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+              <Link to="/projects/workwear" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo(0, 0);
               }}>
-                Workwear Climate Control
-              </Link>
-              <Link to="/projects/hockey" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo(0, 0);
-              }}>
-                Ice Hockey Elite Tracker
-              </Link>
-              <Link to="/projects/pet-tracker" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
-                setIsMenuOpen(false);
-                window.scrollTo(0, 0);
-              }}>
-                Pet Activity Counter
+                Seasonal Menus
               </Link>
             </div>
           </div>
@@ -241,46 +254,36 @@ const Navbar = () => {
               if (submenu) {
                 submenu.classList.toggle('hidden');
               }
-            }} className={cn("flex w-full justify-between items-center px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")}>
-              <span>Learn More</span>
+            }} className={cn("flex w-full justify-between items-center px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")}>
+              <span>Membership</span>
               <ChevronDown className="h-4 w-4" />
             </button>
             
             <div className="hidden ml-4 mt-1 space-y-1">
-              <Link to="/tech-details" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+              <Link to="/tech-details" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo(0, 0);
               }}>
-                Technology Details
+                Exclusive Clubs
               </Link>
-              <Link to="/development-process" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+              <Link to="/development-process" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
                 setIsMenuOpen(false);
                 window.scrollTo(0, 0);
               }}>
-                Development Process
+                Pricing Tiers
               </Link>
-              <button onClick={() => scrollToSection('why-wrlds')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")}>
-                Why WRLDS
-              </button>
             </div>
           </div>
           
-          <Link to="/blog" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
+          <Link to="/blog" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900")} onClick={() => {
             setIsMenuOpen(false);
             window.scrollTo(0, 0);
           }}>
-            News
+            Recipes
           </Link>
           
-          <Link to="/careers" className={cn("block px-3 py-2 rounded-md", isScrolled ? "text-gray-700 hover:bg-gray-50" : "text-gray-200 hover:bg-gray-900")} onClick={() => {
-            setIsMenuOpen(false);
-            window.scrollTo(0, 0);
-          }}>
-            Careers
-          </Link>
-          
-          <button onClick={() => scrollToSection('contact')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-gray-700 bg-gray-200 hover:bg-gray-300" : "text-white bg-gray-700 hover:bg-gray-600")}>
-            Contact Us
+          <button onClick={() => scrollToSection('contact')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-chef-charcoal bg-chef-royal-green hover:bg-chef-green-light" : "text-chef-warm-ivory bg-chef-gold hover:bg-chef-gold/90")}>
+            Book a Class
           </button>
         </div>
       </div>
