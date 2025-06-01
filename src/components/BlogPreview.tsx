@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { ArrowRight, Newspaper } from 'lucide-react';
+import { ArrowRight, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BlogPostCard from '@/components/BlogPostCard';
 import { blogPosts } from '@/data/blogPosts';
@@ -13,21 +13,21 @@ const BlogPreview = () => {
     .slice(0, 3);
 
   return (
-    <section id="blog" className="py-12 md:py-24 px-4 md:px-12 bg-white">
+    <section id="blog" className="py-16 md:py-24 px-4 md:px-12 bg-white">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <Newspaper size={20} className="text-black" />
-              <span className="text-black font-medium">Our Blog</span>
+              <BookOpen size={20} className="text-chef-royal-green" />
+              <span className="text-chef-royal-green font-medium">Culinary Insights</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">Latest Updates</h2>
-            <p className="text-gray-800 max-w-xl">
-              Explore our latest insights on smart textile technology, industry trends, and innovation.
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-chef-charcoal font-playfair">Latest from Our Kitchen</h2>
+            <p className="text-chef-charcoal/70 max-w-xl font-inter">
+              Explore our latest culinary insights, cooking tips, chef interviews, and behind-the-scenes stories from the ChefCircle community.
             </p>
           </div>
           <Link to="/blog" className="mt-4 md:mt-0">
-            <Button variant="outline" className="group border-black text-black hover:bg-black hover:text-white">
+            <Button variant="outline" className="group border-chef-royal-green text-chef-royal-green hover:bg-chef-royal-green hover:text-white">
               View All Posts
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -42,7 +42,7 @@ const BlogPreview = () => {
                   <BlogPostCard
                     title={post.title}
                     excerpt={post.excerpt}
-                    imageUrl={post.imageUrl || '/placeholder.svg'}
+                    imageUrl={post.imageUrl || '/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png'}
                     date={post.date}
                     slug={post.slug}
                     category={post.category}
@@ -59,7 +59,7 @@ const BlogPreview = () => {
                 key={post.id}
                 title={post.title}
                 excerpt={post.excerpt}
-                imageUrl={post.imageUrl || '/placeholder.svg'}
+                imageUrl={post.imageUrl || '/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png'}
                 date={post.date}
                 slug={post.slug}
                 category={post.category}
@@ -72,7 +72,7 @@ const BlogPreview = () => {
               {[0, 1, 2].map((i) => (
                 <div 
                   key={i} 
-                  className={`h-1.5 rounded-full ${i === 0 ? 'w-6 bg-gray-800' : 'w-2 bg-gray-300'}`}
+                  className={`h-1.5 rounded-full ${i === 0 ? 'w-6 bg-chef-royal-green' : 'w-2 bg-chef-charcoal/30'}`}
                 />
               ))}
             </div>

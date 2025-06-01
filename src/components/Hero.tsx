@@ -74,9 +74,9 @@ const Hero = () => {
                   className="chef-button-primary flex items-center justify-center group text-lg"
                   onClick={e => {
                     e.preventDefault();
-                    const projectsSection = document.getElementById('projects');
-                    if (projectsSection) {
-                      projectsSection.scrollIntoView({ behavior: 'smooth' });
+                    const featuresSection = document.getElementById('features');
+                    if (featuresSection) {
+                      featuresSection.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
                 >

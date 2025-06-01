@@ -1,6 +1,7 @@
+
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Layers, BarChart, AlertTriangle, Clock4, Rocket, Zap, Sparkles, ArrowRight, Award, Target, Shield, ChartBar } from "lucide-react";
+import { ChefHat, Users, BookOpen, Star, Clock4, Trophy, Sparkles, ArrowRight, Award, Target, Shield, TrendingUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 
@@ -23,40 +24,48 @@ const AnimatedCounter = ({
     once: true,
     margin: "-100px"
   });
+
   useEffect(() => {
     if (!inView) return;
     let startTime: number;
     let animationFrame: number;
+
     const startAnimation = (timestamp: number) => {
       startTime = timestamp;
       animate(timestamp);
     };
+
     const animate = (timestamp: number) => {
       const progress = Math.min((timestamp - startTime) / duration, 1);
       const currentCount = progress * end;
       setCount(currentCount);
+
       if (progress < 1) {
         animationFrame = requestAnimationFrame(animate);
       }
     };
+
     animationFrame = requestAnimationFrame(startAnimation);
+
     return () => {
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
     };
   }, [end, duration, inView]);
-  return <span ref={countRef} className="font-bold tabular-nums">
+
+  return (
+    <span ref={countRef} className="font-bold tabular-nums">
       {prefix}{count.toFixed(decimals)}{suffix}
-    </span>;
+    </span>
+  );
 };
 
-const WhyWrlds = () => {
+const WhyChefCircle = () => {
   const isMobile = useIsMobile();
+
   const containerVariants = {
-    hidden: {
-      opacity: 0
-    },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
@@ -66,148 +75,164 @@ const WhyWrlds = () => {
       }
     }
   };
+
   const itemVariants = {
-    hidden: {
-      y: 20,
-      opacity: 0
-    },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.6
-      }
+      transition: { duration: 0.6 }
     }
   };
-  return <section id="why-wrlds" className="relative py-16 md:py-24 bg-white overflow-hidden">
+
+  return (
+    <section id="why-chefcircle" className="relative py-16 md:py-24 bg-chef-warm-ivory overflow-hidden">
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div className="text-center mb-12 md:mb-16" initial="hidden" whileInView="visible" viewport={{
-        once: true,
-        margin: "-100px"
-      }} variants={containerVariants}>
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
-            Why WRLDS?
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+        >
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-sm font-medium">
+            <ChefHat className="w-4 h-4" />
+            Why Choose ChefCircle
+          </motion.div>
+          <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-chef-charcoal mb-6 font-playfair">
+            The Future of Culinary Education
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-gray-600 text-lg max-w-3xl mx-auto">
-            In an industry where complexity leads to failure, we bring simplicity and expertise to ensure your success
+          <motion.p variants={itemVariants} className="text-chef-charcoal/70 text-lg max-w-3xl mx-auto font-inter">
+            In a world where cooking shows inspire but don't truly teach, ChefCircle bridges the gap between passion and mastery through personalized, interactive culinary education.
           </motion.p>
         </motion.div>
         
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" initial="hidden" whileInView="visible" viewport={{
-        once: true,
-        margin: "-100px"
-      }} variants={containerVariants}>
-          <motion.div variants={itemVariants} className="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center hover:bg-gray-200 transition-all">
-            <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-4">
-              <BarChart className="w-8 h-8 text-gray-700" />
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+        >
+          <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
+            <div className="w-16 h-16 rounded-full bg-chef-gold/20 flex items-center justify-center mx-auto mb-6">
+              <Users className="w-8 h-8 text-chef-gold" />
             </div>
-            <h3 className="text-gray-900 text-2xl lg:text-3xl font-bold mb-3">
-              <AnimatedCounter end={3.8} decimals={1} suffix=" Billion" /> USD
+            <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
+              <AnimatedCounter end={2500} suffix="+" />
             </h3>
-            <p className="text-gray-700">Market estimated to reach this value by 2030, with massive growth potential for smart textile solutions</p>
+            <p className="text-chef-charcoal/70 font-inter">Active members learning and growing together in our exclusive culinary community</p>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center hover:bg-gray-200 transition-all">
-            <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="w-8 h-8 text-gray-700" />
+          <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
+            <div className="w-16 h-16 rounded-full bg-chef-royal-green/20 flex items-center justify-center mx-auto mb-6">
+              <Trophy className="w-8 h-8 text-chef-royal-green" />
             </div>
-            <h3 className="text-gray-900 text-2xl lg:text-3xl font-bold mb-3">
-              <AnimatedCounter end={60} suffix="%" /> 
+            <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
+              <AnimatedCounter end={150} suffix="+" />
             </h3>
-            <p className="text-gray-700">
-              of IoT projects stall at the proof-of-concept stage due to fragmented expertise and poor coordination
+            <p className="text-chef-charcoal/70 font-inter">
+              Master classes and cook-alongs completed by our members, with 95% satisfaction rate
             </p>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="bg-gray-100 p-6 rounded-xl border border-gray-200 text-center hover:bg-gray-200 transition-all">
-            <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center mx-auto mb-4">
-              <Clock4 className="w-8 h-8 text-gray-700" />
+          <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
+            <div className="w-16 h-16 rounded-full bg-chef-royal-blue/20 flex items-center justify-center mx-auto mb-6">
+              <Star className="w-8 h-8 text-chef-royal-blue" />
             </div>
-            <h3 className="text-gray-900 text-2xl lg:text-3xl font-bold mb-3">
-              <AnimatedCounter end={80} suffix="%" />
+            <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
+              <AnimatedCounter end={4.9} decimals={1} suffix="/5" />
             </h3>
-            <p className="text-gray-700">
-              Increase in time-to-market for IoT products over the past four years, creating costly delays
+            <p className="text-chef-charcoal/70 font-inter">
+              Average rating from our members, reflecting the quality of our culinary education programs
             </p>
           </motion.div>
         </motion.div>
         
-        <motion.div className="mb-12" initial="hidden" whileInView="visible" viewport={{
-          once: true,
-          margin: "-100px"
-        }} variants={containerVariants}>
-          <motion.div variants={itemVariants} className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-              What WRLDS Does for You
+        <motion.div
+          className="mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={containerVariants}
+        >
+          <motion.div variants={itemVariants} className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium">
+              <Sparkles className="w-4 h-4" />
+              What ChefCircle Offers You
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold text-chef-charcoal mb-4 font-playfair">
+              Transform Your Passion Into Mastery
             </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              We transform your ideas into market-ready solutions with tangible benefits for your business
+            <p className="text-chef-charcoal/70 max-w-3xl mx-auto font-inter">
+              We provide the structured learning, expert guidance, and supportive community that home cooks need to become confident chefs.
             </p>
           </motion.div>
           
-          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div variants={itemVariants} className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
               <div className="flex items-start">
-                <div className="bg-gray-200 rounded-full p-3 mr-4">
-                  <BarChart className="w-6 h-6 text-gray-700" />
+                <div className="bg-chef-royal-green/20 rounded-full p-4 mr-6">
+                  <ChefHat className="w-8 h-8 text-chef-royal-green" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">New Revenue Products</h4>
-                  <p className="text-gray-700">Create high-margin, sensor-enabled products for new revenue streams.</p>
+                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Expert-Led Instruction</h4>
+                  <p className="text-chef-charcoal/70 font-inter">Learn from renowned chefs and culinary experts who share their secrets, techniques, and professional insights in every session.</p>
                 </div>
               </div>
             </motion.div>
             
-            <motion.div variants={itemVariants} className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
               <div className="flex items-start">
-                <div className="bg-gray-200 rounded-full p-3 mr-4">
-                  <Sparkles className="w-6 h-6 text-gray-700" />
+                <div className="bg-chef-gold/20 rounded-full p-4 mr-6">
+                  <Users className="w-8 h-8 text-chef-gold" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Innovation That Attracts</h4>
-                  <p className="text-gray-700">Break through to dream clients with tech that makes you stand out.</p>
+                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Vibrant Community</h4>
+                  <p className="text-chef-charcoal/70 font-inter">Connect with like-minded food enthusiasts, share your creations, and get inspired by others' culinary journeys.</p>
                 </div>
               </div>
             </motion.div>
             
-            <motion.div variants={itemVariants} className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
               <div className="flex items-start">
-                <div className="bg-gray-200 rounded-full p-3 mr-4">
-                  <Zap className="w-6 h-6 text-gray-700" />
+                <div className="bg-chef-royal-blue/20 rounded-full p-4 mr-6">
+                  <BookOpen className="w-8 h-8 text-chef-royal-blue" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Comfort-Zone Development</h4>
-                  <p className="text-gray-700">We develop frontier tech while you stay in your comfort zone.</p>
+                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Structured Learning Path</h4>
+                  <p className="text-chef-charcoal/70 font-inter">Progress through carefully designed courses that build upon each other, ensuring comprehensive skill development.</p>
                 </div>
               </div>
             </motion.div>
             
-            <motion.div variants={itemVariants} className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-all">
+            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
               <div className="flex items-start">
-                <div className="bg-gray-200 rounded-full p-3 mr-4">
-                  <Rocket className="w-6 h-6 text-gray-700" />
+                <div className="bg-chef-bronze/20 rounded-full p-4 mr-6">
+                  <Award className="w-8 h-8 text-chef-bronze" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">Brand-Building Leaps</h4>
-                  <p className="text-gray-700">We enable hardware/software leaps that define your brand's future.</p>
+                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Recognition & Growth</h4>
+                  <p className="text-chef-charcoal/70 font-inter">Earn certificates, build your culinary portfolio, and track your progress as you master new skills and techniques.</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="text-center mt-10">
+          <motion.div variants={itemVariants} className="text-center mt-12">
             <Link 
-              to="/development-process" 
+              to="/blog" 
               onClick={() => window.scrollTo(0, 0)}
-              className="inline-flex items-center px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-all group"
+              className="chef-button-outline inline-flex items-center group"
             >
-              Learn more about our structured development process
+              Read More About Our Approach
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
-export default WhyWrlds;
+export default WhyChefCircle;
