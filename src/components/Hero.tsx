@@ -55,14 +55,14 @@ const Hero = () => {
         <div className="banner-overlay bg-transparent pt-21 md:pt-24 w-full">
           <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full">
             <motion.div className="w-full max-w-4xl text-center" variants={itemVariants}>
-              <motion.div className="inline-flex items-center gap-2 bg-chef-gold/20 text-chef-gold px-4 py-2 rounded-full mb-6" variants={itemVariants}>
+              <motion.div className="inline-flex items-center gap-2 bg-chef-royal-blue/20 text-chef-royal-blue px-4 py-2 rounded-full mb-6" variants={itemVariants}>
                 <Star className="w-4 h-4 fill-current" />
                 <span className="text-sm font-medium">Exclusive Culinary Club</span>
               </motion.div>
               
               <motion.h1 className="banner-title text-chef-warm-ivory text-4xl md:text-6xl lg:text-7xl font-bold font-playfair" variants={itemVariants}>
                 Master the Art of 
-                <span className="block text-chef-gold">Culinary Excellence</span>
+                <span className="block text-chef-royal-blue">Culinary Excellence</span>
               </motion.h1>
               
               <motion.p className="banner-subtitle text-chef-warm-ivory/90 mt-6 text-lg md:text-xl max-w-3xl mx-auto font-inter" variants={itemVariants}>
@@ -85,7 +85,7 @@ const Hero = () => {
                 </button>
                 
                 <button 
-                  className="chef-button-gold flex items-center justify-center group text-lg"
+                  className="chef-button-blue flex items-center justify-center group text-lg"
                   onClick={scrollToContact}
                 >
                   Cook With Us
@@ -122,7 +122,7 @@ const Hero = () => {
           </motion.div>
           
           <motion.div className="chef-card p-6" variants={itemVariants}>
-            <div className="w-12 h-12 bg-chef-gold/10 flex items-center justify-center rounded-lg text-chef-gold mb-4">
+            <div className="w-12 h-12 bg-chef-royal-blue/10 flex items-center justify-center rounded-lg text-chef-royal-blue mb-4">
               <Star className="w-6 h-6 fill-current" />
             </div>
             <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Premium Content</h3>

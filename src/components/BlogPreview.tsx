@@ -18,16 +18,16 @@ const BlogPreview = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <BookOpen size={20} className="text-chef-royal-green" />
-              <span className="text-chef-royal-green font-medium">Culinary Insights</span>
+              <BookOpen size={20} className="text-chef-royal-blue" />
+              <span className="text-chef-royal-blue font-medium">Culinary Mastery</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-chef-charcoal font-playfair">Latest from Our Kitchen</h2>
             <p className="text-chef-charcoal/70 max-w-xl font-inter">
-              Explore our latest culinary insights, cooking tips, chef interviews, and behind-the-scenes stories from the ChefCircle community.
+              Discover expert culinary techniques, exclusive recipes, seasonal ingredients, and behind-the-scenes stories from our community of passionate chefs.
             </p>
           </div>
           <Link to="/blog" className="mt-4 md:mt-0">
-            <Button variant="outline" className="group border-chef-royal-green text-chef-royal-green hover:bg-chef-royal-green hover:text-white">
+            <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white">
               View All Posts
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -72,7 +72,7 @@ const BlogPreview = () => {
               {[0, 1, 2].map((i) => (
                 <div 
                   key={i} 
-                  className={`h-1.5 rounded-full ${i === 0 ? 'w-6 bg-chef-royal-green' : 'w-2 bg-chef-charcoal/30'}`}
+                  className={`h-1.5 rounded-full ${i === 0 ? 'w-6 bg-chef-royal-blue' : 'w-2 bg-chef-charcoal/30'}`}
                 />
               ))}
             </div>

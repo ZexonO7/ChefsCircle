@@ -1,3 +1,4 @@
+
 import PageLayout from '@/components/PageLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,19 +17,19 @@ const Blog = () => {
   return (
     <PageLayout>
       <SEO 
-        title="WRLDS - News and insights about smart textile technology" 
-        description="Stay updated with the latest news and insights about sensor-integrated textiles and smart technology from WRLDS Technologies."
-        imageUrl={featuredPost?.imageUrl || "/lovable-uploads/6b0637e9-4a7b-40d0-b219-c8b7f879f93e.png"}
-        keywords={['smart textiles', 'textile technology', 'industry news', 'sensor innovation', 'wearable tech', 'smart fabrics']}
+        title="ChefCircle - Culinary Insights and Expert Cooking Tips" 
+        description="Discover the latest culinary techniques, exclusive recipes, chef interviews, and cooking insights from the ChefCircle community of passionate food enthusiasts."
+        imageUrl={featuredPost?.imageUrl || "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"}
+        keywords={['culinary techniques', 'cooking tips', 'chef recipes', 'culinary education', 'cooking skills', 'gourmet cooking', 'culinary community']}
         type="website"
       />
       
-      <div className="w-full pt-24 pb-12 bg-gradient-to-b from-black to-gray-900 text-white">
+      <div className="w-full pt-24 pb-12 bg-gradient-to-b from-chef-charcoal to-chef-royal-green text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">WRLDS News &amp; Insights</h1>
-            <p className="text-xl text-gray-300 mb-6">
-              The latest trends and news in sensor-integrated textiles and smart technology
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-playfair">Culinary Insights &amp; Expertise</h1>
+            <p className="text-xl text-chef-warm-ivory/90 mb-6 font-inter">
+              The latest culinary techniques, exclusive recipes, and expert insights from our community of passionate chefs
             </p>
           </div>
         </div>
@@ -38,7 +39,7 @@ const Blog = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredPost && (
             <Link to={`/blog/${featuredPost.slug}`} className="col-span-1 md:col-span-2 lg:col-span-3">
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 h-full">
+              <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20">
                 <div className="grid md:grid-cols-2 h-full">
                   <div 
                     className="bg-cover bg-center h-64 md:h-full p-8 flex items-center justify-center"
@@ -49,17 +50,17 @@ const Blog = () => {
                       backgroundPosition: 'center'
                     }}
                   >
-                    <div className="text-white text-center bg-black/30 backdrop-blur-sm p-4 rounded-lg">
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium inline-block mb-4">Featured</span>
-                      <h3 className="text-2xl md:text-3xl font-bold">{featuredPost.title}</h3>
+                    <div className="text-white text-center bg-chef-charcoal/60 backdrop-blur-sm p-4 rounded-lg">
+                      <span className="px-3 py-1 bg-chef-royal-blue/20 rounded-full text-sm font-medium inline-block mb-4">Featured Recipe</span>
+                      <h3 className="text-2xl md:text-3xl font-bold font-playfair">{featuredPost.title}</h3>
                     </div>
                   </div>
                   <CardContent className="p-8">
-                    <p className="text-gray-500 text-sm mb-2">Published: {featuredPost.date}</p>
-                    <p className="text-gray-700 mb-6">
+                    <p className="text-chef-charcoal/60 text-sm mb-2">Published: {featuredPost.date}</p>
+                    <p className="text-chef-charcoal/70 mb-6 font-inter">
                       {featuredPost.excerpt}
                     </p>
-                    <Button variant="outline" className="group">
+                    <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white">
                       Read more 
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
@@ -75,7 +76,7 @@ const Blog = () => {
               key={post.id}
               title={post.title}
               excerpt={post.excerpt}
-              imageUrl={post.imageUrl || '/lovable-uploads/48ecf6e2-5a98-4a9d-af6f-ae2265cd4098.png'}
+              imageUrl={post.imageUrl || '/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png'}
               date={post.date}
               slug={post.slug}
               category={post.category}
@@ -86,9 +87,9 @@ const Blog = () => {
           {blogPosts.length < 4 && Array.from({ length: Math.max(0, 4 - blogPosts.length) }).map((_, index) => (
             <BlogPostCard 
               key={`placeholder-${index}`}
-              title="Upcoming article"
-              excerpt="Stay tuned for more exciting articles about smart textiles and sensor technology."
-              imageUrl={index % 2 === 0 ? "/lovable-uploads/6b0637e9-4a7b-40d0-b219-c8b7f879f93e.png" : "/lovable-uploads/700e27d7-0513-4bfa-8ac4-f7fd6087594c.png"}
+              title="Upcoming Culinary Masterclass"
+              excerpt="Stay tuned for more exciting culinary tutorials, exclusive recipes, and expert cooking techniques from our renowned chef community."
+              imageUrl={index % 2 === 0 ? "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png" : "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"}
               date="Coming soon"
               slug="#"
               category="Upcoming"
