@@ -7,13 +7,25 @@ interface SEOProps {
   description?: string;
   imageUrl?: string;
   keywords?: string[];
+  type?: string;
+  isBlogPost?: boolean;
+  publishDate?: string;
+  modifiedDate?: string;
+  author?: string;
+  category?: string;
 }
 
 const SEO = ({ 
   title = "ChefCircle - Exclusive Online Culinary Club", 
   description = "Join ChefCircle, the premium online culinary club for Gen Z and millennials. Master cooking skills through live cook-alongs, exclusive classes, and an elite community of food enthusiasts.",
   imageUrl = "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
-  keywords = ['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'cooking community', 'gourmet cooking', 'culinary skills']
+  keywords = ['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'cooking community', 'gourmet cooking', 'culinary skills'],
+  type = "website",
+  isBlogPost = false,
+  publishDate,
+  modifiedDate,
+  author = "ChefCircle",
+  category
 }: SEOProps) => {
   return (
     <Helmet>
@@ -25,7 +37,7 @@ const SEO = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={imageUrl} />
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={type} />
       
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -33,9 +45,19 @@ const SEO = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
       
+      {/* Blog post specific meta tags */}
+      {isBlogPost && (
+        <>
+          {publishDate && <meta property="article:published_time" content={publishDate} />}
+          {modifiedDate && <meta property="article:modified_time" content={modifiedDate} />}
+          {author && <meta property="article:author" content={author} />}
+          {category && <meta property="article:section" content={category} />}
+        </>
+      )}
+      
       {/* Additional SEO */}
       <meta name="robots" content="index, follow" />
-      <meta name="author" content="ChefCircle" />
+      <meta name="author" content={author} />
       <link rel="canonical" href={window.location.href} />
     </Helmet>
   );

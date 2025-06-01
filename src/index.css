@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -35,7 +35,37 @@
     --input: 220 220 220;
     --ring: 1 68 33;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 28 28 28;
+    --foreground: 249 246 241;
+
+    --card: 28 28 28;
+    --card-foreground: 249 246 241;
+
+    --popover: 28 28 28;
+    --popover-foreground: 249 246 241;
+
+    --primary: 1 68 33;
+    --primary-foreground: 249 246 241;
+
+    --secondary: 11 31 102;
+    --secondary-foreground: 249 246 241;
+
+    --muted: 64 64 64;
+    --muted-foreground: 161 161 170;
+
+    --accent: 194 168 62;
+    --accent-foreground: 28 28 28;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 194 168 62;
   }
 }
 
@@ -52,30 +82,154 @@
 
   body {
     @apply bg-chef-warm-ivory text-foreground font-inter;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair;
+    font-feature-settings: "ss01", "ss02";
   }
 }
 
-.section-container {
-  @apply w-full px-4 sm:px-6 lg:px-8 py-12;
+/* ChefCircle Component System */
+@layer components {
+  .chef-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .chef-section {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .chef-card {
+    @apply bg-chef-warm-ivory border border-chef-gold/20 rounded-2xl shadow-chef-luxury hover:shadow-chef-gold transition-all duration-500 backdrop-blur-sm;
+  }
+
+  .chef-card-luxury {
+    @apply chef-card bg-gradient-to-br from-chef-warm-ivory to-chef-cream border-chef-gold/30 shadow-chef-luxury hover:shadow-chef-gold hover:scale-[1.02] transition-all duration-500;
+  }
+
+  .chef-button {
+    @apply px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-inter;
+  }
+
+  .chef-button-primary {
+    @apply chef-button bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light active:bg-chef-forest;
+  }
+
+  .chef-button-secondary {
+    @apply chef-button bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light active:bg-chef-navy;
+  }
+
+  .chef-button-gold {
+    @apply chef-button bg-gradient-to-r from-chef-gold to-chef-bronze text-chef-charcoal hover:from-chef-bronze hover:to-chef-gold active:scale-95;
+  }
+
+  .chef-button-outline {
+    @apply chef-button border-2 border-chef-royal-green text-chef-royal-green bg-transparent hover:bg-chef-royal-green hover:text-chef-warm-ivory;
+  }
+
+  .chef-gradient {
+    background: linear-gradient(135deg, #014421 0%, #0B1F66 100%);
+  }
+
+  .chef-gradient-gold {
+    background: linear-gradient(135deg, #C2A83E 0%, #A8944D 100%);
+  }
+
+  .chef-gradient-luxury {
+    background: linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%);
+  }
+
+  .chef-text-gradient {
+    @apply bg-gradient-to-r from-chef-royal-green to-chef-royal-blue bg-clip-text text-transparent;
+  }
+
+  .chef-text-gold {
+    @apply bg-gradient-to-r from-chef-gold to-chef-bronze bg-clip-text text-transparent;
+  }
+
+  .chef-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-chef-gold/20 text-chef-gold border border-chef-gold/30;
+  }
+
+  .chef-badge-green {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-chef-royal-green/20 text-chef-royal-green border border-chef-royal-green/30;
+  }
+
+  .chef-badge-blue {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-chef-royal-blue/20 text-chef-royal-blue border border-chef-royal-blue/30;
+  }
 }
 
-.hover-lift {
-  @apply transition-transform duration-300;
+/* Typography System */
+@layer components {
+  .chef-heading-xl {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold font-playfair leading-tight;
+  }
+
+  .chef-heading-lg {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold font-playfair leading-tight;
+  }
+
+  .chef-heading-md {
+    @apply text-2xl md:text-3xl font-bold font-playfair leading-tight;
+  }
+
+  .chef-heading-sm {
+    @apply text-xl md:text-2xl font-semibold font-playfair leading-tight;
+  }
+
+  .chef-body-lg {
+    @apply text-lg md:text-xl font-inter leading-relaxed;
+  }
+
+  .chef-body {
+    @apply text-base md:text-lg font-inter leading-relaxed;
+  }
+
+  .chef-body-sm {
+    @apply text-sm md:text-base font-inter leading-relaxed;
+  }
 }
 
-.hover-lift:hover {
-  @apply transform -translate-y-1;
+/* Animation System */
+@layer components {
+  .chef-hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-chef-luxury;
+  }
+
+  .chef-hover-scale {
+    @apply transition-all duration-300 hover:scale-105;
+  }
+
+  .chef-hover-glow {
+    @apply transition-all duration-300 hover:shadow-chef-gold hover:animate-chef-glow;
+  }
+
+  .chef-fade-in {
+    @apply opacity-0 animate-[fade-in_0.8s_ease-out_forwards];
+  }
+
+  .chef-slide-up {
+    @apply translate-y-8 opacity-0 animate-[slide-up_0.8s_ease-out_forwards];
+  }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }
 
-.smooth-scroll {
-  scroll-behavior: smooth;
-}
-
-/* Banner styles */
+/* Luxury Layout Elements */
 .banner-container {
   position: relative;
   width: 100vw;
@@ -108,186 +262,55 @@
   max-width: 800px;
 }
 
-/* Animation classes */
-@keyframes float {
-  0% {
-    transform: translateY(0);
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .banner-title {
+    font-size: 2rem;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
+  
+  .banner-subtitle {
+    font-size: 1rem;
   }
 }
 
-@keyframes rotate-float {
-  0% {
-    transform: translateY(0) rotate(0deg);
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  .chef-hover-lift,
+  .chef-hover-scale,
+  .chef-hover-glow {
+    transition: none;
   }
-  50% {
-    transform: translateY(-10px) rotate(10deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-}
-
-@keyframes pulse-line {
-  0% {
-    opacity: 0.3;
-    stroke-width: 1px;
-  }
-  50% {
+  
+  .chef-fade-in,
+  .chef-slide-up {
+    animation: none;
     opacity: 1;
-    stroke-width: 2px;
-  }
-  100% {
-    opacity: 0.3;
-    stroke-width: 1px;
+    transform: none;
   }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
+/* Focus States */
+.chef-button:focus-visible,
+.chef-card:focus-visible {
+  @apply outline-2 outline-offset-2 outline-chef-royal-green;
+}
+
+/* Smooth Scrolling */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Loading States */
+.chef-loading {
+  @apply animate-pulse bg-chef-gold/20;
+}
+
+/* Print Styles */
+@media print {
+  .chef-gradient,
+  .chef-gradient-gold,
+  .chef-gradient-luxury {
+    background: #f9f6f1 !important;
+    color: #1c1c1c !important;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animation-delay-100 {
-  animation-delay: 100ms !important;
-}
-
-.animation-delay-200 {
-  animation-delay: 200ms !important;
-}
-
-.animation-delay-300 {
-  animation-delay: 300ms !important;
-}
-
-.animation-delay-400 {
-  animation-delay: 400ms !important;
-}
-
-.animation-delay-500 {
-  animation-delay: 500ms !important;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-circle {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-line {
-  animation: pulse-line 4s ease-in-out infinite;
-}
-
-.animate-rotate {
-  animation: rotate 20s linear infinite;
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-slide-in {
-  animation: slideIn 0.6s ease-out forwards;
-}
-
-/* Hover animations */
-.hover-underline {
-  position: relative;
-}
-
-.hover-underline:after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  left: 0;
-  background-color: currentColor;
-  transition: width 0.3s ease;
-}
-
-.hover-underline:hover:after {
-  width: 100%;
-}
-
-.hover-scale {
-  transition: transform 0.3s ease;
-}
-
-.hover-scale:hover {
-  transform: scale(1.05);
-}
-
-/* New pulse animation */
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
-}
-
-/* ChefCircle luxury styles */
-.chef-button {
-  @apply px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl;
-}
-
-.chef-button-primary {
-  @apply chef-button bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light;
-}
-
-.chef-button-secondary {
-  @apply chef-button bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light;
-}
-
-.chef-button-gold {
-  @apply chef-button bg-chef-gold text-chef-charcoal hover:opacity-90;
-}
-
-.chef-card {
-  @apply bg-chef-warm-ivory border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300;
-}
-
-.chef-gradient {
-  background: linear-gradient(135deg, #014421 0%, #0B1F66 100%);
 }

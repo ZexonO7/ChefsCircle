@@ -70,7 +70,11 @@ export default {
 					'charcoal': '#1C1C1C',
 					'gold': '#C2A83E',
 					'green-light': '#036B35',
-					'blue-light': '#1A3A8A'
+					'blue-light': '#1A3A8A',
+					'cream': '#FDF8F0',
+					'forest': '#0A3D1F',
+					'navy': '#091852',
+					'bronze': '#A8944D'
 				}
 			},
 			borderRadius: {
@@ -82,6 +86,15 @@ export default {
 				'playfair': ['Playfair Display', 'serif'],
 				'inter': ['Inter', 'sans-serif'],
 				'space': ['Space Grotesk', 'sans-serif'],
+			},
+			backgroundImage: {
+				'chef-gradient': 'linear-gradient(135deg, #014421 0%, #0B1F66 100%)',
+				'gold-gradient': 'linear-gradient(135deg, #C2A83E 0%, #A8944D 100%)',
+				'luxury-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)',
+			},
+			boxShadow: {
+				'chef-luxury': '0 20px 25px -5px rgba(1, 68, 33, 0.1), 0 10px 10px -5px rgba(1, 68, 33, 0.04)',
+				'chef-gold': '0 20px 25px -5px rgba(194, 168, 62, 0.1), 0 10px 10px -5px rgba(194, 168, 62, 0.04)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -119,6 +132,10 @@ export default {
 				'shimmer': {
 					'0%': { backgroundPosition: '-200% 0' },
 					'100%': { backgroundPosition: '200% 0' }
+				},
+				'chef-glow': {
+					'0%, 100%': { boxShadow: '0 0 20px rgba(194, 168, 62, 0.3)' },
+					'50%': { boxShadow: '0 0 30px rgba(194, 168, 62, 0.5)' }
 				}
 			},
 			animation: {
@@ -130,7 +147,8 @@ export default {
 				'scale-in-out': 'scale-in-out 3s ease-in-out infinite',
 				'rotate-slow': 'rotate-slow 20s linear infinite',
 				'bounce-subtle': 'bounce-subtle 2s ease-in-out infinite',
-				'shimmer': 'shimmer 3s linear infinite'
+				'shimmer': 'shimmer 3s linear infinite',
+				'chef-glow': 'chef-glow 3s ease-in-out infinite'
 			}
 		}
 	},
