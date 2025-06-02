@@ -219,23 +219,23 @@ const Features = () => {
           </div>
         </div>
 
-        <div className="feature-item bg-chef-warm-ivory rounded-2xl p-8 md:p-12">
+        <div className="feature-item chef-gradient-blue rounded-2xl p-8 md:p-12">
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium">
               <Crown className="w-4 h-4" />
-              Membership Benefits
+              Ready to Evaluate Your Culinary Journey
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-4 text-chef-charcoal font-playfair">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 text-chef-warm-ivory font-playfair">
               Premium Culinary Experience
             </h3>
-            <p className="text-chef-charcoal/70 max-w-2xl mx-auto font-inter">
+            <p className="text-chef-warm-ivory/90 max-w-2xl mx-auto font-inter">
               Join an exclusive community of culinary enthusiasts and gain access to world-class instruction, premium content, and invaluable networking opportunities.
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {membershipBenefits.map((benefit, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 text-center chef-hover-lift border border-chef-gold/10">
+              <div key={index} className="bg-chef-warm-ivory rounded-xl p-6 text-center chef-hover-lift border border-chef-gold/10">
                 <div className="bg-chef-gold/10 rounded-full p-4 w-16 h-16 flex items-center justify-center mx-auto mb-4">
                   {benefit.icon}
                 </div>
