@@ -40,21 +40,16 @@ const Navbar = () => {
     <motion.nav 
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full",
-        isScrolled 
-          ? "bg-chef-warm-ivory/95 backdrop-blur-sm shadow-sm border-b border-chef-royal-blue/20" 
-          : "bg-chef-charcoal/20 backdrop-blur-sm"
+        "bg-chef-royal-blue/95 backdrop-blur-sm shadow-sm border-b border-chef-royal-blue/20"
       )}
       initial={{ opacity: 1, y: 0 }}
       animate={{ opacity: 1, y: 0 }}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto">
-        <div className="flex items-center justify-between h-16 bg-chef-navy">
+        <div className="flex items-center justify-between h-16 bg-chef-royal-blue">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <div className={cn(
-                "text-2xl font-bold font-playfair transition-colors",
-                isScrolled ? "text-chef-royal-green" : "text-chef-warm-ivory"
-              )}>
+              <div className="text-2xl font-bold font-playfair transition-colors text-chef-warm-ivory">
                 ChefCircle
               </div>
             </Link>
@@ -62,7 +57,7 @@ const Navbar = () => {
           
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <NavigationMenu className={cn(isScrolled ? "" : "text-white")}>
+            <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link to="/">
@@ -167,10 +162,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button 
               onClick={toggleMenu} 
-              className={cn(
-                "focus:outline-none",
-                isScrolled ? "text-chef-charcoal" : "text-chef-warm-ivory"
-              )}
+              className="focus:outline-none text-chef-warm-ivory"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -183,16 +175,10 @@ const Navbar = () => {
         "md:hidden transition-all duration-300 overflow-hidden w-full",
         isMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
       )}>
-        <div className={cn(
-          "px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-sm backdrop-blur-sm",
-          isScrolled ? "bg-chef-warm-ivory/95" : "bg-chef-charcoal/90"
-        )}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-sm backdrop-blur-sm bg-chef-royal-blue/95">
           <Link 
             to="/" 
-            className={cn(
-              "block px-3 py-2 rounded-md",
-              isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-            )}
+            className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
             onClick={() => {
               setIsMenuOpen(false);
               window.scrollTo(0, 0);
@@ -203,10 +189,7 @@ const Navbar = () => {
           
           <Link 
             to="/about" 
-            className={cn(
-              "block px-3 py-2 rounded-md",
-              isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-            )}
+            className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
             onClick={() => {
               setIsMenuOpen(false);
               window.scrollTo(0, 0);
@@ -224,10 +207,7 @@ const Navbar = () => {
                   submenu.classList.toggle('hidden');
                 }
               }}
-              className={cn(
-                "flex w-full justify-between items-center px-3 py-2 rounded-md",
-                isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-              )}
+              className="flex w-full justify-between items-center px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
             >
               <span>Cook-Alongs</span>
               <ChevronDown className="h-4 w-4" />
@@ -236,10 +216,7 @@ const Navbar = () => {
             <div className="hidden ml-4 mt-1 space-y-1">
               <Link 
                 to="/projects/firecat" 
-                className={cn(
-                  "block px-3 py-2 rounded-md",
-                  isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-                )}
+                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
@@ -249,10 +226,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/projects/sport-retail" 
-                className={cn(
-                  "block px-3 py-2 rounded-md",
-                  isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-                )}
+                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
@@ -262,10 +236,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/projects/workwear" 
-                className={cn(
-                  "block px-3 py-2 rounded-md",
-                  isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-                )}
+                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
@@ -285,10 +256,7 @@ const Navbar = () => {
                   submenu.classList.toggle('hidden');
                 }
               }}
-              className={cn(
-                "flex w-full justify-between items-center px-3 py-2 rounded-md",
-                isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-              )}
+              className="flex w-full justify-between items-center px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
             >
               <span>Membership</span>
               <ChevronDown className="h-4 w-4" />
@@ -297,10 +265,7 @@ const Navbar = () => {
             <div className="hidden ml-4 mt-1 space-y-1">
               <Link 
                 to="/tech-details" 
-                className={cn(
-                  "block px-3 py-2 rounded-md",
-                  isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-                )}
+                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
@@ -310,10 +275,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 to="/development-process" 
-                className={cn(
-                  "block px-3 py-2 rounded-md",
-                  isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-                )}
+                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
@@ -326,10 +288,7 @@ const Navbar = () => {
           
           <Link 
             to="/blog" 
-            className={cn(
-              "block px-3 py-2 rounded-md",
-              isScrolled ? "text-chef-charcoal hover:bg-chef-50" : "text-chef-warm-ivory hover:bg-chef-900"
-            )}
+            className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
             onClick={() => {
               setIsMenuOpen(false);
               window.scrollTo(0, 0);
