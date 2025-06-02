@@ -1,9 +1,10 @@
 
 import PageLayout from '@/components/PageLayout';
-import { ArrowLeft, Mail, Linkedin, Phone } from 'lucide-react';
+import { ArrowLeft, Mail, Linkedin, Phone, ChefHat, Users, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { useEffect } from 'react';
+import SEO from '@/components/SEO';
 
 const Careers = () => {
   useEffect(() => {
@@ -11,12 +12,18 @@ const Careers = () => {
   }, []);
   
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-chef-warm-ivory">
       <PageLayout showContact={false}>
+        <SEO 
+          title="Join Our Culinary Team - ChefCircle Careers" 
+          description="Join ChefCircle's passionate team of culinary educators and food enthusiasts. We're looking for talented individuals to help revolutionize culinary education."
+          imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+          keywords={['culinary careers', 'chef jobs', 'cooking instructor', 'culinary education', 'food industry careers']}
+        />
         <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
           <div className="container mx-auto">
             <div className="max-w-6xl mx-auto">
-              <Link to="/" className="inline-flex items-center text-gray-500 hover:text-gray-700 mb-6 transition-colors">
+              <Link to="/" className="inline-flex items-center text-chef-charcoal/60 hover:text-chef-charcoal mb-6 transition-colors">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home
               </Link>
@@ -25,9 +32,9 @@ const Careers = () => {
                 initial={{ opacity: 0, y: -10 }} 
                 animate={{ opacity: 1, y: 0 }} 
                 transition={{ duration: 0.5 }} 
-                className="text-4xl font-bold mb-6"
+                className="text-4xl font-bold mb-6 text-chef-charcoal font-playfair"
               >
-                Join Our Team
+                Join Our Culinary Team
               </motion.h1>
               
               <div className="prose prose-lg max-w-none">
@@ -35,18 +42,18 @@ const Careers = () => {
                   initial={{ opacity: 0 }} 
                   animate={{ opacity: 1 }} 
                   transition={{ duration: 0.5, delay: 0.2 }} 
-                  className="text-xl text-gray-600 mb-4"
+                  className="text-xl text-chef-charcoal/70 mb-4 font-inter"
                 >
-                  We're looking for passionate innovators to help us revolutionize the smart textile industry.
+                  We're looking for passionate culinary innovators to help us revolutionize the online cooking education industry.
                 </motion.p>
                 
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="text-xl text-gray-600 mb-12"
+                  className="text-xl text-chef-charcoal/70 mb-12 font-inter"
                 >
-                  We welcome both full-time professionals and interns who are eager to contribute to groundbreaking technology.
+                  We welcome both full-time culinary professionals and interns who are eager to contribute to the future of culinary education.
                 </motion.p>
                 
                 <motion.div 
@@ -55,57 +62,61 @@ const Careers = () => {
                   transition={{ duration: 0.6 }}
                   className="mb-16"
                 >
-                  <h2 className="text-3xl font-bold mb-6">Why Join WRLDS?</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Why Join ChefCircle?</h2>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     {[
                       {
-                        title: "Innovation",
-                        description: "Work on cutting-edge technology that's changing multiple industries."
+                        icon: <ChefHat className="w-8 h-8 text-chef-royal-green" />,
+                        title: "Culinary Innovation",
+                        description: "Work with cutting-edge culinary education technology that's changing how people learn to cook."
                       },
                       {
-                        title: "Impact",
-                        description: "Create solutions that enhance safety, performance, and quality of life."
+                        icon: <Users className="w-8 h-8 text-chef-royal-blue" />,
+                        title: "Community Impact",
+                        description: "Create experiences that bring together passionate food enthusiasts from around the world."
                       },
                       {
-                        title: "Growth",
-                        description: "Develop your skills in a rapidly expanding field with diverse challenges."
+                        icon: <Award className="w-8 h-8 text-chef-royal-green" />,
+                        title: "Professional Growth",
+                        description: "Develop your skills in a rapidly expanding field with diverse culinary challenges and opportunities."
                       }
                     ].map((benefit, i) => (
-                      <div key={i} className="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full">
-                        <h3 className="font-bold text-lg mb-2">{benefit.title}</h3>
-                        <p className="text-gray-600">{benefit.description}</p>
+                      <div key={i} className="chef-card p-6 h-full chef-hover-lift">
+                        <div className="mb-4">{benefit.icon}</div>
+                        <h3 className="font-bold text-lg mb-2 text-chef-charcoal font-playfair">{benefit.title}</h3>
+                        <p className="text-chef-charcoal/70 font-inter">{benefit.description}</p>
                       </div>
                     ))}
                   </div>
                   
-                  <div className="bg-white rounded-xl border border-gray-200 p-8 shadow-sm mt-12">
-                    <h3 className="font-bold text-xl mb-6">Contact Our COO</h3>
-                    <div className="bg-white rounded-xl p-6 border border-gray-200">
+                  <div className="chef-card p-8 shadow-chef-luxury mt-12">
+                    <h3 className="font-bold text-xl mb-6 text-chef-charcoal font-playfair">Contact Our Community Director</h3>
+                    <div className="chef-card bg-chef-warm-ivory p-6 border border-chef-royal-green/20">
                       <div className="flex flex-col items-center text-center">
                         <img 
-                          src="/lovable-uploads/a9bb9110-964a-43b0-a5ab-7162140cd133.png"
-                          alt="Love Anderberg"
-                          className="w-32 h-32 rounded-full mb-4 object-cover filter grayscale"
+                          src="/lovable-uploads/3de85ddd-15e1-4216-9697-f91abb9a47ce.png"
+                          alt="Elena Dubois"
+                          className="w-32 h-32 rounded-full mb-4 object-cover"
                         />
-                        <h3 className="text-xl font-bold text-gray-900">Love Anderberg</h3>
-                        <p className="text-gray-600 mb-4">COO</p>
+                        <h3 className="text-xl font-bold text-chef-charcoal font-playfair">Elena Dubois</h3>
+                        <p className="text-chef-royal-blue mb-4 font-medium">Community Director</p>
                         <div className="flex flex-col space-y-3">
-                          <a href="mailto:love@wrlds.com" className="flex items-center text-gray-700 hover:text-blue-600">
+                          <a href="mailto:elena@chefcircle.com" className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors">
                             <Mail className="w-5 h-5 mr-2" />
-                            love@wrlds.com
+                            elena@chefcircle.com
                           </a>
                           <a 
-                            href="https://www.linkedin.com/in/love-anderberg-67549a174/" 
+                            href="https://www.linkedin.com/in/elena-dubois-chef/" 
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center text-gray-700 hover:text-blue-600"
+                            className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors"
                           >
                             <Linkedin className="w-5 h-5 mr-2" />
                             LinkedIn Profile
                           </a>
-                          <a href="tel:+46760149508" className="flex items-center text-gray-700 hover:text-blue-600">
+                          <a href="tel:+1555-CHEF-123" className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors">
                             <Phone className="w-5 h-5 mr-2" />
-                            076-014 95 08
+                            +1 (555) CHEF-123
                           </a>
                         </div>
                       </div>

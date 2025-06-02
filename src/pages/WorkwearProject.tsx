@@ -1,105 +1,134 @@
+
 import ProjectPageLayout from '@/components/ProjectPageLayout';
-import { Thermometer, ShieldCheck, Mountain, FileSymlink, Cpu, FlaskConical } from 'lucide-react';
+import { ChefHat, Leaf, Calendar, Award, Clock, Utensils } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 const WorkwearProject = () => {
   return (
-    <ProjectPageLayout
-      title="Workwear Climate Control"
-      subtitle="Intelligent temperature regulation for extreme work environments"
-      imageUrl="/lovable-uploads/6b0637e9-4a7b-40d0-b219-c8b7f879f93e.png"
-      brandName="European Multinational Textile Producer"
-    >
-      <div className="bg-yellow-50 p-4 rounded-lg mb-6 flex items-center">
-        <FlaskConical className="h-5 w-5 text-yellow-600 mr-2 flex-shrink-0" />
-        <p className="text-yellow-700 font-medium text-sm">Ongoing R&D Project — Currently in Prototyping Phase</p>
-      </div>
-      
-      <h2 className="text-3xl font-bold mb-6">Case Study: Advanced Climate Control Workwear</h2>
-      
-      <div className="bg-gray-50 p-6 rounded-lg mb-8">
-        <h3 className="text-xl font-semibold mb-2">Background</h3>
-        <p>
-          A leading European textile manufacturer sought to create next-generation workwear for professionals operating in 
-          extreme temperature environments. From arctic construction workers to foundry operators, they needed a solution 
-          that could actively regulate body temperature without compromising mobility or safety compliance.
-        </p>
-      </div>
-      
-      <h3 className="text-2xl font-semibold mb-4">Challenge</h3>
-      <p>
-        Traditional approaches to temperature regulation in workwear were either passive (insulation) or bulky active systems 
-        with external power sources and limited zoning capabilities. The client needed a fully integrated solution that could adapt 
-        to changing conditions, worker activity levels, and provide targeted temperature control while maintaining all safety certifications.
-      </p>
-      
-      <h3 className="text-2xl font-semibold mb-4 mt-8">Solution</h3>
-      <p>
-        WRLDS Technologies developed a comprehensive climate control workwear platform featuring:
-      </p>
-      
-      <div className="grid md:grid-cols-2 gap-6 my-8">
-        <div className="bg-white shadow-md rounded-lg p-6 border border-gray-100 flex items-start">
-          <Thermometer className="h-6 w-6 text-black mr-3 flex-shrink-0 mt-1" />
-          <div>
-            <h4 className="text-lg font-semibold mb-2 text-gray-700">Adaptive Heating/Cooling</h4>
-            <p>Textile-integrated heating and cooling elements with multi-zone temperature control.</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-chef-warm-ivory">
+      <SEO 
+        title="Seasonal Menus - ChefCircle" 
+        description="Discover the art of seasonal cooking with our farm-to-table menu experiences featuring the finest seasonal ingredients."
+        imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+        keywords={['seasonal cooking', 'farm to table', 'seasonal menus', 'fresh ingredients', 'seasonal recipes']}
+      />
+      <ProjectPageLayout
+        title="Seasonal Menus"
+        subtitle="Farm-to-table cooking with seasonal ingredients"
+        imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+        brandName="ChefCircle"
+        darkMode={false}
+      >
+        <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Experience: Seasonal Menu Collection</h2>
         
-        <div className="bg-white shadow-md rounded-lg p-6 border border-gray-100 flex items-start">
-          <Cpu className="h-6 w-6 text-black mr-3 flex-shrink-0 mt-1" />
-          <div>
-            <h4 className="text-lg font-semibold mb-2 text-gray-700">Smart Control System</h4>
-            <p>AI-driven controller that learns user preferences and optimizes power usage based on conditions.</p>
-          </div>
-        </div>
-        
-        <div className="bg-white shadow-md rounded-lg p-6 border border-gray-100 flex items-start">
-          <ShieldCheck className="h-6 w-6 text-black mr-3 flex-shrink-0 mt-1" />
-          <div>
-            <h4 className="text-lg font-semibold mb-2 text-gray-700">Safety Integration</h4>
-            <p>Systems designed to maintain all industry safety certifications including flame resistance and electrical safety.</p>
-          </div>
-        </div>
-        
-        <div className="bg-white shadow-md rounded-lg p-6 border border-gray-100 flex items-start">
-          <Mountain className="h-6 w-6 text-black mr-3 flex-shrink-0 mt-1" />
-          <div>
-            <h4 className="text-lg font-semibold mb-2 text-gray-700">Extreme Durability</h4>
-            <p>Components rated for operation in extreme temperatures with full washability and construction durability.</p>
-          </div>
-        </div>
-      </div>
-      
-      <h4 className="text-xl font-semibold mb-4">Technical Specifications</h4>
-      <ul className="list-disc pl-6 space-y-2 mb-8">
-        <li>Modular design supporting full-body integration or focused application</li>
-        <li>Extended battery life depending on conditions and settings</li>
-        <li>Smartphone app for manual control and environmental monitoring</li>
-        <li>Washable for multiple industrial cleaning cycles without performance degradation</li>
-        <li>Compliance with industry-specific safety standards</li>
-      </ul>
-      
-      <h3 className="text-2xl font-semibold mb-4 mt-8">Preliminary Results</h3>
-      <p>
-        The prototype climate-controlled workwear has shown promising results in controlled testing environments. 
-        The technology is being evaluated by select industrial clients across Northern Europe and Canada, focusing on 
-        oil & gas, mining, and construction sectors operating in extreme climates. Initial feedback indicates 
-        significant potential for reducing cold-related work disruptions.
-      </p>
-      
-      <div className="bg-blue-50 p-6 rounded-lg mt-8 flex items-start">
-        <FileSymlink className="h-6 w-6 text-blue-500 mr-3 flex-shrink-0 mt-1" />
-        <div>
-          <h4 className="text-lg font-semibold mb-2 text-gray-700">Ongoing Development</h4>
-          <p>
-            Current R&D efforts are focused on refining the prototypes, improving power efficiency, and 
-            exploring the potential to include environmental hazard detection capabilities 
-            and integration with wider workplace safety systems.
+        <div className="chef-card p-6 mb-8">
+          <h3 className="text-xl font-semibold mb-2 text-chef-charcoal font-playfair">Celebrate Every Season</h3>
+          <p className="text-chef-charcoal/70 font-inter">
+            Our seasonal menu collection celebrates the finest ingredients each season has to offer. From spring's 
+            delicate vegetables to winter's hearty comfort foods, learn to create menus that capture the essence 
+            of each season while supporting local farmers and sustainable cooking practices.
           </p>
         </div>
-      </div>
-    </ProjectPageLayout>
+        
+        <h3 className="text-2xl font-semibold mb-4 text-chef-charcoal font-playfair">Seasonal Philosophy</h3>
+        <p className="text-chef-charcoal/70 mb-6 font-inter">
+          Cooking with the seasons isn't just about flavor—it's about connecting with nature's rhythm, 
+          supporting local agriculture, and discovering how ingredients at their peak can transform your cooking.
+        </p>
+        
+        <h3 className="text-2xl font-semibold mb-4 mt-8 text-chef-charcoal font-playfair">Seasonal Highlights</h3>
+        <p className="text-chef-charcoal/70 mb-6 font-inter">
+          Each season brings unique opportunities to explore new flavors, techniques, and presentations 
+          that celebrate nature's bounty at its finest:
+        </p>
+        
+        <div className="grid md:grid-cols-2 gap-6 my-8">
+          <div className="chef-card p-6 chef-hover-lift flex items-start">
+            <Leaf className="h-6 w-6 text-chef-royal-green mr-3 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="text-lg font-semibold mb-2 text-chef-charcoal font-playfair">Spring Awakening</h4>
+              <p className="text-chef-charcoal/70 font-inter">Fresh herbs, tender vegetables, and light preparations that celebrate renewal.</p>
+            </div>
+          </div>
+          
+          <div className="chef-card p-6 chef-hover-lift flex items-start">
+            <ChefHat className="h-6 w-6 text-chef-royal-blue mr-3 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="text-lg font-semibold mb-2 text-chef-charcoal font-playfair">Summer Abundance</h4>
+              <p className="text-chef-charcoal/70 font-inter">Peak produce, grilling techniques, and fresh preparations for warm weather dining.</p>
+            </div>
+          </div>
+          
+          <div className="chef-card p-6 chef-hover-lift flex items-start">
+            <Calendar className="h-6 w-6 text-chef-royal-green mr-3 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="text-lg font-semibold mb-2 text-chef-charcoal font-playfair">Autumn Harvest</h4>
+              <p className="text-chef-charcoal/70 font-inter">Rich flavors, warming spices, and preservation techniques for the season's bounty.</p>
+            </div>
+          </div>
+          
+          <div className="chef-card p-6 chef-hover-lift flex items-start">
+            <Award className="h-6 w-6 text-chef-royal-blue mr-3 flex-shrink-0 mt-1" />
+            <div>
+              <h4 className="text-lg font-semibold mb-2 text-chef-charcoal font-playfair">Winter Comfort</h4>
+              <p className="text-chef-charcoal/70 font-inter">Hearty dishes, slow cooking methods, and warming flavors for cold months.</p>
+            </div>
+          </div>
+        </div>
+        
+        <h4 className="text-xl font-semibold mb-4 text-chef-charcoal font-playfair">What You'll Learn</h4>
+        <ul className="list-disc pl-6 space-y-2 mb-8 text-chef-charcoal/70 font-inter">
+          <li>Identifying peak seasonal ingredients and their optimal uses</li>
+          <li>Menu planning that showcases seasonal flavors and textures</li>
+          <li>Preservation techniques to extend seasonal enjoyment</li>
+          <li>Sustainable cooking practices and supporting local producers</li>
+          <li>Seasonal wine and beverage pairings</li>
+        </ul>
+        
+        <h3 className="text-2xl font-semibold mb-4 mt-8 text-chef-charcoal font-playfair">Program Benefits</h3>
+        <div className="space-y-6 mb-8">
+          <div className="flex items-start">
+            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-chef-royal-green/20 flex items-center justify-center text-chef-royal-green mr-3 mt-1">✓</div>
+            <div>
+              <h4 className="font-semibold text-chef-charcoal font-playfair">Local Partnerships</h4>
+              <p className="text-chef-charcoal/70 font-inter">Connect with local farmers and producers for the freshest seasonal ingredients.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-chef-royal-blue/20 flex items-center justify-center text-chef-royal-blue mr-3 mt-1">✓</div>
+            <div>
+              <h4 className="font-semibold text-chef-charcoal font-playfair">Year-Round Learning</h4>
+              <p className="text-chef-charcoal/70 font-inter">Four complete seasonal menu collections with monthly ingredient spotlights.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-chef-royal-green/20 flex items-center justify-center text-chef-royal-green mr-3 mt-1">✓</div>
+            <div>
+              <h4 className="font-semibold text-chef-charcoal font-playfair">Sustainable Practices</h4>
+              <p className="text-chef-charcoal/70 font-inter">Learn environmentally conscious cooking methods and zero-waste techniques.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start">
+            <div className="flex-shrink-0 h-6 w-6 rounded-full bg-chef-royal-blue/20 flex items-center justify-center text-chef-royal-blue mr-3 mt-1">✓</div>
+            <div>
+              <h4 className="font-semibold text-chef-charcoal font-playfair">Menu Planning Tools</h4>
+              <p className="text-chef-charcoal/70 font-inter">Comprehensive guides for creating your own seasonal menus and meal planning.</p>
+            </div>
+          </div>
+        </div>
+        
+        <h3 className="text-2xl font-semibold mb-4 mt-8 text-chef-charcoal font-playfair">Cook with Nature's Calendar</h3>
+        <p className="text-chef-charcoal/70 font-inter">
+          ChefCircle's seasonal menu collection teaches you to cook in harmony with nature's cycles, 
+          creating dishes that not only taste better but also support sustainable food systems. 
+          Discover how seasonal cooking can transform your approach to food and deepen your 
+          connection to the ingredients you use.
+        </p>
+      </ProjectPageLayout>
+    </div>
   );
 };
 
