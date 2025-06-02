@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -164,8 +165,8 @@ const Navbar = () => {
                     className={cn(
                       "px-6 py-2 rounded-lg transition-all duration-300 font-inter font-medium",
                       isScrolled 
-                        ? "bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light shadow-md hover:shadow-lg" 
-                        : "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light shadow-md hover:shadow-lg"
+                        ? "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 shadow-md hover:shadow-lg" 
+                        : "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 shadow-md hover:shadow-lg"
                     )}
                   >
                     Book a Class
@@ -282,7 +283,7 @@ const Navbar = () => {
             Recipes
           </Link>
           
-          <button onClick={() => scrollToSection('contact')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-chef-warm-ivory bg-chef-royal-green hover:bg-chef-green-light" : "text-chef-warm-ivory bg-chef-royal-blue hover:bg-chef-blue-light")}>
+          <button onClick={() => scrollToSection('contact')} className={cn("block w-full text-left px-3 py-2 rounded-md", isScrolled ? "text-chef-warm-ivory bg-chef-royal-blue hover:bg-chef-royal-blue/90" : "text-chef-warm-ivory bg-chef-royal-blue hover:bg-chef-royal-blue/90")}>
             Book a Class
           </button>
         </div>
