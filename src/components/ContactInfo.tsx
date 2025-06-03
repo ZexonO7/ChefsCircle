@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
 const ContactInfo = () => {
@@ -27,7 +25,7 @@ const ContactInfo = () => {
               </div>
               <h3 className="text-2xl font-bold text-chef-charcoal mb-2 font-playfair">Advithya Bhardwaj</h3>
               <p className="text-chef-gold font-semibold mb-2 font-inter">Founder & Head Chef</p>
-              <p className="text-chef-charcoal/70 mb-6 font-inter">Teen culinary prodigy turned entrepreneur, bringing innovative cooking education to the next generation.</p>
+              <p className="text-chef-charcoal/70 mb-6 font-inter">Teen culinary prodigy turned entrepreneur, bringing innovative cooking communitys to the next generation.</p>
               <div className="flex flex-col space-y-3">
                 <a href="mailto:Advithya07@gmail.com" className="flex items-center text-chef-charcoal hover:text-chef-royal-green transition-colors font-inter">
                   <Mail className="w-5 h-5 mr-2" />
@@ -61,4 +59,3 @@ const ContactInfo = () => {
     </section>;
 };
 export default ContactInfo;
-
