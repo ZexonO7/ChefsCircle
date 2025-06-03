@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
 const ContactInfo = () => {
@@ -36,6 +37,10 @@ const ContactInfo = () => {
                   <Linkedin className="w-5 h-5 mr-2" />
                   LinkedIn Profile
                 </a>
+                <a href="tel:+919810273085" className="flex items-center text-chef-charcoal hover:text-chef-royal-green transition-colors font-inter">
+                  <Phone className="w-5 h-5 mr-2" />
+                  +91 98102 73085
+                </a>
               </div>
             </div>
           </div>
@@ -56,3 +61,4 @@ const ContactInfo = () => {
     </section>;
 };
 export default ContactInfo;
+

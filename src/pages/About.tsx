@@ -39,7 +39,7 @@ const About = () => {
                 transition={{ duration: 0.5, delay: 0.2 }} 
                 className="text-xl text-chef-charcoal/70 mb-12"
               >
-                We're a passionate community of culinary innovators dedicated to transforming home cooking through exclusive education and elite networking.
+                Founded by Advithya Bhardwaj, we're a passionate community of culinary innovators dedicated to transforming home cooking through exclusive education and elite networking.
               </motion.p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
@@ -98,11 +98,11 @@ const About = () => {
                 <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Our Story</h2>
                 <div className="bg-white rounded-xl border border-chef-royal-green/20 p-8 shadow-chef-luxury">
                   <p className="text-chef-charcoal/70 mb-4">
-                    ChefCircle was born from a simple observation: while the culinary world was experiencing a renaissance, 
+                    ChefCircle was born from a simple observation by founder Advithya Bhardwaj: while the culinary world was experiencing a renaissance, 
                     young food enthusiasts lacked access to truly premium culinary education and exclusive community experiences.
                   </p>
                   <p className="text-chef-charcoal/70 mb-4">
-                    We started with the ambition to create an elite culinary club that would bridge the gap between 
+                    Advithya started with the ambition to create an elite culinary club that would bridge the gap between 
                     amateur cooking and professional expertise. After connecting with renowned chefs and culinary experts 
                     worldwide, we developed our unique live cook-along format and premium membership experience.
                   </p>
