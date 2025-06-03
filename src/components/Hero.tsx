@@ -1,14 +1,13 @@
-
 import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
 const Hero = () => {
   const isMobile = useIsMobile();
-  
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {
+      opacity: 0
+    },
     visible: {
       opacity: 1,
       transition: {
@@ -18,38 +17,32 @@ const Hero = () => {
       }
     }
   };
-  
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: {
+      y: 20,
+      opacity: 0
+    },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6 }
+      transition: {
+        duration: 0.6
+      }
     }
   };
-  
   const scrollToContact = (e: React.MouseEvent) => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-  
-  return (
-    <motion.div 
-      className="relative mt-16 md:mt-0 w-full max-w-[100vw]" 
-      initial="hidden" 
-      animate="visible" 
-      variants={containerVariants}
-    >
+  return <motion.div className="relative mt-16 md:mt-0 w-full max-w-[100vw]" initial="hidden" animate="visible" variants={containerVariants}>
       <div className="banner-container chef-gradient-blue relative overflow-hidden h-[700px] md:h-[750px] w-full">
         <div className="absolute inset-0 w-full">
-          <img 
-            src="/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png" 
-            alt="ChefCircle - Luxury Culinary Experience" 
-            className={`w-full h-full object-cover opacity-40 ${isMobile ? 'object-right' : 'object-center'}`} 
-          />
+          <img src="/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png" alt="ChefCircle - Luxury Culinary Experience" className={`w-full h-full object-cover opacity-40 ${isMobile ? 'object-right' : 'object-center'}`} />
           <div className="absolute inset-0 bg-gradient-to-b from-chef-charcoal/70 via-chef-royal-blue/60 to-chef-warm-ivory"></div>
         </div>
         
@@ -79,7 +72,7 @@ const Hero = () => {
                 </Link>
                 
                 <Link to="/recipes">
-                  <button className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-inter bg-chef-gold text-chef-charcoal hover:bg-chef-bronze flex items-center justify-center group text-lg">
+                  <button className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-inter flex items-center justify-center group text-lg bg-[chef-royal-green] bg-chef-forest text-chef-cream">
                     Share Recipes
                     <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
                   </button>
@@ -91,13 +84,9 @@ const Hero = () => {
       </div>
       
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 mx-auto">
-        <motion.div 
-          className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6" 
-          variants={containerVariants} 
-          initial="hidden" 
-          animate="visible" 
-          transition={{ delay: 0.6 }}
-        >
+        <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6" variants={containerVariants} initial="hidden" animate="visible" transition={{
+        delay: 0.6
+      }}>
           <motion.div className="chef-card p-6" variants={itemVariants}>
             <div className="w-12 h-12 bg-chef-royal-green/10 flex items-center justify-center rounded-lg text-chef-royal-green mb-4">
               <Users className="w-6 h-6" />
@@ -123,8 +112,6 @@ const Hero = () => {
           </motion.div>
         </motion.div>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 };
-
 export default Hero;
