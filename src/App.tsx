@@ -9,6 +9,10 @@ import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogPostDetail from "./pages/BlogPostDetail";
 import Careers from "./pages/Careers";
+import Clubs from "./pages/Clubs";
+import Recipes from "./pages/Recipes";
+import Courses from "./pages/Courses";
+import Library from "./pages/Library";
 import FireCatProject from "./pages/FireCatProject";
 import SportRetailProject from "./pages/SportRetailProject";
 import WorkwearProject from "./pages/WorkwearProject";
@@ -29,6 +33,10 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPostDetail />} />
           <Route path="/careers" element={<Careers />} />
+          <Route path="/clubs" element={<Clubs />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/library" element={<Library />} />
           <Route path="/projects/firecat" element={<FireCatProject />} />
           <Route path="/projects/sport-retail" element={<SportRetailProject />} />
           <Route path="/projects/workwear" element={<WorkwearProject />} />

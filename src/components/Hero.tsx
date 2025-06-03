@@ -2,6 +2,7 @@
 import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const isMobile = useIsMobile();
@@ -57,40 +58,32 @@ const Hero = () => {
             <motion.div className="w-full max-w-4xl text-center" variants={itemVariants}>
               <motion.div className="inline-flex items-center gap-2 bg-chef-gold/20 text-chef-gold px-4 py-2 rounded-full mb-6" variants={itemVariants}>
                 <Star className="w-4 h-4 fill-current" />
-                <span className="text-sm font-medium">Exclusive Culinary Club</span>
+                <span className="text-sm font-medium">Culinary Community</span>
               </motion.div>
               
               <motion.h1 className="banner-title text-chef-warm-ivory text-4xl md:text-6xl lg:text-7xl font-bold font-playfair" variants={itemVariants}>
-                Master the Art of 
-                <span className="block text-chef-gold">Culinary Excellence</span>
+                Join the Ultimate 
+                <span className="block text-chef-gold">Culinary Community</span>
               </motion.h1>
               
               <motion.p className="banner-subtitle text-chef-warm-ivory/90 mt-6 text-lg md:text-xl max-w-3xl mx-auto font-inter" variants={itemVariants}>
-                Join ChefCircle, the exclusive online culinary club where passionate Gen Z and millennial home chefs elevate their skills through live cook-alongs, premium courses, and an elite community.
+                Connect with passionate chefs, share recipes, learn from experts, and grow your culinary skills in our vibrant community of food enthusiasts.
               </motion.p>
               
               <motion.div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center" variants={itemVariants}>
-                <button 
-                  className="chef-button-primary flex items-center justify-center group text-lg"
-                  onClick={e => {
-                    e.preventDefault();
-                    const featuresSection = document.getElementById('features');
-                    if (featuresSection) {
-                      featuresSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  Book a Class
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                <Link to="/clubs">
+                  <button className="chef-button-primary flex items-center justify-center group text-lg">
+                    Join Clubs
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </Link>
                 
-                <button 
-                  className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-inter bg-chef-gold text-chef-charcoal hover:bg-chef-bronze flex items-center justify-center group text-lg"
-                  onClick={scrollToContact}
-                >
-                  Cook With Us
-                  <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
-                </button>
+                <Link to="/recipes">
+                  <button className="px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 font-inter bg-chef-gold text-chef-charcoal hover:bg-chef-bronze flex items-center justify-center group text-lg">
+                    Share Recipes
+                    <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
+                  </button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
@@ -107,26 +100,26 @@ const Hero = () => {
         >
           <motion.div className="chef-card p-6" variants={itemVariants}>
             <div className="w-12 h-12 bg-chef-royal-green/10 flex items-center justify-center rounded-lg text-chef-royal-green mb-4">
-              <ChefHat className="w-6 h-6" />
+              <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Live Cook-Alongs</h3>
-            <p className="text-chef-charcoal/70 font-inter">Interactive cooking sessions with renowned chefs, perfecting techniques in real-time.</p>
+            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Culinary Clubs</h3>
+            <p className="text-chef-charcoal/70 font-inter">Join specialized cooking communities and connect with chefs who share your passions.</p>
           </motion.div>
           
           <motion.div className="chef-card p-6" variants={itemVariants}>
             <div className="w-12 h-12 bg-chef-royal-blue/10 flex items-center justify-center rounded-lg text-chef-royal-blue mb-4">
-              <Users className="w-6 h-6" />
+              <ChefHat className="w-6 h-6" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Elite Community</h3>
-            <p className="text-chef-charcoal/70 font-inter">Connect with passionate culinary enthusiasts and share your gastronomic journey.</p>
+            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Recipe Sharing</h3>
+            <p className="text-chef-charcoal/70 font-inter">Share your favorite recipes and discover new dishes from talented home chefs.</p>
           </motion.div>
           
           <motion.div className="chef-card p-6" variants={itemVariants}>
             <div className="w-12 h-12 bg-chef-royal-blue/10 flex items-center justify-center rounded-lg text-chef-royal-blue mb-4">
               <Star className="w-6 h-6 fill-current" />
             </div>
-            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Premium Content</h3>
-            <p className="text-chef-charcoal/70 font-inter">Exclusive recipes, advanced techniques, and insider culinary secrets from industry experts.</p>
+            <h3 className="text-xl font-bold mb-3 text-chef-charcoal font-playfair">Expert Learning</h3>
+            <p className="text-chef-charcoal/70 font-inter">Access courses, ask questions, and learn from experienced chefs in our knowledge library.</p>
           </motion.div>
         </motion.div>
       </div>

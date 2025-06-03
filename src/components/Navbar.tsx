@@ -85,26 +85,26 @@ const Navbar = () => {
                   <NavigationMenuTrigger className={cn(
                     "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 font-inter"
                   )}>
-                    Cook-Alongs
+                    Community
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid gap-3 p-4 w-[400px] bg-chef-warm-ivory">
                       <li>
-                        <Link to="/projects/firecat" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
-                          <div className="font-medium text-chef-charcoal font-playfair">Live Cooking Sessions</div>
-                          <p className="text-sm text-chef-charcoal/70 font-inter">Interactive culinary experiences with master chefs</p>
+                        <Link to="/clubs" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Clubs</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Join culinary clubs and connect with like-minded chefs</p>
                         </Link>
                       </li>
                       <li>
-                        <Link to="/projects/sport-retail" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
-                          <div className="font-medium text-chef-charcoal font-playfair">Technique Masterclasses</div>
-                          <p className="text-sm text-chef-charcoal/70 font-inter">Advanced culinary skills and methods</p>
+                        <Link to="/recipes" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Recipe Sharing</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Share your favorite recipes with the community</p>
                         </Link>
                       </li>
                       <li>
-                        <Link to="/projects/workwear" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
-                          <div className="font-medium text-chef-charcoal font-playfair">Seasonal Menus</div>
-                          <p className="text-sm text-chef-charcoal/70 font-inter">Farm-to-table cooking with seasonal ingredients</p>
+                        <Link to="/library" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
+                          <div className="font-medium text-chef-charcoal font-playfair">Knowledge Library</div>
+                          <p className="text-sm text-chef-charcoal/70 font-inter">Search cooking questions and get expert answers</p>
                         </Link>
                       </li>
                     </ul>
@@ -112,27 +112,14 @@ const Navbar = () => {
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className={cn(
-                    "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 font-inter"
-                  )}>
-                    Membership
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid gap-3 p-4 w-[400px] bg-chef-warm-ivory">
-                      <li>
-                        <Link to="/tech-details" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
-                          <div className="font-medium text-chef-charcoal font-playfair">Exclusive Clubs</div>
-                          <p className="text-sm text-chef-charcoal/70 font-inter">Join specialized culinary communities</p>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/development-process" className="block p-3 space-y-1 rounded-md hover:bg-chef-royal-green/5">
-                          <div className="font-medium text-chef-charcoal font-playfair">Pricing Tiers</div>
-                          <p className="text-sm text-chef-charcoal/70 font-inter">Choose your culinary journey level</p>
-                        </Link>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
+                  <Link to="/courses">
+                    <NavigationMenuLink className={cn(
+                      navigationMenuTriggerStyle(),
+                      "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 font-inter"
+                    )}>
+                      Courses
+                    </NavigationMenuLink>
+                  </Link>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
@@ -141,7 +128,7 @@ const Navbar = () => {
                       navigationMenuTriggerStyle(),
                       "bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 font-inter"
                     )}>
-                      Recipes
+                      Blog
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -149,9 +136,9 @@ const Navbar = () => {
                 <NavigationMenuItem>
                   <button 
                     onClick={() => scrollToSection('contact')} 
-                    className="px-6 py-2 rounded-lg transition-all duration-300 font-inter font-medium bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-royal-blue/90 shadow-md hover:shadow-lg"
+                    className="px-6 py-2 rounded-lg transition-all duration-300 font-inter font-medium bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-royal-green/90 shadow-md hover:shadow-lg"
                   >
-                    Book a Class
+                    Join Community
                   </button>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -209,82 +196,54 @@ const Navbar = () => {
               }}
               className="flex w-full justify-between items-center px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
             >
-              <span>Cook-Alongs</span>
+              <span>Community</span>
               <ChevronDown className="h-4 w-4" />
             </button>
             
             <div className="hidden ml-4 mt-1 space-y-1">
               <Link 
-                to="/projects/firecat" 
+                to="/clubs" 
                 className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
                 }}
               >
-                Live Cooking Sessions
+                Clubs
               </Link>
               <Link 
-                to="/projects/sport-retail" 
+                to="/recipes" 
                 className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
                 }}
               >
-                Technique Masterclasses
+                Recipe Sharing
               </Link>
               <Link 
-                to="/projects/workwear" 
+                to="/library" 
                 className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
                 onClick={() => {
                   setIsMenuOpen(false);
                   window.scrollTo(0, 0);
                 }}
               >
-                Seasonal Menus
+                Knowledge Library
               </Link>
             </div>
           </div>
           
-          <div className="block">
-            <button 
-              onClick={(e) => {
-                e.preventDefault();
-                const submenu = e.currentTarget.nextElementSibling;
-                if (submenu) {
-                  submenu.classList.toggle('hidden');
-                }
-              }}
-              className="flex w-full justify-between items-center px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
-            >
-              <span>Membership</span>
-              <ChevronDown className="h-4 w-4" />
-            </button>
-            
-            <div className="hidden ml-4 mt-1 space-y-1">
-              <Link 
-                to="/tech-details" 
-                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                Exclusive Clubs
-              </Link>
-              <Link 
-                to="/development-process" 
-                className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  window.scrollTo(0, 0);
-                }}
-              >
-                Pricing Tiers
-              </Link>
-            </div>
-          </div>
+          <Link 
+            to="/courses" 
+            className="block px-3 py-2 rounded-md text-chef-warm-ivory hover:bg-chef-royal-blue/70"
+            onClick={() => {
+              setIsMenuOpen(false);
+              window.scrollTo(0, 0);
+            }}
+          >
+            Courses
+          </Link>
           
           <Link 
             to="/blog" 
@@ -294,14 +253,14 @@ const Navbar = () => {
               window.scrollTo(0, 0);
             }}
           >
-            Recipes
+            Blog
           </Link>
           
           <button 
             onClick={() => scrollToSection('contact')} 
-            className="block w-full text-left px-3 py-2 rounded-md text-chef-warm-ivory bg-chef-royal-blue hover:bg-chef-royal-blue/90"
+            className="block w-full text-left px-3 py-2 rounded-md text-chef-warm-ivory bg-chef-royal-green hover:bg-chef-royal-green/90"
           >
-            Book a Class
+            Join Community
           </button>
         </div>
       </div>
