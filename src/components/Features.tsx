@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { ChefHat, Users, BookOpen, Award, ArrowRight, Star, Clock, Trophy, MessageSquare, Utensils, Heart, Crown } from "lucide-react";
 import { cn } from '@/lib/utils';
@@ -6,39 +5,31 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from '@/hooks/use-mobile';
-
 const Features = () => {
   const featuresRef = useRef<HTMLDivElement>(null);
   const [hoveredFeature, setHoveredFeature] = useState<number | null>(null);
   const isMobile = useIsMobile();
-
-  const culinaryFeatures = [
-    {
-      icon: <ChefHat className="w-10 h-10 text-white transition-transform duration-300 transform" />,
-      title: "Live Cook-Alongs",
-      description: "Interactive sessions with renowned chefs, where you cook together in real-time, learning professional techniques and insider secrets.",
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
-    },
-    {
-      icon: <BookOpen className="w-10 h-10 text-white transition-transform duration-300 transform" />,
-      title: "Master Classes",
-      description: "Deep-dive courses covering advanced culinary techniques, from knife skills to molecular gastronomy and artisanal bread making.",
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
-    },
-    {
-      icon: <Users className="w-10 h-10 text-white transition-transform duration-300 transform" />,
-      title: "Elite Community",
-      description: "Connect with passionate food lovers, share your culinary creations, and get feedback from fellow members and professional chefs.",
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
-    },
-    {
-      icon: <Crown className="w-10 h-10 text-white transition-transform duration-300 transform" />,
-      title: "Premium Content",
-      description: "Exclusive recipes, seasonal menus, wine pairings, and access to chef-curated ingredient boxes delivered to your door.",
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
-    }
-  ];
-
+  const culinaryFeatures = [{
+    icon: <ChefHat className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+    title: "Live Cook-Alongs",
+    description: "Interactive sessions with renowned chefs, where you cook together in real-time, learning professional techniques and insider secrets.",
+    image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+  }, {
+    icon: <BookOpen className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+    title: "Master Classes",
+    description: "Deep-dive courses covering advanced culinary techniques, from knife skills to molecular gastronomy and artisanal bread making.",
+    image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
+  }, {
+    icon: <Users className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+    title: "Elite Community",
+    description: "Connect with passionate food lovers, share your culinary creations, and get feedback from fellow members and professional chefs.",
+    image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+  }, {
+    icon: <Crown className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+    title: "Premium Content",
+    description: "Exclusive recipes, seasonal menus, wine pairings, and access to chef-curated ingredient boxes delivered to your door.",
+    image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
+  }];
   const scrollToContact = (e: React.MouseEvent) => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
@@ -48,7 +39,6 @@ const Features = () => {
       });
     }
   };
-
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -72,50 +62,37 @@ const Features = () => {
     }
     return () => observer.disconnect();
   }, []);
-
-  const culinaryPrograms = [
-    {
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
-      title: "Teen Chef Mastery",
-      description: "Specialized program for young culinary enthusiasts aged 16-19, covering fundamental techniques to advanced plating."
-    },
-    {
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png",
-      title: "Millennial Kitchen",
-      description: "Perfect for busy professionals who want to create restaurant-quality meals at home with efficient techniques."
-    },
-    {
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
-      title: "Artisan Baking Club",
-      description: "Master the art of bread making, pastries, and desserts with our specialized baking community and expert instructors."
-    }
-  ];
-
-  const membershipBenefits = [
-    {
-      icon: <Star className="h-8 w-8 text-chef-gold" />,
-      title: "VIP Access",
-      description: "First access to new classes and exclusive chef events"
-    },
-    {
-      icon: <Trophy className="h-8 w-8 text-chef-gold" />,
-      title: "Skill Certification",
-      description: "Earn recognized certificates for completed masterclasses"
-    },
-    {
-      icon: <Heart className="h-8 w-8 text-chef-gold" />,
-      title: "Personal Growth",
-      description: "Track your culinary journey with personalized progress reports"
-    },
-    {
-      icon: <Utensils className="h-8 w-8 text-chef-gold" />,
-      title: "Premium Tools",
-      description: "Access to exclusive recipe collections and meal planning tools"
-    }
-  ];
-
-  return (
-    <section id="features" className="relative bg-white overflow-hidden py-16 md:py-24 w-full">
+  const culinaryPrograms = [{
+    image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+    title: "Teen Chef Mastery",
+    description: "Specialized program for young culinary enthusiasts aged 16-19, covering fundamental techniques to advanced plating."
+  }, {
+    image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png",
+    title: "Millennial Kitchen",
+    description: "Perfect for busy professionals who want to create restaurant-quality meals at home with efficient techniques."
+  }, {
+    image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+    title: "Artisan Baking Club",
+    description: "Master the art of bread making, pastries, and desserts with our specialized baking community and expert instructors."
+  }];
+  const membershipBenefits = [{
+    icon: <Star className="h-8 w-8 text-chef-gold" />,
+    title: "VIP Access",
+    description: "First access to new classes and exclusive chef events"
+  }, {
+    icon: <Trophy className="h-8 w-8 text-chef-gold" />,
+    title: "Skill Certification",
+    description: "Earn recognized certificates for completed masterclasses"
+  }, {
+    icon: <Heart className="h-8 w-8 text-chef-gold" />,
+    title: "Personal Growth",
+    description: "Track your culinary journey with personalized progress reports"
+  }, {
+    icon: <Utensils className="h-8 w-8 text-chef-gold" />,
+    title: "Premium Tools",
+    description: "Access to exclusive recipe collections and meal planning tools"
+  }];
+  return <section id="features" className="relative bg-white overflow-hidden py-16 md:py-24 w-full">
       <div className="w-full px-4 sm:px-6 lg:px-8" ref={featuresRef}> 
         <div className="text-center mb-16 max-w-4xl mx-auto feature-item">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium">
@@ -131,36 +108,17 @@ const Features = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {culinaryFeatures.map((feature, index) => (
-            <div 
-              key={index} 
-              className="feature-item rounded-xl overflow-hidden transform transition-all duration-500 relative shadow-lg h-[320px] hover:-translate-y-1"
-              style={{
-                transitionDelay: `${index * 100}ms`
-              }}
-              onMouseEnter={() => setHoveredFeature(index)} 
-              onMouseLeave={() => setHoveredFeature(null)}
-            >
+          {culinaryFeatures.map((feature, index) => <div key={index} className="feature-item rounded-xl overflow-hidden transform transition-all duration-500 relative shadow-lg h-[320px] hover:-translate-y-1" style={{
+          transitionDelay: `${index * 100}ms`
+        }} onMouseEnter={() => setHoveredFeature(index)} onMouseLeave={() => setHoveredFeature(null)}>
               <div className="absolute inset-0 w-full h-full">
-                <img 
-                  src={feature.image} 
-                  alt={feature.title} 
-                  className="w-full h-full object-cover transition-all duration-300 grayscale hover:grayscale-0" 
-                />
-                <div className={cn(
-                  "absolute inset-0 transition-opacity duration-300",
-                  hoveredFeature === index 
-                    ? "bg-chef-royal-green/60" 
-                    : "bg-chef-charcoal/70"
-                )}></div>
+                <img src={feature.image} alt={feature.title} className="w-full h-full object-cover transition-all duration-300 grayscale hover:grayscale-0" />
+                <div className={cn("absolute inset-0 transition-opacity duration-300", hoveredFeature === index ? "bg-chef-royal-green/60" : "bg-chef-charcoal/70")}></div>
               </div>
               
               <div className="relative z-10 flex flex-col justify-between p-6 h-full">
                 <div>
-                  <div className={cn(
-                    "inline-block p-3 bg-chef-gold/20 backdrop-blur-sm rounded-lg transition-all duration-300 transform mb-4",
-                    hoveredFeature === index ? "hover:scale-110" : ""
-                  )}>
+                  <div className={cn("inline-block p-3 bg-chef-gold/20 backdrop-blur-sm rounded-lg transition-all duration-300 transform mb-4", hoveredFeature === index ? "hover:scale-110" : "")}>
                     <div className={`transform transition-transform duration-300 ${hoveredFeature === index ? 'rotate-12' : ''}`}>
                       {feature.icon}
                     </div>
@@ -174,8 +132,7 @@ const Features = () => {
                 </div>
                 <div className={`h-0.5 bg-chef-gold mt-4 transition-all duration-500 ${hoveredFeature === index ? 'w-full' : 'w-0'}`}></div>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
 
         <div className="mb-16 feature-item">
@@ -195,8 +152,7 @@ const Features = () => {
           <div className="rounded-xl overflow-hidden bg-chef-warm-ivory p-6">
             <Carousel className="w-full max-w-7xl mx-auto">
               <CarouselContent className="flex">
-                {culinaryPrograms.map((program, index) => (
-                  <CarouselItem key={index} className="md:basis-1/3 flex-shrink-0">
+                {culinaryPrograms.map((program, index) => <CarouselItem key={index} className="md:basis-1/3 flex-shrink-0">
                     <Card className="chef-card border-chef-gold/20">
                       <CardContent className="p-0">
                         <div className="w-full h-48">
@@ -208,8 +164,7 @@ const Features = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </CarouselItem>
-                ))}
+                  </CarouselItem>)}
               </CarouselContent>
               <div className="flex justify-center mt-8 gap-4">
                 <CarouselPrevious className="chef-button-outline" />
@@ -234,32 +189,28 @@ const Features = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {membershipBenefits.map((benefit, index) => (
-              <div key={index} className="bg-chef-warm-ivory rounded-xl p-6 text-center chef-hover-lift border border-chef-gold/10">
+            {membershipBenefits.map((benefit, index) => <div key={index} className="bg-chef-warm-ivory rounded-xl p-6 text-center chef-hover-lift border border-chef-gold/10">
                 <div className="bg-chef-gold/10 rounded-full p-4 w-16 h-16 flex items-center justify-center mx-auto mb-4">
                   {benefit.icon}
                 </div>
                 <h4 className="font-bold text-lg mb-2 text-chef-charcoal font-playfair">{benefit.title}</h4>
                 <p className="text-chef-charcoal/70 text-sm font-inter">{benefit.description}</p>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
         
         <div className="text-center mt-16 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <Button onClick={scrollToContact} className="chef-button-primary flex items-center group text-lg">
+          <Button onClick={scrollToContact} className="chef-button-primary flex items-center group text-[chef-warm-ivory] text-chef-cream">
             Start Your Culinary Journey
             <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
           </Button>
           
-          <Button onClick={() => window.scrollTo(0, 0)} className="chef-button-outline flex items-center group text-lg">
+          <Button onClick={() => window.scrollTo(0, 0)} className="chef-button-outline flex items-center group text-lg text-chef-cream">
             Learn More About Our Programs
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Features;
