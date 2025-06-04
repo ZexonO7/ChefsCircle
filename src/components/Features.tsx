@@ -152,7 +152,7 @@ const Features = () => {
           <div className="rounded-xl overflow-hidden bg-chef-warm-ivory p-6">
             <Carousel className="w-full max-w-7xl mx-auto">
               <CarouselContent className="flex">
-                {culinaryPrograms.map((program, index) => <CarouselItem key={index} className="md:basis-1/3 flex-shrink-0">
+                {culinaryPrograms.map((program, index) => <CarouselItem key={index} className="md:basis-1/3 flex-shrink-0 bg-chef-cream">
                     <Card className="chef-card border-chef-gold/20">
                       <CardContent className="p-0">
                         <div className="w-full h-48">
