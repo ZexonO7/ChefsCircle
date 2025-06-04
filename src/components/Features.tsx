@@ -205,7 +205,7 @@ const Features = () => {
             <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
           </Button>
           
-          <Button onClick={() => window.scrollTo(0, 0)} className="chef-button-outline flex items-center group text-lg text-chef-cream">
+          <Button onClick={() => window.scrollTo(0, 0)} className="chef-button-outline flex items-center group text-chef-cream text-sm">
             Learn More About Our Programs
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
