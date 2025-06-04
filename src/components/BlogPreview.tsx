@@ -21,7 +21,7 @@ const BlogPreview = () => {
             </p>
           </div>
           <Link to="/blog" className="mt-4 md:mt-0">
-            <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white bg-[t] bg-[#141c74]">
+            <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-[t] bg-[#141c74] text-white">
               View All Posts
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
