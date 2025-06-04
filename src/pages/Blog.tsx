@@ -46,7 +46,7 @@ const Blog = () => {
                     <p className="text-chef-charcoal/70 mb-6 font-inter">
                       {featuredPost.excerpt}
                     </p>
-                    <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-[c] bg-[#141c73] text-white">
+                    <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-[c] text-white bg-chef-forest">
                       Read more 
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
