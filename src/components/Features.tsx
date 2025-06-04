@@ -167,8 +167,8 @@ const Features = () => {
                   </CarouselItem>)}
               </CarouselContent>
               <div className="flex justify-center mt-8 gap-4">
-                <CarouselPrevious className="chef-button-outline" />
-                <CarouselNext className="chef-button-outline" />
+                <CarouselPrevious className="chef-button-outline text-black bg-[chef-green-light] bg-chef-cream" />
+                <CarouselNext className="chef-button-outline bg-chef-cream" />
               </div>
             </Carousel>
           </div>
