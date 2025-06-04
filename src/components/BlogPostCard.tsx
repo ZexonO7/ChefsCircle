@@ -34,7 +34,7 @@ const BlogPostCard = ({
             <p className="text-chef-charcoal/60 text-sm mb-2">{date}</p>
             <h3 className="text-xl font-bold mb-2 line-clamp-2 text-chef-charcoal font-playfair">{title}</h3>
             <p className="text-chef-charcoal/70 mb-4 line-clamp-3 font-inter">{excerpt}</p>
-            <Button variant="outline" className="group mt-auto border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white bg-[c] bg-[#141c73]">
+            <Button variant="outline" className="group mt-auto border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-[c] bg-[#141c73] text-chef-cream">
               Read more 
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
