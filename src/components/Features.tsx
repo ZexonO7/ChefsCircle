@@ -158,7 +158,7 @@ const Features = () => {
                         <div className="w-full h-48">
                           <img src={program.image} alt={program.title} className="w-full h-full object-cover" />
                         </div>
-                        <div className="p-6">
+                        <div className="p-6 bg-[chef-blue-light] bg-chef-cream">
                           <h4 className="font-bold text-xl mb-3 text-chef-charcoal font-playfair">{program.title}</h4>
                           <p className="text-chef-charcoal/70 font-inter">{program.description}</p>
                         </div>
