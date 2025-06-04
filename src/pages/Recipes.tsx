@@ -1,17 +1,23 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Plus, Search, Filter, Clock, Users, Star, ChefHat } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/components/AuthProvider';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Recipes = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [userRecipes, setUserRecipes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+  const { toast } = useToast();
 
   const categories = ['All', 'Appetizers', 'Main Course', 'Desserts', 'Beverages', 'Breakfast', 'Vegetarian', 'Quick & Easy'];
 
-  const recipes = [
+  const staticRecipes = [
     {
       id: 1,
       title: "Truffle Risotto Perfection",
@@ -98,7 +104,45 @@ const Recipes = () => {
     }
   ];
 
-  const filteredRecipes = recipes.filter(recipe => {
+  useEffect(() => {
+    fetchUserRecipes();
+  }, []);
+
+  const fetchUserRecipes = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('user_recipes')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setUserRecipes(data || []);
+    } catch (error: any) {
+      console.error('Error fetching recipes:', error);
+      toast({
+        title: "Error loading recipes",
+        description: error.message || "Failed to load user recipes.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Combine static and user recipes
+  const allRecipes = [
+    ...staticRecipes,
+    ...userRecipes.map(recipe => ({
+      ...recipe,
+      author: 'Community Chef',
+      rating: 4.5,
+      likes: Math.floor(Math.random() * 200) + 50,
+      isPremium: false,
+      status: 'approved'
+    }))
+  ];
+
+  const filteredRecipes = allRecipes.filter(recipe => {
     const matchesSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          recipe.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          recipe.author.toLowerCase().includes(searchTerm.toLowerCase());
@@ -110,6 +154,14 @@ const Recipes = () => {
     if (minutes >= 1440) return `${Math.floor(minutes / 1440)}d`;
     if (minutes >= 60) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
     return `${minutes}m`;
+  };
+
+  const handleShareRecipe = () => {
+    // For now, just show a message. In a real app, this would open a recipe creation form
+    toast({
+      title: "Recipe sharing coming soon!",
+      description: "We're working on a recipe submission form. Stay tuned!",
+    });
   };
 
   return (
@@ -138,7 +190,10 @@ const Recipes = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="chef-button bg-chef-gold text-chef-charcoal hover:bg-chef-bronze">
+                <button 
+                  onClick={handleShareRecipe}
+                  className="chef-button bg-chef-gold text-chef-charcoal hover:bg-chef-bronze"
+                >
                   <Plus className="w-5 h-5 mr-2" />
                   Share Recipe
                 </button>
@@ -181,78 +236,85 @@ const Recipes = () => {
         {/* Recipes Grid */}
         <section className="chef-section">
           <div className="chef-container">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredRecipes.map((recipe, index) => (
-                <motion.div
-                  key={recipe.id}
-                  className="chef-card-luxury group cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="relative overflow-hidden rounded-t-xl">
-                    <img 
-                      src={recipe.image} 
-                      alt={recipe.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      {recipe.isPremium && (
-                        <span className="chef-badge bg-chef-gold/20 text-chef-gold border-chef-gold/30">
-                          Premium
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-chef-royal-green mx-auto mb-4"></div>
+                <p className="text-chef-charcoal">Loading recipes...</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredRecipes.map((recipe, index) => (
+                  <motion.div
+                    key={`${recipe.id}-${recipe.title}`}
+                    className="chef-card-luxury group cursor-pointer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="relative overflow-hidden rounded-t-xl">
+                      <img 
+                        src={recipe.image || '/lovable-uploads/48ecf6e2-5a98-4a9d-af6f-ae2265cd4098.png'} 
+                        alt={recipe.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        {recipe.isPremium && (
+                          <span className="chef-badge bg-chef-gold/20 text-chef-gold border-chef-gold/30">
+                            Premium
+                          </span>
+                        )}
+                        <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                          recipe.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
+                          recipe.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
+                          'bg-red-100 text-red-800'
+                        }`}>
+                          {recipe.difficulty}
                         </span>
-                      )}
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                        recipe.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
-                        recipe.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-red-100 text-red-800'
-                      }`}>
-                        {recipe.difficulty}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
-                      <Clock className="w-3 h-3 inline mr-1" />
-                      {formatCookTime(recipe.cookTime)}
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-green transition-colors">
-                        {recipe.title}
-                      </h3>
-                      <div className="flex items-center gap-1 text-sm text-chef-gold">
-                        <Star className="w-4 h-4 fill-current" />
-                        <span>{recipe.rating}</span>
+                      </div>
+                      <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
+                        <Clock className="w-3 h-3 inline mr-1" />
+                        {formatCookTime(recipe.cook_time || recipe.cookTime || 30)}
                       </div>
                     </div>
                     
-                    <p className="text-sm text-chef-royal-green font-medium mb-2">by {recipe.author}</p>
-                    
-                    <p className="chef-body-sm text-chef-charcoal/80 mb-4 line-clamp-2">
-                      {recipe.description}
-                    </p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-sm text-chef-charcoal/60">
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>{recipe.likes}</span>
+                    <div className="p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-green transition-colors">
+                          {recipe.title}
+                        </h3>
+                        <div className="flex items-center gap-1 text-sm text-chef-gold">
+                          <Star className="w-4 h-4 fill-current" />
+                          <span>{recipe.rating}</span>
                         </div>
-                        <span className="chef-badge-blue">{recipe.category}</span>
                       </div>
                       
-                      <button className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-sm">
-                        View Recipe →
-                      </button>
+                      <p className="text-sm text-chef-royal-green font-medium mb-2">by {recipe.author}</p>
+                      
+                      <p className="chef-body-sm text-chef-charcoal/80 mb-4 line-clamp-2">
+                        {recipe.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4 text-sm text-chef-charcoal/60">
+                          <div className="flex items-center gap-1">
+                            <Users className="w-4 h-4" />
+                            <span>{recipe.likes}</span>
+                          </div>
+                          <span className="chef-badge-blue">{recipe.category}</span>
+                        </div>
+                        
+                        <button className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-sm">
+                          View Recipe →
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
             
-            {filteredRecipes.length === 0 && (
+            {!loading && filteredRecipes.length === 0 && (
               <div className="text-center py-12">
                 <p className="chef-body text-chef-charcoal/60">No recipes found matching your criteria.</p>
               </div>

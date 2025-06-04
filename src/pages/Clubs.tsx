@@ -1,12 +1,17 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Users, MessageCircle, Crown, Star, ArrowRight, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useAuth } from '@/components/AuthProvider';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Clubs = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [joiningClub, setJoiningClub] = useState<string | null>(null);
+  const { user } = useAuth();
+  const { toast } = useToast();
 
   const clubs = [
     {
@@ -82,6 +87,47 @@ const Clubs = () => {
     club.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
     club.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleJoinClub = async (clubName: string) => {
+    if (!user) return;
+    
+    setJoiningClub(clubName);
+    
+    try {
+      const { error } = await supabase
+        .from('club_memberships')
+        .insert({
+          user_id: user.id,
+          club_name: clubName
+        });
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already a member!",
+            description: `You're already a member of ${clubName}.`,
+            variant: "destructive",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Welcome to the club!",
+          description: `You've successfully joined ${clubName}.`,
+        });
+      }
+    } catch (error: any) {
+      console.error('Error joining club:', error);
+      toast({
+        title: "Error joining club",
+        description: error.message || "There was an error joining the club. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setJoiningClub(null);
+    }
+  };
 
   return (
     <PageLayout>
@@ -177,9 +223,15 @@ const Clubs = () => {
                         <span className="chef-badge-blue">{club.category}</span>
                       </div>
                       
-                      <button className="chef-button-primary text-sm py-2 px-4 group">
-                        Join Club
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      <button 
+                        onClick={() => handleJoinClub(club.name)}
+                        disabled={joiningClub === club.name}
+                        className="chef-button-primary text-sm py-2 px-4 group disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {joiningClub === club.name ? 'Joining...' : 'Join Club'}
+                        {joiningClub !== club.name && (
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        )}
                       </button>
                     </div>
                   </div>
