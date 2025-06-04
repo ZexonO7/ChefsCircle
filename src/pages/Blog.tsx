@@ -41,12 +41,12 @@ const Blog = () => {
                       <h3 className="text-2xl md:text-3xl font-bold font-playfair">{featuredPost.title}</h3>
                     </div>
                   </div>
-                  <CardContent className="p-8 bg-[141c74] bg-[#141c71]">
+                  <CardContent className="p-8 bg-[141c74] bg-chef-cream">
                     <p className="text-chef-charcoal/60 text-sm mb-2">Published: {featuredPost.date}</p>
                     <p className="text-chef-charcoal/70 mb-6 font-inter">
                       {featuredPost.excerpt}
                     </p>
-                    <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue text-slate-950 bg-chef-cream">
+                    <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-[c] bg-[#141c73] text-white">
                       Read more 
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Button>
