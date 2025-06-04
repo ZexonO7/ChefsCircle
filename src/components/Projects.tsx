@@ -169,7 +169,7 @@ const Projects = () => {
                     <span className="text-chef-royal-green font-medium">{event.spots}</span>
                   </div>
                 </div>
-                <Button onClick={scrollToContact} className="w-full chef-button-outline">
+                <Button onClick={scrollToContact} className="w-full chef-button-outline bg-[#141c70] text-chef-cream">
                   Reserve Spot
                 </Button>
               </CardContent>
