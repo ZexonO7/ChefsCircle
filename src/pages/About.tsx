@@ -132,25 +132,25 @@ const About = () => {
                       name: "Chef Isabella Rodriguez",
                       role: "Head Culinary Director",
                       bio: "Michelin-starred chef with 15 years of experience in fine dining and culinary education.",
-                      image: "/lovable-uploads/aa5291bd-2417-4c1e-9a02-0bcc71a92507.png"
+                      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     },
                     {
                       name: "Chef Marcus Chen",
                       role: "Asian Cuisine Specialist",
                       bio: "Expert in modern Asian fusion techniques and traditional culinary methods.",
-                      image: "/lovable-uploads/e502f601-c519-43a8-86f5-5fa89ae50d2f.png"
+                      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
                     },
                     {
                       name: "Chef Elena Dubois",
                       role: "Pastry & Dessert Expert",
                       bio: "French-trained pastry chef specializing in modern dessert techniques and artisanal confections.",
-                      image: "/lovable-uploads/3de85ddd-15e1-4216-9697-f91abb9a47ce.png"
+                      image: "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     },
                     {
                       name: "Chef David Thompson",
                       role: "Community Experience Manager",
                       bio: "Culinary educator focused on creating engaging cooking experiences and building culinary communities.",
-                      image: "/lovable-uploads/a9bb9110-964a-43b0-a5ab-7162140cd133.png"
+                      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                     }
                   ].map((member, i) => (
                     <Card key={i} className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-shadow">

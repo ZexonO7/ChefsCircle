@@ -17,7 +17,7 @@ const Careers = () => {
         <SEO 
           title="Join Our Culinary Team - ChefCircle Careers" 
           description="Join ChefCircle's passionate team of culinary educators and food enthusiasts. We're looking for talented individuals to help revolutionize culinary education."
-          imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+          imageUrl="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
           keywords={['culinary careers', 'chef jobs', 'cooking instructor', 'culinary education', 'food industry careers']}
         />
         <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
@@ -94,7 +94,7 @@ const Careers = () => {
                     <div className="chef-card bg-chef-warm-ivory p-6 border border-chef-royal-green/20">
                       <div className="flex flex-col items-center text-center">
                         <img 
-                          src="/lovable-uploads/3de85ddd-15e1-4216-9697-f91abb9a47ce.png"
+                          src="https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                           alt="Elena Dubois"
                           className="w-32 h-32 rounded-full mb-4 object-cover"
                         />

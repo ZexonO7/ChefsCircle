@@ -1,3 +1,4 @@
+
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Users, MessageCircle, Crown, Star, ArrowRight, Search } from 'lucide-react';
@@ -21,7 +22,7 @@ const Clubs = () => {
       members: 2847,
       category: "Professional",
       difficulty: "Expert",
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png",
+      image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80",
       isPopular: true,
       isPremium: true
     },
@@ -32,7 +33,7 @@ const Clubs = () => {
       members: 1923,
       category: "Dietary",
       difficulty: "Intermediate",
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       isPopular: true,
       isPremium: false
     },
@@ -43,7 +44,7 @@ const Clubs = () => {
       members: 3291,
       category: "Baking",
       difficulty: "All Levels",
-      image: "/lovable-uploads/11e92b89-ed02-453a-9888-56cd91807f2d.png",
+      image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       isPopular: true,
       isPremium: false
     },
@@ -54,7 +55,7 @@ const Clubs = () => {
       members: 1576,
       category: "International",
       difficulty: "Beginner",
-      image: "/lovable-uploads/39671993-1bb4-4bb6-8819-3ca5c07c0042.png",
+      image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       isPopular: false,
       isPremium: false
     },
@@ -65,7 +66,7 @@ const Clubs = () => {
       members: 892,
       category: "Innovation",
       difficulty: "Expert",
-      image: "/lovable-uploads/48ecf6e2-5a98-4a9d-af6f-ae2265cd4098.png",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1081&q=80",
       isPopular: false,
       isPremium: true
     },
@@ -76,7 +77,7 @@ const Clubs = () => {
       members: 2156,
       category: "Lifestyle",
       difficulty: "All Levels",
-      image: "/lovable-uploads/700e27d7-0513-4bfa-8ac4-f7fd6087594c.png",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       isPopular: false,
       isPremium: false
     }
