@@ -1,20 +1,23 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChefHat, Mail, Lock, User, AlertCircle } from 'lucide-react';
+import { ChefHat, Mail, Lock, User, AlertCircle, ArrowLeft, Send } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import OTPInput from '@/components/OTPInput';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [showOTPStep, setShowOTPStep] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [otpError, setOtpError] = useState('');
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -25,45 +28,121 @@ const Auth = () => {
     }
   }, [user, navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const sendOTP = async () => {
     setLoading(true);
-
     try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
+      const response = await fetch(`${supabase.supabaseUrl}/functions/v1/send-otp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabase.supabaseKey}`,
+        },
+        body: JSON.stringify({ email }),
+      });
 
-        if (error) throw error;
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send OTP');
+      }
 
+      toast({
+        title: "Verification code sent!",
+        description: `We've sent a 6-digit code to ${email}. Please check your email.`,
+      });
+
+      // For demo purposes - show the OTP in console
+      if (data.debug_otp) {
+        console.log('Demo OTP:', data.debug_otp);
         toast({
-          title: "Welcome back!",
-          description: "You have successfully signed in.",
-        });
-        navigate('/');
-      } else {
-        const redirectUrl = `${window.location.origin}/`;
-        
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: redirectUrl,
-            data: {
-              full_name: fullName,
-            }
-          }
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Check your email!",
-          description: "We've sent you a confirmation link to complete your registration.",
+          title: "Demo Mode",
+          description: `For testing: Your OTP is ${data.debug_otp}`,
+          variant: "default",
         });
       }
+
+      setShowOTPStep(true);
+    } catch (error: any) {
+      console.error('Send OTP error:', error);
+      toast({
+        title: "Failed to send verification code",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyOTPAndCreateAccount = async (otpCode: string) => {
+    setOtpLoading(true);
+    setOtpError('');
+    
+    try {
+      const response = await fetch(`${supabase.supabaseUrl}/functions/v1/verify-otp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${supabase.supabaseKey}`,
+        },
+        body: JSON.stringify({ 
+          email, 
+          otp: otpCode, 
+          password, 
+          fullName 
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Verification failed');
+      }
+
+      toast({
+        title: "Account created successfully!",
+        description: "You can now sign in with your new account.",
+      });
+
+      // Reset form and switch to login
+      setShowOTPStep(false);
+      setIsLogin(true);
+      setEmail('');
+      setPassword('');
+      setFullName('');
+      
+    } catch (error: any) {
+      console.error('Verify OTP error:', error);
+      setOtpError(error.message || 'Verification failed. Please try again.');
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!isLogin && !showOTPStep) {
+      // Sign up flow - send OTP first
+      await sendOTP();
+      return;
+    }
+
+    // Login flow
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Welcome back!",
+        description: "You have successfully signed in.",
+      });
+      navigate('/');
     } catch (error: any) {
       console.error('Auth error:', error);
       toast({
@@ -95,6 +174,73 @@ const Auth = () => {
       });
     }
   };
+
+  const goBackToForm = () => {
+    setShowOTPStep(false);
+    setOtpError('');
+  };
+
+  if (showOTPStep && !isLogin) {
+    return (
+      <PageLayout>
+        <SEO 
+          title="Verify Email - ChefCircle"
+          description="Enter the verification code sent to your email to complete your ChefCircle account setup."
+        />
+        
+        <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center py-12 px-4">
+          <motion.div
+            className="max-w-md w-full space-y-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-chef-royal-blue rounded-full flex items-center justify-center">
+                  <Mail className="w-8 h-8 text-chef-warm-ivory" />
+                </div>
+              </div>
+              <h2 className="chef-heading-xl text-chef-charcoal">
+                Check Your Email
+              </h2>
+              <p className="chef-body text-chef-charcoal/70 mt-2">
+                We've sent a 6-digit verification code to
+              </p>
+              <p className="font-semibold text-chef-royal-blue">{email}</p>
+            </div>
+
+            <div className="chef-card p-8">
+              <OTPInput
+                onComplete={verifyOTPAndCreateAccount}
+                loading={otpLoading}
+                error={otpError}
+              />
+
+              <div className="mt-6 space-y-4">
+                <button
+                  onClick={goBackToForm}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-chef-royal-blue/20 rounded-xl text-chef-charcoal hover:bg-chef-royal-blue/5 transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to Sign Up
+                </button>
+
+                <button
+                  onClick={sendOTP}
+                  disabled={loading}
+                  className="w-full flex items-center justify-center gap-2 text-chef-royal-blue hover:text-chef-royal-blue/80 text-sm"
+                >
+                  <Send className="w-4 h-4" />
+                  Resend Code
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout>
@@ -191,7 +337,7 @@ const Auth = () => {
                 disabled={loading}
                 className="w-full chef-button-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
+                {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Send Verification Code')}
               </button>
             </form>
 
