@@ -31,11 +31,11 @@ const Auth = () => {
   const sendOTP = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${supabase.supabaseUrl}/functions/v1/send-otp`, {
+      const response = await fetch(`https://syamxswsyylzvvcdmpjz.supabase.co/functions/v1/send-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${supabase.supabaseKey}`,
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YW14c3dzeXlsenZ2Y2RtcGp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5NzAwODgsImV4cCI6MjA2NDU0NjA4OH0.NahrbwV-cv4uKbygo1aCLNnnMeBqj_kvyPuVn7sZ-g8`,
         },
         body: JSON.stringify({ email }),
       });
@@ -79,11 +79,11 @@ const Auth = () => {
     setOtpError('');
     
     try {
-      const response = await fetch(`${supabase.supabaseUrl}/functions/v1/verify-otp`, {
+      const response = await fetch(`https://syamxswsyylzvvcdmpjz.supabase.co/functions/v1/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${supabase.supabaseKey}`,
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YW14c3dzeXlsenZ2Y2RtcGp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5NzAwODgsImV4cCI6MjA2NDU0NjA4OH0.NahrbwV-cv4uKbygo1aCLNnnMeBqj_kvyPuVn7sZ-g8`,
         },
         body: JSON.stringify({ 
           email, 
