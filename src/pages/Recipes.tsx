@@ -1,5 +1,6 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
+import RecipeSubmissionForm from '@/components/RecipeSubmissionForm';
 import { Plus, Search, Filter, Clock, Users, Star, ChefHat } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -12,6 +13,7 @@ const Recipes = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [userRecipes, setUserRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showSubmissionForm, setShowSubmissionForm] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -23,7 +25,7 @@ const Recipes = () => {
       title: "Truffle Risotto Perfection",
       author: "Chef Marco",
       description: "Creamy Arborio rice with authentic black truffle and aged Parmesan. A restaurant-quality dish that's surprisingly achievable at home.",
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png",
+      image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&h=400&fit=crop",
       cookTime: 45,
       difficulty: "Intermediate",
       rating: 4.8,
@@ -37,7 +39,7 @@ const Recipes = () => {
       title: "Mediterranean Quinoa Bowl",
       author: "Sarah Green",
       description: "Fresh quinoa topped with roasted vegetables, feta cheese, and tahini dressing. Perfect for meal prep and healthy eating.",
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+      image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop",
       cookTime: 30,
       difficulty: "Easy",
       rating: 4.6,
@@ -51,7 +53,7 @@ const Recipes = () => {
       title: "Classic French Macarons",
       author: "Pastry Chef Emma",
       description: "Delicate almond macarons with various fillings. Master the technique with detailed step-by-step instructions.",
-      image: "/lovable-uploads/11e92b89-ed02-453a-9888-56cd91807f2d.png",
+      image: "https://images.unsplash.com/photo-1558312657-b2dead562040?w=600&h=400&fit=crop",
       cookTime: 120,
       difficulty: "Advanced",
       rating: 4.9,
@@ -65,7 +67,7 @@ const Recipes = () => {
       title: "Korean BBQ Tacos",
       author: "Chef Jin",
       description: "Fusion street food combining Korean flavors with Mexican classics. Marinated bulgogi beef in soft tortillas.",
-      image: "/lovable-uploads/39671993-1bb4-4bb6-8819-3ca5c07c0042.png",
+      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600&h=400&fit=crop",
       cookTime: 40,
       difficulty: "Intermediate",
       rating: 4.7,
@@ -79,7 +81,7 @@ const Recipes = () => {
       title: "Artisan Sourdough Bread",
       author: "Baker Tom",
       description: "Traditional sourdough with a perfect crust and airy crumb. Includes starter recipe and fermentation tips.",
-      image: "/lovable-uploads/700e27d7-0513-4bfa-8ac4-f7fd6087594c.png",
+      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&h=400&fit=crop",
       cookTime: 1440, // 24 hours
       difficulty: "Advanced",
       rating: 4.8,
@@ -93,7 +95,7 @@ const Recipes = () => {
       title: "5-Minute Chocolate Mug Cake",
       author: "QuickBites",
       description: "Satisfying chocolate cake ready in minutes. Perfect for those late-night sweet cravings.",
-      image: "/lovable-uploads/48ecf6e2-5a98-4a9d-af6f-ae2265cd4098.png",
+      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop",
       cookTime: 5,
       difficulty: "Easy",
       rating: 4.4,
@@ -157,11 +159,19 @@ const Recipes = () => {
   };
 
   const handleShareRecipe = () => {
-    // For now, just show a message. In a real app, this would open a recipe creation form
-    toast({
-      title: "Recipe sharing coming soon!",
-      description: "We're working on a recipe submission form. Stay tuned!",
-    });
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to share a recipe.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setShowSubmissionForm(true);
+  };
+
+  const handleRecipeSubmitted = () => {
+    fetchUserRecipes(); // Refresh the recipes list
   };
 
   return (
@@ -254,7 +264,7 @@ const Recipes = () => {
                   >
                     <div className="relative overflow-hidden rounded-t-xl">
                       <img 
-                        src={recipe.image || '/lovable-uploads/48ecf6e2-5a98-4a9d-af6f-ae2265cd4098.png'} 
+                        src={recipe.image_url || recipe.image || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop'} 
                         alt={recipe.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -372,6 +382,12 @@ const Recipes = () => {
           </div>
         </section>
       </div>
+
+      <RecipeSubmissionForm
+        isOpen={showSubmissionForm}
+        onClose={() => setShowSubmissionForm(false)}
+        onSubmit={handleRecipeSubmitted}
+      />
     </PageLayout>
   );
 };
