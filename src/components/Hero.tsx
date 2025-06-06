@@ -46,7 +46,7 @@ const Hero = () => {
       <div className="banner-container chef-gradient-blue relative overflow-hidden h-[700px] md:h-[750px] w-full">
         <div className="absolute inset-0 w-full">
           <img 
-            src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80"
+            src="/lovable-uploads/4d70a018-96e2-480a-9492-ccdb9dba7ce2.png"
             alt="ChefCircle - Luxury Culinary Experience" 
             className={`w-full h-full object-cover opacity-40 ${isMobile ? 'object-right' : 'object-center'}`}
           />
