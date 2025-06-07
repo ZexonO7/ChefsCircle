@@ -84,7 +84,7 @@ const Hero = () => {
                 <div className="hidden sm:block w-1 h-1 bg-chef-warm-ivory/40 rounded-full"></div>
                 <div className="flex items-center gap-2">
                   <ChefHat className="w-5 h-5" />
-                  <span className="text-sm">500+ Expert Chefs</span>
+                  <span className="text-sm">10+ Expert Chefs</span>
                 </div>
                 <div className="hidden sm:block w-1 h-1 bg-chef-warm-ivory/40 rounded-full"></div>
                 <div className="flex items-center gap-2">
