@@ -32,19 +32,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/projects/pet-tracker</loc>
+    <loc>https://chefscircle.in/projects/cources</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/tech-details</loc>
+    <loc>https://chefscircle.in/library</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/development-process</loc>
+    <loc>https://chefscircle.in/recipes</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -56,7 +56,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/careers</loc>
+    <loc>https://chefscircle.in/auth</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -66,29 +66,5 @@
     <lastmod>2025-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://chefscircle.in/blog/sensor-integrated-textiles-trend</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://chefscircle.in/blog/ai-powered-uniforms-emergency-alerts</loc>
-    <lastmod>2025-05-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://chefscircle.in/blog/from-idea-to-launch-development-process</loc>
-    <lastmod>2025-05-15</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://chefscircle.in/privacy-policy</loc>
-    <lastmod>2025-06-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
   </url>
 </urlset>
