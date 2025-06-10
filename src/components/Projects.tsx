@@ -16,7 +16,7 @@ const Projects = () => {
     image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
   }, {
     name: "Sous Chef",
-    price: "$59",
+    price: "$49",
     period: "/month",
     description: "For passionate home cooks ready to elevate their skills",
     features: ["4 live cook-alongs per month", "Advanced masterclass access", "1-on-1 chef consultations", "Premium recipe collections", "Ingredient box discounts", "Priority support"],
