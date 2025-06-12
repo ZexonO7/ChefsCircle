@@ -52,7 +52,7 @@ const Navbar = () => {
             <div className="w-10 h-10 bg-chef-royal-blue rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <ChefHat className="w-6 h-6 text-chef-warm-ivory" />
             </div>
-            <span className="text-2xl font-bold text-chef-charcoal font-playfair">ChefCircle</span>
+            <span className="text-2xl font-bold text-chef-charcoal font-playfair">ChefsCircle</span>
           </Link>
           
           <div className="hidden md:block">
