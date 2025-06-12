@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "host": "www.chefscircle.in" }],
+      "destination": "https://chefscircle.in/$1",
+      "permanent": true
+    }
+  ]
+}
