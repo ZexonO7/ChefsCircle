@@ -29,31 +29,59 @@ export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
   console.log('Fetching culinary news, API key present:', !!apiKey);
   
   if (!apiKey || apiKey === '' || apiKey.includes('YOUR_NEWS_API_KEY')) {
-    // Return mock data when API key is not set or is placeholder
-    console.log('Using mock data - no valid API key');
+    console.log('No valid API key found, using mock data');
     return getMockCulinaryNews();
   }
 
   try {
+    console.log('Making API request to NewsAPI...');
     const response = await fetch(
-      `${NEWS_API_BASE_URL}/everything?q=cooking OR culinary OR chef OR recipe OR food&language=en&sortBy=publishedAt&pageSize=20&apiKey=${apiKey}`
+      `${NEWS_API_BASE_URL}/everything?q=(cooking OR culinary OR chef OR recipe OR food OR restaurant OR kitchen) AND (news OR industry OR trend)&language=en&sortBy=publishedAt&pageSize=20&apiKey=${apiKey}`
     );
 
+    console.log('NewsAPI response status:', response.status);
+
     if (!response.ok) {
-      throw new Error(`News API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error('NewsAPI error response:', errorText);
+      throw new Error(`News API error: ${response.status} - ${errorText}`);
     }
 
     const data: NewsResponse = await response.json();
-    console.log('Fetched real news articles:', data.articles.length);
-    return data.articles.filter(article => 
+    console.log('Raw NewsAPI response:', data);
+    console.log('Total results from API:', data.totalResults);
+    console.log('Articles received:', data.articles?.length || 0);
+
+    if (!data.articles || data.articles.length === 0) {
+      console.log('No articles returned from API, using mock data');
+      return getMockCulinaryNews();
+    }
+
+    // Filter out removed articles and ensure we have valid content
+    const validArticles = data.articles.filter(article => 
       article.title && 
       article.description && 
+      article.url &&
       article.urlToImage &&
-      !article.title.includes('[Removed]')
+      !article.title.includes('[Removed]') &&
+      !article.description.includes('[Removed]') &&
+      article.title.toLowerCase() !== 'removed' &&
+      article.description.toLowerCase() !== 'removed'
     );
+
+    console.log('Valid articles after filtering:', validArticles.length);
+
+    if (validArticles.length === 0) {
+      console.log('No valid articles after filtering, using mock data');
+      return getMockCulinaryNews();
+    }
+
+    console.log('Successfully fetched real culinary news:', validArticles.length, 'articles');
+    return validArticles;
+
   } catch (error) {
-    console.error('Error fetching culinary news:', error);
-    console.log('Falling back to mock data');
+    console.error('Error fetching culinary news from API:', error);
+    console.log('Falling back to mock data due to error');
     return getMockCulinaryNews();
   }
 };
