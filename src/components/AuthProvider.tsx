@@ -28,11 +28,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         console.log('Auth state changed:', event, session);
         setSession(session);
         setUser(session?.user ?? null);
         setLoading(false);
+
+        // Track first login when user signs in
+        if (event === 'SIGNED_IN' && session?.user) {
+          setTimeout(async () => {
+            try {
+              await supabase.rpc('track_first_login', {
+                user_id_param: session.user.id
+              });
+            } catch (error) {
+              console.error('Error tracking first login:', error);
+            }
+          }, 100);
+        }
       }
     );
 

@@ -39,6 +39,7 @@ export const useGamificationData = () => {
   const [loading, setLoading] = useState(true);
   const [showAchievement, setShowAchievement] = useState(false);
   const [newAchievement, setNewAchievement] = useState<string>('');
+  const [hasTrackedLogin, setHasTrackedLogin] = useState(false);
 
   // Function to check for new achievements
   const checkForNewAchievements = (currentAchievements: Achievement[], previousAchievements: Achievement[]) => {
@@ -61,6 +62,25 @@ export const useGamificationData = () => {
     setNewAchievement('');
   };
 
+  // Function to track first login
+  const trackFirstLogin = async () => {
+    if (!user || hasTrackedLogin) return;
+    
+    try {
+      const { error } = await supabase.rpc('track_first_login', {
+        user_id_param: user.id
+      });
+      
+      if (error) {
+        console.error('Error tracking first login:', error);
+      } else {
+        setHasTrackedLogin(true);
+      }
+    } catch (error) {
+      console.error('Error in trackFirstLogin:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user) return;
@@ -68,6 +88,11 @@ export const useGamificationData = () => {
       try {
         // Store previous achievements for comparison
         const previousAchievements = [...userAchievements];
+
+        // Track first login if not already tracked
+        if (!hasTrackedLogin) {
+          await trackFirstLogin();
+        }
 
         // Fetch user gamification data
         const { data: gamificationData, error: gamificationError } = await supabase
@@ -200,7 +225,7 @@ export const useGamificationData = () => {
     };
 
     fetchUserData();
-  }, [user, toast]);
+  }, [user, toast, hasTrackedLogin]);
 
   return {
     userGamification,
@@ -210,6 +235,7 @@ export const useGamificationData = () => {
     loading,
     showAchievement,
     newAchievement,
-    handleDismissAchievement
+    handleDismissAchievement,
+    trackFirstLogin
   };
 };

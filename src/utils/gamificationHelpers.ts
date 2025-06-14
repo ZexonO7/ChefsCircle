@@ -9,38 +9,45 @@ export const mapAchievementsToBadges = (userAchievements: Achievement[]) => {
   return [
     {
       id: 1,
-      name: "Master Chef",
+      name: "Welcome Chef",
       iconName: "ChefHat" as const,
-      earned: userAchievements.some(a => a.achievement_name === "Master Chef"),
+      earned: userAchievements.some(a => a.achievement_name === "Welcome Chef"),
       color: "chef-gold"
     },
     {
       id: 2,
-      name: "Recipe Creator",
+      name: "Profile Master",
       iconName: "Star" as const,
-      earned: userAchievements.some(a => a.achievement_name === "Recipe Creator"),
+      earned: userAchievements.some(a => a.achievement_name === "Profile Master"),
       color: "chef-royal-blue"
     },
     {
       id: 3,
-      name: "Challenge Winner",
+      name: "Recipe Creator",
       iconName: "Trophy" as const,
-      earned: userAchievements.some(a => a.achievement_name === "Challenge Winner"),
+      earned: userAchievements.some(a => a.achievement_name === "Recipe Creator"),
       color: "chef-royal-green"
     },
     {
       id: 4,
-      name: "Community Leader",
+      name: "Master Chef",
       iconName: "Crown" as const,
-      earned: userAchievements.some(a => a.achievement_name === "Community Leader"),
+      earned: userAchievements.some(a => a.achievement_name === "Master Chef"),
       color: "chef-gold"
     },
     {
       id: 5,
-      name: "Speed Cook",
+      name: "Community Leader",
       iconName: "Clock" as const,
-      earned: userAchievements.some(a => a.achievement_name === "Speed Cook"),
+      earned: userAchievements.some(a => a.achievement_name === "Community Leader"),
       color: "chef-royal-blue"
+    },
+    {
+      id: 6,
+      name: "Challenge Winner",
+      iconName: "Trophy" as const,
+      earned: userAchievements.some(a => a.achievement_name === "Challenge Winner"),
+      color: "chef-royal-green"
     }
   ];
 };

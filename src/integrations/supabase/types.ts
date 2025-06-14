@@ -396,6 +396,14 @@ export type Database = {
         }
         Returns: undefined
       }
+      track_first_login: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
+      track_profile_customization: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
       update_challenge_progress: {
         Args: { user_id_param: string; challenge_type_param: string }
         Returns: undefined
