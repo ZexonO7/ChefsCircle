@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Trophy, ChefHat, Star, Crown, Clock } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
@@ -130,29 +129,39 @@ const GamificationDashboard = () => {
           setUserAchievements(achievementsData || []);
         }
 
-        // Fetch leaderboard data
-        const { data: leaderboardResponse, error: leaderboardError } = await supabase
+        // Fetch leaderboard data - first get gamification data
+        const { data: gamificationLeaderboard, error: leaderboardError } = await supabase
           .from('user_gamification')
-          .select(`
-            total_xp,
-            level,
-            user_id,
-            profiles!inner(full_name, avatar_url)
-          `)
+          .select('total_xp, level, user_id')
           .order('total_xp', { ascending: false })
           .limit(5);
 
         if (leaderboardError) {
           console.error('Error fetching leaderboard:', leaderboardError);
-        } else {
-          const formattedLeaderboard = leaderboardResponse?.map((item, index) => ({
-            rank: index + 1,
-            name: item.profiles?.full_name || 'Chef User',
-            xp: item.total_xp,
-            level: item.level,
-            avatar: item.profiles?.avatar_url || "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
-            isUser: item.user_id === user.id
-          })) || [];
+        } else if (gamificationLeaderboard) {
+          // Now fetch profile data for these users
+          const userIds = gamificationLeaderboard.map(item => item.user_id);
+          const { data: profilesData, error: profilesError } = await supabase
+            .from('profiles')
+            .select('id, full_name, avatar_url')
+            .in('id', userIds);
+
+          if (profilesError) {
+            console.error('Error fetching profiles:', profilesError);
+          }
+
+          // Combine the data
+          const formattedLeaderboard = gamificationLeaderboard.map((item, index) => {
+            const profile = profilesData?.find(p => p.id === item.user_id);
+            return {
+              rank: index + 1,
+              name: profile?.full_name || 'Chef User',
+              xp: item.total_xp,
+              level: item.level,
+              avatar: profile?.avatar_url || "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+              isUser: item.user_id === user.id
+            };
+          });
           
           setLeaderboardData(formattedLeaderboard);
         }
