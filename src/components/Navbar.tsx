@@ -1,16 +1,17 @@
+
 import React from "react";
 import { motion } from "framer-motion";
-import { Menu, X, ChefHat } from "lucide-react";
+import { Menu, X, ChefHat, Shield } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from '@/components/AuthProvider';
 import UserMenu from '@/components/UserMenu';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const {
-    user
-  } = useAuth();
+  const { user } = useAuth();
+
   const navItems = [{
     name: "Home",
     href: "/"
@@ -33,11 +34,15 @@ const Navbar = () => {
     name: "Blog",
     href: "/blog"
   }];
+
   const isActive = (path: string) => {
     if (path === "/" && location.pathname === "/") return true;
     if (path !== "/" && location.pathname.startsWith(path)) return true;
     return false;
   };
+
+  const isAdmin = user?.email === 'Advithya07@gmail.com';
+
   return <motion.nav className="fixed top-0 w-full bg-chef-warm-ivory/95 backdrop-blur-sm z-50 border-b border-chef-royal-blue/10" initial={{
     y: -100
   }} animate={{
@@ -60,6 +65,12 @@ const Navbar = () => {
               {navItems.map(item => <Link key={item.name} to={item.href} className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${isActive(item.href) ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`}>
                   {item.name}
                 </Link>)}
+              {isAdmin && (
+                <Link to="/admin" className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 flex items-center gap-2 ${isActive("/admin") ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`}>
+                  <Shield className="w-4 h-4" />
+                  Admin
+                </Link>
+              )}
             </div>
           </div>
 
@@ -95,6 +106,12 @@ const Navbar = () => {
             {navItems.map(item => <Link key={item.name} to={item.href} className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ${isActive(item.href) ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`} onClick={() => setIsOpen(false)}>
                 {item.name}
               </Link>)}
+            {isAdmin && (
+              <Link to="/admin" className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 flex items-center gap-2 ${isActive("/admin") ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`} onClick={() => setIsOpen(false)}>
+                <Shield className="w-4 h-4" />
+                Admin Portal
+              </Link>
+            )}
             {!user && <Link to="/auth" onClick={() => setIsOpen(false)}>
                 <button className="w-full chef-button-primary text-sm mt-4">
                   Sign In
@@ -104,4 +121,5 @@ const Navbar = () => {
         </motion.div>}
     </motion.nav>;
 };
+
 export default Navbar;

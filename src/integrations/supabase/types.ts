@@ -9,6 +9,36 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_logs: {
+        Row: {
+          action: string
+          admin_id: string
+          created_at: string | null
+          details: Json | null
+          id: string
+          target_id: string | null
+          target_type: string
+        }
+        Insert: {
+          action: string
+          admin_id: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          target_id?: string | null
+          target_type: string
+        }
+        Update: {
+          action?: string
+          admin_id?: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          target_id?: string | null
+          target_type?: string
+        }
+        Relationships: []
+      }
       club_memberships: {
         Row: {
           club_name: string
@@ -86,6 +116,7 @@ export type Database = {
       }
       user_recipes: {
         Row: {
+          admin_notes: string | null
           category: string | null
           cook_time: number | null
           created_at: string | null
@@ -95,11 +126,15 @@ export type Database = {
           image_url: string | null
           ingredients: string[] | null
           instructions: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string | null
           title: string
           updated_at: string | null
           user_id: string
         }
         Insert: {
+          admin_notes?: string | null
           category?: string | null
           cook_time?: number | null
           created_at?: string | null
@@ -109,11 +144,15 @@ export type Database = {
           image_url?: string | null
           ingredients?: string[] | null
           instructions?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
           title: string
           updated_at?: string | null
           user_id: string
         }
         Update: {
+          admin_notes?: string | null
           category?: string | null
           cook_time?: number | null
           created_at?: string | null
@@ -123,9 +162,39 @@ export type Database = {
           image_url?: string | null
           ingredients?: string[] | null
           instructions?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string | null
           title?: string
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      website_analytics: {
+        Row: {
+          created_at: string | null
+          date: string | null
+          id: string
+          metadata: Json | null
+          metric_name: string
+          metric_value: number
+        }
+        Insert: {
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          metadata?: Json | null
+          metric_name: string
+          metric_value: number
+        }
+        Update: {
+          created_at?: string | null
+          date?: string | null
+          id?: string
+          metadata?: Json | null
+          metric_name?: string
+          metric_value?: number
         }
         Relationships: []
       }
@@ -136,6 +205,15 @@ export type Database = {
     Functions: {
       cleanup_expired_otps: {
         Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      log_admin_action: {
+        Args: {
+          action_text: string
+          target_type_text: string
+          target_id_param?: string
+          details_param?: Json
+        }
         Returns: undefined
       }
     }
