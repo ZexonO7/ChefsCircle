@@ -42,6 +42,8 @@ const GamificationDashboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [weeklyChallenge, setWeeklyChallenge] = useState<WeeklyChallengeData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showAchievement, setShowAchievement] = useState(false);
+  const [newAchievement, setNewAchievement] = useState<string>('');
 
   // Calculate next level XP requirement
   const nextLevelXP = userGamification ? userGamification.level * 1000 : 1000;
@@ -98,11 +100,30 @@ const GamificationDashboard = () => {
     return `${diffDays} days left`;
   };
 
+  // Function to check for new achievements
+  const checkForNewAchievements = (currentAchievements: Achievement[], previousAchievements: Achievement[]) => {
+    const newAchievements = currentAchievements.filter(current => 
+      !previousAchievements.some(prev => 
+        prev.achievement_name === current.achievement_name && 
+        prev.earned_at === current.earned_at
+      )
+    );
+    
+    if (newAchievements.length > 0) {
+      const latestAchievement = newAchievements[newAchievements.length - 1];
+      setNewAchievement(latestAchievement.achievement_name);
+      setShowAchievement(true);
+    }
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user) return;
 
       try {
+        // Store previous achievements for comparison
+        const previousAchievements = [...userAchievements];
+
         // Fetch user gamification data
         const { data: gamificationData, error: gamificationError } = await supabase
           .from('user_gamification')
@@ -143,7 +164,13 @@ const GamificationDashboard = () => {
         if (achievementsError) {
           console.error('Error fetching achievements:', achievementsError);
         } else {
-          setUserAchievements(achievementsData || []);
+          const currentAchievements = achievementsData || [];
+          setUserAchievements(currentAchievements);
+          
+          // Check for new achievements only if this isn't the initial load
+          if (previousAchievements.length > 0) {
+            checkForNewAchievements(currentAchievements, previousAchievements);
+          }
         }
 
         // Fetch active weekly challenge
@@ -230,6 +257,11 @@ const GamificationDashboard = () => {
     fetchUserData();
   }, [user, toast]);
 
+  const handleDismissAchievement = () => {
+    setShowAchievement(false);
+    setNewAchievement('');
+  };
+
   if (loading) {
     return (
       <section className="py-16 md:py-24 bg-chef-warm-ivory">
@@ -310,8 +342,12 @@ const GamificationDashboard = () => {
           <Leaderboard users={leaderboardData} />
         </div>
 
-        {/* Achievement Notification */}
-        <AchievementNotification />
+        {/* Achievement Notification - now conditional */}
+        <AchievementNotification 
+          isVisible={showAchievement}
+          achievementName={newAchievement}
+          onDismiss={handleDismissAchievement}
+        />
       </div>
     </section>
   );
