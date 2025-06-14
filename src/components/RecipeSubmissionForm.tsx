@@ -61,7 +61,9 @@ const RecipeSubmissionForm = ({
     setLoading(true);
     try {
       const filteredIngredients = ingredients.filter(ingredient => ingredient.trim() !== '');
-      const { error } = await supabase.from('user_recipes').insert({
+      
+      // Submit recipe
+      const { error: recipeError } = await supabase.from('user_recipes').insert({
         title,
         description,
         category,
@@ -73,11 +75,24 @@ const RecipeSubmissionForm = ({
         user_id: user.id
       });
 
-      if (error) throw error;
+      if (recipeError) throw recipeError;
+
+      // Award XP for recipe submission
+      const { error: xpError } = await supabase.rpc('award_xp', {
+        user_id_param: user.id,
+        xp_amount: 200,
+        action_type_param: 'recipe_upload',
+        action_description_param: `Uploaded recipe: ${title}`
+      });
+
+      if (xpError) {
+        console.error('Error awarding XP:', xpError);
+        // Don't block the recipe submission if XP awarding fails
+      }
 
       toast({
         title: "Recipe submitted successfully!",
-        description: "Your recipe has been submitted for review. It will appear in the community once approved."
+        description: "Your recipe has been submitted for review. You earned 200 XP!"
       });
 
       // Reset form

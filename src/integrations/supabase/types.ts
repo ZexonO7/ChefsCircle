@@ -87,6 +87,33 @@ export type Database = {
         }
         Relationships: []
       }
+      gamification_actions: {
+        Row: {
+          action_description: string | null
+          action_type: string
+          created_at: string | null
+          id: string
+          user_id: string
+          xp_earned: number
+        }
+        Insert: {
+          action_description?: string | null
+          action_type: string
+          created_at?: string | null
+          id?: string
+          user_id: string
+          xp_earned: number
+        }
+        Update: {
+          action_description?: string | null
+          action_type?: string
+          created_at?: string | null
+          id?: string
+          user_id?: string
+          xp_earned?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -111,6 +138,63 @@ export type Database = {
           full_name?: string | null
           id?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_achievements: {
+        Row: {
+          achievement_name: string
+          achievement_type: string
+          earned_at: string | null
+          id: string
+          user_id: string
+          xp_awarded: number | null
+        }
+        Insert: {
+          achievement_name: string
+          achievement_type: string
+          earned_at?: string | null
+          id?: string
+          user_id: string
+          xp_awarded?: number | null
+        }
+        Update: {
+          achievement_name?: string
+          achievement_type?: string
+          earned_at?: string | null
+          id?: string
+          user_id?: string
+          xp_awarded?: number | null
+        }
+        Relationships: []
+      }
+      user_gamification: {
+        Row: {
+          created_at: string | null
+          current_xp: number | null
+          id: string
+          level: number | null
+          total_xp: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          current_xp?: number | null
+          id?: string
+          level?: number | null
+          total_xp?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          current_xp?: number | null
+          id?: string
+          level?: number | null
+          total_xp?: number | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -203,6 +287,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      award_xp: {
+        Args: {
+          user_id_param: string
+          xp_amount: number
+          action_type_param: string
+          action_description_param?: string
+        }
+        Returns: undefined
+      }
+      calculate_level: {
+        Args: { total_xp: number }
+        Returns: number
+      }
       cleanup_expired_otps: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -215,6 +312,10 @@ export type Database = {
           details_param?: Json
         }
         Returns: undefined
+      }
+      xp_for_next_level: {
+        Args: { current_level: number }
+        Returns: number
       }
     }
     Enums: {
