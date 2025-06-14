@@ -21,8 +21,8 @@ export interface NewsResponse {
 }
 
 export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
-  if (!NEWS_API_KEY || NEWS_API_KEY === 'YOUR_NEWS_API_KEY') {
-    // Return mock data when API key is not set
+  if (!NEWS_API_KEY || NEWS_API_KEY === '' || NEWS_API_KEY.includes('YOUR_NEWS_API_KEY')) {
+    // Return mock data when API key is not set or is placeholder
     return getMockCulinaryNews();
   }
 
