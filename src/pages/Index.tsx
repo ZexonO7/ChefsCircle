@@ -6,7 +6,6 @@ import Projects from '@/components/Projects';
 import WhyChefCircle from '@/components/WhyChefsCircle';
 import GamificationDashboard from '@/components/GamificationDashboard';
 import BlogPreview from '@/components/BlogPreview';
-import ContactInfo from '@/components/ContactInfo';
 import SEO from '@/components/SEO';
 import { useEffect } from 'react';
 
@@ -34,7 +33,6 @@ const Index = () => {
       <GamificationDashboard />
       <Projects />
       <BlogPreview />
-      <ContactInfo />
     </PageLayout>
   );
 };
