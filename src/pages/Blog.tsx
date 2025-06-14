@@ -1,89 +1,140 @@
 import PageLayout from '@/components/PageLayout';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
-import BlogPostCard from '@/components/BlogPostCard';
-import { blogPosts } from '@/data/blogPosts';
+import NewsCard from '@/components/NewsCard';
+import NewsApiKeyInput from '@/components/NewsApiKeyInput';
+import { useNewsApi } from '@/hooks/useNewsApi';
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { RefreshCw, Newspaper } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Blog = () => {
-  // Get the newest blog post for the featured post section
-  const featuredPost = blogPosts.find(post => post.id === '4') || blogPosts[0]; // Feature the new post about sensor technology
-  // Get the rest of the blog posts for the grid section
-  const otherPosts = blogPosts.filter(post => post.id !== featuredPost?.id);
+  const [showApiKeyInput, setShowApiKeyInput] = useState(false);
+  const { articles, isLoading, error, refetch } = useNewsApi();
+
+  useEffect(() => {
+    // Check if API key is configured
+    const apiKey = localStorage.getItem('news-api-key');
+    if (!apiKey) {
+      setShowApiKeyInput(true);
+    }
+  }, []);
+
+  const handleApiKeySet = (apiKey: string) => {
+    localStorage.setItem('news-api-key', apiKey);
+    setShowApiKeyInput(false);
+    window.location.reload(); // Reload to use the new API key
+  };
+
+  const handleRefresh = () => {
+    refetch();
+  };
+
+  const featuredArticle = articles[0];
+  const otherArticles = articles.slice(1);
+
+  if (showApiKeyInput) {
+    return (
+      <PageLayout>
+        <SEO 
+          title="ChefCircle - Latest Culinary News" 
+          description="Stay updated with the latest culinary news, trends, and insights from the world of professional cooking and gastronomy." 
+          keywords={['culinary news', 'cooking trends', 'chef news', 'food industry', 'restaurant news']} 
+          type="website" 
+        />
+        
+        <div className="w-full pt-24 pb-12 bg-gradient-to-b from-chef-charcoal to-chef-royal-green text-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 font-playfair">Latest Culinary News</h1>
+              <p className="text-xl text-chef-warm-ivory/90 mb-6 font-inter">
+                Configure your news API to get the latest culinary stories and trends
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="container mx-auto px-4 py-16">
+          <NewsApiKeyInput onApiKeySet={handleApiKeySet} />
+        </div>
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout>
       <SEO 
-        title="ChefCircle - Culinary News and Expert Cooking Tips" 
-        description="Discover the latest culinary techniques, exclusive recipes, chef interviews, and cooking insights from the ChefCircle community of passionate food enthusiasts." 
-        imageUrl={featuredPost?.imageUrl || "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"} 
-        keywords={['culinary techniques', 'cooking tips', 'chef recipes', 'culinary education', 'cooking skills', 'gourmet cooking', 'culinary community']} 
+        title="ChefCircle - Latest Culinary News" 
+        description="Stay updated with the latest culinary news, trends, and insights from the world of professional cooking and gastronomy." 
+        keywords={['culinary news', 'cooking trends', 'chef news', 'food industry', 'restaurant news']} 
         type="website" 
       />
       
       <div className="w-full pt-24 pb-12 bg-gradient-to-b from-chef-charcoal to-chef-royal-green text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-playfair">Culinary News & Expertise</h1>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Newspaper className="w-8 h-8" />
+              <h1 className="text-4xl md:text-5xl font-bold font-playfair">Latest Culinary News</h1>
+            </div>
             <p className="text-xl text-chef-warm-ivory/90 mb-6 font-inter">
-              The latest culinary techniques, exclusive recipes, and expert insights from our community of passionate chefs
+              Stay updated with the latest culinary stories, trends, and insights from around the world
             </p>
+            <Button 
+              onClick={handleRefresh} 
+              variant="outline" 
+              className="border-chef-warm-ivory text-chef-warm-ivory hover:bg-chef-warm-ivory hover:text-chef-charcoal"
+              disabled={isLoading}
+            >
+              <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+              Refresh News
+            </Button>
           </div>
         </div>
       </div>
       
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredPost && (
-            <Link to={`/news/${featuredPost.slug}`} className="col-span-1 md:col-span-2 lg:col-span-3">
-              <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20">
-                <div className="grid md:grid-cols-2 h-full">
-                  <div style={{
-                backgroundImage: `url('${featuredPost.imageUrl}')`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center'
-              }} className="bg-cover bg-center h-64 md:h-full p-8 flex items-center justify-center bg-[c] px-0 py-0 bg-[#141c73]">
-                    <div className="text-white text-center bg-chef-charcoal/60 backdrop-blur-sm p-4 rounded-lg">
-                      <span className="px-3 py-1 bg-chef-royal-blue/20 rounded-full text-sm font-medium inline-block mb-4">Featured Recipe</span>
-                      <h3 className="text-2xl md:text-3xl font-bold font-playfair">{featuredPost.title}</h3>
-                    </div>
-                  </div>
-                  <CardContent className="p-8 bg-chef-cream">
-                    <p className="text-chef-charcoal/60 text-sm mb-2">Published: {featuredPost.date}</p>
-                    <p className="text-chef-charcoal/70 mb-6 font-inter">
-                      {featuredPost.excerpt}
-                    </p>
-                    <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-chef-forest text-white">
-                      Read more 
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </CardContent>
-                </div>
-              </Card>
-            </Link>
-          )}
-          
-          {/* Other blog posts */}
-          {otherPosts.map(post => (
-            <BlogPostCard 
-              key={post.id} 
-              title={post.title} 
-              excerpt={post.excerpt} 
-              imageUrl={post.imageUrl || 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'} 
-              date={post.date} 
-              slug={post.slug} 
-              category={post.category} 
-            />
-          ))}
-          
-          {/* If there are fewer than 3 published posts, add placeholders */}
-          {blogPosts.length < 4 && Array.from({
-          length: Math.max(0, 4 - blogPosts.length)
-        }).map((_, index) => <BlogPostCard key={`placeholder-${index}`} title="Upcoming Culinary Masterclass" excerpt="Stay tuned for more exciting culinary tutorials, exclusive recipes, and expert cooking techniques from our renowned chef community." imageUrl={index % 2 === 0 ? "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" : "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80"} date="Coming soon" slug="#" category="Upcoming" />)}
-        </div>
+        {error && (
+          <div className="text-center mb-8">
+            <p className="text-red-600 mb-4">Failed to load news. Showing sample content.</p>
+          </div>
+        )}
+
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Featured article skeleton */}
+            <div className="col-span-1 md:col-span-2 lg:col-span-3">
+              <Skeleton className="h-96 w-full rounded-lg" />
+            </div>
+            {/* Other articles skeletons */}
+            {Array.from({ length: 6 }).map((_, index) => (
+              <Skeleton key={index} className="h-96 w-full rounded-lg" />
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredArticle && (
+              <NewsCard article={featuredArticle} featured={true} />
+            )}
+            
+            {otherArticles.map((article, index) => (
+              <NewsCard key={index} article={article} />
+            ))}
+            
+            {articles.length === 0 && !isLoading && (
+              <div className="col-span-full text-center py-16">
+                <h3 className="text-2xl font-bold mb-4 text-chef-charcoal">No news articles found</h3>
+                <p className="text-chef-charcoal/70 mb-6">
+                  We couldn't find any culinary news at the moment. Please try refreshing or check back later.
+                </p>
+                <Button onClick={handleRefresh}>
+                  <RefreshCw className="w-4 h-4 mr-2" />
+                  Try Again
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </PageLayout>
   );
