@@ -72,7 +72,7 @@ const BadgesSection = ({ badges }: BadgesSectionProps) => {
             <p className="text-sm text-chef-charcoal/60 mb-3">
               {availableBadges.length} more badges to unlock
             </p>
-            <Button variant="outline" className="chef-button-outline text-sm">
+            <Button variant="outline" className="chef-button-outline text-sm bg-inherit">
               View All Badges
             </Button>
           </div>
