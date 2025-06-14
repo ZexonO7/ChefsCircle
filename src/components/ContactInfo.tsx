@@ -1,7 +1,23 @@
+
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
+
 const ContactInfo = () => {
-  return <section id="contact" className="bg-gradient-to-b from-chef-warm-ivory to-chef-royal-green text-white relative py-[25px] md:py-[40px]">
+  const handleScheduleConsultation = () => {
+    // Scroll to the contact card or open email
+    const contactCard = document.querySelector('.chef-card');
+    if (contactCard) {
+      contactCard.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleJoinChefCircle = () => {
+    // Open email to join
+    window.location.href = 'mailto:Advithya@chefscircle.in?subject=Join ChefCircle - Membership Inquiry&body=Hi, I would like to learn more about joining ChefCircle and your membership options.';
+  };
+
+  return (
+    <section id="contact" className="bg-gradient-to-b from-chef-warm-ivory to-chef-royal-green text-white relative py-[25px] md:py-[40px]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-warm-ivory text-chef-royal-green rounded-full text-sm font-medium font-inter">
@@ -47,15 +63,23 @@ const ContactInfo = () => {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <button className="chef-button-gold text-lg">
+            <button 
+              onClick={handleScheduleConsultation}
+              className="chef-button-gold text-lg cursor-pointer hover:scale-105 transition-transform"
+            >
               Schedule a Consultation
             </button>
-            <button className="chef-button-primary text-lg">
+            <button 
+              onClick={handleJoinChefCircle}
+              className="chef-button-primary text-lg cursor-pointer hover:scale-105 transition-transform"
+            >
               Join ChefCircle Today
             </button>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ContactInfo;
