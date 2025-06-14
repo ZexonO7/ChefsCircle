@@ -20,8 +20,14 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
   };
 
   const handleReadMore = () => {
+    console.log('Read more button clicked for article:', article.title);
+    console.log('Article URL:', article.url);
+    
     if (article.url && article.url !== '#') {
+      console.log('Opening URL in new tab:', article.url);
       window.open(article.url, '_blank', 'noopener,noreferrer');
+    } else {
+      console.log('No valid URL found for article');
     }
   };
 
