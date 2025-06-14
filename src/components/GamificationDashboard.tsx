@@ -5,12 +5,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+
 const GamificationDashboard = () => {
   const [userLevel, setUserLevel] = useState(7);
   const [currentXP, setCurrentXP] = useState(2450);
   const [nextLevelXP] = useState(3000);
   const [totalXP] = useState(12450);
+
   const xpProgress = currentXP / nextLevelXP * 100;
+
   const userBadges = [{
     id: 1,
     name: "Master Chef",
@@ -84,7 +87,9 @@ const GamificationDashboard = () => {
   }];
   const earnedBadges = userBadges.filter(badge => badge.earned);
   const availableBadges = userBadges.filter(badge => !badge.earned);
-  return <section className="py-16 md:py-24 bg-chef-warm-ivory">
+
+  return (
+    <section className="py-16 md:py-24 bg-chef-warm-ivory">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -101,15 +106,12 @@ const GamificationDashboard = () => {
         </div>
 
         {/* XP & Level Widget */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.5
-      }} className="mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
           <Card className="chef-card-luxury bg-gradient-to-br from-chef-royal-blue to-chef-blue-light text-white overflow-hidden">
             <CardContent className="p-8">
               <div className="flex flex-col md:flex-row items-center justify-between">
@@ -140,16 +142,12 @@ const GamificationDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {/* Weekly Challenge */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5,
-          delay: 0.1
-        }} className="lg:col-span-1">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-1"
+          >
             <Card className="chef-card h-full">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-chef-charcoal">
@@ -186,16 +184,12 @@ const GamificationDashboard = () => {
           </motion.div>
 
           {/* Earned Badges */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5,
-          delay: 0.2
-        }} className="lg:col-span-1">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:col-span-1"
+          >
             <Card className="chef-card h-full">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-chef-charcoal">
@@ -205,14 +199,18 @@ const GamificationDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-3 gap-3 mb-4">
-                  {earnedBadges.map(badge => <motion.div key={badge.id} whileHover={{
-                  scale: 1.05
-                }} className={`p-3 rounded-lg bg-${badge.color}/20 text-center border border-${badge.color}/30`}>
+                  {earnedBadges.map((badge) => (
+                    <motion.div
+                      key={badge.id}
+                      whileHover={{ scale: 1.05 }}
+                      className={`p-3 rounded-lg bg-${badge.color}/20 text-center border border-${badge.color}/30`}
+                    >
                       <div className={`w-8 h-8 mx-auto mb-2 text-${badge.color} flex items-center justify-center`}>
                         {badge.icon}
                       </div>
                       <p className="text-xs font-medium text-chef-charcoal">{badge.name}</p>
-                    </motion.div>)}
+                    </motion.div>
+                  ))}
                 </div>
                 
                 <div className="text-center">
@@ -228,16 +226,12 @@ const GamificationDashboard = () => {
           </motion.div>
 
           {/* Leaderboard */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5,
-          delay: 0.3
-        }} className="lg:col-span-1">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="lg:col-span-1"
+          >
             <Card className="chef-card h-full">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-chef-charcoal">
@@ -247,22 +241,45 @@ const GamificationDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {leaderboard.map(user => <div key={user.rank} className={`flex items-center gap-3 p-3 rounded-lg ${user.isUser ? 'bg-chef-royal-blue/20 border border-chef-royal-blue/30' : 'bg-chef-warm-ivory/50'}`}>
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${user.rank === 1 ? 'bg-chef-gold text-chef-charcoal' : user.rank === 2 ? 'bg-gray-400 text-white' : user.rank === 3 ? 'bg-amber-600 text-white' : 'bg-chef-royal-blue/20 text-chef-royal-blue'}`}>
+                  {leaderboard.map((user) => (
+                    <div
+                      key={user.rank}
+                      className={`flex items-center gap-3 p-3 rounded-lg ${
+                        user.isUser 
+                          ? 'bg-chef-royal-blue/20 border border-chef-royal-blue/30' 
+                          : 'bg-chef-warm-ivory/50'
+                      }`}
+                    >
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                        user.rank === 1 
+                          ? 'bg-chef-gold text-chef-charcoal' 
+                          : user.rank === 2 
+                          ? 'bg-gray-400 text-white' 
+                          : user.rank === 3 
+                          ? 'bg-amber-600 text-white' 
+                          : 'bg-chef-royal-blue/20 text-chef-royal-blue'
+                      }`}>
                         {user.rank}
                       </div>
                       
-                      <img src={user.avatar} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
+                      <img 
+                        src={user.avatar} 
+                        alt={user.name} 
+                        className="w-8 h-8 rounded-full object-cover" 
+                      />
                       
                       <div className="flex-1">
-                        <p className={`font-medium text-sm ${user.isUser ? 'text-chef-royal-blue' : 'text-chef-charcoal'}`}>
+                        <p className={`font-medium text-sm ${
+                          user.isUser ? 'text-chef-royal-blue' : 'text-chef-charcoal'
+                        }`}>
                           {user.name}
                         </p>
                         <p className="text-xs text-chef-charcoal/60">
                           Level {user.level} • {user.xp.toLocaleString()} XP
                         </p>
                       </div>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
                 
                 <Button variant="outline" className="w-full mt-4 chef-button-outline text-sm">
@@ -274,16 +291,12 @@ const GamificationDashboard = () => {
         </div>
 
         {/* Achievement Notification (Sample) */}
-        <motion.div initial={{
-        opacity: 0,
-        scale: 0.9
-      }} animate={{
-        opacity: 1,
-        scale: 1
-      }} transition={{
-        duration: 0.5,
-        delay: 0.4
-      }} className="fixed bottom-6 right-6 z-50 md:block hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="fixed bottom-6 right-6 z-50 md:block hidden"
+        >
           <Card className="chef-card bg-gradient-to-r from-chef-royal-green to-chef-green-light text-white shadow-chef-luxury">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
@@ -294,7 +307,11 @@ const GamificationDashboard = () => {
                   <p className="font-bold text-sm">Achievement Unlocked!</p>
                   <p className="text-xs text-white/90">Recipe Creator Badge Earned</p>
                 </div>
-                <Button size="sm" variant="outline" className="text-white border-white hover:text-chef-royal-green bg-[0] bg-chef-cream">
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  className="text-white border-white hover:text-chef-royal-green bg-[0] bg-chef-cream"
+                >
                   Claim Reward
                 </Button>
               </div>
@@ -302,6 +319,8 @@ const GamificationDashboard = () => {
           </Card>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default GamificationDashboard;
