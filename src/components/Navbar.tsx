@@ -30,8 +30,8 @@ const Navbar = () => {
     name: "Library",
     href: "/library"
   }, {
-    name: "Blog",
-    href: "/blog"
+    name: "News",
+    href: "/news"
   }];
 
   const isActive = (path: string) => {

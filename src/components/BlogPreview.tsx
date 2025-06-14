@@ -1,13 +1,17 @@
+
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import BlogPostCard from '@/components/BlogPostCard';
 import { blogPosts } from '@/data/blogPosts';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 const BlogPreview = () => {
   // Get the 3 most recent blog posts
   const recentPosts = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
-  return <section id="blog" className="py-16 md:py-24 px-4 md:px-12 bg-white">
+
+  return (
+    <section id="news" className="py-16 md:py-24 px-4 md:px-12 bg-white">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
           <div>
@@ -20,7 +24,7 @@ const BlogPreview = () => {
               Discover expert culinary techniques, exclusive recipes, seasonal ingredients, and behind-the-scenes stories from our community of passionate chefs.
             </p>
           </div>
-          <Link to="/blog" className="mt-4 md:mt-0">
+          <Link to="/news" className="mt-4 md:mt-0">
             <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue bg-[t] bg-[#141c74] text-white">
               View All Posts
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -49,6 +53,8 @@ const BlogPreview = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default BlogPreview;

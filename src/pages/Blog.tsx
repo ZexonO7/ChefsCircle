@@ -6,18 +6,27 @@ import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
 import BlogPostCard from '@/components/BlogPostCard';
 import { blogPosts } from '@/data/blogPosts';
+
 const Blog = () => {
   // Get the newest blog post for the featured post section
   const featuredPost = blogPosts.find(post => post.id === '4') || blogPosts[0]; // Feature the new post about sensor technology
   // Get the rest of the blog posts for the grid section
   const otherPosts = blogPosts.filter(post => post.id !== featuredPost?.id);
-  return <PageLayout>
-      <SEO title="ChefCircle - Culinary Insights and Expert Cooking Tips" description="Discover the latest culinary techniques, exclusive recipes, chef interviews, and cooking insights from the ChefCircle community of passionate food enthusiasts." imageUrl={featuredPost?.imageUrl || "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"} keywords={['culinary techniques', 'cooking tips', 'chef recipes', 'culinary education', 'cooking skills', 'gourmet cooking', 'culinary community']} type="website" />
+
+  return (
+    <PageLayout>
+      <SEO 
+        title="ChefCircle - Culinary News and Expert Cooking Tips" 
+        description="Discover the latest culinary techniques, exclusive recipes, chef interviews, and cooking insights from the ChefCircle community of passionate food enthusiasts." 
+        imageUrl={featuredPost?.imageUrl || "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"} 
+        keywords={['culinary techniques', 'cooking tips', 'chef recipes', 'culinary education', 'cooking skills', 'gourmet cooking', 'culinary community']} 
+        type="website" 
+      />
       
       <div className="w-full pt-24 pb-12 bg-gradient-to-b from-chef-charcoal to-chef-royal-green text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-playfair">Culinary Insights &amp; Expertise</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 font-playfair">Culinary News & Expertise</h1>
             <p className="text-xl text-chef-warm-ivory/90 mb-6 font-inter">
               The latest culinary techniques, exclusive recipes, and expert insights from our community of passionate chefs
             </p>
@@ -27,7 +36,8 @@ const Blog = () => {
       
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredPost && <Link to={`/blog/${featuredPost.slug}`} className="col-span-1 md:col-span-2 lg:col-span-3">
+          {featuredPost && (
+            <Link to={`/news/${featuredPost.slug}`} className="col-span-1 md:col-span-2 lg:col-span-3">
               <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20">
                 <div className="grid md:grid-cols-2 h-full">
                   <div style={{
@@ -53,10 +63,21 @@ const Blog = () => {
                   </CardContent>
                 </div>
               </Card>
-            </Link>}
+            </Link>
+          )}
           
           {/* Other blog posts */}
-          {otherPosts.map(post => <BlogPostCard key={post.id} title={post.title} excerpt={post.excerpt} imageUrl={post.imageUrl || 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'} date={post.date} slug={post.slug} category={post.category} />)}
+          {otherPosts.map(post => (
+            <BlogPostCard 
+              key={post.id} 
+              title={post.title} 
+              excerpt={post.excerpt} 
+              imageUrl={post.imageUrl || 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'} 
+              date={post.date} 
+              slug={post.slug} 
+              category={post.category} 
+            />
+          ))}
           
           {/* If there are fewer than 3 published posts, add placeholders */}
           {blogPosts.length < 4 && Array.from({
@@ -64,6 +85,8 @@ const Blog = () => {
         }).map((_, index) => <BlogPostCard key={`placeholder-${index}`} title="Upcoming Culinary Masterclass" excerpt="Stay tuned for more exciting culinary tutorials, exclusive recipes, and expert cooking techniques from our renowned chef community." imageUrl={index % 2 === 0 ? "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" : "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80"} date="Coming soon" slug="#" category="Upcoming" />)}
         </div>
       </div>
-    </PageLayout>;
+    </PageLayout>
+  );
 };
+
 export default Blog;

@@ -1,7 +1,9 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 interface BlogPostCardProps {
   title: string;
   excerpt: string;
@@ -10,6 +12,7 @@ interface BlogPostCardProps {
   slug: string;
   category: string;
 }
+
 const BlogPostCard = ({
   title,
   excerpt,
@@ -18,7 +21,8 @@ const BlogPostCard = ({
   slug,
   category
 }: BlogPostCardProps) => {
-  return <Link to={`/blog/${slug}`}>
+  return (
+    <Link to={`/news/${slug}`}>
       <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20">
         <div className="grid grid-rows-[200px,1fr]">
           <div className="bg-cover bg-center" style={{
@@ -41,6 +45,8 @@ const BlogPostCard = ({
           </CardContent>
         </div>
       </Card>
-    </Link>;
+    </Link>
+  );
 };
+
 export default BlogPostCard;
