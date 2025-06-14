@@ -1,13 +1,13 @@
 
 import { motion } from 'framer-motion';
-import { Award } from 'lucide-react';
+import { Award, ChefHat, Star, Trophy, Crown, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Badge {
   id: number;
   name: string;
-  icon: React.ReactNode;
+  iconName: string;
   earned: boolean;
   color: string;
 }
@@ -19,6 +19,24 @@ interface BadgesSectionProps {
 const BadgesSection = ({ badges }: BadgesSectionProps) => {
   const earnedBadges = badges.filter(badge => badge.earned);
   const availableBadges = badges.filter(badge => !badge.earned);
+
+  const getIcon = (iconName: string) => {
+    const iconProps = { className: "w-4 h-4" };
+    switch (iconName) {
+      case 'ChefHat':
+        return <ChefHat {...iconProps} />;
+      case 'Star':
+        return <Star {...iconProps} />;
+      case 'Trophy':
+        return <Trophy {...iconProps} />;
+      case 'Crown':
+        return <Crown {...iconProps} />;
+      case 'Clock':
+        return <Clock {...iconProps} />;
+      default:
+        return <Star {...iconProps} />;
+    }
+  };
 
   return (
     <motion.div
@@ -43,7 +61,7 @@ const BadgesSection = ({ badges }: BadgesSectionProps) => {
                 className={`p-3 rounded-lg bg-${badge.color}/20 text-center border border-${badge.color}/30`}
               >
                 <div className={`w-8 h-8 mx-auto mb-2 text-${badge.color} flex items-center justify-center`}>
-                  {badge.icon}
+                  {getIcon(badge.iconName)}
                 </div>
                 <p className="text-xs font-medium text-chef-charcoal">{badge.name}</p>
               </motion.div>

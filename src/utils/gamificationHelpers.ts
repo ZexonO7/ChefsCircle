@@ -1,6 +1,4 @@
 
-import { Trophy, ChefHat, Star, Crown, Clock } from 'lucide-react';
-
 interface Achievement {
   achievement_type: string;
   achievement_name: string;
@@ -12,35 +10,35 @@ export const mapAchievementsToBadges = (userAchievements: Achievement[]) => {
     {
       id: 1,
       name: "Master Chef",
-      icon: <ChefHat className="w-4 h-4" />,
+      iconName: "ChefHat" as const,
       earned: userAchievements.some(a => a.achievement_name === "Master Chef"),
       color: "chef-gold"
     },
     {
       id: 2,
       name: "Recipe Creator",
-      icon: <Star className="w-4 h-4" />,
+      iconName: "Star" as const,
       earned: userAchievements.some(a => a.achievement_name === "Recipe Creator"),
       color: "chef-royal-blue"
     },
     {
       id: 3,
       name: "Challenge Winner",
-      icon: <Trophy className="w-4 h-4" />,
+      iconName: "Trophy" as const,
       earned: userAchievements.some(a => a.achievement_name === "Challenge Winner"),
       color: "chef-royal-green"
     },
     {
       id: 4,
       name: "Community Leader",
-      icon: <Crown className="w-4 h-4" />,
+      iconName: "Crown" as const,
       earned: userAchievements.some(a => a.achievement_name === "Community Leader"),
       color: "chef-gold"
     },
     {
       id: 5,
       name: "Speed Cook",
-      icon: <Clock className="w-4 h-4" />,
+      iconName: "Clock" as const,
       earned: userAchievements.some(a => a.achievement_name === "Speed Cook"),
       color: "chef-royal-blue"
     }
