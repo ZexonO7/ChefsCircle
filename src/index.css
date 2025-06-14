@@ -122,7 +122,7 @@
   }
 
   .chef-button-primary {
-    @apply chef-button bg-primary text-primary-foreground hover:bg-chef-blue-light active:bg-navy;
+    @apply chef-button bg-primary text-primary-foreground hover:bg-chef-blue-light active:bg-chef-navy;
   }
   
   .chef-button-primary:hover {
