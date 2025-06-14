@@ -24,7 +24,7 @@ const WeeklyChallenge = ({ challenge }: WeeklyChallengeProps) => {
       transition={{ duration: 0.5, delay: 0.1 }}
       className="lg:col-span-1"
     >
-      <Card className="chef-card h-full">
+      <Card className="chef-card h-full bg-inherit">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-chef-charcoal">
             <Target className="w-5 h-5 text-chef-royal-green" />
