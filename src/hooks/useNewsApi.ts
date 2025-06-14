@@ -8,7 +8,9 @@ export const useNewsApi = () => {
     queryKey: ['culinary-news'],
     queryFn: fetchCulinaryNews,
     staleTime: 30 * 60 * 1000, // 30 minutes
-    gcTime: 60 * 60 * 1000, // 1 hour (renamed from cacheTime in v5)
+    gcTime: 60 * 60 * 1000, // 1 hour
+    refetchInterval: 24 * 60 * 60 * 1000, // Refetch every 24 hours (86400000 ms)
+    refetchIntervalInBackground: true, // Continue refetching even when tab is not active
   });
 
   return {
