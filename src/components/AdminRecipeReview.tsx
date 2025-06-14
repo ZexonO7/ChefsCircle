@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -31,6 +32,7 @@ const AdminRecipeReview = () => {
 
   useEffect(() => {
     fetchRecipes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
   const fetchRecipes = async () => {
@@ -48,7 +50,18 @@ const AdminRecipeReview = () => {
       const { data, error } = await query;
 
       if (error) throw error;
-      setRecipes(data || []);
+
+      // Map and cast status property
+      setRecipes(
+        (data || []).map((recipe: any) => ({
+          ...recipe,
+          status: (['pending', 'approved', 'rejected'].includes(recipe.status)
+            ? recipe.status
+            : 'pending') as 'pending' | 'approved' | 'rejected',
+          // Fallback for possible null arrays from db
+          ingredients: Array.isArray(recipe.ingredients) ? recipe.ingredients : [],
+        }))
+      );
     } catch (error: any) {
       console.error('Error fetching recipes:', error);
       toast({
