@@ -27,9 +27,9 @@ const ContactInfo = () => {
               <p className="text-chef-gold font-semibold mb-2 font-inter">Founder & Head Chef</p>
               <p className="text-chef-charcoal/70 mb-6 font-inter">Teen culinary prodigy turned entrepreneur, bringing innovative cooking communitys to the next generation.</p>
               <div className="flex flex-col space-y-3">
-                <a href="mailto:Advithya07@gmail.com" className="flex items-center text-chef-charcoal hover:text-chef-royal-green transition-colors font-inter">
+                <a href="mailto:Advithya@chefscircle.in" className="flex items-center text-chef-charcoal hover:text-chef-royal-green transition-colors font-inter">
                   <Mail className="w-5 h-5 mr-2" />
-                  Advithya07@gmail.com
+                  Advithya@chefscircle.in
                 </a>
                 <a href="https://www.linkedin.com/in/advithya-bhardwaj-05412a313/" target="_blank" rel="noopener noreferrer" className="flex items-center text-chef-charcoal hover:text-chef-royal-green transition-colors font-inter">
                   <Linkedin className="w-5 h-5 mr-2" />
