@@ -52,7 +52,7 @@ const WeeklyChallenge = ({ challenge }: WeeklyChallengeProps) => {
             </div>
           </div>
           
-          <Button className="w-full chef-button-primary bg-inherit">
+          <Button className="w-full chef-button-primary bg-inherit text-inherit">
             Join Challenge
           </Button>
         </CardContent>

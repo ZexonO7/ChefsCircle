@@ -75,7 +75,7 @@ const Leaderboard = ({ users }: LeaderboardProps) => {
             ))}
           </div>
           
-          <Button variant="outline" className="w-full mt-4 chef-button-outline text-sm bg-inherit">
+          <Button variant="outline" className="w-full mt-4 chef-button-outline text-sm bg-inherit text-inherit">
             View Full Leaderboard
           </Button>
         </CardContent>
