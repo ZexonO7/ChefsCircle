@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
@@ -16,7 +15,7 @@ const AdminPortal = () => {
   const [activeTab, setActiveTab] = useState('analytics');
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const adminEmails = ['Advithya07@gmail.com', 'Advithya@chefscircle.in'];
+  const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
 
   useEffect(() => {
     if (user?.email) {
