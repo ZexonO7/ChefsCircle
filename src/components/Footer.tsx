@@ -1,4 +1,3 @@
-
 import { ArrowRight, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -70,11 +69,7 @@ const Footer = () => {
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 pb-10 border-b border-gray-700">
           <div className="lg:col-span-2">
-            <img 
-              src="/lovable-uploads/chefsCircle logo.png" 
-              alt="ChefCircle Logo" 
-              className="h-10 w-auto mb-6"
-            />
+            <h2 className="text-2xl font-bold text-white mb-6">ChefCircle</h2>
             <p className="text-gray-300 mb-6">
               ChefCircle is the premier online culinary club for passionate home cooks and aspiring chefs. Join our exclusive community to master cooking skills, connect with fellow food enthusiasts, and elevate your culinary journey.
             </p>
