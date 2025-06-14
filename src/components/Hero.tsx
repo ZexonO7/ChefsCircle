@@ -1,19 +1,19 @@
-
-import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
+import { ArrowRight, ChefHat, Users, Star, Sparkles } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-// Custom animated gradient BG - Updated to Royal Blue and Cream White
+// Custom animated gradient BG - Updated for warmer, more dynamic feel
 const AnimatedGradient = () => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    transition={{ duration: 1.2 }}
+    transition={{ duration: 1.5, delay: 0.2 }}
     className="absolute inset-0 pointer-events-none"
     style={{
       zIndex: 2,
-      background: "radial-gradient(ellipse at 60% 33%, rgba(249, 246, 241, 0.30), transparent 75%), radial-gradient(circle at 40% 60%, rgba(26, 58, 138, 0.45), transparent 80%)" // Cream and Lighter Blue
+      // Softer, warmer radial gradients
+      background: "radial-gradient(ellipse at 60% 33%, hsl(var(--chef-soft-peach) / 0.25), transparent 70%), radial-gradient(circle at 40% 60%, hsl(var(--chef-blue-light) / 0.35), transparent 75%), radial-gradient(ellipse at 70% 70%, hsl(var(--chef-amber) / 0.15), transparent 60%)"
     }}
   />
 );
@@ -23,7 +23,7 @@ const shimmerVariants = {
     backgroundPosition: ["-200% 0", "200% 0"],
     transition: {
       repeat: Infinity,
-      duration: 2.1,
+      duration: 2.5, // Slightly slower for a more luxe feel
       ease: "linear"
     }
   },
@@ -36,15 +36,15 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.18, // Slightly increased stagger
         delayChildren: 0.3,
-        duration: 0.8
+        duration: 0.9
       }
     }
   };
   const itemVariants = {
-    hidden: { y: 24, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6 } }
+    hidden: { y: 28, opacity: 0 }, // Increased y offset
+    visible: { y: 0, opacity: 1, transition: { duration: 0.7, type: "spring", stiffness: 80 } } // Spring animation
   };
   const scrollToContact = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,130 +61,110 @@ const Hero = () => {
       animate="visible"
       variants={containerVariants}
     >
-      {/* Animated BG with luxurious overlays */}
-      <div className="banner-container min-h-[650px] md:min-h-[770px] w-full relative overflow-hidden flex items-center justify-center bg-chef-royal-blue"> {/* Main BG is Royal Blue */}
-        {/* Hero Image, Blur, and Overlay */}
+      <div className="banner-container min-h-[680px] md:min-h-[790px] w-full relative overflow-hidden flex items-center justify-center bg-chef-royal-blue">
         <div className="absolute inset-0 z-0">
           <img
             src="/lovable-uploads/4d70a018-96e2-480a-9492-ccdb9dba7ce2.png"
             alt="ChefCircle - Luxury Culinary Experience"
-            className={`w-full h-full object-cover mix-blend-overlay blur-sm ${isMobile ? 'object-left' : 'object-center'} select-none`}
+            className={`w-full h-full object-cover mix-blend-soft-light blur-sm ${isMobile ? 'object-left' : 'object-center'} select-none`}
             draggable={false}
-            style={{ opacity: 0.30 }}
+            style={{ opacity: 0.45 }}
           />
-          {/* Animated glassy white gradient blur overlay - Updated */}
           <motion.div
-            initial={{ opacity: 0, filter: "blur(36px)" }}
-            animate={{ opacity: 0.70, filter: "blur(0px)" }}
-            transition={{ delay: 0.6, duration: 1.4, type: "spring" }}
-            className="absolute inset-0 bg-gradient-to-br from-chef-warm-ivory/50 via-chef-cream/40 to-chef-warm-ivory/10" // Cream/Ivory gradient
+            initial={{ opacity: 0, filter: "blur(30px)" }}
+            animate={{ opacity: 0.80, filter: "blur(0px)" }}
+            transition={{ delay: 0.5, duration: 1.6, type: "spring" }}
+            className="absolute inset-0 bg-gradient-to-br from-chef-warm-sand/40 via-chef-soft-peach/30 to-chef-warm-sand/20"
             style={{ zIndex: 1 }}
           />
           <AnimatedGradient />
         </div>
 
-        {/* Main overlayed hero content */}
-        <div className="relative z-10 w-full px-3 sm:px-7 flex items-center justify-center h-[650px] md:h-[700px]">
+        <div className="relative z-10 w-full px-3 sm:px-7 flex items-center justify-center h-[680px] md:h-[720px]">
           <div className="w-full max-w-3xl mx-auto text-center flex flex-col items-center justify-center gap-8">
-            {/* Shimmery badge at top - Updated */}
             <motion.div
-              className="inline-flex items-center gap-2 font-inter font-semibold tracking-wide px-5 py-2 rounded-2xl mb-5 border border-chef-warm-ivory/60 shadow-chef-blue-md" // Ivory border, Blue shadow
+              className="inline-flex items-center gap-2.5 font-space font-semibold tracking-normal px-6 py-2.5 rounded-2xl mb-4 border border-chef-amber/50 shadow-chef-gold"
               style={{
-                background: "linear-gradient(90deg, rgba(249, 246, 241, 0.15) 0%, rgba(249, 246, 241, 0.3) 100%)", // Subtle ivory gradient
-                boxShadow: "0 0 16px 2px rgba(11, 31, 102, 0.2)" // Softer blue shadow
+                background: "linear-gradient(95deg, hsl(var(--chef-soft-peach) / 0.15) 0%, hsl(var(--chef-amber) / 0.2) 100%)",
+                backdropFilter: "blur(8px)",
               }}
               variants={itemVariants}
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 0.5 } }}
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.5 } }}
             >
-              <Star className="w-4 h-4 text-chef-warm-ivory" /> {/* Icon to Warm Ivory */}
+              <Sparkles className="w-4 h-4 text-chef-amber" />
               <motion.span
-                className="text-[1rem]" // text-chef-gold removed, shimmer provides color
+                className="text-[1rem]"
                 variants={shimmerVariants}
                 animate="animate"
                 style={{
-                  background: "linear-gradient(90deg, #FDF8F0 0%, #1A3A8A 40%, #FDF8F0 80%)", // Cream, Light Blue, Cream shimmer
-                  backgroundSize: "240% 100%",
+                  background: "linear-gradient(90deg, hsl(var(--chef-warm-sand)) 0%, hsl(var(--chef-amber)) 40%, hsl(var(--chef-warm-sand)) 80%)",
+                  backgroundSize: "260% 100%",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   fontWeight: 600
                 }}
               >
-                Culinary Community
+                Exclusive Culinary Hub
               </motion.span>
             </motion.div>
 
-            {/* Headline - Updated */}
             <motion.h1
-              className="banner-title text-chef-warm-ivory text-4xl md:text-6xl lg:text-7xl font-bold font-playfair leading-tight relative" // Text to Warm Ivory
+              className="banner-title text-chef-warm-ivory text-4xl md:text-6xl lg:text-7xl font-bold font-playfair leading-tight relative"
               style={{
-                textShadow: "0 5px 22px rgba(0,0,0, 0.3), 0 2px 7px rgba(249, 246, 241, 0.15)" // Darker general shadow, Ivory highlight
+                textShadow: "0 4px 20px rgba(0,0,0, 0.35), 0 2px 8px hsl(var(--chef-soft-peach) / 0.2)"
               }}
-              initial="hidden"
-              animate="visible"
               variants={itemVariants}
             >
-              Join the <span className="whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-chef-cream to-chef-warm-ivory pr-1">Ultimate Culinary Club</span> {/* Cream/Ivory gradient text */}
+              Ignite Your Passion: <span className="whitespace-nowrap bg-clip-text text-transparent bg-hero-text-gradient pr-1">The Ultimate Foodie Club</span>
             </motion.h1>
 
-            {/* Subheadline - Updated */}
             <motion.p
-              className="banner-subtitle text-chef-charcoal font-inter font-medium mt-2 mb-1" // Text to Charcoal for readability on light bg
+              className="banner-subtitle text-chef-charcoal font-inter font-medium mt-1 mb-0 text-lg"
               style={{
-                background: "rgba(249, 246, 241, 0.85)", // More opaque Ivory background
-                borderRadius: "1.5rem",
-                padding: '1.1rem 2.5rem',
-                boxShadow: "0 6px 30px rgba(11, 31, 102, 0.15)" // Blue shadow
+                background: "hsl(var(--chef-warm-sand) / 0.92)",
+                borderRadius: "1.25rem",
+                padding: '1.2rem 2.6rem',
+                boxShadow: "0 8px 35px rgba(11, 31, 102, 0.12), 0 0 15px hsl(var(--chef-amber)/0.15) inset"
               }}
-              initial="hidden"
-              animate="visible"
               variants={itemVariants}
             >
-              Meet fellow Gen Z and Millennial foodies, share your best creations, and master recipes from chefs all over the world—in one <span className="rounded font-bold text-chef-royal-blue">luxurious</span>, tasty place. {/* Span text to Royal Blue */}
+              Connect with vibrant Gen Z & Millennial food lovers, showcase your culinary art, and learn from global chefs—all in one <span className="font-bold text-chef-royal-blue drop-shadow-[0_1px_1px_hsl(var(--chef-amber)/0.5)]">inspiring</span> community.
             </motion.p>
 
-            {/* CTA buttons - Updated */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-5 mt-3 mb-2 justify-center items-center w-full"
+              className="flex flex-col sm:flex-row gap-5 mt-4 mb-1 justify-center items-center w-full"
               variants={itemVariants}
             >
               <Link to="/clubs" style={{ textDecoration: "none" }}>
-                <button className="chef-button-primary flex items-center justify-center gap-2 text-lg rounded-xl px-8 py-4 font-semibold font-inter transition-all duration-300 shadow-chef-blue-lg hover:scale-105 focus-visible:outline-chef-royal-blue border-[1.2px] border-chef-warm-ivory/50"> {/* Uses updated chef-button-primary, added ivory border, blue shadow */}
-                  Join Clubs
+                <button className="chef-button-primary flex items-center justify-center gap-2.5 text-lg rounded-xl px-9 py-4 font-semibold font-inter transition-all duration-300 shadow-chef-blue-lg hover:scale-105 focus-visible:outline-chef-royal-blue border-[1.5px] border-chef-amber/40 hover:border-chef-amber/70">
+                  Explore Clubs
                   <ArrowRight className="ml-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>
               <button
                 onClick={scrollToContact}
-                className="flex items-center justify-center group text-lg font-semibold font-inter bg-chef-warm-ivory/90 backdrop-sepia-0 px-8 py-4 rounded-xl text-chef-royal-blue border border-chef-royal-blue/40 shadow-chef-blue-md hover:shadow-chef-blue-lg duration-200 hover:scale-105 active:scale-95" // Ivory bg, Royal Blue text, Blue border & shadows
-                style={{
-                  // boxShadow values handled by tailwind classes above
-                }}
+                className="flex items-center justify-center group text-lg font-semibold font-inter bg-chef-warm-sand/95 backdrop-blur-sm px-9 py-4 rounded-xl text-chef-royal-blue border border-chef-royal-blue/30 hover:border-chef-amber/60 shadow-chef-blue-md hover:shadow-chef-gold duration-300 hover:scale-105 active:scale-95"
               >
                 Get Started
-                <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform text-chef-royal-blue" /> {/* Icon to Royal Blue */}
+                <ChefHat className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform text-chef-royal-blue group-hover:text-chef-amber" />
               </button>
             </motion.div>
 
-            {/* Social Proof - Updated */}
             <motion.div
-              className="flex flex-row flex-wrap justify-center gap-8 mt-2 text-chef-warm-ivory/90 z-30" // Text to Warm Ivory
-              initial="hidden"
-              animate="visible"
+              className="flex flex-row flex-wrap justify-center gap-x-6 gap-y-4 mt-3 text-chef-warm-ivory/95 z-30"
               variants={itemVariants}
             >
-              <div className="flex items-center gap-2 px-5 py-1 bg-chef-warm-ivory/20 rounded-full shadow-chef-blue-md font-medium backdrop-blur-sm"> {/* Light Ivory bg on blue, Blue shadow */}
-                <Users className="w-5 h-5" />
-                <span className="text-base">100+ Active Members</span>
-              </div>
-              <div className="flex items-center gap-2 px-5 py-1 bg-chef-warm-ivory/20 rounded-full shadow-chef-blue-md font-medium backdrop-blur-sm">
-                <ChefHat className="w-5 h-5" />
-                <span className="text-base">10+ Pro Chefs</span>
-              </div>
-              <div className="flex items-center gap-2 px-5 py-1 bg-chef-warm-ivory/20 rounded-full shadow-chef-blue-md font-medium backdrop-blur-sm">
-                <Star className="w-5 h-5 text-chef-warm-ivory" /> {/* Star to Warm Ivory to stand out on its badge */}
-                <span className="text-base">4.9/5 Reviews</span>
-              </div>
+              {[
+                { icon: Users, text: "100+ Active Members" },
+                { icon: ChefHat, text: "15+ Pro Chefs" },
+                { icon: Star, text: "4.9/5 Stellar Reviews", starColor: "text-chef-amber" }
+              ].map((item, index) => (
+                <div key={index} className="flex items-center gap-2.5 px-5 py-2 bg-chef-warm-sand/15 hover:bg-chef-soft-peach/20 rounded-full shadow-chef-blue-md font-medium backdrop-blur-sm transition-colors duration-200 cursor-default">
+                  <item.icon className={`w-5 h-5 ${item.starColor || ''}`} />
+                  <span className="text-base font-space tracking-tight">{item.text}</span>
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>
@@ -194,4 +174,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

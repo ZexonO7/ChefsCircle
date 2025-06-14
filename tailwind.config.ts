@@ -73,7 +73,10 @@ export default {
 					'cream': '#FDF8F0', // Secondary cream/white
 					'forest': '#0A3D1F',
 					'navy': '#091852',
-					'bronze': '#A8944D'
+					'bronze': '#A8944D',
+                    'amber': '#C69A3A', // New warm gold/amber
+                    'soft-peach': '#FFE5B4', // New soft, warm peach
+                    'warm-sand': '#F0E6D2', // New warm neutral, richer than ivory
 				}
 			},
 			borderRadius: {
@@ -90,14 +93,17 @@ export default {
 				'chef-gradient': 'linear-gradient(135deg, #0B1F66 0%, #1A3A8A 100%)', // Updated from green/blue to blue/lightblue
 				'gold-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)', // Changed to ivory/cream gradient
 				'luxury-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)',
+                'warm-glow-gradient': 'linear-gradient(135deg, hsl(var(--chef-warm-sand)) 0%, hsl(var(--chef-soft-peach)) 100%)', // New warm gradient
+                'hero-text-gradient': 'linear-gradient(to right, hsl(var(--chef-soft-peach)), hsl(var(--chef-warm-sand)))', // New for hero text
 			},
 			boxShadow: {
 				'chef-luxury': '0 20px 25px -5px rgba(11, 31, 102, 0.1), 0 8px 10px -6px rgba(11, 31, 102, 0.1)', // Blue based shadow
-				'chef-gold': '0 10px 15px -3px rgba(26, 58, 138, 0.15), 0 4px 6px -4px rgba(26, 58, 138, 0.15)', // Lighter blue accent shadow (was gold)
+				'chef-gold': '0 10px 15px -3px rgba(198, 154, 58, 0.2), 0 4px 6px -4px rgba(198, 154, 58, 0.2)', // Updated to use amber tones
         'chef-blue-md': '0 4px 6px -1px rgba(11, 31, 102, 0.1), 0 2px 4px -2px rgba(11, 31, 102, 0.1)',
         'chef-blue-lg': '0 10px 15px -3px rgba(11, 31, 102, 0.1), 0 4px 6px -4px rgba(11, 31, 102, 0.1)',
         'chef-blue-xl': '0 20px 25px -5px rgba(11, 31, 102, 0.1), 0 8px 10px -6px rgba(11, 31, 102, 0.1)',
         'chef-ivory-glow': '0 0 20px rgba(249, 246, 241, 0.4)',
+        'chef-warm-glow': '0 0 25px rgba(198, 154, 58, 0.3)', // New warm glow shadow
 			},
 			keyframes: {
 				'accordion-down': {
@@ -137,8 +143,8 @@ export default {
 					'100%': { backgroundPosition: '200% 0' }
 				},
 				'chef-glow': { // Updated to blue glow
-					'0%, 100%': { boxShadow: '0 0 20px rgba(11, 31, 102, 0.3)' },
-					'50%': { boxShadow: '0 0 30px rgba(11, 31, 102, 0.5)' }
+					'0%, 100%': { boxShadow: '0 0 20px rgba(198, 154, 58, 0.25)' }, // Updated to warm glow
+					'50%': { boxShadow: '0 0 30px rgba(198, 154, 58, 0.45)' }
 				}
 			},
 			animation: {
