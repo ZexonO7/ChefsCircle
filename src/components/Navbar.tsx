@@ -41,7 +41,8 @@ const Navbar = () => {
     return false;
   };
 
-  const isAdmin = user?.email === 'Advithya07@gmail.com';
+  const adminEmails = ['Advithya07@gmail.com', 'Advithya@chefscircle.in'];
+  const isAdmin = user?.email && adminEmails.includes(user.email);
 
   return <motion.nav className="fixed top-0 w-full bg-chef-warm-ivory/95 backdrop-blur-sm z-50 border-b border-chef-royal-blue/10" initial={{
     y: -100

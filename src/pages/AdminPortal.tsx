@@ -16,9 +16,11 @@ const AdminPortal = () => {
   const [activeTab, setActiveTab] = useState('analytics');
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const adminEmails = ['Advithya07@gmail.com', 'Advithya@chefscircle.in'];
+
   useEffect(() => {
     if (user?.email) {
-      setIsAdmin(user.email === 'Advithya07@gmail.com');
+      setIsAdmin(adminEmails.includes(user.email));
     }
   }, [user]);
 
