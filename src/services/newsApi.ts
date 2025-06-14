@@ -1,5 +1,5 @@
 
-const NEWS_API_KEY = 'YOUR_NEWS_API_KEY'; // User will need to add this
+const NEWS_API_KEY = 'f653d83cc3ce498aa19fae29ae9a2842';
 const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
 
 export interface NewsArticle {
