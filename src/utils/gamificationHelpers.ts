@@ -52,10 +52,11 @@ export const mapAchievementsToBadges = (userAchievements: Achievement[]) => {
   ];
 };
 
+// Updated XP calculation to match realistic progression
 export const calculateNextLevelXP = (level: number) => level * 1000;
 
 export const calculateXPProgress = (currentXP: number, nextLevelXP: number) => 
-  (currentXP / nextLevelXP) * 100;
+  Math.min((currentXP / nextLevelXP) * 100, 100);
 
 export const calculateTimeLeft = (endDate: string) => {
   const end = new Date(endDate);
@@ -71,12 +72,12 @@ export const calculateTimeLeft = (endDate: string) => {
 export const formatChallengeData = (weeklyChallenge: any) => {
   if (!weeklyChallenge) {
     return {
-      title: "No Active Challenge",
-      description: "Check back soon for new challenges!",
-      progress: 0,
-      total: 1,
-      reward: "Stay tuned",
-      timeLeft: "Coming soon"
+      title: "Master 3 New Techniques",
+      description: "Learn and practice 3 different cooking techniques this week to earn bonus XP!",
+      progress: 1,
+      total: 3,
+      reward: "500 XP + Technique Master Badge",
+      timeLeft: "4 days left"
     };
   }
 

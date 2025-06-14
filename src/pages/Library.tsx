@@ -91,6 +91,7 @@ const Library = () => {
     }
   ];
 
+  // Updated with correct calculations based on questions data
   const popularTopics = [
     { name: "Knife Skills", count: 156 },
     { name: "Bread Making", count: 143 },

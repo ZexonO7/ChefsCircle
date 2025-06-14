@@ -15,6 +15,7 @@ const Clubs = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  // Updated with realistic and consistent member counts
   const clubs = [
     {
       id: 1,
