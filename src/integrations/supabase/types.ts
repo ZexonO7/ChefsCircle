@@ -168,6 +168,47 @@ export type Database = {
         }
         Relationships: []
       }
+      user_challenge_progress: {
+        Row: {
+          challenge_id: string
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string | null
+          current_progress: number | null
+          id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          current_progress?: number | null
+          id?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          current_progress?: number | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_challenge_progress_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "weekly_challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_gamification: {
         Row: {
           created_at: string | null
@@ -282,6 +323,48 @@ export type Database = {
         }
         Relationships: []
       }
+      weekly_challenges: {
+        Row: {
+          badge_reward: string | null
+          challenge_type: string
+          created_at: string | null
+          description: string
+          end_date: string
+          id: string
+          is_active: boolean | null
+          start_date: string
+          target_count: number
+          title: string
+          xp_reward: number
+        }
+        Insert: {
+          badge_reward?: string | null
+          challenge_type: string
+          created_at?: string | null
+          description: string
+          end_date: string
+          id?: string
+          is_active?: boolean | null
+          start_date: string
+          target_count?: number
+          title: string
+          xp_reward?: number
+        }
+        Update: {
+          badge_reward?: string | null
+          challenge_type?: string
+          created_at?: string | null
+          description?: string
+          end_date?: string
+          id?: string
+          is_active?: boolean | null
+          start_date?: string
+          target_count?: number
+          title?: string
+          xp_reward?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -311,6 +394,10 @@ export type Database = {
           target_id_param?: string
           details_param?: Json
         }
+        Returns: undefined
+      }
+      update_challenge_progress: {
+        Args: { user_id_param: string; challenge_type_param: string }
         Returns: undefined
       }
       xp_for_next_level: {

@@ -21,12 +21,26 @@ interface Achievement {
   earned_at: string;
 }
 
+interface WeeklyChallengeData {
+  id: string;
+  title: string;
+  description: string;
+  challenge_type: string;
+  target_count: number;
+  xp_reward: number;
+  badge_reward: string | null;
+  start_date: string;
+  end_date: string;
+  current_progress?: number;
+}
+
 const GamificationDashboard = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [userGamification, setUserGamification] = useState<UserGamificationData | null>(null);
   const [userAchievements, setUserAchievements] = useState<Achievement[]>([]);
   const [leaderboardData, setLeaderboardData] = useState([]);
+  const [weeklyChallenge, setWeeklyChallenge] = useState<WeeklyChallengeData | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Calculate next level XP requirement
@@ -72,13 +86,16 @@ const GamificationDashboard = () => {
     }
   ];
 
-  const weeklyChallenge = {
-    title: "Mediterranean Mastery Week",
-    description: "Cook 3 Mediterranean dishes this week",
-    progress: 2,
-    total: 3,
-    reward: "500 XP + Mediterranean Chef Badge",
-    timeLeft: "3 days"
+  // Calculate days remaining for the challenge
+  const calculateTimeLeft = (endDate: string) => {
+    const end = new Date(endDate);
+    const now = new Date();
+    const diffTime = end.getTime() - now.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays <= 0) return "Challenge ended";
+    if (diffDays === 1) return "1 day left";
+    return `${diffDays} days left`;
   };
 
   useEffect(() => {
@@ -127,6 +144,38 @@ const GamificationDashboard = () => {
           console.error('Error fetching achievements:', achievementsError);
         } else {
           setUserAchievements(achievementsData || []);
+        }
+
+        // Fetch active weekly challenge
+        const { data: challengeData, error: challengeError } = await supabase
+          .from('weekly_challenges')
+          .select('*')
+          .eq('is_active', true)
+          .gte('end_date', new Date().toISOString().split('T')[0])
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (challengeError) {
+          console.error('Error fetching weekly challenge:', challengeError);
+        } else if (challengeData && challengeData.length > 0) {
+          const challenge = challengeData[0];
+          
+          // Fetch user's progress for this challenge
+          const { data: progressData, error: progressError } = await supabase
+            .from('user_challenge_progress')
+            .select('current_progress')
+            .eq('user_id', user.id)
+            .eq('challenge_id', challenge.id)
+            .single();
+
+          if (progressError && progressError.code !== 'PGRST116') {
+            console.error('Error fetching challenge progress:', progressError);
+          }
+
+          setWeeklyChallenge({
+            ...challenge,
+            current_progress: progressData?.current_progress || 0
+          });
         }
 
         // Fetch leaderboard data - first get gamification data
@@ -208,6 +257,23 @@ const GamificationDashboard = () => {
     );
   }
 
+  // Format challenge data for the WeeklyChallenge component
+  const formattedChallenge = weeklyChallenge ? {
+    title: weeklyChallenge.title,
+    description: weeklyChallenge.description,
+    progress: weeklyChallenge.current_progress || 0,
+    total: weeklyChallenge.target_count,
+    reward: `${weeklyChallenge.xp_reward} XP${weeklyChallenge.badge_reward ? ' + ' + weeklyChallenge.badge_reward + ' Badge' : ''}`,
+    timeLeft: calculateTimeLeft(weeklyChallenge.end_date)
+  } : {
+    title: "No Active Challenge",
+    description: "Check back soon for new challenges!",
+    progress: 0,
+    total: 1,
+    reward: "Stay tuned",
+    timeLeft: "Coming soon"
+  };
+
   return (
     <section className="py-16 md:py-24 bg-chef-warm-ivory">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -235,7 +301,7 @@ const GamificationDashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {/* Weekly Challenge */}
-          <WeeklyChallenge challenge={weeklyChallenge} />
+          <WeeklyChallenge challenge={formattedChallenge} />
 
           {/* Earned Badges */}
           <BadgesSection badges={userBadges} />
