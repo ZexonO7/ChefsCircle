@@ -14,16 +14,23 @@ const AdminPortal = () => {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState('analytics');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [adminCheckLoading, setAdminCheckLoading] = useState(true);
 
   const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
 
   useEffect(() => {
     if (user?.email) {
-      setIsAdmin(adminEmails.includes(user.email));
+      console.log('Checking admin status for email:', user.email);
+      console.log('Admin emails list:', adminEmails);
+      const adminStatus = adminEmails.includes(user.email);
+      console.log('Is admin?', adminStatus);
+      setIsAdmin(adminStatus);
     }
+    setAdminCheckLoading(false);
   }, [user]);
 
-  if (loading) {
+  // Show loading while auth is loading OR while we're checking admin status
+  if (loading || adminCheckLoading) {
     return (
       <div className="min-h-screen bg-chef-warm-ivory flex items-center justify-center">
         <div className="text-center">
@@ -34,7 +41,9 @@ const AdminPortal = () => {
     );
   }
 
+  // Only redirect after we've completed both auth loading and admin check
   if (!user || !isAdmin) {
+    console.log('Redirecting - User:', !!user, 'IsAdmin:', isAdmin);
     return <Navigate to="/auth" replace />;
   }
 
