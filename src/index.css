@@ -1,4 +1,5 @@
 
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -19,13 +20,13 @@
     --primary: 11 31 102;
     --primary-foreground: 249 246 241;
 
-    --secondary: 198 154 58;
-    --secondary-foreground: 28 28 28;
+    --secondary: 156 112 75;
+    --secondary-foreground: 249 246 241;
 
     --muted: 245 245 245;
     --muted-foreground: 100 100 100;
 
-    --accent: 198 154 58;
+    --accent: 156 112 75;
     --accent-foreground: 249 246 241;
 
     --destructive: 0 84.2% 60.2%;
@@ -40,8 +41,8 @@
     --chef-royal-blue: 11 31 102;
     --chef-warm-ivory: 249 246 241;
     --chef-charcoal: 28 28 28;
-    --chef-amber: 198 154 58;
-    --chef-soft-peach: 255 229 180;
+    --chef-terracotta: 156 112 75;
+    --chef-warm-beige: 235 220 195;
     --chef-warm-sand: 240 230 210;
     --chef-blue-light: 26 58 138;
   }
@@ -59,21 +60,21 @@
     --primary: 11 31 102;
     --primary-foreground: 240 230 210;
 
-    --secondary: 198 154 58;
-    --secondary-foreground: 28 28 28;
+    --secondary: 156 112 75;
+    --secondary-foreground: 249 246 241;
 
     --muted: 50 50 50;
     --muted-foreground: 160 160 160;
 
-    --accent: 198 154 58;
-    --accent-foreground: 28 28 28;
+    --accent: 156 112 75;
+    --accent-foreground: 249 246 241;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 60 60 60;
     --input: 60 60 60;
-    --ring: 198 154 58;
+    --ring: 156 112 75;
   }
 }
 
@@ -110,11 +111,11 @@
   }
 
   .chef-card {
-    @apply bg-card border border-secondary/20 rounded-2xl shadow-chef-gold hover:shadow-chef-luxury transition-all duration-500 backdrop-blur-sm;
+    @apply bg-card border border-secondary/20 rounded-2xl shadow-chef-warm transition-all duration-500 backdrop-blur-sm;
   }
 
   .chef-card-luxury {
-    @apply chef-card bg-gradient-to-br from-chef-warm-sand to-chef-soft-peach border-chef-amber/30 shadow-chef-luxury hover:shadow-chef-gold hover:scale-[1.02] transition-all duration-500;
+    @apply chef-card bg-gradient-to-br from-chef-warm-sand to-chef-warm-beige border-chef-terracotta/30 shadow-chef-luxury hover:shadow-chef-warm hover:scale-[1.02] transition-all duration-500;
   }
 
   .chef-button {
@@ -126,11 +127,11 @@
   }
   
   .chef-button-primary:hover {
-     box-shadow: 0 0 15px 0px hsl(var(--chef-amber) / 0.5);
+     box-shadow: 0 0 15px 0px hsl(var(--chef-terracotta) / 0.3);
   }
 
   .chef-button-secondary {
-    @apply chef-button bg-secondary text-secondary-foreground hover:bg-chef-amber/80 active:bg-chef-amber;
+    @apply chef-button bg-secondary text-secondary-foreground hover:bg-chef-terracotta/80 active:bg-chef-terracotta;
   }
 
   .chef-button-blue {
@@ -141,7 +142,7 @@
     @apply chef-button border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground;
   }
   
-  .chef-button-outline-amber {
+  .chef-button-outline-terracotta {
     @apply chef-button border-2 border-secondary text-secondary bg-transparent hover:bg-secondary hover:text-secondary-foreground;
   }
 
@@ -165,7 +166,7 @@
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/20 text-primary border border-primary/30;
   }
 
-  .chef-badge-amber {
+  .chef-badge-terracotta {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-secondary/20 text-secondary border border-secondary/30;
   }
 
@@ -220,7 +221,7 @@
   }
 
   .chef-hover-glow {
-    @apply transition-all duration-300 hover:shadow-chef-gold hover:animate-chef-glow;
+    @apply transition-all duration-300 hover:shadow-chef-warm hover:animate-chef-glow;
   }
 
   .chef-fade-in {
@@ -330,3 +331,4 @@
     color: #1c1c1c !important;
   }
 }
+
