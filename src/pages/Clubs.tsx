@@ -1,4 +1,3 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Users, MessageCircle, Crown, Star, ArrowRight, Search } from 'lucide-react';
@@ -7,12 +6,14 @@ import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Clubs = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [joiningClub, setJoiningClub] = useState<string | null>(null);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const clubs = [
     {
@@ -90,7 +91,15 @@ const Clubs = () => {
   );
 
   const handleJoinClub = async (clubName: string) => {
-    if (!user) return;
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to join clubs.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
     
     setJoiningClub(clubName);
     
@@ -128,6 +137,23 @@ const Clubs = () => {
     } finally {
       setJoiningClub(null);
     }
+  };
+
+  const handleCreateClub = () => {
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to create a club.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
+    
+    toast({
+      title: "Coming Soon",
+      description: "Club creation feature is under development.",
+    });
   };
 
   return (
@@ -263,7 +289,10 @@ const Clubs = () => {
               <p className="chef-body text-chef-charcoal/80 mb-8">
                 Have a unique culinary perspective or specialty? Create your own club and lead a community of passionate chefs.
               </p>
-              <button className="chef-button-primary">
+              <button 
+                onClick={handleCreateClub}
+                className="chef-button-primary"
+              >
                 <MessageCircle className="w-5 h-5 mr-2" />
                 Create New Club
               </button>

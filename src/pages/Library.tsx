@@ -1,13 +1,18 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Search, Plus, MessageCircle, ThumbsUp, Clock, User, HelpCircle, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useAuth } from '@/components/AuthProvider';
+import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Library = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const categories = ['All', 'Techniques', 'Ingredients', 'Equipment', 'Troubleshooting', 'Nutrition', 'Food Safety'];
 
@@ -102,6 +107,41 @@ const Library = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const handleAskQuestion = () => {
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to ask a question.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
+    toast({
+      title: "Coming Soon",
+      description: "Question submission feature is under development.",
+    });
+  };
+
+  const handleQuestionClick = (questionId: number) => {
+    toast({
+      title: "Coming Soon",
+      description: "Question details page is under development.",
+    });
+  };
+
+  const handleTopicClick = (topicName: string) => {
+    setSearchTerm(topicName.toLowerCase());
+    setSelectedCategory('All');
+  };
+
+  const handleLoadMore = () => {
+    toast({
+      title: "Coming Soon",
+      description: "Pagination feature is under development.",
+    });
+  };
+
   return (
     <PageLayout>
       <SEO 
@@ -138,7 +178,10 @@ const Library = () => {
                     className="w-full pl-10 pr-4 py-3 rounded-xl border border-chef-royal-blue/20 focus:outline-none focus:ring-2 focus:ring-chef-gold"
                   />
                 </div>
-                <button className="chef-button bg-chef-gold text-chef-charcoal hover:bg-chef-bronze">
+                <button 
+                  onClick={handleAskQuestion}
+                  className="chef-button bg-chef-gold text-chef-charcoal hover:bg-chef-bronze"
+                >
                   <Plus className="w-5 h-5 mr-2" />
                   Ask Question
                 </button>
@@ -173,9 +216,12 @@ const Library = () => {
                 <div className="space-y-2">
                   {popularTopics.map((topic) => (
                     <div key={topic.name} className="flex items-center justify-between text-sm">
-                      <span className="text-chef-charcoal hover:text-chef-royal-green cursor-pointer">
+                      <button 
+                        onClick={() => handleTopicClick(topic.name)}
+                        className="text-chef-charcoal hover:text-chef-royal-green cursor-pointer transition-colors"
+                      >
                         {topic.name}
-                      </span>
+                      </button>
                       <span className="text-chef-charcoal/60">{topic.count}</span>
                     </div>
                   ))}
@@ -202,6 +248,7 @@ const Library = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
+                    onClick={() => handleQuestionClick(question.id)}
                   >
                     <div className="flex items-start gap-4">
                       <div className="flex-1">
@@ -261,17 +308,23 @@ const Library = () => {
                       : "Be the first to ask a question in this category!"
                     }
                   </p>
-                  <button className="chef-button-primary">
+                  <button 
+                    onClick={handleAskQuestion}
+                    className="chef-button-primary"
+                  >
                     <Plus className="w-5 h-5 mr-2" />
                     Ask the First Question
                   </button>
                 </div>
               )}
 
-              {/* Pagination would go here */}
+              {/* Pagination */}
               {filteredQuestions.length > 0 && (
                 <div className="flex justify-center mt-12">
-                  <button className="chef-button-outline">
+                  <button 
+                    onClick={handleLoadMore}
+                    className="chef-button-outline"
+                  >
                     Load More Questions
                   </button>
                 </div>

@@ -1,13 +1,18 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Play, Clock, Users, Star, Crown, BookOpen, Filter, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useAuth } from '@/components/AuthProvider';
+import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('All');
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
   const filters = ['All', 'Free', 'Premium', 'Beginner', 'Intermediate', 'Advanced'];
 
@@ -123,6 +128,37 @@ const Courses = () => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
     return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+  };
+
+  const handleEnrollment = (course: any) => {
+    if (!user && course.price > 0) {
+      toast({
+        title: "Authentication required",
+        description: "Please sign in to enroll in premium courses.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
+    
+    if (course.price > 0) {
+      toast({
+        title: "Payment Required",
+        description: `To enroll in ${course.title}, payment processing will be available soon.`,
+      });
+    } else {
+      toast({
+        title: "Enrollment Successful!",
+        description: `You've enrolled in ${course.title}. The course will be available in your dashboard soon.`,
+      });
+    }
+  };
+
+  const handleLearnMore = (course: any) => {
+    toast({
+      title: "Course Details",
+      description: `Detailed course page for ${course.title} is under development.`,
+    });
   };
 
   return (
@@ -269,7 +305,10 @@ const Courses = () => {
                         <div className="text-lg font-bold text-chef-charcoal">
                           {course.price === 0 ? 'Free' : `$${course.price}`}
                         </div>
-                        <button className="chef-button-primary text-sm py-2 px-4">
+                        <button 
+                          onClick={() => handleEnrollment(course)}
+                          className="chef-button-primary text-sm py-2 px-4"
+                        >
                           {course.price === 0 ? 'Start Learning' : 'Enroll Now'}
                         </button>
                       </div>
@@ -341,7 +380,10 @@ const Courses = () => {
                       <div className="text-lg font-bold text-chef-charcoal">
                         {course.price === 0 ? 'Free' : `$${course.price}`}
                       </div>
-                      <button className="text-chef-royal-blue hover:text-chef-royal-blue/80 font-medium text-sm">
+                      <button 
+                        onClick={() => handleLearnMore(course)}
+                        className="text-chef-royal-blue hover:text-chef-royal-blue/80 font-medium text-sm"
+                      >
                         Learn More →
                       </button>
                     </div>

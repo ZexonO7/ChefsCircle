@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 const Recipes = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,6 +17,7 @@ const Recipes = () => {
   const [showSubmissionForm, setShowSubmissionForm] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const categories = ['All', 'Appetizers', 'Main Course', 'Desserts', 'Beverages', 'Breakfast', 'Vegetarian', 'Quick & Easy'];
 
@@ -165,6 +167,7 @@ const Recipes = () => {
         description: "Please sign in to share a recipe.",
         variant: "destructive",
       });
+      navigate('/auth');
       return;
     }
     setShowSubmissionForm(true);
@@ -172,6 +175,13 @@ const Recipes = () => {
 
   const handleRecipeSubmitted = () => {
     fetchUserRecipes(); // Refresh the recipes list
+  };
+
+  const handleViewRecipe = (recipe: any) => {
+    toast({
+      title: "Coming Soon",
+      description: `Detailed recipe page for "${recipe.title}" is under development.`,
+    });
   };
 
   return (
@@ -261,6 +271,7 @@ const Recipes = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ y: -5 }}
+                    onClick={() => handleViewRecipe(recipe)}
                   >
                     <div className="relative overflow-hidden rounded-t-xl">
                       <img 
@@ -314,7 +325,13 @@ const Recipes = () => {
                           <span className="chef-badge-blue">{recipe.category}</span>
                         </div>
                         
-                        <button className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-sm">
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleViewRecipe(recipe);
+                          }}
+                          className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-sm"
+                        >
                           View Recipe →
                         </button>
                       </div>
