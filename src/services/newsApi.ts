@@ -26,8 +26,11 @@ const getApiKey = (): string | null => {
 export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
   const apiKey = getApiKey();
   
+  console.log('Fetching culinary news, API key present:', !!apiKey);
+  
   if (!apiKey || apiKey === '' || apiKey.includes('YOUR_NEWS_API_KEY')) {
     // Return mock data when API key is not set or is placeholder
+    console.log('Using mock data - no valid API key');
     return getMockCulinaryNews();
   }
 
@@ -41,6 +44,7 @@ export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
     }
 
     const data: NewsResponse = await response.json();
+    console.log('Fetched real news articles:', data.articles.length);
     return data.articles.filter(article => 
       article.title && 
       article.description && 
@@ -49,16 +53,18 @@ export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
     );
   } catch (error) {
     console.error('Error fetching culinary news:', error);
+    console.log('Falling back to mock data');
     return getMockCulinaryNews();
   }
 };
 
 const getMockCulinaryNews = (): NewsArticle[] => {
+  console.log('Generating mock culinary news data');
   return [
     {
       title: "Revolutionary Cooking Techniques Transform Modern Kitchens",
       description: "Discover how innovative cooking methods are changing the way professional chefs approach food preparation and presentation in today's culinary landscape.",
-      url: "https://www.foodandwine.com/news/cooking-techniques-modern-kitchen-innovation",
+      url: "https://www.foodandwine.com/",
       urlToImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date().toISOString(),
       source: { name: "Food & Wine" },
@@ -67,7 +73,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Sustainable Ingredients: The Future of Culinary Arts",
       description: "Leading chefs share their insights on incorporating sustainable and locally-sourced ingredients into their menus for a better future.",
-      url: "https://www.bonappetit.com/story/sustainable-cooking-local-ingredients",
+      url: "https://www.bonappetit.com/",
       urlToImage: "https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Bon Appétit" },
@@ -76,7 +82,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Michelin Star Secrets: Behind the Scenes of Excellence",
       description: "Get an exclusive look at the preparation methods and quality standards that define Michelin-starred restaurants around the world.",
-      url: "https://guide.michelin.com/en/article/dining-in/michelin-star-restaurants-behind-scenes",
+      url: "https://guide.michelin.com/",
       urlToImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Michelin Guide" },
@@ -85,7 +91,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Plant-Based Revolution in Fine Dining",
       description: "How top restaurants are embracing plant-based cuisine without compromising on flavor or presentation standards.",
-      url: "https://www.eater.com/fine-dining/plant-based-restaurant-trends",
+      url: "https://www.eater.com/",
       urlToImage: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Eater" },
@@ -94,7 +100,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Global Street Food Influences Modern Cuisine",
       description: "Explore how traditional street food flavors are being elevated and incorporated into contemporary restaurant menus worldwide.",
-      url: "https://www.saveur.com/culture/street-food-modern-restaurant-cuisine",
+      url: "https://www.saveur.com/",
       urlToImage: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Saveur" },
@@ -103,7 +109,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "The Rise of Fermentation in Contemporary Cooking",
       description: "Professional chefs are rediscovering ancient fermentation techniques to create bold new flavors and enhance nutritional value.",
-      url: "https://www.epicurious.com/expert-advice/fermentation-techniques-modern-cooking",
+      url: "https://www.epicurious.com/",
       urlToImage: "https://images.unsplash.com/photo-1506976785307-8732e854ad03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Epicurious" },

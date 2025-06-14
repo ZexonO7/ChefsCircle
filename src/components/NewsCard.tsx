@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, User } from 'lucide-react';
 import { NewsArticle } from '@/services/newsApi';
+import { useToast } from '@/hooks/use-toast';
 
 interface NewsCardProps {
   article: NewsArticle;
@@ -10,6 +11,8 @@ interface NewsCardProps {
 }
 
 const NewsCard = ({ article, featured = false }: NewsCardProps) => {
+  const { toast } = useToast();
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -24,10 +27,29 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
     console.log('Article URL:', article.url);
     
     if (article.url && article.url !== '#') {
-      console.log('Opening URL in new tab:', article.url);
-      window.open(article.url, '_blank', 'noopener,noreferrer');
+      try {
+        console.log('Opening URL in new tab:', article.url);
+        window.open(article.url, '_blank', 'noopener,noreferrer');
+        
+        toast({
+          title: "Opening article",
+          description: `Redirecting to ${article.source.name}`,
+        });
+      } catch (error) {
+        console.error('Error opening URL:', error);
+        toast({
+          title: "Unable to open article",
+          description: "There was an issue opening the article link",
+          variant: "destructive",
+        });
+      }
     } else {
       console.log('No valid URL found for article');
+      toast({
+        title: "Article unavailable",
+        description: "This article link is not available",
+        variant: "destructive",
+      });
     }
   };
 

@@ -8,10 +8,12 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, Newspaper } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/hooks/use-toast';
 
 const Blog = () => {
   const [showApiKeyInput, setShowApiKeyInput] = useState(false);
   const { articles, isLoading, error, refetch } = useNewsApi();
+  const { toast } = useToast();
 
   useEffect(() => {
     // Check if API key is configured
@@ -27,8 +29,30 @@ const Blog = () => {
     window.location.reload(); // Reload to use the new API key
   };
 
-  const handleRefresh = () => {
-    refetch();
+  const handleRefresh = async () => {
+    console.log('Refresh button clicked');
+    try {
+      toast({
+        title: "Refreshing news...",
+        description: "Fetching the latest culinary stories",
+      });
+      
+      await refetch();
+      
+      toast({
+        title: "News refreshed!",
+        description: "Latest culinary news has been loaded",
+      });
+      
+      console.log('News refresh completed successfully');
+    } catch (error) {
+      console.error('Error refreshing news:', error);
+      toast({
+        title: "Refresh failed",
+        description: "Unable to fetch latest news, showing cached content",
+        variant: "destructive",
+      });
+    }
   };
 
   const featuredArticle = articles[0];
