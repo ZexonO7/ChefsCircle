@@ -4,7 +4,6 @@ import { ChefHat, Users, BookOpen, Crown } from "lucide-react";
 import { useIsMobile } from '@/hooks/use-mobile';
 import FeatureCard from './features/FeatureCard';
 import ProgramsCarousel from './features/ProgramsCarousel';
-import MembershipBenefits from './features/MembershipBenefits';
 
 const Features = () => {
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -94,8 +93,6 @@ const Features = () => {
         </div>
 
         <ProgramsCarousel />
-
-        <MembershipBenefits />
       </div>
     </section>
   );
