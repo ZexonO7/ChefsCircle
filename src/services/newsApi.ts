@@ -58,7 +58,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Revolutionary Cooking Techniques Transform Modern Kitchens",
       description: "Discover how innovative cooking methods are changing the way professional chefs approach food preparation and presentation.",
-      url: "https://example.com/revolutionary-cooking-techniques",
+      url: "https://www.foodandwine.com/cooking-techniques",
       urlToImage: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date().toISOString(),
       source: { name: "Culinary Today" },
@@ -67,7 +67,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Sustainable Ingredients: The Future of Culinary Arts",
       description: "Leading chefs share their insights on incorporating sustainable and locally-sourced ingredients into their menus.",
-      url: "https://example.com/sustainable-ingredients-future",
+      url: "https://www.bonappetit.com/story/sustainable-cooking",
       urlToImage: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Green Kitchen" },
@@ -76,7 +76,7 @@ const getMockCulinaryNews = (): NewsArticle[] => {
     {
       title: "Michelin Star Secrets: Behind the Scenes of Excellence",
       description: "Get an exclusive look at the preparation methods and quality standards that define Michelin-starred restaurants.",
-      url: "https://example.com/michelin-star-secrets",
+      url: "https://guide.michelin.com/en/article/dining-in/michelin-star-restaurants-secrets",
       urlToImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       publishedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Fine Dining Weekly" },
