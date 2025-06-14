@@ -1,3 +1,4 @@
+
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import NewsCard from '@/components/NewsCard';
@@ -82,8 +83,7 @@ const Blog = () => {
             </p>
             <Button 
               onClick={handleRefresh} 
-              variant="outline" 
-              className="border-chef-warm-ivory text-chef-warm-ivory hover:bg-chef-warm-ivory hover:text-chef-charcoal"
+              className="bg-chef-warm-ivory text-chef-charcoal hover:bg-chef-cream hover:text-chef-charcoal border-chef-warm-ivory border-2 font-semibold"
               disabled={isLoading}
             >
               <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
