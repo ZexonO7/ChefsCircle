@@ -23,7 +23,7 @@ const FloatingContactButton = () => {
   
   const scrollToContact = (e: React.MouseEvent) => {
     e.preventDefault();
-    const contactSection = document.getElementById('contact-info');
+    const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({
         behavior: 'smooth'
@@ -36,7 +36,7 @@ const FloatingContactButton = () => {
   return (
     <Button
       onClick={scrollToContact}
-      className="fixed bottom-6 right-6 z-50 bg-gray-800 hover:bg-gray-700 text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all"
+      className="fixed bottom-6 right-6 z-50 bg-chef-royal-green hover:bg-chef-royal-green/90 text-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all"
       size="icon"
       aria-label="Contact Us"
     >
