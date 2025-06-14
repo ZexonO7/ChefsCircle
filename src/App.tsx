@@ -17,6 +17,7 @@ import Courses from "./pages/Courses";
 import Library from "./pages/Library";
 import Auth from "./pages/Auth";
 import AdminPortal from "./pages/AdminPortal";
+import Dashboard from "./pages/Dashboard";
 import FireCatProject from "./pages/FireCatProject";
 import SportRetailProject from "./pages/SportRetailProject";
 import WorkwearProject from "./pages/WorkwearProject";
@@ -42,6 +43,11 @@ const App = () => (
             <Route path="/admin" element={
               <ProtectedRoute>
                 <AdminPortal />
+              </ProtectedRoute>
+            } />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
               </ProtectedRoute>
             } />
             <Route path="/clubs" element={

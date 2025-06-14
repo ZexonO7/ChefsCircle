@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { User, LogOut, Settings } from 'lucide-react';
+import { User, LogOut, Settings, Trophy } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 
 const UserMenu = () => {
   const { user, signOut } = useAuth();
@@ -47,6 +48,13 @@ const UserMenu = () => {
         </div>
         
         <div className="py-2">
+          <Link 
+            to="/dashboard"
+            className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
+          >
+            <Trophy className="w-4 h-4" />
+            Dashboard
+          </Link>
           <button className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2">
             <Settings className="w-4 h-4" />
             Settings
