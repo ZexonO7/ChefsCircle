@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
@@ -114,11 +113,11 @@
   }
 
   .chef-button-primary {
-    @apply chef-button bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light active:bg-chef-forest;
+    @apply chef-button bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light active:bg-chef-navy;
   }
 
   .chef-button-secondary {
-    @apply chef-button bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light active:bg-chef-navy;
+    @apply chef-button bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light active:bg-chef-forest;
   }
 
   .chef-button-blue {
@@ -126,11 +125,11 @@
   }
 
   .chef-button-outline {
-    @apply chef-button border-2 border-chef-royal-green text-chef-royal-green bg-transparent hover:bg-chef-royal-green hover:text-chef-warm-ivory;
+    @apply chef-button border-2 border-chef-royal-blue text-chef-royal-blue bg-transparent hover:bg-chef-royal-blue hover:text-chef-warm-ivory;
   }
 
   .chef-gradient {
-    background: linear-gradient(135deg, #014421 0%, #0B1F66 100%);
+    background: linear-gradient(135deg, #0B1F66 0%, #1A3A8A 100%);
   }
 
   .chef-gradient-blue {
@@ -142,7 +141,7 @@
   }
 
   .chef-text-gradient {
-    @apply bg-gradient-to-r from-chef-royal-green to-chef-royal-blue bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-chef-royal-blue to-chef-blue-light bg-clip-text text-transparent;
   }
 
   .chef-text-blue {
@@ -292,7 +291,7 @@
 /* Focus States */
 .chef-button:focus-visible,
 .chef-card:focus-visible {
-  @apply outline-2 outline-offset-2 outline-chef-royal-green;
+  @apply outline-2 outline-offset-2 outline-chef-royal-blue;
 }
 
 /* Smooth Scrolling */

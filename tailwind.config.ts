@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -64,14 +63,14 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				chef: {
-					'royal-green': '#014421',
-					'royal-blue': '#0B1F66',
-					'warm-ivory': '#F9F6F1',
+					'royal-green': '#014421', // Will be less used in Hero
+					'royal-blue': '#0B1F66', // Primary blue
+					'warm-ivory': '#F9F6F1', // Primary cream/white
 					'charcoal': '#1C1C1C',
-					'gold': '#C2A83E',
+					'gold': '#C2A83E', // Will be less used in Hero
 					'green-light': '#036B35',
-					'blue-light': '#1A3A8A',
-					'cream': '#FDF8F0',
+					'blue-light': '#1A3A8A', // Lighter blue for accents/hovers
+					'cream': '#FDF8F0', // Secondary cream/white
 					'forest': '#0A3D1F',
 					'navy': '#091852',
 					'bronze': '#A8944D'
@@ -88,13 +87,17 @@ export default {
 				'space': ['Space Grotesk', 'sans-serif'],
 			},
 			backgroundImage: {
-				'chef-gradient': 'linear-gradient(135deg, #014421 0%, #0B1F66 100%)',
-				'gold-gradient': 'linear-gradient(135deg, #C2A83E 0%, #A8944D 100%)',
+				'chef-gradient': 'linear-gradient(135deg, #0B1F66 0%, #1A3A8A 100%)', // Updated from green/blue to blue/lightblue
+				'gold-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)', // Changed to ivory/cream gradient
 				'luxury-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)',
 			},
 			boxShadow: {
-				'chef-luxury': '0 20px 25px -5px rgba(1, 68, 33, 0.1), 0 10px 10px -5px rgba(1, 68, 33, 0.04)',
-				'chef-gold': '0 20px 25px -5px rgba(194, 168, 62, 0.1), 0 10px 10px -5px rgba(194, 168, 62, 0.04)',
+				'chef-luxury': '0 20px 25px -5px rgba(11, 31, 102, 0.1), 0 8px 10px -6px rgba(11, 31, 102, 0.1)', // Blue based shadow
+				'chef-gold': '0 10px 15px -3px rgba(26, 58, 138, 0.15), 0 4px 6px -4px rgba(26, 58, 138, 0.15)', // Lighter blue accent shadow (was gold)
+        'chef-blue-md': '0 4px 6px -1px rgba(11, 31, 102, 0.1), 0 2px 4px -2px rgba(11, 31, 102, 0.1)',
+        'chef-blue-lg': '0 10px 15px -3px rgba(11, 31, 102, 0.1), 0 4px 6px -4px rgba(11, 31, 102, 0.1)',
+        'chef-blue-xl': '0 20px 25px -5px rgba(11, 31, 102, 0.1), 0 8px 10px -6px rgba(11, 31, 102, 0.1)',
+        'chef-ivory-glow': '0 0 20px rgba(249, 246, 241, 0.4)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -133,9 +136,9 @@ export default {
 					'0%': { backgroundPosition: '-200% 0' },
 					'100%': { backgroundPosition: '200% 0' }
 				},
-				'chef-glow': {
-					'0%, 100%': { boxShadow: '0 0 20px rgba(194, 168, 62, 0.3)' },
-					'50%': { boxShadow: '0 0 30px rgba(194, 168, 62, 0.5)' }
+				'chef-glow': { // Updated to blue glow
+					'0%, 100%': { boxShadow: '0 0 20px rgba(11, 31, 102, 0.3)' },
+					'50%': { boxShadow: '0 0 30px rgba(11, 31, 102, 0.5)' }
 				}
 			},
 			animation: {
