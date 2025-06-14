@@ -1,6 +1,5 @@
 
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -11,70 +10,62 @@
     --background: 249 246 241;
     --foreground: 28 28 28;
 
-    --card: 240 230 210;
+    --card: 249 246 241;
     --card-foreground: 28 28 28;
 
-    --popover: 240 230 210;
+    --popover: 249 246 241;
     --popover-foreground: 28 28 28;
 
-    --primary: 11 31 102;
+    --primary: 1 68 33;
     --primary-foreground: 249 246 241;
 
-    --secondary: 156 112 75;
+    --secondary: 11 31 102;
     --secondary-foreground: 249 246 241;
 
-    --muted: 245 245 245;
-    --muted-foreground: 100 100 100;
+    --muted: 240 240 240;
+    --muted-foreground: 115 115 115;
 
-    --accent: 156 112 75;
+    --accent: 11 31 102;
     --accent-foreground: 249 246 241;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 200 180;
-    --input: 210 200 180;
-    --ring: 11 31 102;
+    --border: 220 220 220;
+    --input: 220 220 220;
+    --ring: 1 68 33;
 
     --radius: 0.75rem;
-
-    --chef-royal-blue: 11 31 102;
-    --chef-warm-ivory: 249 246 241;
-    --chef-charcoal: 28 28 28;
-    --chef-terracotta: 156 112 75;
-    --chef-warm-beige: 235 220 195;
-    --chef-warm-sand: 240 230 210;
-    --chef-blue-light: 26 58 138;
   }
 
   .dark {
     --background: 28 28 28;
-    --foreground: 240 230 210;
+    --foreground: 249 246 241;
 
-    --card: 40 40 40;
-    --card-foreground: 240 230 210;
+    --card: 28 28 28;
+    --card-foreground: 249 246 241;
 
-    --popover: 40 40 40;
-    --popover-foreground: 240 230 210;
+    --popover: 28 28 28;
+    --popover-foreground: 28 28 28;
 
-    --primary: 11 31 102;
-    --primary-foreground: 240 230 210;
+    --primary: 1 68 33;
+    --primary-foreground: 249 246 241;
 
-    --secondary: 156 112 75;
+    --secondary: 11 31 102;
     --secondary-foreground: 249 246 241;
 
-    --muted: 50 50 50;
-    --muted-foreground: 160 160 160;
+    --muted: 64 64 64;
+    --muted-foreground: 161 161 170;
 
-    --accent: 156 112 75;
+    --accent: 11 31 102;
     --accent-foreground: 249 246 241;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 60 60 60;
-    --input: 60 60 60;
-    --ring: 156 112 75;
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 11 31 102;
   }
 }
 
@@ -90,7 +81,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-inter;
+    @apply bg-chef-warm-ivory text-foreground font-inter;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
@@ -111,11 +102,11 @@
   }
 
   .chef-card {
-    @apply bg-card border border-secondary/20 rounded-2xl shadow-chef-warm transition-all duration-500 backdrop-blur-sm;
+    @apply bg-chef-warm-ivory border border-chef-royal-blue/20 rounded-2xl shadow-chef-luxury hover:shadow-chef-gold transition-all duration-500 backdrop-blur-sm;
   }
 
   .chef-card-luxury {
-    @apply chef-card bg-gradient-to-br from-chef-warm-sand to-chef-warm-beige border-chef-terracotta/30 shadow-chef-luxury hover:shadow-chef-warm hover:scale-[1.02] transition-all duration-500;
+    @apply chef-card bg-gradient-to-br from-chef-warm-ivory to-chef-cream border-chef-royal-blue/30 shadow-chef-luxury hover:shadow-chef-gold hover:scale-[1.02] transition-all duration-500;
   }
 
   .chef-button {
@@ -123,15 +114,11 @@
   }
 
   .chef-button-primary {
-    @apply chef-button bg-primary text-primary-foreground hover:bg-chef-blue-light active:bg-chef-navy;
-  }
-  
-  .chef-button-primary:hover {
-     box-shadow: 0 0 15px 0px hsl(var(--chef-terracotta) / 0.3);
+    @apply chef-button bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-green-light active:bg-chef-forest;
   }
 
   .chef-button-secondary {
-    @apply chef-button bg-secondary text-secondary-foreground hover:bg-chef-terracotta/80 active:bg-chef-terracotta;
+    @apply chef-button bg-chef-royal-blue text-chef-warm-ivory hover:bg-chef-blue-light active:bg-chef-navy;
   }
 
   .chef-button-blue {
@@ -139,11 +126,11 @@
   }
 
   .chef-button-outline {
-    @apply chef-button border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground;
+    @apply chef-button border-2 border-chef-royal-green text-chef-royal-green bg-transparent hover:bg-chef-royal-green hover:text-chef-warm-ivory;
   }
-  
-  .chef-button-outline-terracotta {
-    @apply chef-button border-2 border-secondary text-secondary bg-transparent hover:bg-secondary hover:text-secondary-foreground;
+
+  .chef-gradient {
+    background: linear-gradient(135deg, #014421 0%, #0B1F66 100%);
   }
 
   .chef-gradient-blue {
@@ -151,11 +138,11 @@
   }
 
   .chef-gradient-luxury {
-    @apply bg-warm-glow-gradient;
+    background: linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%);
   }
 
   .chef-text-gradient {
-    @apply bg-gradient-to-r from-primary to-blue-light bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-chef-royal-green to-chef-royal-blue bg-clip-text text-transparent;
   }
 
   .chef-text-blue {
@@ -163,11 +150,7 @@
   }
 
   .chef-badge {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary/20 text-primary border border-primary/30;
-  }
-
-  .chef-badge-terracotta {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-secondary/20 text-secondary border border-secondary/30;
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-chef-royal-blue/20 text-chef-royal-blue border border-chef-royal-blue/30;
   }
 
   .chef-badge-green {
@@ -221,7 +204,7 @@
   }
 
   .chef-hover-glow {
-    @apply transition-all duration-300 hover:shadow-chef-warm hover:animate-chef-glow;
+    @apply transition-all duration-300 hover:shadow-chef-gold hover:animate-chef-glow;
   }
 
   .chef-fade-in {
@@ -309,7 +292,7 @@
 /* Focus States */
 .chef-button:focus-visible,
 .chef-card:focus-visible {
-  @apply outline-2 outline-offset-2 outline-chef-royal-blue;
+  @apply outline-2 outline-offset-2 outline-chef-royal-green;
 }
 
 /* Smooth Scrolling */
@@ -331,4 +314,3 @@
     color: #1c1c1c !important;
   }
 }
-
