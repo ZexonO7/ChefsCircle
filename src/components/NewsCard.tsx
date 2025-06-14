@@ -67,9 +67,8 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
                 {article.source.name}
               </span>
               <Button 
-                variant="outline" 
-                className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white"
                 onClick={handleReadMore}
+                className="bg-chef-royal-blue text-white hover:bg-chef-royal-blue/90 border-chef-royal-blue group"
               >
                 Read Full Article
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -108,9 +107,8 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
             {article.description}
           </p>
           <Button 
-            variant="outline" 
-            className="group mt-auto border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white w-full"
             onClick={handleReadMore}
+            className="bg-chef-royal-blue text-white hover:bg-chef-royal-blue/90 border-chef-royal-blue group mt-auto w-full"
           >
             Read Article
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
