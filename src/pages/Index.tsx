@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Projects from '@/components/Projects';
 import WhyChefCircle from '@/components/WhyChefsCircle';
+import GamificationDashboard from '@/components/GamificationDashboard';
 import BlogPreview from '@/components/BlogPreview';
 import ContactInfo from '@/components/ContactInfo';
 import SEO from '@/components/SEO';
@@ -30,6 +31,7 @@ const Index = () => {
       <Hero />
       <Features />
       <WhyChefCircle />
+      <GamificationDashboard />
       <Projects />
       <BlogPreview />
       <ContactInfo />

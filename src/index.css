@@ -129,6 +129,10 @@
     @apply chef-button border-2 border-chef-royal-green text-chef-royal-green bg-transparent hover:bg-chef-royal-green hover:text-chef-warm-ivory;
   }
 
+  .chef-button-gold {
+    @apply chef-button bg-chef-gold text-chef-charcoal hover:bg-chef-bronze active:bg-chef-bronze;
+  }
+
   .chef-gradient {
     background: linear-gradient(135deg, #014421 0%, #0B1F66 100%);
   }
@@ -159,6 +163,35 @@
 
   .chef-badge-blue {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-chef-royal-blue/20 text-chef-royal-blue border border-chef-royal-blue/30;
+  }
+
+  .chef-badge-gold {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-chef-gold/20 text-chef-gold border border-chef-gold/30;
+  }
+
+  /* Gamification specific styles */
+  .chef-achievement-popup {
+    @apply fixed bottom-6 right-6 z-50 transform transition-all duration-500 ease-in-out;
+  }
+
+  .chef-progress-bar {
+    @apply relative overflow-hidden rounded-full bg-white/20;
+  }
+
+  .chef-xp-widget {
+    @apply bg-gradient-to-r from-chef-royal-blue to-chef-blue-light text-white p-6 rounded-2xl shadow-chef-luxury;
+  }
+
+  .chef-badge-grid {
+    @apply grid grid-cols-3 gap-3;
+  }
+
+  .chef-leaderboard-item {
+    @apply flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-chef-royal-blue/10;
+  }
+
+  .chef-challenge-card {
+    @apply bg-white border border-chef-royal-blue/20 rounded-xl p-6 shadow-lg;
   }
 }
 
@@ -227,6 +260,19 @@
       opacity: 1;
     }
   }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(194, 168, 62, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(194, 168, 62, 0.6);
+    }
+  }
+
+  .chef-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
 }
 
 /* Luxury Layout Elements */
@@ -270,6 +316,10 @@
   
   .banner-subtitle {
     font-size: 1rem;
+  }
+
+  .chef-achievement-popup {
+    @apply bottom-4 right-4 left-4;
   }
 }
 
