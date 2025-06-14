@@ -1,7 +1,6 @@
 
 import { Link } from 'react-router-dom';
 import { ArrowRight, Newspaper } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import NewsCard from '@/components/NewsCard';
 import { useNewsApi } from '@/hooks/useNewsApi';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -27,10 +26,10 @@ const BlogPreview = () => {
             </p>
           </div>
           <Link to="/news" className="mt-4 md:mt-0">
-            <Button variant="outline" className="group border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-white">
+            <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-chef-royal-blue font-medium rounded-lg border-2 border-chef-royal-blue hover:bg-chef-royal-blue hover:text-white transition-colors group">
               View All News
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Button>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
           </Link>
         </div>
         

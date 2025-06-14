@@ -88,13 +88,13 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
               <span className="text-sm text-chef-royal-blue font-medium">
                 {article.source.name}
               </span>
-              <Button 
+              <button 
                 onClick={handleReadMore}
-                className="bg-chef-royal-blue text-white hover:bg-chef-royal-blue/90 border-chef-royal-blue group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-chef-royal-blue text-white font-medium rounded-lg hover:bg-chef-royal-blue/90 transition-colors group border-0"
               >
                 Read Full Article
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+              </button>
             </div>
           </CardContent>
         </div>
@@ -128,13 +128,13 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
           <p className="text-chef-charcoal/70 mb-4 line-clamp-3 font-inter">
             {article.description}
           </p>
-          <Button 
+          <button 
             onClick={handleReadMore}
-            className="bg-chef-royal-blue text-white hover:bg-chef-royal-blue/90 border-chef-royal-blue group mt-auto w-full"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-chef-royal-blue text-white font-medium rounded-lg hover:bg-chef-royal-blue/90 transition-colors group mt-auto w-full border-0"
           >
             Read Article
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
+          </button>
         </CardContent>
       </div>
     </Card>

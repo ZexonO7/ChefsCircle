@@ -1,11 +1,9 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import NewsCard from '@/components/NewsCard';
 import NewsApiKeyInput from '@/components/NewsApiKeyInput';
 import { useNewsApi } from '@/hooks/useNewsApi';
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
 import { RefreshCw, Newspaper } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
@@ -105,14 +103,14 @@ const Blog = () => {
             <p className="text-xl text-chef-warm-ivory/90 mb-6 font-inter">
               Stay updated with the latest culinary stories, trends, and insights from around the world
             </p>
-            <Button 
+            <button 
               onClick={handleRefresh} 
-              className="bg-chef-warm-ivory text-chef-charcoal hover:bg-chef-cream hover:text-chef-charcoal border-chef-warm-ivory border-2 font-semibold"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-chef-warm-ivory text-chef-charcoal font-semibold rounded-lg hover:bg-chef-cream transition-colors border-0"
               disabled={isLoading}
             >
-              <RefreshCw className={`w-4 h-4 mr-2 ${isLoading ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
               Refresh News
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -151,10 +149,13 @@ const Blog = () => {
                 <p className="text-chef-charcoal/70 mb-6">
                   We couldn't find any culinary news at the moment. Please try refreshing or check back later.
                 </p>
-                <Button onClick={handleRefresh}>
-                  <RefreshCw className="w-4 h-4 mr-2" />
+                <button 
+                  onClick={handleRefresh}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-chef-royal-blue text-white font-medium rounded-lg hover:bg-chef-royal-blue/90 transition-colors border-0"
+                >
+                  <RefreshCw className="w-4 h-4" />
                   Try Again
-                </Button>
+                </button>
               </div>
             )}
           </div>
