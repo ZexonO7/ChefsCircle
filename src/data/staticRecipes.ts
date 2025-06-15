@@ -1,4 +1,5 @@
 
+
 export const staticRecipes = [
   {
     id: 1,
@@ -417,7 +418,7 @@ export const staticRecipes = [
     title: "Shrimp Scampi",
     author: "ChefCircle",
     description: "Succulent shrimp in garlic, white wine, and butter sauce over pasta.",
-    image: "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=600&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1563379091339-03246963d774?w=600&h=400&fit=crop",
     cookTime: 20,
     difficulty: "Easy",
     rating: 4.7,
@@ -750,3 +751,4 @@ export const staticRecipes = [
     ]
   }
 ];
+
