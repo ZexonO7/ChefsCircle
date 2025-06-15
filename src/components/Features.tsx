@@ -14,25 +14,25 @@ const Features = () => {
       icon: <ChefHat className="w-10 h-10 text-white transition-transform duration-300 transform" />,
       title: "Live Cook-Alongs",
       description: "Interactive sessions with renowned chefs, where you cook together in real-time, learning professional techniques and insider secrets.",
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop"
     },
     {
       icon: <BookOpen className="w-10 h-10 text-white transition-transform duration-300 transform" />,
       title: "Master Classes",
       description: "Deep-dive courses covering advanced culinary techniques, from knife skills to molecular gastronomy and artisanal bread making.",
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop"
     },
     {
       icon: <Users className="w-10 h-10 text-white transition-transform duration-300 transform" />,
       title: "Elite Community",
       description: "Connect with passionate food lovers, share your culinary creations, and get feedback from fellow members and professional chefs.",
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
+      image: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=600&h=400&fit=crop"
     },
     {
       icon: <Crown className="w-10 h-10 text-white transition-transform duration-300 transform" />,
       title: "Premium Content",
       description: "Exclusive recipes, seasonal menus, wine pairings, and access to chef-curated ingredient boxes delivered to your door.",
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop"
     }
   ];
 

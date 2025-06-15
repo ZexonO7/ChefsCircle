@@ -11,8 +11,15 @@ interface RecipeHeroProps {
 
 const RecipeHero = ({ searchTerm, onSearchChange, onShareRecipe }: RecipeHeroProps) => {
   return (
-    <section className="chef-section bg-gradient-to-br from-chef-royal-green to-chef-forest">
-      <div className="chef-container">
+    <section className="chef-section bg-gradient-to-br from-chef-royal-green to-chef-forest relative overflow-hidden">
+      <div className="absolute inset-0">
+        <img 
+          src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1200&h=600&fit=crop" 
+          alt="Recipe ingredients and cooking" 
+          className="w-full h-full object-cover opacity-20"
+        />
+      </div>
+      <div className="chef-container relative z-10">
         <motion.div 
           className="text-center max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 20 }}

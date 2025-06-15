@@ -1,3 +1,4 @@
+
 import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
@@ -42,7 +43,7 @@ const Hero = () => {
   return <motion.div className="relative mt-16 md:mt-0 w-full max-w-[100vw]" initial="hidden" animate="visible" variants={containerVariants}>
       <div className="banner-container chef-gradient-blue relative overflow-hidden h-[700px] md:h-[750px] w-full">
         <div className="absolute inset-0 w-full">
-          <img src="/lovable-uploads/4d70a018-96e2-480a-9492-ccdb9dba7ce2.png" alt="ChefCircle - Luxury Culinary Experience" className={`w-full h-full object-cover opacity-40 ${isMobile ? 'object-right' : 'object-center'}`} />
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop" alt="ChefCircle - Professional Kitchen and Culinary Community" className={`w-full h-full object-cover opacity-40 ${isMobile ? 'object-right' : 'object-center'}`} />
           <div className="absolute inset-0 bg-gradient-to-b from-chef-charcoal/70 via-chef-royal-blue/60 to-chef-warm-ivory"></div>
         </div>
         
