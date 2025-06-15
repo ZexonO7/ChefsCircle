@@ -55,7 +55,7 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
 
   if (featured) {
     return (
-      <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20 col-span-1 md:col-span-2 lg:col-span-3">
+      <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20 col-span-1 md:col-span-2 lg:col-span-3 bg-white">
         <div className="grid md:grid-cols-2 h-full">
           <div 
             className="bg-cover bg-center h-64 md:h-full p-8 flex items-center justify-center"
@@ -103,7 +103,7 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
   }
 
   return (
-    <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20">
+    <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20 bg-white">
       <div className="grid grid-rows-[200px,1fr]">
         <div 
           className="bg-cover bg-center"
