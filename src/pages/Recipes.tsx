@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/components/AuthProvider';
@@ -79,15 +78,32 @@ const Recipes = () => {
     }
   };
 
+  // Filter out rejected recipes except personal ones
   const fetchUserRecipes = async () => {
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from('user_recipes')
         .select('*')
         .order('created_at', { ascending: false });
 
+      // Only fetch approved recipes and recipes belonging to the current user
+      if (user) {
+        query = query.or(`status.eq.approved,user_id.eq.${user.id}`);
+      } else {
+        query = query.eq('status', 'approved');
+      }
+
+      const { data, error } = await query;
+
       if (error) throw error;
-      setUserRecipes(data || []);
+
+      // For non-logged-in users, only show 'approved'.
+      // For logged-in users: show all 'approved' plus their own (any status)
+      setUserRecipes(
+        (data || []).filter(recipe => 
+          recipe.status !== 'rejected' || (user && recipe.user_id === user.id)
+        )
+      );
     } catch (error: any) {
       console.error('Error fetching recipes:', error);
       toast({
