@@ -2,7 +2,6 @@
 import PageLayout from '@/components/PageLayout';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
-import Projects from '@/components/Projects';
 import WhyChefCircle from '@/components/WhyChefsCircle';
 import GamificationDashboard from '@/components/GamificationDashboard';
 import BlogPreview from '@/components/BlogPreview';
@@ -31,7 +30,6 @@ const Index = () => {
       <Features />
       <WhyChefCircle />
       <GamificationDashboard />
-      <Projects />
       <BlogPreview />
     </PageLayout>
   );
