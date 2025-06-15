@@ -44,12 +44,21 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
     return count.toString();
   };
 
+  // Use a ref to track if we've already incremented for this modal opening
+  const hasIncrementedRef = React.useRef(false);
+
   React.useEffect(() => {
-    if (isOpen && recipe) {
-      // Increment view count when modal opens
+    if (isOpen && recipe && !hasIncrementedRef.current) {
+      // Increment view count when modal opens (only once)
       onViewIncrement(recipe.id);
+      hasIncrementedRef.current = true;
     }
-  }, [isOpen, recipe, onViewIncrement]);
+    
+    // Reset the flag when modal closes
+    if (!isOpen) {
+      hasIncrementedRef.current = false;
+    }
+  }, [isOpen, recipe?.id, onViewIncrement]);
 
   if (!recipe) return null;
 

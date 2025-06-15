@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
@@ -22,6 +22,7 @@ const Recipes = () => {
   const [showSubmissionForm, setShowSubmissionForm] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
   const [recipeViews, setRecipeViews] = useState<{[key: string]: number}>({});
+  const [viewedRecipes, setViewedRecipes] = useState<Set<string | number>>(new Set());
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -35,9 +36,15 @@ const Recipes = () => {
 
   // Load view counts from localStorage
   const loadViewCounts = () => {
-    // Reset view counts - clear localStorage and start fresh
-    localStorage.removeItem('recipeViews');
-    setRecipeViews({});
+    const savedViews = localStorage.getItem('recipeViews');
+    if (savedViews) {
+      try {
+        setRecipeViews(JSON.parse(savedViews));
+      } catch (error) {
+        console.error('Error parsing saved view counts:', error);
+        setRecipeViews({});
+      }
+    }
   };
 
   // Save view counts to localStorage whenever they change
@@ -68,7 +75,7 @@ const Recipes = () => {
     }
   };
 
-  // Get recipe view count - starts at 0 for all recipes
+  // Get recipe view count
   const getRecipeViewCount = (recipeId: string | number) => {
     return recipeViews[recipeId] || 0;
   };
@@ -123,17 +130,24 @@ const Recipes = () => {
     setSelectedRecipe(null);
   };
 
-  const handleViewIncrement = (recipeId: string | number) => {
-    setRecipeViews(prev => {
-      const currentCount = prev[recipeId] || 0;
-      const newCount = currentCount + 1;
-      console.log(`Incrementing view count for recipe ${recipeId}: ${currentCount} → ${newCount}`);
-      return {
-        ...prev,
-        [recipeId]: newCount
-      };
-    });
-  };
+  // Use useCallback to prevent function from changing on every render
+  const handleViewIncrement = useCallback((recipeId: string | number) => {
+    // Only increment if this recipe hasn't been viewed in this session
+    if (!viewedRecipes.has(recipeId)) {
+      setRecipeViews(prev => {
+        const currentCount = prev[recipeId] || 0;
+        const newCount = currentCount + 1;
+        console.log(`Incrementing view count for recipe ${recipeId}: ${currentCount} → ${newCount}`);
+        return {
+          ...prev,
+          [recipeId]: newCount
+        };
+      });
+      
+      // Mark this recipe as viewed in this session
+      setViewedRecipes(prev => new Set(prev).add(recipeId));
+    }
+  }, [viewedRecipes]);
 
   return (
     <PageLayout>
