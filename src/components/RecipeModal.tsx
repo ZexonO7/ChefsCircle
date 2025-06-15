@@ -50,8 +50,8 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-chef-royal-blue">
-        <div className="relative bg-chef-royal-blue">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-white">
+        <div className="relative bg-white">
           {/* Hero Image */}
           <div className="relative h-64 overflow-hidden rounded-t-lg">
             <img 
@@ -89,7 +89,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
           </div>
 
           {/* Content */}
-          <div className="p-8 bg-chef-royal-blue text-chef-warm-ivory">
+          <div className="p-8 bg-white">
             {/* Description */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -97,7 +97,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               transition={{ duration: 0.5 }}
               className="mb-6"
             >
-              <p className="text-lg text-chef-warm-ivory/90 leading-relaxed">{recipe.description}</p>
+              <p className="text-lg text-gray-700 leading-relaxed">{recipe.description}</p>
             </motion.div>
 
             {/* Recipe Stats */}
@@ -105,27 +105,27 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 p-6 bg-chef-warm-ivory/10 backdrop-blur-sm rounded-xl border border-chef-warm-ivory/20"
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 p-6 bg-gray-50 rounded-xl"
             >
               <div className="text-center">
-                <Clock className="w-6 h-6 text-chef-gold mx-auto mb-2" />
-                <p className="font-semibold text-chef-warm-ivory">{formatCookTime(cookTime)}</p>
-                <p className="text-sm text-chef-warm-ivory/70">Cook Time</p>
+                <Clock className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
+                <p className="font-semibold text-gray-900">{formatCookTime(cookTime)}</p>
+                <p className="text-sm text-gray-600">Cook Time</p>
               </div>
               <div className="text-center">
-                <Users className="w-6 h-6 text-chef-gold mx-auto mb-2" />
-                <p className="font-semibold text-chef-warm-ivory">{recipe.servings || 4}</p>
-                <p className="text-sm text-chef-warm-ivory/70">Servings</p>
+                <Users className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
+                <p className="font-semibold text-gray-900">{recipe.servings || 4}</p>
+                <p className="text-sm text-gray-600">Servings</p>
               </div>
               <div className="text-center">
-                <ChefHat className="w-6 h-6 text-chef-gold mx-auto mb-2" />
-                <p className="font-semibold text-chef-warm-ivory">{recipe.difficulty}</p>
-                <p className="text-sm text-chef-warm-ivory/70">Difficulty</p>
+                <ChefHat className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
+                <p className="font-semibold text-gray-900">{recipe.difficulty}</p>
+                <p className="text-sm text-gray-600">Difficulty</p>
               </div>
               <div className="text-center">
-                <Heart className="w-6 h-6 text-chef-gold mx-auto mb-2" />
-                <p className="font-semibold text-chef-warm-ivory">{recipe.likes}</p>
-                <p className="text-sm text-chef-warm-ivory/70">Likes</p>
+                <Heart className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
+                <p className="font-semibold text-gray-900">{recipe.likes}</p>
+                <p className="text-sm text-gray-600">Likes</p>
               </div>
             </motion.div>
 
@@ -136,11 +136,11 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               transition={{ duration: 0.5, delay: 0.2 }}
               className="flex gap-4 mb-8"
             >
-              <button className="flex items-center gap-2 px-4 py-2 bg-chef-gold text-chef-charcoal rounded-lg hover:bg-chef-bronze transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 bg-chef-royal-green text-white rounded-lg hover:bg-chef-forest transition-colors">
                 <Heart className="w-4 h-4" />
                 Like Recipe
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 border border-chef-warm-ivory/30 text-chef-warm-ivory rounded-lg hover:bg-chef-warm-ivory/10 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
                 <Share2 className="w-4 h-4" />
                 Share
               </button>
@@ -154,8 +154,8 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
                 >
-                  <h3 className="text-2xl font-bold text-chef-warm-ivory mb-4 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-chef-gold text-chef-charcoal rounded-full flex items-center justify-center text-sm">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-8 h-8 bg-chef-royal-green text-white rounded-full flex items-center justify-center text-sm">
                       📝
                     </span>
                     Ingredients
@@ -167,10 +167,10 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-                        className="flex items-start gap-3 p-3 bg-chef-warm-ivory/10 backdrop-blur-sm rounded-lg border border-chef-warm-ivory/20 hover:bg-chef-warm-ivory/15 transition-colors"
+                        className="flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:shadow-sm transition-shadow"
                       >
-                        <div className="w-2 h-2 bg-chef-gold rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-chef-warm-ivory/90">{ingredient}</span>
+                        <div className="w-2 h-2 bg-chef-royal-green rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-gray-700">{ingredient}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -184,8 +184,8 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  <h3 className="text-2xl font-bold text-chef-warm-ivory mb-4 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-chef-gold text-chef-charcoal rounded-full flex items-center justify-center text-sm">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span className="w-8 h-8 bg-chef-royal-green text-white rounded-full flex items-center justify-center text-sm">
                       👨‍🍳
                     </span>
                     Instructions
@@ -197,12 +197,12 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                        className="flex gap-4 p-4 bg-chef-warm-ivory/10 backdrop-blur-sm rounded-lg border border-chef-warm-ivory/20 hover:bg-chef-warm-ivory/15 transition-colors"
+                        className="flex gap-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-sm transition-shadow"
                       >
-                        <div className="w-8 h-8 bg-chef-gold text-chef-charcoal rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                        <div className="w-8 h-8 bg-chef-royal-green text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                           {index + 1}
                         </div>
-                        <p className="text-chef-warm-ivory/90 leading-relaxed pt-1">{instruction}</p>
+                        <p className="text-gray-700 leading-relaxed pt-1">{instruction}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -215,9 +215,9 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-8 pt-6 border-t border-chef-warm-ivory/20"
+              className="mt-8 pt-6 border-t border-gray-200"
             >
-              <span className="inline-block px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium border border-chef-gold/30">
+              <span className="inline-block px-4 py-2 bg-chef-royal-blue/10 text-chef-royal-blue rounded-full text-sm font-medium">
                 {recipe.category}
               </span>
             </motion.div>
