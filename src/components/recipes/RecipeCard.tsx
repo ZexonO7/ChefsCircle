@@ -1,0 +1,119 @@
+
+import React from 'react';
+import { Clock, Users, Star, ChefHat, Eye } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+interface Recipe {
+  id: number | string;
+  title: string;
+  author: string;
+  description: string;
+  image_url?: string;
+  image?: string;
+  cookTime?: number;
+  cook_time?: number;
+  difficulty: string;
+  rating: number;
+  category: string;
+  likes: number;
+  servings?: number;
+  ingredients?: string[];
+  instructions?: string[];
+  view_count?: number;
+  isPremium?: boolean;
+}
+
+interface RecipeCardProps {
+  recipe: Recipe;
+  index: number;
+  onViewRecipe: (recipe: Recipe) => void;
+}
+
+const formatCookTime = (minutes: number) => {
+  if (minutes >= 1440) return `${Math.floor(minutes / 1440)}d`;
+  if (minutes >= 60) return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+  return `${minutes}m`;
+};
+
+const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
+  return (
+    <motion.div
+      className="chef-card-luxury group cursor-pointer"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      whileHover={{ y: -5 }}
+      onClick={() => onViewRecipe(recipe)}
+    >
+      <div className="relative overflow-hidden rounded-t-xl">
+        <img 
+          src={recipe.image_url || recipe.image || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop'} 
+          alt={recipe.title}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+        <div className="absolute top-4 left-4 flex gap-2">
+          {recipe.isPremium && (
+            <span className="chef-badge bg-chef-gold/20 text-chef-gold border-chef-gold/30">
+              Premium
+            </span>
+          )}
+          <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+            recipe.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
+            recipe.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
+            'bg-red-100 text-red-800'
+          }`}>
+            {recipe.difficulty}
+          </span>
+        </div>
+        <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
+          <Clock className="w-3 h-3 inline mr-1" />
+          {formatCookTime(recipe.cook_time || recipe.cookTime || 30)}
+        </div>
+        <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
+          <Eye className="w-3 h-3" />
+          <span>{recipe.view_count || 1}</span>
+        </div>
+      </div>
+      
+      <div className="p-6">
+        <div className="flex items-start justify-between mb-3">
+          <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-green transition-colors">
+            {recipe.title}
+          </h3>
+          <div className="flex items-center gap-1 text-sm text-chef-gold">
+            <Star className="w-4 h-4 fill-current" />
+            <span>{recipe.rating}</span>
+          </div>
+        </div>
+        
+        <p className="text-sm text-chef-royal-green font-medium mb-2">by {recipe.author}</p>
+        
+        <p className="chef-body-sm text-chef-charcoal/80 mb-4 line-clamp-2">
+          {recipe.description}
+        </p>
+        
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4 text-sm text-chef-charcoal/60">
+            <div className="flex items-center gap-1">
+              <Users className="w-4 h-4" />
+              <span>{recipe.likes}</span>
+            </div>
+            <span className="chef-badge-blue">{recipe.category}</span>
+          </div>
+          
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              onViewRecipe(recipe);
+            }}
+            className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-sm"
+          >
+            View Recipe →
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default RecipeCard;
