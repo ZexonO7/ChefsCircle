@@ -1,4 +1,3 @@
-
 import { Users } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,19 +9,19 @@ interface Program {
 }
 
 const ProgramsCarousel = () => {
-  const culinaryPrograms: Program[] = [
+  const culinaryPrograms = [
     {
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+      image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80", // Teens together in kitchen
       title: "Teen Chef Mastery",
       description: "Specialized program for young culinary enthusiasts aged 16-19, covering fundamental techniques to advanced plating."
     },
     {
-      image: "/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png",
+      image: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=600&q=80", // Young adult working in kitchen
       title: "Millennial Kitchen",
       description: "Perfect for busy professionals who want to create restaurant-quality meals at home with efficient techniques."
     },
     {
-      image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+      image: "https://images.unsplash.com/photo-1504674900247-ec9e8e8a3e67?auto=format&fit=crop&w=600&q=80", // Bread and pastries
       title: "Artisan Baking Club",
       description: "Master the art of bread making, pastries, and desserts with our specialized baking community and expert instructors."
     }
