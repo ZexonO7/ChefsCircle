@@ -35,6 +35,13 @@ const formatCookTime = (minutes: number) => {
   return `${minutes}m`;
 };
 
+const formatViewCount = (count: number) => {
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}k`;
+  }
+  return count.toString();
+};
+
 const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
   // Enhanced image fallback logic
   const getRecipeImage = () => {
@@ -94,7 +101,7 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
         </div>
         <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
           <Eye className="w-3 h-3" />
-          <span>{recipe.view_count || 1}</span>
+          <span>{formatViewCount(recipe.view_count || 0)}</span>
         </div>
       </div>
       

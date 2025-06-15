@@ -30,16 +30,27 @@ const Recipes = () => {
 
   useEffect(() => {
     fetchUserRecipes();
-    // Load view counts from localStorage on component mount
+    loadViewCounts();
+  }, []);
+
+  // Load view counts from localStorage
+  const loadViewCounts = () => {
     const savedViews = localStorage.getItem('recipeViews');
     if (savedViews) {
-      setRecipeViews(JSON.parse(savedViews));
+      try {
+        setRecipeViews(JSON.parse(savedViews));
+      } catch (error) {
+        console.error('Error parsing saved view counts:', error);
+        setRecipeViews({});
+      }
     }
-  }, []);
+  };
 
   // Save view counts to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem('recipeViews', JSON.stringify(recipeViews));
+    if (Object.keys(recipeViews).length > 0) {
+      localStorage.setItem('recipeViews', JSON.stringify(recipeViews));
+    }
   }, [recipeViews]);
 
   const fetchUserRecipes = async () => {
@@ -63,11 +74,21 @@ const Recipes = () => {
     }
   };
 
+  // Initialize view counts for recipes that don't have them yet
+  const getRecipeViewCount = (recipeId: string | number) => {
+    if (recipeViews[recipeId] !== undefined) {
+      return recipeViews[recipeId];
+    }
+    // Generate initial random view count for static recipes
+    const isStaticRecipe = staticRecipes.some(recipe => recipe.id === recipeId);
+    return isStaticRecipe ? Math.floor(Math.random() * 300) + 50 : Math.floor(Math.random() * 100) + 25;
+  };
+
   // Combine static and user recipes with proper view counts
   const allRecipes = [
     ...staticRecipes.map(recipe => ({
       ...recipe,
-      view_count: recipeViews[recipe.id] || Math.floor(Math.random() * 300) + 50
+      view_count: getRecipeViewCount(recipe.id)
     })),
     ...userRecipes.map(recipe => ({
       ...recipe,
@@ -76,7 +97,7 @@ const Recipes = () => {
       likes: Math.floor(Math.random() * 200) + 50,
       isPremium: false,
       status: 'approved',
-      view_count: recipeViews[recipe.id] || Math.floor(Math.random() * 100) + 25
+      view_count: getRecipeViewCount(recipe.id)
     }))
   ];
 
@@ -115,7 +136,7 @@ const Recipes = () => {
 
   const handleViewIncrement = (recipeId: string | number) => {
     setRecipeViews(prev => {
-      const currentCount = prev[recipeId] || 0;
+      const currentCount = prev[recipeId] || getRecipeViewCount(recipeId);
       const newCount = currentCount + 1;
       console.log(`Incrementing view count for recipe ${recipeId}: ${currentCount} → ${newCount}`);
       return {

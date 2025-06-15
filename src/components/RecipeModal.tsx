@@ -37,8 +37,16 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
     return `${minutes}m`;
   };
 
+  const formatViewCount = (count: number) => {
+    if (count >= 1000) {
+      return `${(count / 1000).toFixed(1)}k`;
+    }
+    return count.toString();
+  };
+
   React.useEffect(() => {
     if (isOpen && recipe) {
+      // Increment view count when modal opens
       onViewIncrement(recipe.id);
     }
   }, [isOpen, recipe, onViewIncrement]);
@@ -112,7 +120,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               </div>
               <div className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
                 <Eye className="w-4 h-4" />
-                <span>{recipe.view_count || 1}</span>
+                <span>{formatViewCount(recipe.view_count || 0)}</span>
               </div>
             </div>
           </div>
@@ -152,9 +160,9 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                 <p className="text-sm text-chef-charcoal/70">Difficulty</p>
               </div>
               <div className="text-center">
-                <Heart className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
-                <p className="font-semibold text-chef-charcoal">{recipe.likes}</p>
-                <p className="text-sm text-chef-charcoal/70">Likes</p>
+                <Eye className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
+                <p className="font-semibold text-chef-charcoal">{formatViewCount(recipe.view_count || 0)}</p>
+                <p className="text-sm text-chef-charcoal/70">Views</p>
               </div>
             </motion.div>
 
