@@ -1,4 +1,6 @@
 
+import { fetchAllCulinaryRSSFeeds } from './rssService';
+
 const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
 
 export interface NewsArticle {
@@ -19,11 +21,60 @@ export interface NewsResponse {
   articles: NewsArticle[];
 }
 
+const DEFAULT_CULINARY_IMAGES = [
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1506976785307-8732e854ad03?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+  'https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+];
+
 export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
-  console.log('Fetching curated culinary news content');
+  console.log('Fetching real culinary news from RSS feeds');
   
-  // Always return high-quality mock data that represents real culinary news
-  return getCuratedCulinaryNews();
+  try {
+    const rssItems = await fetchAllCulinaryRSSFeeds();
+    
+    if (rssItems.length === 0) {
+      console.log('No RSS items found, falling back to curated content');
+      return getCuratedCulinaryNews();
+    }
+    
+    console.log(`Converting ${rssItems.length} RSS items to NewsArticle format`);
+    
+    const articles: NewsArticle[] = rssItems.map((item, index) => {
+      // Extract image from RSS item or use default
+      let imageUrl = DEFAULT_CULINARY_IMAGES[index % DEFAULT_CULINARY_IMAGES.length];
+      
+      if (item['media:content']?.url) {
+        imageUrl = item['media:content'].url;
+      } else if (item.enclosure?.url) {
+        imageUrl = item.enclosure.url;
+      }
+      
+      return {
+        title: item.title,
+        description: item.description,
+        url: item.link,
+        urlToImage: imageUrl,
+        publishedAt: new Date(item.pubDate).toISOString(),
+        source: {
+          name: (item as any).sourceName || 'Culinary News'
+        },
+        author: undefined // RSS feeds typically don't include author info
+      };
+    });
+    
+    console.log(`Successfully converted RSS items to ${articles.length} news articles`);
+    return articles;
+    
+  } catch (error) {
+    console.error('Error fetching RSS feeds, falling back to curated content:', error);
+    return getCuratedCulinaryNews();
+  }
 };
 
 const getCuratedCulinaryNews = (): NewsArticle[] => {
@@ -85,24 +136,6 @@ const getCuratedCulinaryNews = (): NewsArticle[] => {
       publishedAt: new Date(now - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
       source: { name: "Epicurious" },
       author: "Michael Foster"
-    },
-    {
-      title: "Molecular Gastronomy: Science Meets Art in the Kitchen",
-      description: "Exploring how cutting-edge scientific techniques are being used to create extraordinary dining experiences and push culinary boundaries.",
-      url: "https://www.seriouseats.com/",
-      urlToImage: "https://images.unsplash.com/photo-1551218808-94e220e084d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      publishedAt: new Date(now - Math.random() * 8 * 24 * 60 * 60 * 1000).toISOString(),
-      source: { name: "Serious Eats" },
-      author: "Dr. Emma Wilson"
-    },
-    {
-      title: "Ancient Grains Making Modern Comeback in Professional Kitchens",
-      description: "Chefs worldwide are rediscovering the nutritional and flavor benefits of ancient grains, incorporating them into contemporary dishes.",
-      url: "https://www.foodnetwork.com/",
-      urlToImage: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      publishedAt: new Date(now - Math.random() * 9 * 24 * 60 * 60 * 1000).toISOString(),
-      source: { name: "Food Network" },
-      author: "Chef Roberto Santos"
     }
   ];
 
