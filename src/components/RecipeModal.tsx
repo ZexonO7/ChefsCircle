@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Clock, Users, Star, ChefHat, Eye, Heart, Share2, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -46,11 +46,36 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
   if (!recipe) return null;
 
   const cookTime = recipe.cookTime || recipe.cook_time || 30;
-  const imageUrl = recipe.image_url || recipe.image || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
+  
+  // Comprehensive image fallback logic
+  const getRecipeImage = () => {
+    if (recipe.image_url) return recipe.image_url;
+    if (recipe.image) return recipe.image;
+    
+    // Category-based fallback images
+    const categoryImages: { [key: string]: string } = {
+      'Appetizers': 'https://images.unsplash.com/photo-1541833761820-0f006f4f5317?w=600&h=400&fit=crop',
+      'Main Course': 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop',
+      'Desserts': 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&h=400&fit=crop',
+      'Beverages': 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&h=400&fit=crop',
+      'Breakfast': 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&h=400&fit=crop',
+      'Vegetarian': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop',
+      'Quick & Easy': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600&h=400&fit=crop'
+    };
+    
+    return categoryImages[recipe.category] || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
+  };
+
+  const imageUrl = getRecipeImage();
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-chef-cream">
+        <DialogTitle className="sr-only">{recipe.title}</DialogTitle>
+        <DialogDescription className="sr-only">
+          Recipe details for {recipe.title} by {recipe.author}
+        </DialogDescription>
+        
         <div className="relative bg-chef-cream">
           {/* Hero Image */}
           <div className="relative h-64 overflow-hidden rounded-t-lg">
@@ -58,6 +83,10 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               src={imageUrl}
               alt={recipe.title}
               className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             

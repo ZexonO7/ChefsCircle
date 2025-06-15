@@ -30,7 +30,17 @@ const Recipes = () => {
 
   useEffect(() => {
     fetchUserRecipes();
+    // Load view counts from localStorage on component mount
+    const savedViews = localStorage.getItem('recipeViews');
+    if (savedViews) {
+      setRecipeViews(JSON.parse(savedViews));
+    }
   }, []);
+
+  // Save view counts to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('recipeViews', JSON.stringify(recipeViews));
+  }, [recipeViews]);
 
   const fetchUserRecipes = async () => {
     try {
@@ -53,7 +63,7 @@ const Recipes = () => {
     }
   };
 
-  // Combine static and user recipes
+  // Combine static and user recipes with proper view counts
   const allRecipes = [
     ...staticRecipes.map(recipe => ({
       ...recipe,
@@ -104,10 +114,15 @@ const Recipes = () => {
   };
 
   const handleViewIncrement = (recipeId: string | number) => {
-    setRecipeViews(prev => ({
-      ...prev,
-      [recipeId]: (prev[recipeId] || 0) + 1
-    }));
+    setRecipeViews(prev => {
+      const currentCount = prev[recipeId] || 0;
+      const newCount = currentCount + 1;
+      console.log(`Incrementing view count for recipe ${recipeId}: ${currentCount} → ${newCount}`);
+      return {
+        ...prev,
+        [recipeId]: newCount
+      };
+    });
   };
 
   return (

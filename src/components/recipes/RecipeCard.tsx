@@ -36,6 +36,25 @@ const formatCookTime = (minutes: number) => {
 };
 
 const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
+  // Enhanced image fallback logic
+  const getRecipeImage = () => {
+    if (recipe.image_url) return recipe.image_url;
+    if (recipe.image) return recipe.image;
+    
+    // Category-based fallback images
+    const categoryImages: { [key: string]: string } = {
+      'Appetizers': 'https://images.unsplash.com/photo-1541833761820-0f006f4f5317?w=600&h=400&fit=crop',
+      'Main Course': 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&h=400&fit=crop',
+      'Desserts': 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&h=400&fit=crop',
+      'Beverages': 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&h=400&fit=crop',
+      'Breakfast': 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=600&h=400&fit=crop',
+      'Vegetarian': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop',
+      'Quick & Easy': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600&h=400&fit=crop'
+    };
+    
+    return categoryImages[recipe.category] || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
+  };
+
   return (
     <motion.div
       className="chef-card-luxury group cursor-pointer"
@@ -47,9 +66,13 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
     >
       <div className="relative overflow-hidden rounded-t-xl">
         <img 
-          src={recipe.image_url || recipe.image || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop'} 
+          src={getRecipeImage()}
           alt={recipe.title}
           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
+          }}
         />
         <div className="absolute top-4 left-4 flex gap-2">
           {recipe.isPremium && (
