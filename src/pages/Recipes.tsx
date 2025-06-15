@@ -35,15 +35,9 @@ const Recipes = () => {
 
   // Load view counts from localStorage
   const loadViewCounts = () => {
-    const savedViews = localStorage.getItem('recipeViews');
-    if (savedViews) {
-      try {
-        setRecipeViews(JSON.parse(savedViews));
-      } catch (error) {
-        console.error('Error parsing saved view counts:', error);
-        setRecipeViews({});
-      }
-    }
+    // Reset view counts - clear localStorage and start fresh
+    localStorage.removeItem('recipeViews');
+    setRecipeViews({});
   };
 
   // Save view counts to localStorage whenever they change
@@ -74,14 +68,9 @@ const Recipes = () => {
     }
   };
 
-  // Initialize view counts for recipes that don't have them yet
+  // Get recipe view count - starts at 0 for all recipes
   const getRecipeViewCount = (recipeId: string | number) => {
-    if (recipeViews[recipeId] !== undefined) {
-      return recipeViews[recipeId];
-    }
-    // Generate initial random view count for static recipes
-    const isStaticRecipe = staticRecipes.some(recipe => recipe.id === recipeId);
-    return isStaticRecipe ? Math.floor(Math.random() * 300) + 50 : Math.floor(Math.random() * 100) + 25;
+    return recipeViews[recipeId] || 0;
   };
 
   // Combine static and user recipes with proper view counts
@@ -136,7 +125,7 @@ const Recipes = () => {
 
   const handleViewIncrement = (recipeId: string | number) => {
     setRecipeViews(prev => {
-      const currentCount = prev[recipeId] || getRecipeViewCount(recipeId);
+      const currentCount = prev[recipeId] || 0;
       const newCount = currentCount + 1;
       console.log(`Incrementing view count for recipe ${recipeId}: ${currentCount} → ${newCount}`);
       return {
