@@ -21,8 +21,8 @@ const Recipes = () => {
   const [loading, setLoading] = useState(true);
   const [showSubmissionForm, setShowSubmissionForm] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
-  const [recipeViews, setRecipeViews] = useState<{[key: string]: number}>({});
-  const [viewedRecipes, setViewedRecipes] = useState<Set<string | number>>(new Set());
+  const [recipeAnalytics, setRecipeAnalytics] = useState<{[key: string]: {views: number, likes: number}}>({});
+  const [viewedRecipes, setViewedRecipes] = useState<Set<string>>(new Set());
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -31,28 +31,53 @@ const Recipes = () => {
 
   useEffect(() => {
     fetchUserRecipes();
-    loadViewCounts();
+    loadRecipeAnalytics();
   }, []);
 
-  // Load view counts from localStorage
-  const loadViewCounts = () => {
-    const savedViews = localStorage.getItem('recipeViews');
-    if (savedViews) {
-      try {
-        setRecipeViews(JSON.parse(savedViews));
-      } catch (error) {
-        console.error('Error parsing saved view counts:', error);
-        setRecipeViews({});
-      }
+  // Load analytics for all recipes from the database
+  const loadRecipeAnalytics = async () => {
+    try {
+      console.log('Loading recipe analytics from database...');
+      
+      // Get analytics for all static recipes
+      const staticAnalyticsPromises = staticRecipes.map(async (recipe) => {
+        const { data, error } = await supabase.rpc('get_recipe_analytics', {
+          p_recipe_id: recipe.id.toString(),
+          p_recipe_type: 'static'
+        });
+        
+        if (error) {
+          console.error(`Error fetching analytics for static recipe ${recipe.id}:`, error);
+          return { recipeKey: `static-${recipe.id}`, views: 0, likes: 0 };
+        }
+        
+        const analytics = data?.[0] || { view_count: 0, like_count: 0 };
+        return { 
+          recipeKey: `static-${recipe.id}`, 
+          views: analytics.view_count, 
+          likes: analytics.like_count 
+        };
+      });
+
+      const staticAnalytics = await Promise.all(staticAnalyticsPromises);
+      
+      // Convert to our analytics format
+      const analyticsMap: {[key: string]: {views: number, likes: number}} = {};
+      staticAnalytics.forEach(({ recipeKey, views, likes }) => {
+        analyticsMap[recipeKey] = { views, likes };
+      });
+      
+      setRecipeAnalytics(analyticsMap);
+      console.log('Loaded analytics:', analyticsMap);
+    } catch (error) {
+      console.error('Error loading recipe analytics:', error);
+      toast({
+        title: "Error loading analytics",
+        description: "Failed to load recipe view counts.",
+        variant: "destructive",
+      });
     }
   };
-
-  // Save view counts to localStorage whenever they change
-  useEffect(() => {
-    if (Object.keys(recipeViews).length > 0) {
-      localStorage.setItem('recipeViews', JSON.stringify(recipeViews));
-    }
-  }, [recipeViews]);
 
   const fetchUserRecipes = async () => {
     try {
@@ -75,16 +100,17 @@ const Recipes = () => {
     }
   };
 
-  // Get recipe view count
-  const getRecipeViewCount = (recipeId: string | number) => {
-    return recipeViews[recipeId] || 0;
+  // Get recipe view count from analytics
+  const getRecipeViewCount = (recipeId: string | number, isStatic: boolean = true) => {
+    const key = isStatic ? `static-${recipeId}` : `user-${recipeId}`;
+    return recipeAnalytics[key]?.views || 0;
   };
 
-  // Combine static and user recipes with proper view counts
+  // Combine static and user recipes with proper view counts from database
   const allRecipes = [
     ...staticRecipes.map(recipe => ({
       ...recipe,
-      view_count: getRecipeViewCount(recipe.id)
+      view_count: getRecipeViewCount(recipe.id, true)
     })),
     ...userRecipes.map(recipe => ({
       ...recipe,
@@ -93,7 +119,7 @@ const Recipes = () => {
       likes: Math.floor(Math.random() * 200) + 50,
       isPremium: false,
       status: 'approved',
-      view_count: getRecipeViewCount(recipe.id)
+      view_count: getRecipeViewCount(recipe.id, false)
     }))
   ];
 
@@ -130,24 +156,52 @@ const Recipes = () => {
     setSelectedRecipe(null);
   };
 
-  // Use useCallback to prevent function from changing on every render
-  const handleViewIncrement = useCallback((recipeId: string | number) => {
+  // Increment view count in database
+  const handleViewIncrement = useCallback(async (recipeId: string | number) => {
+    const recipeKey = `static-${recipeId}`; // For now, we only handle static recipes
+    
     // Only increment if this recipe hasn't been viewed in this session
-    if (!viewedRecipes.has(recipeId)) {
-      setRecipeViews(prev => {
-        const currentCount = prev[recipeId] || 0;
-        const newCount = currentCount + 1;
-        console.log(`Incrementing view count for recipe ${recipeId}: ${currentCount} → ${newCount}`);
-        return {
+    if (!viewedRecipes.has(recipeKey)) {
+      try {
+        console.log(`Incrementing database view count for recipe ${recipeId}...`);
+        
+        const { data, error } = await supabase.rpc('increment_recipe_views', {
+          p_recipe_id: recipeId.toString(),
+          p_recipe_type: 'static'
+        });
+        
+        if (error) {
+          console.error('Error incrementing view count:', error);
+          throw error;
+        }
+        
+        const newViewCount = data;
+        console.log(`View count incremented to: ${newViewCount}`);
+        
+        // Update local analytics state
+        setRecipeAnalytics(prev => ({
           ...prev,
-          [recipeId]: newCount
-        };
-      });
-      
-      // Mark this recipe as viewed in this session
-      setViewedRecipes(prev => new Set(prev).add(recipeId));
+          [recipeKey]: {
+            ...prev[recipeKey],
+            views: newViewCount
+          }
+        }));
+        
+        // Mark this recipe as viewed in this session
+        setViewedRecipes(prev => new Set(prev).add(recipeKey));
+        
+      } catch (error) {
+        console.error('Failed to increment view count:', error);
+        toast({
+          title: "Error",
+          description: "Failed to update view count.",
+          variant: "destructive",
+        });
+      }
+    } else {
+      console.log(`Recipe ${recipeId} already viewed in this session, skipping increment`);
     }
-  }, [viewedRecipes]);
+  }, [viewedRecipes, toast]);
 
   return (
     <PageLayout>

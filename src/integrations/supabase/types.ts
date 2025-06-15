@@ -141,6 +141,36 @@ export type Database = {
         }
         Relationships: []
       }
+      recipe_analytics: {
+        Row: {
+          created_at: string
+          id: string
+          like_count: number
+          recipe_id: string
+          recipe_type: string
+          updated_at: string
+          view_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          like_count?: number
+          recipe_id: string
+          recipe_type: string
+          updated_at?: string
+          view_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          like_count?: number
+          recipe_id?: string
+          recipe_type?: string
+          updated_at?: string
+          view_count?: number
+        }
+        Relationships: []
+      }
       user_achievements: {
         Row: {
           achievement_name: string
@@ -386,6 +416,17 @@ export type Database = {
       cleanup_expired_otps: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      get_recipe_analytics: {
+        Args: { p_recipe_id: string; p_recipe_type: string }
+        Returns: {
+          view_count: number
+          like_count: number
+        }[]
+      }
+      increment_recipe_views: {
+        Args: { p_recipe_id: string; p_recipe_type: string }
+        Returns: number
       }
       log_admin_action: {
         Args: {

@@ -27,7 +27,7 @@ interface RecipeModalProps {
   recipe: Recipe | null;
   isOpen: boolean;
   onClose: () => void;
-  onViewIncrement: (recipeId: string | number) => void;
+  onViewIncrement: (recipeId: string | number) => Promise<void>;
 }
 
 const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalProps) => {
@@ -50,6 +50,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
   React.useEffect(() => {
     if (isOpen && recipe && !hasIncrementedRef.current) {
       // Increment view count when modal opens (only once)
+      console.log(`Modal opened for recipe ${recipe.id}, incrementing view count...`);
       onViewIncrement(recipe.id);
       hasIncrementedRef.current = true;
     }
