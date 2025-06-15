@@ -201,7 +201,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                           {index + 1}
                         </div>
                         <p className="text-gray-700 leading-relaxed pt-1">{instruction}</p>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>
