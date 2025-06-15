@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/components/AuthProvider";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import PageLoadingWrapper from "@/components/PageLoadingWrapper";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
@@ -33,41 +34,43 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/news" element={<Blog />} />
-            <Route path="/news/:slug" element={<BlogPostDetail />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/admin" element={
-              <ProtectedRoute>
-                <AdminPortal />
-              </ProtectedRoute>
-            } />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } />
-            <Route path="/clubs" element={
-              <ProtectedRoute>
-                <Clubs />
-              </ProtectedRoute>
-            } />
-            <Route path="/recipes" element={
-              <ProtectedRoute>
-                <Recipes />
-              </ProtectedRoute>
-            } />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/projects/firecat" element={<FireCatProject />} />
-            <Route path="/projects/sport-retail" element={<SportRetailProject />} />
-            <Route path="/projects/workwear" element={<WorkwearProject />} />
-            <Route path="/tech-details" element={<TechDetails />} />
-            <Route path="/development-process" element={<DevelopmentProcess />} />
-          </Routes>
+          <PageLoadingWrapper>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/news" element={<Blog />} />
+              <Route path="/news/:slug" element={<BlogPostDetail />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/admin" element={
+                <ProtectedRoute>
+                  <AdminPortal />
+                </ProtectedRoute>
+              } />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/clubs" element={
+                <ProtectedRoute>
+                  <Clubs />
+                </ProtectedRoute>
+              } />
+              <Route path="/recipes" element={
+                <ProtectedRoute>
+                  <Recipes />
+                </ProtectedRoute>
+              } />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/library" element={<Library />} />
+              <Route path="/projects/firecat" element={<FireCatProject />} />
+              <Route path="/projects/sport-retail" element={<SportRetailProject />} />
+              <Route path="/projects/workwear" element={<WorkwearProject />} />
+              <Route path="/tech-details" element={<TechDetails />} />
+              <Route path="/development-process" element={<DevelopmentProcess />} />
+            </Routes>
+          </PageLoadingWrapper>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
