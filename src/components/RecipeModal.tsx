@@ -50,8 +50,8 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0">
-        <div className="relative">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-white">
+        <div className="relative bg-white">
           {/* Hero Image */}
           <div className="relative h-64 overflow-hidden rounded-t-lg">
             <img 
@@ -89,7 +89,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
           </div>
 
           {/* Content */}
-          <div className="p-8">
+          <div className="p-8 bg-white">
             {/* Description */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
