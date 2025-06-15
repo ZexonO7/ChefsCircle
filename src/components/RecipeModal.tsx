@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Clock, Users, Star, ChefHat, Eye, Heart, Share2, X, ScrollText, CheckSquare } from 'lucide-react';
+import { Clock, Users, Star, ChefHat, Eye, Heart, Share2, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface Recipe {
@@ -48,162 +48,161 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
   const cookTime = recipe.cookTime || recipe.cook_time || 30;
   const imageUrl = recipe.image_url || recipe.image || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
 
-  const StatItem = ({ icon, value, label }: { icon: React.ReactNode, value: string | number, label: string }) => (
-    <div className="text-center p-3 rounded-xl transition-all duration-300 hover:bg-white/80 hover:shadow-md group cursor-pointer">
-      <div className="w-12 h-12 flex items-center justify-center mx-auto mb-2 bg-chef-royal-green/10 rounded-full group-hover:bg-chef-royal-green/20 transition-colors">
-        {icon}
-      </div>
-      <p className="font-bold text-chef-charcoal font-inter text-lg">{value}</p>
-      <p className="text-sm text-chef-charcoal/70 font-inter font-medium">{label}</p>
-    </div>
-  );
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-6xl max-h-[95vh] overflow-y-auto p-0 bg-gradient-to-br from-chef-warm-ivory via-white to-chef-cream rounded-3xl shadow-chef-luxury border-2 border-chef-gold/30">
-        <div className="relative">
-          {/* Hero Image with Improved Gradient */}
-          <div className="relative h-72 md:h-96">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-chef-royal-blue">
+        <div className="relative bg-chef-royal-blue">
+          {/* Hero Image */}
+          <div className="relative h-64 overflow-hidden rounded-t-lg">
             <img 
               src={imageUrl}
               alt={recipe.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             
-            {/* Close Button - Enhanced */}
+            {/* Close Button */}
             <button 
               onClick={onClose}
-              className="absolute top-6 right-6 bg-white/20 backdrop-blur-md rounded-full p-3 text-white hover:bg-white/30 transition-all duration-300 hover:scale-110 z-10 shadow-lg"
+              className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
 
-            {/* Recipe Title Overlay - Enhanced */}
-            <div className="absolute bottom-8 left-8 right-8 text-white">
-              <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-4xl md:text-5xl font-bold mb-3 font-playfair text-shadow-lg"
-              >
-                {recipe.title}
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-xl opacity-95 font-inter"
-              >
-                by {recipe.author}
-              </motion.p>
+            {/* Recipe Title Overlay */}
+            <div className="absolute bottom-4 left-4 right-4 text-white">
+              <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
+              <p className="text-lg opacity-90">by {recipe.author}</p>
+            </div>
+
+            {/* Stats Overlay */}
+            <div className="absolute top-4 left-4 flex gap-2">
+              <div className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
+                <Star className="w-4 h-4 fill-current text-yellow-400" />
+                <span>{recipe.rating}</span>
+              </div>
+              <div className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
+                <Eye className="w-4 h-4" />
+                <span>{recipe.view_count || 1}</span>
+              </div>
             </div>
           </div>
 
-          {/* Content with Better Spacing */}
-          <div className="p-8 md:p-12">
-            {/* Description - Enhanced */}
+          {/* Content */}
+          <div className="p-8 bg-chef-royal-blue">
+            {/* Description */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-10"
+              className="mb-6"
             >
-              <p className="text-xl text-chef-charcoal leading-relaxed font-inter bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-chef-gold/20 shadow-sm">
-                {recipe.description}
-              </p>
+              <p className="text-lg text-chef-warm-ivory leading-relaxed">{recipe.description}</p>
             </motion.div>
 
-            {/* Enhanced Recipe Stats */}
+            {/* Recipe Stats */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 mb-10 p-6 bg-white/70 rounded-3xl border-2 border-chef-gold/30 backdrop-blur-sm shadow-lg"
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 p-6 bg-chef-navy rounded-xl"
             >
-              <StatItem icon={<Star className="w-7 h-7 text-chef-gold fill-current" />} value={recipe.rating} label="Rating" />
-              <StatItem icon={<Eye className="w-7 h-7 text-chef-royal-blue" />} value={recipe.view_count || 1} label="Views" />
-              <StatItem icon={<Clock className="w-7 h-7 text-chef-royal-green" />} value={formatCookTime(cookTime)} label="Cook Time" />
-              <StatItem icon={<Users className="w-7 h-7 text-chef-royal-green" />} value={recipe.servings || 4} label="Servings" />
-              <StatItem icon={<ChefHat className="w-7 h-7 text-chef-royal-green" />} value={recipe.difficulty} label="Difficulty" />
+              <div className="text-center">
+                <Clock className="w-6 h-6 text-chef-gold mx-auto mb-2" />
+                <p className="font-semibold text-chef-warm-ivory">{formatCookTime(cookTime)}</p>
+                <p className="text-sm text-chef-warm-ivory/70">Cook Time</p>
+              </div>
+              <div className="text-center">
+                <Users className="w-6 h-6 text-chef-gold mx-auto mb-2" />
+                <p className="font-semibold text-chef-warm-ivory">{recipe.servings || 4}</p>
+                <p className="text-sm text-chef-warm-ivory/70">Servings</p>
+              </div>
+              <div className="text-center">
+                <ChefHat className="w-6 h-6 text-chef-gold mx-auto mb-2" />
+                <p className="font-semibold text-chef-warm-ivory">{recipe.difficulty}</p>
+                <p className="text-sm text-chef-warm-ivory/70">Difficulty</p>
+              </div>
+              <div className="text-center">
+                <Heart className="w-6 h-6 text-chef-gold mx-auto mb-2" />
+                <p className="font-semibold text-chef-warm-ivory">{recipe.likes}</p>
+                <p className="text-sm text-chef-warm-ivory/70">Likes</p>
+              </div>
             </motion.div>
 
-            {/* Enhanced Action Buttons */}
+            {/* Action Buttons */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap gap-4 mb-10"
+              className="flex gap-4 mb-8"
             >
-              <button className="flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-chef-royal-green to-chef-forest text-chef-warm-ivory rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300 font-bold text-lg flex-grow sm:flex-grow-0">
-                <Heart className="w-6 h-6" />
-                Like Recipe ({recipe.likes})
+              <button className="flex items-center gap-2 px-4 py-2 bg-chef-gold text-chef-charcoal rounded-lg hover:bg-chef-bronze transition-colors">
+                <Heart className="w-4 h-4" />
+                Like Recipe
               </button>
-              <button className="flex items-center justify-center gap-3 px-8 py-4 border-2 border-chef-royal-green/40 text-chef-charcoal rounded-xl hover:bg-chef-royal-green/10 hover:shadow-lg transition-all duration-300 font-bold text-lg flex-grow sm:flex-grow-0 bg-white/50 backdrop-blur-sm">
-                <Share2 className="w-6 h-6" />
+              <button className="flex items-center gap-2 px-4 py-2 border border-chef-warm-ivory/30 text-chef-warm-ivory rounded-lg hover:bg-chef-warm-ivory/10 transition-colors">
+                <Share2 className="w-4 h-4" />
                 Share
               </button>
             </motion.div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-5 gap-10">
-              {/* Enhanced Ingredients */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Ingredients */}
               {recipe.ingredients && (
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
-                  className="xl:col-span-2"
                 >
-                  <h3 className="text-3xl font-bold text-chef-charcoal mb-6 flex items-center gap-4 font-playfair">
-                    <div className="w-10 h-10 bg-chef-royal-green rounded-full flex items-center justify-center">
-                      <ScrollText className="w-6 h-6 text-white"/>
-                    </div>
+                  <h3 className="text-2xl font-bold text-chef-warm-ivory mb-4 flex items-center gap-2">
+                    <span className="w-8 h-8 bg-chef-gold text-chef-charcoal rounded-full flex items-center justify-center text-sm">
+                      📝
+                    </span>
                     Ingredients
                   </h3>
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     {recipe.ingredients.map((ingredient, index) => (
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-                        className="flex items-center gap-4 p-4 bg-white/80 rounded-xl border border-chef-gold/20 hover:shadow-md transition-all duration-300 backdrop-blur-sm"
+                        className="flex items-start gap-3 p-3 bg-chef-navy rounded-lg border border-chef-warm-ivory/20 hover:shadow-sm transition-shadow"
                       >
-                        <CheckSquare className="w-6 h-6 text-chef-royal-green flex-shrink-0" />
-                        <span className="text-chef-charcoal font-inter text-lg">{ingredient}</span>
+                        <div className="w-2 h-2 bg-chef-gold rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-chef-warm-ivory">{ingredient}</span>
                       </motion.div>
                     ))}
                   </div>
                 </motion.div>
               )}
 
-              {/* Enhanced Instructions */}
+              {/* Instructions */}
               {recipe.instructions && (
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
-                  className="xl:col-span-3"
                 >
-                  <h3 className="text-3xl font-bold text-chef-charcoal mb-6 flex items-center gap-4 font-playfair">
-                    <div className="w-10 h-10 bg-chef-royal-green rounded-full flex items-center justify-center">
-                      <ChefHat className="w-6 h-6 text-white"/>
-                    </div>
+                  <h3 className="text-2xl font-bold text-chef-warm-ivory mb-4 flex items-center gap-2">
+                    <span className="w-8 h-8 bg-chef-gold text-chef-charcoal rounded-full flex items-center justify-center text-sm">
+                      👨‍🍳
+                    </span>
                     Instructions
                   </h3>
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     {recipe.instructions.map((instruction, index) => (
                       <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                        className="flex gap-5 p-5 bg-white/80 rounded-xl border border-chef-gold/20 hover:shadow-md transition-all duration-300 backdrop-blur-sm"
+                        className="flex gap-4 p-4 bg-chef-navy rounded-lg border border-chef-warm-ivory/20 hover:shadow-sm transition-shadow"
                       >
-                        <div className="w-10 h-10 bg-gradient-to-br from-chef-royal-green to-chef-forest text-chef-warm-ivory rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 font-inter shadow-md">
+                        <div className="w-8 h-8 bg-chef-gold text-chef-charcoal rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                           {index + 1}
                         </div>
-                        <p className="text-chef-charcoal leading-relaxed pt-2 font-inter text-lg">{instruction}</p>
+                        <p className="text-chef-warm-ivory leading-relaxed pt-1">{instruction}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -211,16 +210,16 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               )}
             </div>
 
-            {/* Enhanced Category Badge */}
+            {/* Category Badge */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-12 pt-8 border-t-2 border-chef-gold/30 flex justify-end"
+              className="mt-8 pt-6 border-t border-chef-warm-ivory/20"
             >
-              <div className="chef-badge-green text-lg px-6 py-3 shadow-md">
+              <span className="inline-block px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium">
                 {recipe.category}
-              </div>
+              </span>
             </motion.div>
           </div>
         </div>

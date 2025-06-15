@@ -14,43 +14,13 @@ import RecipeGrid from '@/components/recipes/RecipeGrid';
 import RecipeGuidelines from '@/components/recipes/RecipeGuidelines';
 import { staticRecipes } from '@/data/staticRecipes';
 
-const placeholderImages = [
-  "https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1547584370-832c11da9297?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1563379091339-03246962d51d?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=600&h=400&fit=crop",
-];
-
-const getPlaceholderImageById = (id: string | number) => {
-  const strId = String(id);
-  // A simple hash function
-  let hash = 0;
-  for (let i = 0; i < strId.length; i++) {
-    const char = strId.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  const index = Math.abs(hash) % placeholderImages.length;
-  return placeholderImages[index];
-};
-
 const Recipes = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [userRecipes, setUserRecipes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showSubmissionForm, setShowSubmissionForm] = useState(false);
-  const [selectedRecipeId, setSelectedRecipeId] = useState<string | number | null>(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
   const [recipeViews, setRecipeViews] = useState<{[key: string]: number}>({});
   const { user } = useAuth();
   const { toast } = useToast();
@@ -91,13 +61,12 @@ const Recipes = () => {
     })),
     ...userRecipes.map(recipe => ({
       ...recipe,
-      image: recipe.image_url || getPlaceholderImageById(recipe.id),
       author: 'Community Chef',
       rating: 4.5,
       likes: Math.floor(Math.random() * 200) + 50,
       isPremium: false,
       status: 'approved',
-      view_count: recipeViews[recipe.id] || recipe.view_count || Math.floor(Math.random() * 100) + 25
+      view_count: recipeViews[recipe.id] || Math.floor(Math.random() * 100) + 25
     }))
   ];
 
@@ -127,21 +96,19 @@ const Recipes = () => {
   };
 
   const handleViewRecipe = (recipe: any) => {
-    setSelectedRecipeId(recipe.id);
+    setSelectedRecipe(recipe);
   };
 
   const closeRecipeModal = () => {
-    setSelectedRecipeId(null);
+    setSelectedRecipe(null);
   };
 
   const handleViewIncrement = (recipeId: string | number) => {
     setRecipeViews(prev => ({
       ...prev,
-      [recipeId]: (prev[recipeId] || allRecipes.find(r => r.id === recipeId)?.view_count || 0) + 1
+      [recipeId]: (prev[recipeId] || 0) + 1
     }));
   };
-
-  const selectedRecipe = selectedRecipeId ? allRecipes.find(r => r.id === selectedRecipeId) : null;
 
   return (
     <PageLayout>
