@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/components/AuthProvider';
@@ -86,7 +87,7 @@ const Recipes = () => {
   const allRecipes = [
     ...staticRecipes.map(recipe => ({
       ...recipe,
-      view_count: recipeViews[recipe.id] || recipe.view_count || Math.floor(Math.random() * 300) + 50
+      view_count: recipeViews[recipe.id] || Math.floor(Math.random() * 300) + 50
     })),
     ...userRecipes.map(recipe => ({
       ...recipe,
