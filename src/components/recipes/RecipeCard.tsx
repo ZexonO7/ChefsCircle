@@ -36,6 +36,7 @@ const formatCookTime = (minutes: number) => {
 };
 
 const formatViewCount = (count: number) => {
+  console.log('formatViewCount called with:', count, typeof count);
   if (count >= 1000) {
     return `${(count / 1000).toFixed(1)}k`;
   }
@@ -43,6 +44,8 @@ const formatViewCount = (count: number) => {
 };
 
 const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
+  console.log(`RecipeCard ${recipe.id}: view_count =`, recipe.view_count, typeof recipe.view_count);
+  
   // Enhanced image fallback logic
   const getRecipeImage = () => {
     if (recipe.image_url) return recipe.image_url;
@@ -61,6 +64,15 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
     
     return categoryImages[recipe.category] || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
   };
+
+  const viewCount = recipe.view_count || 0;
+  const formattedViewCount = formatViewCount(viewCount);
+  
+  console.log(`RecipeCard ${recipe.id}: Final view count values:`, {
+    raw: recipe.view_count,
+    processed: viewCount,
+    formatted: formattedViewCount
+  });
 
   return (
     <motion.div
@@ -101,7 +113,7 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
         </div>
         <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
           <Eye className="w-3 h-3" />
-          <span>{formatViewCount(recipe.view_count || 0)}</span>
+          <span>{formattedViewCount}</span>
         </div>
       </div>
       
