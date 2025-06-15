@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from '@/components/AuthProvider';
 import UserMenu from '@/components/UserMenu';
+import NotificationBell from "./NotificationBell";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +76,13 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-4">
-            {user ? <UserMenu /> : <Link to="/auth">
+            {user && (
+              <div className="flex items-center gap-3">
+                <NotificationBell />
+                <UserMenu />
+              </div>
+            )}
+            {!user && <Link to="/auth">
                 <button className="chef-button-primary text-sm">
                   Sign In
                 </button>
