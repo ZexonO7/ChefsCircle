@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { Clock, Users, Star, ChefHat, Eye, Heart, Share2, X } from 'lucide-react';
+import { Clock, Users, Star, ChefHat, Eye, Heart, Share2, X, ScrollText, CheckSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface Recipe {
@@ -48,56 +47,54 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
   const cookTime = recipe.cookTime || recipe.cook_time || 30;
   const imageUrl = recipe.image_url || recipe.image || 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
 
+  const StatItem = ({ icon, value, label }: { icon: React.ReactNode, value: string | number, label: string }) => (
+    <div className="text-center p-2 rounded-lg transition-colors hover:bg-chef-warm-ivory/50">
+      <div className="w-10 h-10 flex items-center justify-center mx-auto mb-1">
+        {icon}
+      </div>
+      <p className="font-semibold text-chef-charcoal font-inter text-sm md:text-base">{value}</p>
+      <p className="text-xs text-chef-charcoal/70 font-inter">{label}</p>
+    </div>
+  );
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-chef-cream">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 bg-chef-cream rounded-2xl shadow-chef-luxury border border-chef-gold/20">
         <div className="relative bg-chef-cream">
           {/* Hero Image */}
-          <div className="relative h-64 overflow-hidden rounded-t-lg">
+          <div className="relative h-64 md:h-80">
             <img 
               src={imageUrl}
               alt={recipe.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
             
             {/* Close Button */}
             <button 
               onClick={onClose}
-              className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors"
+              className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/60 transition-colors z-10"
             >
-              <X className="w-5 h-5" />
+              <X className="w-6 h-6" />
             </button>
 
             {/* Recipe Title Overlay */}
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
-              <p className="text-lg opacity-90">by {recipe.author}</p>
-            </div>
-
-            {/* Stats Overlay */}
-            <div className="absolute top-4 left-4 flex gap-2">
-              <div className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
-                <Star className="w-4 h-4 fill-current text-yellow-400" />
-                <span>{recipe.rating}</span>
-              </div>
-              <div className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
-                <Eye className="w-4 h-4" />
-                <span>{recipe.view_count || 1}</span>
-              </div>
+            <div className="absolute bottom-6 left-6 right-6 md:left-8 md:bottom-8 text-white">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2 font-playfair">{recipe.title}</h1>
+              <p className="text-lg opacity-90 font-inter">by {recipe.author}</p>
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-8 bg-chef-cream">
+          <div className="p-6 md:p-8">
             {/* Description */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="mb-6"
+              className="mb-8"
             >
-              <p className="text-lg text-chef-charcoal leading-relaxed">{recipe.description}</p>
+              <p className="text-lg text-chef-charcoal leading-relaxed font-inter">{recipe.description}</p>
             </motion.div>
 
             {/* Recipe Stats */}
@@ -105,28 +102,13 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 p-6 bg-chef-warm-ivory rounded-xl"
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-8 p-4 bg-white/50 rounded-2xl border border-chef-charcoal/10 backdrop-blur-sm"
             >
-              <div className="text-center">
-                <Clock className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
-                <p className="font-semibold text-chef-charcoal">{formatCookTime(cookTime)}</p>
-                <p className="text-sm text-chef-charcoal/70">Cook Time</p>
-              </div>
-              <div className="text-center">
-                <Users className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
-                <p className="font-semibold text-chef-charcoal">{recipe.servings || 4}</p>
-                <p className="text-sm text-chef-charcoal/70">Servings</p>
-              </div>
-              <div className="text-center">
-                <ChefHat className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
-                <p className="font-semibold text-chef-charcoal">{recipe.difficulty}</p>
-                <p className="text-sm text-chef-charcoal/70">Difficulty</p>
-              </div>
-              <div className="text-center">
-                <Heart className="w-6 h-6 text-chef-royal-green mx-auto mb-2" />
-                <p className="font-semibold text-chef-charcoal">{recipe.likes}</p>
-                <p className="text-sm text-chef-charcoal/70">Likes</p>
-              </div>
+              <StatItem icon={<Star className="w-6 h-6 text-chef-gold fill-current" />} value={recipe.rating} label="Rating" />
+              <StatItem icon={<Eye className="w-6 h-6 text-chef-royal-blue" />} value={recipe.view_count || 1} label="Views" />
+              <StatItem icon={<Clock className="w-6 h-6 text-chef-royal-green" />} value={formatCookTime(cookTime)} label="Cook Time" />
+              <StatItem icon={<Users className="w-6 h-6 text-chef-royal-green" />} value={recipe.servings || 4} label="Servings" />
+              <StatItem icon={<ChefHat className="w-6 h-6 text-chef-royal-green" />} value={recipe.difficulty} label="Difficulty" />
             </motion.div>
 
             {/* Action Buttons */}
@@ -134,30 +116,29 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex gap-4 mb-8"
+              className="flex flex-wrap gap-4 mb-8"
             >
-              <button className="flex items-center gap-2 px-4 py-2 bg-chef-royal-green text-chef-warm-ivory rounded-lg hover:bg-chef-forest transition-colors">
-                <Heart className="w-4 h-4" />
-                Like Recipe
+              <button className="flex items-center justify-center gap-2 px-6 py-3 bg-chef-royal-green text-chef-warm-ivory rounded-lg hover:bg-chef-forest transition-colors font-semibold flex-grow sm:flex-grow-0">
+                <Heart className="w-5 h-5" />
+                Like Recipe ({recipe.likes})
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 border border-chef-charcoal/30 text-chef-charcoal rounded-lg hover:bg-chef-warm-ivory transition-colors">
-                <Share2 className="w-4 h-4" />
+              <button className="flex items-center justify-center gap-2 px-6 py-3 border border-chef-charcoal/30 text-chef-charcoal rounded-lg hover:bg-chef-warm-ivory transition-colors font-semibold flex-grow sm:flex-grow-0">
+                <Share2 className="w-5 h-5" />
                 Share
               </button>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
               {/* Ingredients */}
               {recipe.ingredients && (
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.3 }}
+                  className="lg:col-span-2"
                 >
-                  <h3 className="text-2xl font-bold text-chef-charcoal mb-4 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-chef-royal-green text-chef-warm-ivory rounded-full flex items-center justify-center text-sm">
-                      📝
-                    </span>
+                  <h3 className="text-2xl font-bold text-chef-charcoal mb-4 flex items-center gap-3 font-playfair">
+                    <ScrollText className="w-7 h-7 text-chef-royal-green"/>
                     Ingredients
                   </h3>
                   <div className="space-y-3">
@@ -167,10 +148,10 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-                        className="flex items-start gap-3 p-3 bg-chef-warm-ivory rounded-lg border border-chef-charcoal/20 hover:shadow-sm transition-shadow"
+                        className="flex items-center gap-3 p-3 bg-white rounded-lg border border-chef-charcoal/10"
                       >
-                        <div className="w-2 h-2 bg-chef-royal-green rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-chef-charcoal">{ingredient}</span>
+                        <CheckSquare className="w-5 h-5 text-chef-royal-green flex-shrink-0" />
+                        <span className="text-chef-charcoal font-inter">{ingredient}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -183,11 +164,10 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
+                  className="lg:col-span-3"
                 >
-                  <h3 className="text-2xl font-bold text-chef-charcoal mb-4 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-chef-royal-green text-chef-warm-ivory rounded-full flex items-center justify-center text-sm">
-                      👨‍🍳
-                    </span>
+                  <h3 className="text-2xl font-bold text-chef-charcoal mb-4 flex items-center gap-3 font-playfair">
+                    <ChefHat className="w-7 h-7 text-chef-royal-green"/>
                     Instructions
                   </h3>
                   <div className="space-y-4">
@@ -197,12 +177,12 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-                        className="flex gap-4 p-4 bg-chef-warm-ivory rounded-lg border border-chef-charcoal/20 hover:shadow-sm transition-shadow"
+                        className="flex gap-4 p-4 bg-white rounded-lg border border-chef-charcoal/10"
                       >
-                        <div className="w-8 h-8 bg-chef-royal-green text-chef-warm-ivory rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
+                        <div className="w-8 h-8 bg-chef-royal-green text-chef-warm-ivory rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 font-inter">
                           {index + 1}
                         </div>
-                        <p className="text-chef-charcoal leading-relaxed pt-1">{instruction}</p>
+                        <p className="text-chef-charcoal leading-relaxed pt-1 font-inter">{instruction}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -215,11 +195,11 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="mt-8 pt-6 border-t border-chef-charcoal/20"
+              className="mt-8 pt-6 border-t border-chef-charcoal/10 flex justify-end"
             >
-              <span className="inline-block px-4 py-2 bg-chef-royal-blue/10 text-chef-royal-blue rounded-full text-sm font-medium">
+              <div className="chef-badge-green">
                 {recipe.category}
-              </span>
+              </div>
             </motion.div>
           </div>
         </div>
