@@ -1,3 +1,4 @@
+
 export const staticRecipes = [
   {
     id: 1,
@@ -454,7 +455,7 @@ export const staticRecipes = [
     title: "Banana Bread",
     author: "ChefCircle",
     description: "Moist and flavorful banana bread perfect for breakfast or afternoon snack.",
-    image: "https://images.unsplash.com/photo-1603123853880-a92fafb7809f?w=600&h=400&fit=crop",
+    image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&h=400&fit=crop",
     cookTime: 75,
     difficulty: "Easy",
     rating: 4.6,
