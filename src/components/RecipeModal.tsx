@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Clock, Users, Star, ChefHat, Eye, Heart, Share2 } from 'lucide-react';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Clock, Users, Star, ChefHat, Eye, Heart, Share2, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface Recipe {
@@ -37,17 +37,11 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
     return `${minutes}m`;
   };
 
-  const handleModalOpen = () => {
-    if (recipe) {
-      onViewIncrement(recipe.id);
-    }
-  };
-
   React.useEffect(() => {
     if (isOpen && recipe) {
-      handleModalOpen();
+      onViewIncrement(recipe.id);
     }
-  }, [isOpen, recipe]);
+  }, [isOpen, recipe, onViewIncrement]);
 
   if (!recipe) return null;
 
@@ -67,6 +61,14 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             
+            {/* Close Button */}
+            <button 
+              onClick={onClose}
+              className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-black/70 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
             {/* Recipe Title Overlay */}
             <div className="absolute bottom-4 left-4 right-4 text-white">
               <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
@@ -74,7 +76,7 @@ const RecipeModal = ({ recipe, isOpen, onClose, onViewIncrement }: RecipeModalPr
             </div>
 
             {/* Stats Overlay */}
-            <div className="absolute top-4 right-4 flex gap-2">
+            <div className="absolute top-4 left-4 flex gap-2">
               <div className="bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
                 <Star className="w-4 h-4 fill-current text-yellow-400" />
                 <span>{recipe.rating}</span>

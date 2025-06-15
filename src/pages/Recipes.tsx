@@ -1,4 +1,3 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import RecipeSubmissionForm from '@/components/RecipeSubmissionForm';
@@ -18,6 +17,7 @@ const Recipes = () => {
   const [loading, setLoading] = useState(true);
   const [showSubmissionForm, setShowSubmissionForm] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState<any>(null);
+  const [recipeViews, setRecipeViews] = useState<{[key: string]: number}>({});
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ const Recipes = () => {
       likes: 456,
       isPremium: false,
       servings: 6,
+      view_count: recipeViews['1'] || 128,
       ingredients: [
         "3 lbs beef chuck, cut into 2-inch pieces",
         "6 strips bacon, chopped",
@@ -78,6 +79,7 @@ const Recipes = () => {
       likes: 789,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['2'] || 245,
       ingredients: [
         "3 cups bread flour",
         "1 tsp active dry yeast",
@@ -115,6 +117,7 @@ const Recipes = () => {
       likes: 623,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['3'] || 189,
       ingredients: [
         "4 oz dark chocolate, chopped",
         "4 tbsp unsalted butter",
@@ -151,6 +154,7 @@ const Recipes = () => {
       likes: 345,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['4'] || 167,
       ingredients: [
         "2 heads romaine lettuce, chopped",
         "1/2 cup grated Parmesan cheese",
@@ -188,6 +192,7 @@ const Recipes = () => {
       likes: 567,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['5'] || 298,
       ingredients: [
         "4 salmon fillets (6 oz each)",
         "2 tbsp olive oil",
@@ -223,6 +228,7 @@ const Recipes = () => {
       likes: 423,
       isPremium: false,
       servings: 6,
+      view_count: recipeViews['6'] || 156,
       ingredients: [
         "6 large yellow onions, thinly sliced",
         "4 tbsp butter",
@@ -261,6 +267,7 @@ const Recipes = () => {
       likes: 689,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['7'] || 234,
       ingredients: [
         "2 lbs boneless chicken, cubed",
         "1 cup plain yogurt",
@@ -300,6 +307,7 @@ const Recipes = () => {
       likes: 734,
       isPremium: false,
       servings: 8,
+      view_count: recipeViews['8'] || 289,
       ingredients: [
         "6 egg yolks",
         "3/4 cup sugar",
@@ -337,6 +345,7 @@ const Recipes = () => {
       likes: 456,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['9'] || 178,
       ingredients: [
         "2 tbsp green curry paste",
         "1 can coconut milk",
@@ -375,6 +384,7 @@ const Recipes = () => {
       likes: 892,
       isPremium: false,
       servings: 12,
+      view_count: recipeViews['10'] || 356,
       ingredients: [
         "2 cups graham cracker crumbs",
         "1/2 cup butter, melted",
@@ -412,6 +422,7 @@ const Recipes = () => {
       likes: 567,
       isPremium: false,
       servings: 6,
+      view_count: recipeViews['11'] || 142,
       ingredients: [
         "1 whole chicken, cut into pieces",
         "6 strips bacon, chopped",
@@ -451,6 +462,7 @@ const Recipes = () => {
       likes: 456,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['12'] || 201,
       ingredients: [
         "1 lb large shrimp, peeled",
         "1 lb linguine pasta",
@@ -489,6 +501,7 @@ const Recipes = () => {
       likes: 345,
       isPremium: false,
       servings: 10,
+      view_count: recipeViews['13'] || 167,
       ingredients: [
         "3 ripe bananas, mashed",
         "1/3 cup melted butter",
@@ -526,6 +539,7 @@ const Recipes = () => {
       likes: 567,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['14'] || 198,
       ingredients: [
         "1 1/2 cups Arborio rice",
         "6 cups warm vegetable broth",
@@ -563,6 +577,7 @@ const Recipes = () => {
       likes: 423,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['15'] || 167,
       ingredients: [
         "1 lb white fish fillets",
         "8 corn tortillas",
@@ -601,6 +616,7 @@ const Recipes = () => {
       likes: 389,
       isPremium: false,
       servings: 6,
+      view_count: recipeViews['16'] || 134,
       ingredients: [
         "2 lbs beef sirloin, sliced thin",
         "12 oz egg noodles",
@@ -640,6 +656,7 @@ const Recipes = () => {
       likes: 234,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['17'] || 89,
       ingredients: [
         "4 large ripe tomatoes, sliced",
         "1 lb fresh mozzarella, sliced",
@@ -674,6 +691,7 @@ const Recipes = () => {
       likes: 756,
       isPremium: false,
       servings: 24,
+      view_count: recipeViews['18'] || 445,
       ingredients: [
         "2 1/4 cups all-purpose flour",
         "1 tsp baking soda",
@@ -711,6 +729,7 @@ const Recipes = () => {
       likes: 312,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['19'] || 123,
       ingredients: [
         "2 cups broccoli florets",
         "1 bell pepper, sliced",
@@ -750,6 +769,7 @@ const Recipes = () => {
       likes: 678,
       isPremium: false,
       servings: 4,
+      view_count: recipeViews['20'] || 267,
       ingredients: [
         "4 English muffin halves",
         "8 slices Canadian bacon",
@@ -810,7 +830,8 @@ const Recipes = () => {
       rating: 4.5,
       likes: Math.floor(Math.random() * 200) + 50,
       isPremium: false,
-      status: 'approved'
+      status: 'approved',
+      view_count: recipeViews[recipe.id] || Math.floor(Math.random() * 100) + 25
     }))
   ];
 
@@ -851,6 +872,13 @@ const Recipes = () => {
 
   const closeRecipeModal = () => {
     setSelectedRecipe(null);
+  };
+
+  const handleViewIncrement = (recipeId: string | number) => {
+    setRecipeViews(prev => ({
+      ...prev,
+      [recipeId]: (prev[recipeId] || 0) + 1
+    }));
   };
 
   return (
@@ -966,6 +994,10 @@ const Recipes = () => {
                         <Clock className="w-3 h-3 inline mr-1" />
                         {formatCookTime(recipe.cook_time || recipe.cookTime || 30)}
                       </div>
+                      <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
+                        <Eye className="w-3 h-3" />
+                        <span>{recipe.view_count || 1}</span>
+                      </div>
                     </div>
                     
                     <div className="p-6">
@@ -1075,89 +1107,12 @@ const Recipes = () => {
         onSubmit={handleRecipeSubmitted}
       />
 
-      {/* Recipe Detail Modal */}
-      {selectedRecipe && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="relative">
-              <img 
-                src={selectedRecipe.image_url || selectedRecipe.image} 
-                alt={selectedRecipe.title}
-                className="w-full h-64 object-cover rounded-t-2xl"
-              />
-              <button 
-                onClick={closeRecipeModal}
-                className="absolute top-4 right-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70"
-              >
-                ✕
-              </button>
-            </div>
-            
-            <div className="p-8">
-              <div className="flex items-start justify-between mb-6">
-                <div>
-                  <h2 className="chef-heading-lg text-chef-charcoal mb-2">{selectedRecipe.title}</h2>
-                  <p className="text-chef-royal-green font-medium">by {selectedRecipe.author}</p>
-                </div>
-                <div className="flex items-center gap-1 text-chef-gold">
-                  <Star className="w-5 h-5 fill-current" />
-                  <span className="font-semibold">{selectedRecipe.rating}</span>
-                </div>
-              </div>
-
-              <p className="chef-body text-chef-charcoal/80 mb-6">{selectedRecipe.description}</p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-chef-royal-green" />
-                  <span className="font-medium">Cook Time:</span>
-                  <span>{formatCookTime(selectedRecipe.cookTime || selectedRecipe.cook_time || 30)}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-chef-royal-green" />
-                  <span className="font-medium">Serves:</span>
-                  <span>{selectedRecipe.servings || 4}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ChefHat className="w-5 h-5 text-chef-royal-green" />
-                  <span className="font-medium">Difficulty:</span>
-                  <span>{selectedRecipe.difficulty}</span>
-                </div>
-              </div>
-
-              {selectedRecipe.ingredients && (
-                <div className="mb-8">
-                  <h3 className="chef-heading-sm text-chef-charcoal mb-4">Ingredients</h3>
-                  <ul className="space-y-2">
-                    {selectedRecipe.ingredients.map((ingredient: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <span className="w-2 h-2 bg-chef-royal-green rounded-full mt-2 flex-shrink-0"></span>
-                        <span className="chef-body text-chef-charcoal">{ingredient}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {selectedRecipe.instructions && (
-                <div>
-                  <h3 className="chef-heading-sm text-chef-charcoal mb-4">Instructions</h3>
-                  <ol className="space-y-4">
-                    {selectedRecipe.instructions.map((instruction: string, index: number) => (
-                      <li key={index} className="flex gap-4">
-                        <span className="w-8 h-8 bg-chef-royal-green text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
-                          {index + 1}
-                        </span>
-                        <span className="chef-body text-chef-charcoal pt-1">{instruction}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <RecipeModal
+        recipe={selectedRecipe}
+        isOpen={!!selectedRecipe}
+        onClose={closeRecipeModal}
+        onViewIncrement={handleViewIncrement}
+      />
     </PageLayout>
   );
 };
