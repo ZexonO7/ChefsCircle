@@ -1,5 +1,3 @@
-
-
 export const staticRecipes = [
   {
     id: 1,
@@ -751,4 +749,3 @@ export const staticRecipes = [
     ]
   }
 ];
-
