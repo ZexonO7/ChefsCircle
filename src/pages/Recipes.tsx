@@ -2,7 +2,8 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import RecipeSubmissionForm from '@/components/RecipeSubmissionForm';
-import { Plus, Search, Clock, Users, Star, ChefHat } from 'lucide-react';
+import RecipeModal from '@/components/RecipeModal';
+import { Plus, Search, Clock, Users, Star, ChefHat, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/components/AuthProvider';
