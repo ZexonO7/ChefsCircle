@@ -4,7 +4,7 @@
   <url>
     <loc>https://chefscircle.in/</loc>
     <lastmod>2025-06-10</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
@@ -20,19 +20,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/projects/workwear</loc>
+    <loc>https://chefscircle.in/news</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/projects/hockey</loc>
+    <loc>https://chefscircle.in/dashboard</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://chefscircle.in/projects/cources</loc>
+    <loc>https://chefscircle.in/cources</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -47,7 +47,7 @@
     <loc>https://chefscircle.in/recipes</loc>
     <lastmod>2025-05-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://chefscircle.in/about</loc>
