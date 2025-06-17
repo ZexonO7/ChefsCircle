@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
@@ -224,7 +223,7 @@ const Settings = () => {
   if (!user) {
     return (
       <PageLayout>
-        <div className="min-h-screen bg-chef-warm-ivory flex items-center justify-center">
+        <div className="min-h-screen bg-chef-cream flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-chef-charcoal mb-4">Access Denied</h1>
             <p className="text-chef-charcoal/70">You need to be signed in to access settings.</p>
@@ -237,7 +236,7 @@ const Settings = () => {
   if (isLoading) {
     return (
       <PageLayout>
-        <div className="min-h-screen bg-chef-warm-ivory flex items-center justify-center">
+        <div className="min-h-screen bg-chef-cream flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-chef-royal-blue mx-auto mb-4"></div>
             <p className="text-chef-charcoal">Loading settings...</p>
@@ -249,7 +248,7 @@ const Settings = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-chef-warm-ivory pt-24 pb-16">
+      <div className="min-h-screen bg-chef-cream pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-chef-charcoal font-playfair">Account Settings</h1>
@@ -258,7 +257,7 @@ const Settings = () => {
 
           <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
             {/* Profile Picture Section */}
-            <Card className="lg:col-span-1 bg-chef-warm-ivory border-chef-royal-blue/20">
+            <Card className="lg:col-span-1 bg-chef-cream border-chef-royal-blue/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-chef-charcoal">
                   <Camera className="w-5 h-5 text-chef-royal-blue" />
@@ -293,7 +292,7 @@ const Settings = () => {
                     value={profile.profile_image_url}
                     onChange={(e) => setProfile({...profile, profile_image_url: e.target.value})}
                     placeholder="https://example.com/image.jpg"
-                    className="mt-1 bg-chef-warm-ivory border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                    className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />
                   <p className="text-xs text-chef-charcoal/50 mt-1">
                     Enter a URL to an image you'd like to use as your profile picture
@@ -303,7 +302,7 @@ const Settings = () => {
             </Card>
 
             {/* Profile Information */}
-            <Card className="lg:col-span-2 bg-chef-warm-ivory border-chef-royal-blue/20">
+            <Card className="lg:col-span-2 bg-chef-cream border-chef-royal-blue/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-chef-charcoal">
                   <User className="w-5 h-5 text-chef-royal-blue" />
@@ -333,7 +332,7 @@ const Settings = () => {
                       value={profile.username}
                       onChange={(e) => setProfile({...profile, username: e.target.value})}
                       placeholder="Enter a unique username"
-                      className="mt-1 bg-chef-warm-ivory border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                      className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
                   </div>
                 </div>
@@ -345,7 +344,7 @@ const Settings = () => {
                     value={profile.full_name}
                     onChange={(e) => setProfile({...profile, full_name: e.target.value})}
                     placeholder="Enter your full name"
-                    className="mt-1 bg-chef-warm-ivory border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                    className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />
                 </div>
                 
@@ -356,7 +355,7 @@ const Settings = () => {
                     value={profile.bio}
                     onChange={(e) => setProfile({...profile, bio: e.target.value})}
                     placeholder="Tell others about yourself..."
-                    className="min-h-[100px] mt-1 bg-chef-warm-ivory border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                    className="min-h-[100px] mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />
                   <p className="text-xs text-chef-charcoal/50 mt-1">
                     {profile.bio.length}/500 characters
@@ -375,7 +374,7 @@ const Settings = () => {
             </Card>
 
             {/* Password Section */}
-            <Card className="lg:col-span-3 bg-chef-warm-ivory border-chef-royal-blue/20">
+            <Card className="lg:col-span-3 bg-chef-cream border-chef-royal-blue/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-chef-charcoal">
                   <Lock className="w-5 h-5 text-chef-royal-blue" />
@@ -395,7 +394,7 @@ const Settings = () => {
                       value={passwords.newPassword}
                       onChange={(e) => setPasswords({...passwords, newPassword: e.target.value})}
                       placeholder="Enter new password"
-                      className="mt-1 bg-chef-warm-ivory border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                      className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
                   </div>
                   
@@ -407,7 +406,7 @@ const Settings = () => {
                       value={passwords.confirmPassword}
                       onChange={(e) => setPasswords({...passwords, confirmPassword: e.target.value})}
                       placeholder="Confirm new password"
-                      className="mt-1 bg-chef-warm-ivory border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                      className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
                   </div>
                 </div>
