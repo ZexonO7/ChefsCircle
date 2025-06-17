@@ -11,6 +11,7 @@ interface Notification {
   content: string;
   seen: boolean;
   created_at: string;
+  user_id: string;
 }
 
 const NotificationBell = () => {
@@ -65,7 +66,8 @@ const NotificationBell = () => {
           type: 'achievement',
           content: `🏆 Achievement Unlocked: ${achievement.achievement_name}! (+${achievement.xp_awarded} XP)`,
           seen: false, // Always show as unseen for visual impact
-          created_at: achievement.earned_at
+          created_at: achievement.earned_at,
+          user_id: user.id // Add the missing user_id property
         }));
         allNotifications.push(...achievementNotifications);
       }
