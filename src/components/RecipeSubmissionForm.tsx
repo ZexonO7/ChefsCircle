@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ChefHat, Clock, Users, Star, Upload, X } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
@@ -246,7 +245,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                   <FormControl>
                     <Textarea
                       placeholder="Describe your recipe..."
-                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 min-h-[100px] resize-none"
+                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 min-h-[100px] resize-none text-chef-charcoal placeholder:text-chef-charcoal/50"
                       {...field}
                     />
                   </FormControl>
@@ -265,7 +264,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                       value={ingredient}
                       onChange={(e) => updateIngredient(index, e.target.value)}
                       placeholder={`Ingredient ${index + 1}`}
-                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3"
+                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 text-chef-charcoal placeholder:text-chef-charcoal/50"
                     />
                   </div>
                   {ingredients.length > 1 && (
@@ -285,7 +284,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                 type="button"
                 variant="outline"
                 onClick={addIngredient}
-                className="border-chef-royal-green/30 text-chef-royal-green hover:bg-chef-royal-green/10 hover:text-chef-royal-green"
+                className="border-chef-royal-green text-chef-royal-green bg-chef-warm-ivory hover:bg-chef-royal-green hover:text-white transition-colors"
               >
                 Add Ingredient
               </Button>
@@ -300,7 +299,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                   <FormControl>
                     <Textarea
                       placeholder="Step-by-step cooking instructions..."
-                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 min-h-[150px] resize-none"
+                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 min-h-[150px] resize-none text-chef-charcoal placeholder:text-chef-charcoal/50"
                       {...field}
                     />
                   </FormControl>
@@ -324,7 +323,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                       <Input
                         type="number"
                         placeholder="30"
-                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3"
+                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 text-chef-charcoal placeholder:text-chef-charcoal/50"
                         {...field}
                       />
                     </FormControl>
@@ -373,7 +372,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                     <FormControl>
                       <Input
                         placeholder="https://example.com/image.jpg"
-                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3"
+                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 text-chef-charcoal placeholder:text-chef-charcoal/50"
                         {...field}
                       />
                     </FormControl>
