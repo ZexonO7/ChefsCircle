@@ -1,6 +1,7 @@
+
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
-import { Search, Plus, MessageCircle, ThumbsUp, Clock, User, HelpCircle, BookOpen } from 'lucide-react';
+import { Search, Plus, Clock, HelpCircle, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
@@ -21,10 +22,7 @@ const Library = () => {
       id: 1,
       title: "How do I properly temper chocolate for molding?",
       category: "Techniques",
-      author: "Baker Sarah",
-      answers: 12,
-      views: 2847,
-      likes: 89,
+      author: "ChefsCircle",
       timeAgo: "2 hours ago",
       hasAcceptedAnswer: true,
       preview: "I'm trying to make chocolate molds but my chocolate keeps getting cloudy and doesn't have that nice snap..."
@@ -33,10 +31,7 @@ const Library = () => {
       id: 2,
       title: "What's the difference between sea salt and kosher salt in baking?",
       category: "Ingredients",
-      author: "Home Chef Mike",
-      answers: 8,
-      views: 1923,
-      likes: 67,
+      author: "ChefsCircle",
       timeAgo: "5 hours ago",
       hasAcceptedAnswer: true,
       preview: "I see recipes calling for different types of salt and I'm wondering if it really makes a difference..."
@@ -45,10 +40,7 @@ const Library = () => {
       id: 3,
       title: "Why does my sourdough starter smell like acetone?",
       category: "Troubleshooting",
-      author: "Bread Enthusiast",
-      answers: 15,
-      views: 4156,
-      likes: 134,
+      author: "ChefsCircle",
       timeAgo: "1 day ago",
       hasAcceptedAnswer: true,
       preview: "My 2-week-old starter developed a strong acetone/nail polish remover smell. Is it still safe to use?"
@@ -57,10 +49,7 @@ const Library = () => {
       id: 4,
       title: "Best knife sharpening technique for home cooks?",
       category: "Equipment",
-      author: "Chef Wannabe",
-      answers: 6,
-      views: 987,
-      likes: 45,
+      author: "ChefsCircle",
       timeAgo: "3 days ago",
       hasAcceptedAnswer: false,
       preview: "I have a decent chef's knife but it's getting dull. What's the best way to sharpen it at home?"
@@ -69,10 +58,7 @@ const Library = () => {
       id: 5,
       title: "How to prevent pasta from sticking together?",
       category: "Techniques",
-      author: "Pasta Lover",
-      answers: 11,
-      views: 3421,
-      likes: 98,
+      author: "ChefsCircle",
       timeAgo: "4 days ago",
       hasAcceptedAnswer: true,
       preview: "Every time I cook pasta, it ends up clumping together. I've tried adding oil but that doesn't seem to help..."
@@ -81,17 +67,13 @@ const Library = () => {
       id: 6,
       title: "Safe internal temperature for different cuts of beef?",
       category: "Food Safety",
-      author: "Grill Master",
-      answers: 9,
-      views: 2156,
-      likes: 76,
+      author: "ChefsCircle",
       timeAgo: "1 week ago",
       hasAcceptedAnswer: true,
       preview: "I want to make sure I'm cooking beef safely. What are the recommended internal temperatures for different cuts?"
     }
   ];
 
-  // Updated with correct calculations based on questions data
   const popularTopics = [
     { name: "Knife Skills", count: 156 },
     { name: "Bread Making", count: 143 },
@@ -270,16 +252,7 @@ const Library = () => {
                         
                         <div className="flex items-center gap-6 text-sm text-chef-charcoal/60">
                           <div className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            <span>{question.author}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MessageCircle className="w-4 h-4" />
-                            <span>{question.answers} answers</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <ThumbsUp className="w-4 h-4" />
-                            <span>{question.likes}</span>
+                            <span>by {question.author}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Clock className="w-4 h-4" />
@@ -290,9 +263,6 @@ const Library = () => {
                       
                       <div className="text-center">
                         <span className="chef-badge-blue text-xs">{question.category}</span>
-                        <div className="text-sm text-chef-charcoal/60 mt-2">
-                          {question.views.toLocaleString()} views
-                        </div>
                       </div>
                     </div>
                   </motion.div>
