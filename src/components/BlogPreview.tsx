@@ -25,7 +25,7 @@ const BlogPreview = () => {
               Stay informed with the latest culinary news, industry trends, and expert insights from the world of professional cooking.
             </p>
           </div>
-          <Link to="/news" className="mt-4 md:mt-0">
+          <Link to="/blog" className="mt-4 md:mt-0">
             <button className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-chef-royal-blue font-medium rounded-lg border-2 border-chef-royal-blue hover:bg-chef-royal-blue hover:text-white transition-colors group">
               View All News
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
