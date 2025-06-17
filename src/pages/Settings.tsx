@@ -29,6 +29,7 @@ const Settings = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [imageKey, setImageKey] = useState(0); // Force re-render of avatar
 
   useEffect(() => {
     if (user) {
@@ -160,6 +161,10 @@ const Settings = () => {
           bio: updatedData.bio || '',
           profile_image_url: updatedData.profile_image_url || ''
         }));
+        
+        // Force avatar to re-render with new image
+        setImageKey(prev => prev + 1);
+        console.log('Updated profile state with new image URL:', updatedData.profile_image_url);
       }
 
       // Track profile customization for gamification
@@ -268,6 +273,12 @@ const Settings = () => {
     return 'U';
   };
 
+  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newUrl = e.target.value;
+    setProfile({ ...profile, profile_image_url: newUrl });
+    console.log('Image URL changed to:', newUrl);
+  };
+
   if (!user) {
     return (
       <PageLayout>
@@ -317,10 +328,17 @@ const Settings = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-center">
-                  <Avatar className="w-24 h-24">
+                  <Avatar key={imageKey} className="w-24 h-24">
                     <AvatarImage 
                       src={profile.profile_image_url} 
-                      alt={getDisplayName()} 
+                      alt={getDisplayName()}
+                      onError={(e) => {
+                        console.log('Avatar image failed to load:', profile.profile_image_url);
+                        e.currentTarget.style.display = 'none';
+                      }}
+                      onLoad={() => {
+                        console.log('Avatar image loaded successfully:', profile.profile_image_url);
+                      }}
                     />
                     <AvatarFallback className="bg-chef-royal-blue text-chef-warm-ivory text-lg">
                       {getFallbackText()}
@@ -335,7 +353,7 @@ const Settings = () => {
                   <Input
                     id="profileImage"
                     value={profile.profile_image_url}
-                    onChange={(e) => setProfile({ ...profile, profile_image_url: e.target.value })}
+                    onChange={handleImageUrlChange}
                     placeholder="https://example.com/image.jpg"
                     className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />

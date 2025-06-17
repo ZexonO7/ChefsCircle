@@ -15,6 +15,7 @@ const UserMenu = () => {
     full_name: '',
     profile_image_url: ''
   });
+  const [imageKey, setImageKey] = useState(0); // Force re-render of avatar
 
   useEffect(() => {
     if (user) {
@@ -25,7 +26,9 @@ const UserMenu = () => {
   // Listen for profile updates
   useEffect(() => {
     const handleProfileUpdate = () => {
+      console.log('UserMenu: Profile update event received');
       fetchProfile();
+      setImageKey(prev => prev + 1); // Force avatar re-render
     };
 
     window.addEventListener('profileUpdated', handleProfileUpdate);
@@ -36,6 +39,8 @@ const UserMenu = () => {
     if (!user) return;
     
     try {
+      console.log('UserMenu: Fetching profile for user:', user.id);
+      
       const { data, error } = await supabase
         .from('profiles')
         .select('username, full_name, profile_image_url')
@@ -43,11 +48,12 @@ const UserMenu = () => {
         .single();
 
       if (error && error.code !== 'PGRST116') {
-        console.error('Error fetching profile:', error);
+        console.error('UserMenu: Error fetching profile:', error);
         return;
       }
 
       if (data) {
+        console.log('UserMenu: Profile data fetched:', data);
         setProfile({
           username: data.username || '',
           full_name: data.full_name || '',
@@ -55,7 +61,7 @@ const UserMenu = () => {
         });
       }
     } catch (error) {
-      console.error('Error in fetchProfile:', error);
+      console.error('UserMenu: Error in fetchProfile:', error);
     }
   };
 
@@ -81,6 +87,7 @@ const UserMenu = () => {
   };
 
   const getDisplayName = () => {
+    // Prioritize username over full name
     return profile.username || profile.full_name || user.email?.split('@')[0] || 'Chef';
   };
 
@@ -95,10 +102,17 @@ const UserMenu = () => {
   return (
     <div className="relative group">
       <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-chef-royal-blue/10 transition-colors">
-        <Avatar className="w-8 h-8">
+        <Avatar key={imageKey} className="w-8 h-8">
           <AvatarImage 
             src={profile.profile_image_url} 
-            alt={getDisplayName()} 
+            alt={getDisplayName()}
+            onError={(e) => {
+              console.log('UserMenu: Avatar image failed to load:', profile.profile_image_url);
+              e.currentTarget.style.display = 'none';
+            }}
+            onLoad={() => {
+              console.log('UserMenu: Avatar image loaded successfully:', profile.profile_image_url);
+            }}
           />
           <AvatarFallback className="bg-chef-royal-blue text-chef-warm-ivory text-xs">
             {getFallbackText()}
