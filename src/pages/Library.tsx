@@ -1,3 +1,4 @@
+
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Search, Plus, Clock, HelpCircle, BookOpen } from 'lucide-react';
@@ -6,72 +7,19 @@ import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useQuestions } from '@/hooks/useQuestions';
+import AskQuestionModal from '@/components/AskQuestionModal';
 
 const Library = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [isAskModalOpen, setIsAskModalOpen] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { questions, loading, submitQuestion } = useQuestions();
 
   const categories = ['All', 'Techniques', 'Ingredients', 'Equipment', 'Troubleshooting', 'Nutrition', 'Food Safety'];
-
-  const questions = [
-    {
-      id: 1,
-      title: "How do I properly temper chocolate for molding?",
-      category: "Techniques",
-      author: "ChefsCircle",
-      timeAgo: "2 hours ago",
-      hasAcceptedAnswer: true,
-      preview: "I'm trying to make chocolate molds but my chocolate keeps getting cloudy and doesn't have that nice snap..."
-    },
-    {
-      id: 2,
-      title: "What's the difference between sea salt and kosher salt in baking?",
-      category: "Ingredients",
-      author: "ChefsCircle",
-      timeAgo: "5 hours ago",
-      hasAcceptedAnswer: true,
-      preview: "I see recipes calling for different types of salt and I'm wondering if it really makes a difference..."
-    },
-    {
-      id: 3,
-      title: "Why does my sourdough starter smell like acetone?",
-      category: "Troubleshooting",
-      author: "ChefsCircle",
-      timeAgo: "1 day ago",
-      hasAcceptedAnswer: true,
-      preview: "My 2-week-old starter developed a strong acetone/nail polish remover smell. Is it still safe to use?"
-    },
-    {
-      id: 4,
-      title: "Best knife sharpening technique for home cooks?",
-      category: "Equipment",
-      author: "ChefsCircle",
-      timeAgo: "3 days ago",
-      hasAcceptedAnswer: false,
-      preview: "I have a decent chef's knife but it's getting dull. What's the best way to sharpen it at home?"
-    },
-    {
-      id: 5,
-      title: "How to prevent pasta from sticking together?",
-      category: "Techniques",
-      author: "ChefsCircle",
-      timeAgo: "4 days ago",
-      hasAcceptedAnswer: true,
-      preview: "Every time I cook pasta, it ends up clumping together. I've tried adding oil but that doesn't seem to help..."
-    },
-    {
-      id: 6,
-      title: "Safe internal temperature for different cuts of beef?",
-      category: "Food Safety",
-      author: "ChefsCircle",
-      timeAgo: "1 week ago",
-      hasAcceptedAnswer: true,
-      preview: "I want to make sure I'm cooking beef safely. What are the recommended internal temperatures for different cuts?"
-    }
-  ];
 
   const popularTopics = [
     { name: "Knife Skills", count: 156 },
@@ -84,7 +32,7 @@ const Library = () => {
 
   const filteredQuestions = questions.filter(question => {
     const matchesSearch = question.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         question.preview.toLowerCase().includes(searchTerm.toLowerCase());
+                         question.content.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || question.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -99,13 +47,10 @@ const Library = () => {
       navigate('/auth');
       return;
     }
-    toast({
-      title: "Coming Soon",
-      description: "Question submission feature is under development.",
-    });
+    setIsAskModalOpen(true);
   };
 
-  const handleQuestionClick = (questionId: number) => {
+  const handleQuestionClick = (questionId: string) => {
     navigate(`/library/question/${questionId}`);
   };
 
@@ -114,11 +59,19 @@ const Library = () => {
     setSelectedCategory('All');
   };
 
-  const handleLoadMore = () => {
-    toast({
-      title: "Coming Soon",
-      description: "Pagination feature is under development.",
-    });
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 7) return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    
+    const diffInWeeks = Math.floor(diffInDays / 7);
+    return `${diffInWeeks} week${diffInWeeks > 1 ? 's' : ''} ago`;
   };
 
   return (
@@ -215,57 +168,69 @@ const Library = () => {
                   {selectedCategory === 'All' ? 'All Questions' : `${selectedCategory} Questions`}
                 </h2>
                 <span className="text-chef-charcoal/60">
-                  {filteredQuestions.length} {filteredQuestions.length === 1 ? 'question' : 'questions'}
+                  {loading ? 'Loading...' : `${filteredQuestions.length} ${filteredQuestions.length === 1 ? 'question' : 'questions'}`}
                 </span>
               </div>
 
-              <div className="space-y-6">
-                {filteredQuestions.map((question, index) => (
-                  <motion.div
-                    key={question.id}
-                    className="chef-card p-6 hover:shadow-chef-luxury transition-all duration-300 cursor-pointer"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    onClick={() => handleQuestionClick(question.id)}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-green transition-colors">
-                            {question.title}
-                          </h3>
-                          {question.hasAcceptedAnswer && (
-                            <span className="chef-badge-green text-xs">
-                              ✓ Answered
-                            </span>
-                          )}
-                        </div>
-                        
-                        <p className="chef-body-sm text-chef-charcoal/80 mb-3 line-clamp-2">
-                          {question.preview}
-                        </p>
-                        
-                        <div className="flex items-center gap-6 text-sm text-chef-charcoal/60">
-                          <div className="flex items-center gap-1">
-                            <span>by {question.author}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            <span>{question.timeAgo}</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="text-center">
-                        <span className="chef-badge-blue text-xs">{question.category}</span>
-                      </div>
+              {loading ? (
+                <div className="space-y-6">
+                  {Array.from({ length: 3 }).map((_, index) => (
+                    <div key={index} className="chef-card p-6 animate-pulse">
+                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                      <div className="h-3 bg-gray-200 rounded w-full mb-2"></div>
+                      <div className="h-3 bg-gray-200 rounded w-2/3"></div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {filteredQuestions.map((question, index) => (
+                    <motion.div
+                      key={question.id}
+                      className="chef-card p-6 hover:shadow-chef-luxury transition-all duration-300 cursor-pointer"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      onClick={() => handleQuestionClick(question.id)}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-green transition-colors">
+                              {question.title}
+                            </h3>
+                            {question.has_accepted_answer && (
+                              <span className="chef-badge-green text-xs">
+                                ✓ Answered
+                              </span>
+                            )}
+                          </div>
+                          
+                          <p className="chef-body-sm text-chef-charcoal/80 mb-3 line-clamp-2">
+                            {question.content}
+                          </p>
+                          
+                          <div className="flex items-center gap-6 text-sm text-chef-charcoal/60">
+                            <div className="flex items-center gap-1">
+                              <span>by {question.author?.full_name || 'Anonymous'}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-4 h-4" />
+                              <span>{formatTimeAgo(question.created_at)}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="text-center">
+                          <span className="chef-badge-blue text-xs">{question.category}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
               
-              {filteredQuestions.length === 0 && (
+              {!loading && filteredQuestions.length === 0 && (
                 <div className="text-center py-12">
                   <HelpCircle className="w-16 h-16 text-chef-charcoal/30 mx-auto mb-4" />
                   <h3 className="chef-heading-sm text-chef-charcoal mb-2">No questions found</h3>
@@ -281,18 +246,6 @@ const Library = () => {
                   >
                     <Plus className="w-5 h-5 mr-2" />
                     Ask the First Question
-                  </button>
-                </div>
-              )}
-
-              {/* Pagination */}
-              {filteredQuestions.length > 0 && (
-                <div className="flex justify-center mt-12">
-                  <button 
-                    onClick={handleLoadMore}
-                    className="chef-button-outline"
-                  >
-                    Load More Questions
                   </button>
                 </div>
               )}
@@ -334,6 +287,12 @@ const Library = () => {
           </div>
         </section>
       </div>
+
+      <AskQuestionModal
+        isOpen={isAskModalOpen}
+        onClose={() => setIsAskModalOpen(false)}
+        onSubmit={submitQuestion}
+      />
     </PageLayout>
   );
 };

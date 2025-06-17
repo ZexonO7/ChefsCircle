@@ -7,6 +7,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
+import { useQuestionDetail } from '@/hooks/useQuestions';
+import { Textarea } from '@/components/ui/textarea';
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -14,38 +16,25 @@ const QuestionDetail = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [newAnswer, setNewAnswer] = useState('');
+  
+  const { question, answers, loading, submitAnswer } = useQuestionDetail(id || '');
 
-  // Mock question data - in a real app, this would come from an API
-  const question = {
-    id: parseInt(id || '1'),
-    title: "How do I properly temper chocolate for molding?",
-    category: "Techniques",
-    author: "ChefsCircle",
-    timeAgo: "2 hours ago",
-    content: "I'm trying to make chocolate molds but my chocolate keeps getting cloudy and doesn't have that nice snap when it sets. I've tried different temperatures but can't seem to get it right. What's the proper technique for tempering chocolate at home without special equipment?",
-    hasAcceptedAnswer: true
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 7) return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    
+    const diffInWeeks = Math.floor(diffInDays / 7);
+    return `${diffInWeeks} week${diffInWeeks > 1 ? 's' : ''} ago`;
   };
 
-  const answers = [
-    {
-      id: 1,
-      author: "ChefsCircle",
-      timeAgo: "1 hour ago",
-      content: "Tempering chocolate is all about controlling the crystal structure. Here's the seeding method that works well at home:\n\n1. Melt 2/3 of your chocolate to 115°F (46°C) for dark chocolate, 110°F (43°C) for milk/white\n2. Remove from heat and add the remaining 1/3 unmelted chocolate\n3. Stir continuously until temperature drops to 84°F (29°C)\n4. Reheat slightly to 88-90°F (31-32°C) for dark, 86-88°F (30-31°C) for milk/white\n\nTest by dipping a knife - properly tempered chocolate will set with a glossy finish and audible snap when broken.",
-      isAccepted: true,
-      likes: 24
-    },
-    {
-      id: 2,
-      author: "ChefsCircle",
-      timeAgo: "45 minutes ago",
-      content: "Great answer above! I'd also add that marble slabs work wonderfully for the cooling phase if you have one. The key is patience - don't rush the cooling process. Also, make sure your workspace isn't too warm or humid, as this can affect the tempering process.",
-      isAccepted: false,
-      likes: 8
-    }
-  ];
-
-  const handleSubmitAnswer = () => {
+  const handleSubmitAnswer = async () => {
     if (!user) {
       toast({
         title: "Authentication required",
@@ -64,18 +53,60 @@ const QuestionDetail = () => {
       return;
     }
 
-    toast({
-      title: "Coming Soon",
-      description: "Answer submission feature is under development.",
-    });
+    const success = await submitAnswer(newAnswer.trim());
+    if (success) {
+      setNewAnswer('');
+    }
   };
 
-  const handleLike = (answerId: number) => {
+  const handleLike = (answerId: string) => {
     toast({
       title: "Coming Soon",
       description: "Answer voting feature is under development.",
     });
   };
+
+  if (loading) {
+    return (
+      <PageLayout>
+        <div className="min-h-screen bg-chef-warm-ivory pt-20">
+          <div className="chef-container py-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="chef-card p-8 animate-pulse">
+                <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
+
+  if (!question) {
+    return (
+      <PageLayout>
+        <div className="min-h-screen bg-chef-warm-ivory pt-20">
+          <div className="chef-container py-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="chef-heading-lg text-chef-charcoal mb-4">Question Not Found</h1>
+              <p className="chef-body text-chef-charcoal/60 mb-6">
+                The question you're looking for doesn't exist or has been removed.
+              </p>
+              <button
+                onClick={() => navigate('/library')}
+                className="chef-button-primary"
+              >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                Back to Library
+              </button>
+            </div>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout>
@@ -107,7 +138,7 @@ const QuestionDetail = () => {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-4">
                     <span className="chef-badge-blue text-sm">{question.category}</span>
-                    {question.hasAcceptedAnswer && (
+                    {question.has_accepted_answer && (
                       <span className="chef-badge-green text-sm">
                         ✓ Answered
                       </span>
@@ -117,10 +148,10 @@ const QuestionDetail = () => {
                     {question.title}
                   </h1>
                   <div className="flex items-center gap-4 text-sm text-chef-charcoal/60 mb-6">
-                    <span>Asked by {question.author}</span>
+                    <span>Asked by {question.author?.full_name || 'Anonymous'}</span>
                     <div className="flex items-center gap-1">
                       <Clock className="w-4 h-4" />
-                      <span>{question.timeAgo}</span>
+                      <span>{formatTimeAgo(question.created_at)}</span>
                     </div>
                   </div>
                   <p className="chef-body text-chef-charcoal whitespace-pre-line">
@@ -140,7 +171,7 @@ const QuestionDetail = () => {
                 {answers.map((answer, index) => (
                   <motion.div
                     key={answer.id}
-                    className={`chef-card p-6 ${answer.isAccepted ? 'border-l-4 border-chef-royal-green' : ''}`}
+                    className={`chef-card p-6 ${answer.is_accepted ? 'border-l-4 border-chef-royal-green' : ''}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -148,12 +179,14 @@ const QuestionDetail = () => {
                     <div className="flex items-start gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="font-medium text-chef-charcoal">{answer.author}</span>
+                          <span className="font-medium text-chef-charcoal">
+                            {answer.author?.full_name || 'Anonymous'}
+                          </span>
                           <div className="flex items-center gap-1 text-sm text-chef-charcoal/60">
                             <Clock className="w-4 h-4" />
-                            <span>{answer.timeAgo}</span>
+                            <span>{formatTimeAgo(answer.created_at)}</span>
                           </div>
-                          {answer.isAccepted && (
+                          {answer.is_accepted && (
                             <span className="chef-badge-green text-xs">
                               <CheckCircle className="w-3 h-3 mr-1" />
                               Accepted Answer
@@ -177,6 +210,15 @@ const QuestionDetail = () => {
                   </motion.div>
                 ))}
               </div>
+
+              {answers.length === 0 && (
+                <div className="text-center py-8">
+                  <MessageCircle className="w-12 h-12 text-chef-charcoal/30 mx-auto mb-4" />
+                  <p className="chef-body text-chef-charcoal/60">
+                    No answers yet. Be the first to help!
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Answer Form */}
@@ -187,7 +229,7 @@ const QuestionDetail = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <h3 className="chef-heading-sm text-chef-charcoal mb-4">Your Answer</h3>
-              <textarea
+              <Textarea
                 value={newAnswer}
                 onChange={(e) => setNewAnswer(e.target.value)}
                 placeholder="Share your knowledge and help the community..."
@@ -197,6 +239,7 @@ const QuestionDetail = () => {
                 <button
                   onClick={handleSubmitAnswer}
                   className="chef-button-primary"
+                  disabled={!newAnswer.trim()}
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Submit Answer

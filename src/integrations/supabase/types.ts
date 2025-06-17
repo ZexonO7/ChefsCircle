@@ -39,6 +39,47 @@ export type Database = {
         }
         Relationships: []
       }
+      answers: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          is_accepted: boolean | null
+          likes: number | null
+          question_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          is_accepted?: boolean | null
+          likes?: number | null
+          question_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          is_accepted?: boolean | null
+          likes?: number | null
+          question_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       club_memberships: {
         Row: {
           club_name: string
@@ -174,6 +215,39 @@ export type Database = {
           profile_image_url?: string | null
           updated_at?: string | null
           username?: string | null
+        }
+        Relationships: []
+      }
+      questions: {
+        Row: {
+          category: string
+          content: string
+          created_at: string | null
+          has_accepted_answer: boolean | null
+          id: string
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          content: string
+          created_at?: string | null
+          has_accepted_answer?: boolean | null
+          id?: string
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string
+          content?: string
+          created_at?: string | null
+          has_accepted_answer?: boolean | null
+          id?: string
+          title?: string
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
