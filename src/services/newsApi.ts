@@ -1,6 +1,6 @@
 
 import { fetchAllCulinaryRSSFeeds } from './rssService';
-import { ImageService } from './imageService';
+import { AIImageService } from './aiImageService';
 
 const NEWS_API_BASE_URL = 'https://newsapi.org/v2';
 
@@ -23,53 +23,30 @@ export interface NewsResponse {
 }
 
 export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
-  console.log('Fetching real culinary news from RSS feeds with relevant images');
+  console.log('Fetching culinary news with AI-generated relevant images');
   
   try {
     const rssItems = await fetchAllCulinaryRSSFeeds();
     
     if (rssItems.length === 0) {
       console.log('No RSS items found, falling back to curated content');
-      return getCuratedCulinaryNewsWithRelevantImages();
+      return getCuratedCulinaryNewsWithAIImages();
     }
     
-    console.log(`Converting ${rssItems.length} RSS items to NewsArticle format with relevant images`);
+    console.log(`Converting ${rssItems.length} RSS items to NewsArticle format with AI-generated images`);
     
     const articles: NewsArticle[] = [];
     
     for (const item of rssItems) {
-      let imageUrl = '';
-      
-      // First try to use RSS feed image if it exists and looks valid
-      if (item['media:content']?.url) {
-        const rssImageUrl = item['media:content'].url;
-        if (rssImageUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i) || 
-            rssImageUrl.includes('unsplash.com') || 
-            rssImageUrl.includes('images.') ||
-            rssImageUrl.includes('photo')) {
-          imageUrl = rssImageUrl;
-          console.log(`Using valid RSS image for "${item.title}": ${imageUrl}`);
-        }
-      } else if (item.enclosure?.url) {
-        const enclosureUrl = item.enclosure.url;
-        if (enclosureUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-          imageUrl = enclosureUrl;
-          console.log(`Using valid RSS enclosure image for "${item.title}": ${imageUrl}`);
-        }
-      }
-      
-      // If no valid RSS image found, fetch a relevant image based on content
-      if (!imageUrl) {
-        console.log(`No RSS image found for "${item.title}", fetching relevant image...`);
-        imageUrl = await ImageService.fetchRelevantImageAlternative(item.title, item.description);
-        console.log(`Using topic-relevant image for "${item.title}": ${imageUrl}`);
-      }
+      // Generate AI image based on article content
+      console.log(`Generating AI image for: "${item.title}"`);
+      const aiGeneratedImage = await AIImageService.generateRelevantImage(item.title, item.description);
       
       articles.push({
         title: item.title,
         description: item.description,
         url: item.link,
-        urlToImage: imageUrl,
+        urlToImage: aiGeneratedImage,
         publishedAt: new Date(item.pubDate).toISOString(),
         source: {
           name: (item as any).sourceName || 'Culinary News'
@@ -78,17 +55,17 @@ export const fetchCulinaryNews = async (): Promise<NewsArticle[]> => {
       });
     }
     
-    console.log(`Successfully converted RSS items to ${articles.length} news articles with topic-relevant images`);
+    console.log(`Successfully converted RSS items to ${articles.length} news articles with AI-generated images`);
     return articles;
     
   } catch (error) {
     console.error('Error fetching RSS feeds, falling back to curated content:', error);
-    return getCuratedCulinaryNewsWithRelevantImages();
+    return getCuratedCulinaryNewsWithAIImages();
   }
 };
 
-const getCuratedCulinaryNewsWithRelevantImages = async (): Promise<NewsArticle[]> => {
-  console.log('Generating curated culinary news data with topic-relevant images');
+const getCuratedCulinaryNewsWithAIImages = async (): Promise<NewsArticle[]> => {
+  console.log('Generating curated culinary news data with AI-generated images');
   
   const now = Date.now();
   const articlesData = [
@@ -142,17 +119,17 @@ const getCuratedCulinaryNewsWithRelevantImages = async (): Promise<NewsArticle[]
     }
   ];
 
-  // Fetch relevant images for each curated article
+  // Generate AI images for each curated article
   const articles: NewsArticle[] = [];
   for (const articleData of articlesData) {
-    const relevantImage = await ImageService.fetchRelevantImageAlternative(
+    const aiGeneratedImage = await AIImageService.generateRelevantImage(
       articleData.title, 
       articleData.description
     );
     
     articles.push({
       ...articleData,
-      urlToImage: relevantImage
+      urlToImage: aiGeneratedImage
     });
   }
 
