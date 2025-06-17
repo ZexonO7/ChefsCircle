@@ -32,7 +32,7 @@ const Navbar = () => {
     href: "/library"
   }, {
     name: "News",
-    href: "/news"
+    href: "/blog"
   }];
 
   const isActive = (path: string) => {
