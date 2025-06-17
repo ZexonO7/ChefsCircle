@@ -80,7 +80,7 @@ const Navbar = () => {
     { name: 'Clubs', path: '/clubs' },
     { name: 'Library', path: '/library' },
     { name: 'Recipes', path: '/recipes' },
-    { name: 'Recipe To AI Recipe', path: '/ingredients-to-recipes' },
+    { name: 'AI recipe', path: '/ingredients-to-recipes' },
     { name: 'Blog', path: '/blog' }
   ];
 
