@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
@@ -152,7 +151,7 @@ const Settings = () => {
 
       console.log('Profile updated successfully:', updatedData);
 
-      // Update local state with the returned data to ensure UI reflects changes
+      // Update local state with the returned data to ensure UI reflects changes immediately
       if (updatedData) {
         setProfile(prev => ({
           ...prev,
@@ -170,6 +169,9 @@ const Settings = () => {
         title: "Profile updated",
         description: "Your profile has been updated successfully."
       });
+
+      // Trigger a page refresh to update other components like UserMenu
+      window.dispatchEvent(new CustomEvent('profileUpdated'));
 
     } catch (error: any) {
       console.error('Profile update error:', error);
@@ -256,6 +258,16 @@ const Settings = () => {
     return name.split(' ').map(word => word.charAt(0)).join('').toUpperCase().slice(0, 2);
   };
 
+  const getDisplayName = () => {
+    return profile.username || profile.full_name || 'User';
+  };
+
+  const getFallbackText = () => {
+    if (profile.username) return profile.username.charAt(0).toUpperCase();
+    if (profile.full_name) return getInitials(profile.full_name);
+    return 'U';
+  };
+
   if (!user) {
     return (
       <PageLayout>
@@ -308,11 +320,10 @@ const Settings = () => {
                   <Avatar className="w-24 h-24">
                     <AvatarImage 
                       src={profile.profile_image_url} 
-                      alt={profile.full_name || profile.username || 'Profile'} 
+                      alt={getDisplayName()} 
                     />
                     <AvatarFallback className="bg-chef-royal-blue text-chef-warm-ivory text-lg">
-                      {profile.full_name ? getInitials(profile.full_name) : 
-                       profile.username ? profile.username.charAt(0).toUpperCase() : 'U'}
+                      {getFallbackText()}
                     </AvatarFallback>
                   </Avatar>
                 </div>
@@ -360,7 +371,7 @@ const Settings = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="username" className="text-chef-charcoal font-medium">Username</Label>
+                    <Label htmlFor="username" className="text-chef-charcoal font-medium">Username (Primary Display Name)</Label>
                     <Input
                       id="username"
                       value={profile.username}
@@ -368,6 +379,7 @@ const Settings = () => {
                       placeholder="Enter a unique username"
                       className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
+                    <p className="text-xs text-chef-charcoal/50 mt-1">This will be your primary display name</p>
                   </div>
                 </div>
 

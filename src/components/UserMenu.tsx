@@ -1,13 +1,63 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, LogOut, Settings, Trophy } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const UserMenu = () => {
   const { user, signOut } = useAuth();
   const { toast } = useToast();
+  const [profile, setProfile] = useState({
+    username: '',
+    full_name: '',
+    profile_image_url: ''
+  });
+
+  useEffect(() => {
+    if (user) {
+      fetchProfile();
+    }
+  }, [user]);
+
+  // Listen for profile updates
+  useEffect(() => {
+    const handleProfileUpdate = () => {
+      fetchProfile();
+    };
+
+    window.addEventListener('profileUpdated', handleProfileUpdate);
+    return () => window.removeEventListener('profileUpdated', handleProfileUpdate);
+  }, []);
+
+  const fetchProfile = async () => {
+    if (!user) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('username, full_name, profile_image_url')
+        .eq('id', user.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error fetching profile:', error);
+        return;
+      }
+
+      if (data) {
+        setProfile({
+          username: data.username || '',
+          full_name: data.full_name || '',
+          profile_image_url: data.profile_image_url || ''
+        });
+      }
+    } catch (error) {
+      console.error('Error in fetchProfile:', error);
+    }
+  };
 
   const handleSignOut = async () => {
     try {
@@ -26,23 +76,43 @@ const UserMenu = () => {
     }
   };
 
+  const getInitials = (name: string) => {
+    return name.split(' ').map(word => word.charAt(0)).join('').toUpperCase().slice(0, 2);
+  };
+
+  const getDisplayName = () => {
+    return profile.username || profile.full_name || user.email?.split('@')[0] || 'Chef';
+  };
+
+  const getFallbackText = () => {
+    if (profile.username) return profile.username.charAt(0).toUpperCase();
+    if (profile.full_name) return getInitials(profile.full_name);
+    return 'U';
+  };
+
   if (!user) return null;
 
   return (
     <div className="relative group">
       <button className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-chef-royal-blue/10 transition-colors">
-        <div className="w-8 h-8 bg-chef-royal-blue rounded-full flex items-center justify-center">
-          <User className="w-4 h-4 text-chef-warm-ivory" />
-        </div>
+        <Avatar className="w-8 h-8">
+          <AvatarImage 
+            src={profile.profile_image_url} 
+            alt={getDisplayName()} 
+          />
+          <AvatarFallback className="bg-chef-royal-blue text-chef-warm-ivory text-xs">
+            {getFallbackText()}
+          </AvatarFallback>
+        </Avatar>
         <span className="text-chef-charcoal font-medium hidden md:block">
-          {user.user_metadata?.full_name || user.email?.split('@')[0]}
+          {getDisplayName()}
         </span>
       </button>
       
       <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-chef-royal-blue/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
         <div className="p-4 border-b border-chef-royal-blue/10">
           <p className="text-sm font-medium text-chef-charcoal">
-            {user.user_metadata?.full_name || 'Chef'}
+            {getDisplayName()}
           </p>
           <p className="text-xs text-chef-charcoal/60">{user.email}</p>
         </div>
