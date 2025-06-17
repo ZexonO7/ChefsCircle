@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChefHat, User, Settings, LogOut, Bell } from "lucide-react";
@@ -79,7 +80,7 @@ const Navbar = () => {
     { name: 'Clubs', path: '/clubs' },
     { name: 'Library', path: '/library' },
     { name: 'Recipes', path: '/recipes' },
-    { name: 'Ingredients to Recipes', path: '/ingredients-to-recipes' },
+    { name: 'Recipe To AI Recipe', path: '/ingredients-to-recipes' },
     { name: 'Blog', path: '/blog' }
   ];
 
