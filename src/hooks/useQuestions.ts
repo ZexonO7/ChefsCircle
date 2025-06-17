@@ -44,7 +44,7 @@ export const useQuestions = () => {
         .from('questions')
         .select(`
           *,
-          profiles!questions_user_id_fkey (
+          profiles!inner (
             full_name,
             username
           )
@@ -143,7 +143,7 @@ export const useQuestionDetail = (questionId: string) => {
         .from('questions')
         .select(`
           *,
-          profiles!questions_user_id_fkey (
+          profiles!inner (
             full_name,
             username
           )
@@ -171,7 +171,7 @@ export const useQuestionDetail = (questionId: string) => {
         .from('answers')
         .select(`
           *,
-          profiles!answers_user_id_fkey (
+          profiles!inner (
             full_name,
             username
           )
