@@ -54,6 +54,11 @@ export const useGamificationData = () => {
       const latestAchievement = newAchievements[newAchievements.length - 1];
       setNewAchievement(latestAchievement.achievement_name);
       setShowAchievement(true);
+      
+      // Trigger achievement event for notification center
+      window.dispatchEvent(new CustomEvent('achievementEarned', {
+        detail: { achievementName: latestAchievement.achievement_name }
+      }));
     }
   };
 
