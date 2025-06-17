@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +11,7 @@ import Clubs from "./pages/Clubs";
 import Recipes from "./pages/Recipes";
 import Courses from "./pages/Courses";
 import Library from "./pages/Library";
+import QuestionDetail from "./pages/QuestionDetail";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import AdminPortal from "./pages/AdminPortal";
@@ -45,6 +45,7 @@ const App = () => (
             <Route path="/recipes" element={<Recipes />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/library" element={<Library />} />
+            <Route path="/library/question/:id" element={<QuestionDetail />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/dashboard" element={
               <ProtectedRoute>

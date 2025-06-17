@@ -1,4 +1,3 @@
-
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Search, Plus, Clock, HelpCircle, BookOpen } from 'lucide-react';
@@ -107,10 +106,7 @@ const Library = () => {
   };
 
   const handleQuestionClick = (questionId: number) => {
-    toast({
-      title: "Coming Soon",
-      description: "Question details page is under development.",
-    });
+    navigate(`/library/question/${questionId}`);
   };
 
   const handleTopicClick = (topicName: string) => {
