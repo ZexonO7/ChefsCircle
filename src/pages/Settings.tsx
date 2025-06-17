@@ -346,7 +346,7 @@ const Settings = () => {
                   </div>
                 </div>
                 
-                <Button onClick={handlePasswordChange} disabled={isSaving} variant="outline" className="w-full max-w-xs border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-chef-warm-ivory text-[chef-royal-blue]">
+                <Button onClick={handlePasswordChange} disabled={isSaving} variant="outline" className="w-full max-w-xs border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-chef-warm-ivory text-[chef-royal-blue] text-slate-50 bg-chef-navy bg-[chef-royal-blue]">
                   <Lock className="w-4 h-4 mr-2" />
                   {isSaving ? 'Updating...' : 'Update Password'}
                 </Button>
