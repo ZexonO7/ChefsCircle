@@ -1,6 +1,7 @@
 
+
 import React, { useState, useEffect } from 'react';
-import { User, LogOut, Settings, Trophy } from 'lucide-react';
+import { User, LogOut, Settings, Trophy, Shield } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
@@ -16,10 +17,15 @@ const UserMenu = () => {
     profile_image_url: ''
   });
   const [imageKey, setImageKey] = useState(0); // Force re-render of avatar
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
 
   useEffect(() => {
     if (user) {
       fetchProfile();
+      // Check if user is admin
+      setIsAdmin(adminEmails.includes(user.email || ''));
     }
   }, [user]);
 
@@ -139,6 +145,15 @@ const UserMenu = () => {
             <Trophy className="w-4 h-4" />
             Dashboard
           </Link>
+          {isAdmin && (
+            <Link 
+              to="/admin"
+              className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
+            >
+              <Shield className="w-4 h-4" />
+              Admin
+            </Link>
+          )}
           <Link 
             to="/settings"
             className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
@@ -160,3 +175,4 @@ const UserMenu = () => {
 };
 
 export default UserMenu;
+

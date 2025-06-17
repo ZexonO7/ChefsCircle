@@ -1,132 +1,152 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Menu, X, ChefHat, Shield } from "lucide-react";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useAuth } from '@/components/AuthProvider';
-import UserMenu from '@/components/UserMenu';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Menu, X, ChefHat, User, Sparkles } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import UserMenu from "./UserMenu";
 import NotificationBell from "./NotificationBell";
-
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const {
+    user
+  } = useAuth();
+  const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
-
+  const {
+    toast
+  } = useToast();
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   const navItems = [{
-    name: "Home",
-    href: "/"
+    name: 'About',
+    path: '/about'
   }, {
-    name: "About",
-    href: "/about"
+    name: 'Courses',
+    path: '/courses'
   }, {
-    name: "Clubs",
-    href: "/clubs"
+    name: 'Clubs',
+    path: '/clubs'
   }, {
-    name: "Recipes",
-    href: "/recipes"
+    name: 'Library',
+    path: '/library'
   }, {
-    name: "Courses",
-    href: "/courses"
+    name: 'Recipes',
+    path: '/recipes'
   }, {
-    name: "Library",
-    href: "/library"
+    name: 'AI recipe',
+    path: '/ingredients-to-recipes',
+    isSpecial: true
   }, {
-    name: "News",
-    href: "/blog"
+    name: 'News',
+    path: '/blog'
   }];
-
-  const isActive = (path: string) => {
-    if (path === "/" && location.pathname === "/") return true;
-    if (path !== "/" && location.pathname.startsWith(path)) return true;
+  const isActivePath = (path: string) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
-
-  const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
-  const isAdmin = user?.email && adminEmails.includes(user.email);
-
-  return <motion.nav className="fixed top-0 w-full bg-chef-warm-ivory/95 backdrop-blur-sm z-50 border-b border-chef-royal-blue/10" initial={{
-    y: -100
-  }} animate={{
-    y: 0
-  }} transition={{
-    duration: 0.6,
-    ease: "easeOut"
-  }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 bg-transparent">
-          <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 bg-chef-royal-blue rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-chef-warm-ivory/95 backdrop-blur-lg border-b border-chef-royal-green/20 shadow-chef-luxury' : 'bg-chef-warm-ivory border-b border-chef-royal-green/10'}`}>
+      <div className="chef-container py-4 flex items-center justify-between">
+        {/* Enhanced Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="relative">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-chef-royal-green to-chef-green-light flex items-center justify-center shadow-lg group-hover:shadow-chef-luxury transition-all duration-300 group-hover:scale-110">
               <ChefHat className="w-6 h-6 text-chef-warm-ivory" />
             </div>
-            <span className="text-2xl font-bold text-chef-charcoal font-playfair">ChefsCircle</span>
-          </Link>
-          
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map(item => <Link key={item.name} to={item.href} className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${isActive(item.href) ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`}>
-                  {item.name}
-                </Link>)}
-              {isAdmin && (
-                <Link to="/admin" className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 flex items-center gap-2 ${isActive("/admin") ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`}>
-                  <Shield className="w-4 h-4" />
-                  Admin
-                </Link>
-              )}
-            </div>
+            
           </div>
-
-          <div className="hidden md:flex items-center space-x-4">
-            {user && (
-              <div className="flex items-center gap-3">
-                <NotificationBell />
-                <UserMenu />
-              </div>
-            )}
-            {!user && <Link to="/auth">
-                <button className="chef-button-primary text-sm">
-                  Sign In
-                </button>
-              </Link>}
+          <div className="flex flex-col">
+            <span className="font-playfair text-2xl text-chef-charcoal font-bold tracking-tight group-hover:text-chef-royal-green transition-colors duration-300">
+              ChefCircle
+            </span>
+            <span className="text-xs text-chef-charcoal/60 font-inter tracking-wide -mt-1">
+              Culinary Excellence
+            </span>
           </div>
+        </Link>
 
-          <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-chef-charcoal hover:text-chef-royal-blue p-2">
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {isOpen && <motion.div className="md:hidden bg-chef-warm-ivory border-t border-chef-royal-blue/10" initial={{
-      opacity: 0,
-      height: 0
-    }} animate={{
-      opacity: 1,
-      height: "auto"
-    }} exit={{
-      opacity: 0,
-      height: 0
-    }} transition={{
-      duration: 0.3
-    }}>
-          <div className="px-4 pt-2 pb-3 space-y-1">
-            {navItems.map(item => <Link key={item.name} to={item.href} className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 ${isActive(item.href) ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`} onClick={() => setIsOpen(false)}>
+        {/* Desktop Navigation */}
+        {!isSmallScreen && <div className="hidden md:flex items-center gap-1">
+            {navItems.map(item => <Link key={item.name} to={item.path} className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${isActivePath(item.path) ? 'text-chef-royal-green bg-chef-royal-green/10' : 'text-chef-charcoal hover:text-chef-royal-green hover:bg-chef-royal-green/5'} ${item.isSpecial ? 'bg-gradient-to-r from-chef-royal-blue/10 to-chef-royal-green/10 border border-chef-royal-blue/20' : ''}`}>
+                {item.isSpecial && <Sparkles className="w-3 h-3 inline-block mr-1 text-chef-royal-blue animate-pulse" />}
                 {item.name}
+                {item.isSpecial}
+                <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-chef-royal-green transition-all duration-300 group-hover:w-full ${isActivePath(item.path) ? 'w-full' : ''}`}></div>
               </Link>)}
-            {isAdmin && (
-              <Link to="/admin" className={`block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 flex items-center gap-2 ${isActive("/admin") ? "text-chef-royal-blue bg-chef-royal-blue/10" : "text-chef-charcoal hover:text-chef-royal-blue hover:bg-chef-royal-blue/5"}`} onClick={() => setIsOpen(false)}>
-                <Shield className="w-4 h-4" />
-                Admin Portal
-              </Link>
-            )}
-            {!user && <Link to="/auth" onClick={() => setIsOpen(false)}>
-                <button className="w-full chef-button-primary text-sm mt-4">
-                  Sign In
-                </button>
-              </Link>}
-          </div>
-        </motion.div>}
-    </motion.nav>;
-};
+          </div>}
 
+        {/* Mobile Menu Button */}
+        {isSmallScreen && <Button variant="ghost" size="icon" onClick={toggleMenu} className={`text-chef-charcoal hover:bg-chef-royal-green/10 rounded-full transition-all duration-300 ${isMenuOpen ? 'bg-chef-royal-green/10 rotate-90' : ''}`}>
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>}
+
+        {/* Enhanced Mobile Menu */}
+        {isSmallScreen && <div className={`fixed inset-0 z-50 transform transition-all duration-500 ease-in-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
+            <div className="absolute inset-0 bg-chef-charcoal/20 backdrop-blur-sm" onClick={closeMenu}></div>
+            <div className="absolute right-0 top-0 h-full w-80 max-w-full bg-chef-warm-ivory shadow-2xl">
+              <div className="p-6 border-b border-chef-royal-green/20">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-chef-royal-green to-chef-green-light flex items-center justify-center">
+                      <ChefHat className="w-5 h-5 text-chef-warm-ivory" />
+                    </div>
+                    <span className="font-playfair text-xl text-chef-charcoal font-bold">Menu</span>
+                  </div>
+                  <Button variant="ghost" size="icon" onClick={closeMenu} className="text-chef-charcoal hover:bg-chef-royal-green/10 rounded-full">
+                    <X className="h-6 w-6" />
+                  </Button>
+                </div>
+              </div>
+              <div className="p-6 space-y-2">
+                {navItems.map((item, index) => <Link key={item.name} to={item.path} className={`flex items-center gap-3 px-4 py-3 rounded-xl text-chef-charcoal hover:text-chef-royal-green hover:bg-chef-royal-green/10 transition-all duration-300 transform hover:translate-x-2 ${isActivePath(item.path) ? 'bg-chef-royal-green/10 text-chef-royal-green' : ''} ${item.isSpecial ? 'bg-gradient-to-r from-chef-royal-blue/5 to-chef-royal-green/5 border border-chef-royal-blue/20' : ''}`} onClick={closeMenu} style={{
+              animationDelay: `${index * 50}ms`
+            }}>
+                    {item.isSpecial && <Sparkles className="w-4 h-4 text-chef-royal-blue animate-pulse" />}
+                    <span className="font-medium">{item.name}</span>
+                    {item.isSpecial && <span className="ml-auto text-xs bg-chef-gold/20 text-chef-gold px-2 py-1 rounded-full">AI</span>}
+                  </Link>)}
+              </div>
+            </div>
+          </div>}
+
+        {/* Enhanced User Actions */}
+        {user ? <div className="hidden md:flex items-center gap-3">
+            <NotificationBell />
+            <UserMenu />
+          </div> : <div className="hidden md:block">
+            <Link to="/auth">
+              <Button className="bg-gradient-to-r from-chef-royal-green to-chef-green-light hover:from-chef-green-light hover:to-chef-royal-green text-chef-warm-ivory font-medium px-6 py-2 rounded-xl shadow-lg hover:shadow-chef-luxury transition-all duration-300 transform hover:-translate-y-0.5">
+                <User className="w-4 h-4 mr-2" />
+                Sign In
+              </Button>
+            </Link>
+          </div>}
+      </div>
+    </nav>;
+};
 export default Navbar;
