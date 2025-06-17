@@ -223,10 +223,10 @@ const Settings = () => {
   if (!user) {
     return (
       <PageLayout>
-        <div className="min-h-screen bg-chef-royal-blue flex items-center justify-center">
+        <div className="min-h-screen bg-chef-cream flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-white mb-4">Access Denied</h1>
-            <p className="text-white/70">You need to be signed in to access settings.</p>
+            <h1 className="text-2xl font-bold text-chef-charcoal mb-4">Access Denied</h1>
+            <p className="text-chef-charcoal/70">You need to be signed in to access settings.</p>
           </div>
         </div>
       </PageLayout>
@@ -236,10 +236,10 @@ const Settings = () => {
   if (isLoading) {
     return (
       <PageLayout>
-        <div className="min-h-screen bg-chef-royal-blue flex items-center justify-center">
+        <div className="min-h-screen bg-chef-cream flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-            <p className="text-white">Loading settings...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-chef-royal-blue mx-auto mb-4"></div>
+            <p className="text-chef-charcoal">Loading settings...</p>
           </div>
         </div>
       </PageLayout>
@@ -248,22 +248,22 @@ const Settings = () => {
 
   return (
     <PageLayout>
-      <div className="min-h-screen bg-chef-royal-blue pt-24 pb-16">
+      <div className="min-h-screen bg-chef-cream pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white font-playfair">Account Settings</h1>
-            <p className="text-white/70 mt-2">Manage your profile and account preferences</p>
+            <h1 className="text-3xl font-bold text-chef-charcoal font-playfair">Account Settings</h1>
+            <p className="text-chef-charcoal/70 mt-2">Manage your profile and account preferences</p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
             {/* Profile Picture Section */}
-            <Card className="lg:col-span-1 bg-chef-royal-blue border-white/20">
+            <Card className="lg:col-span-1 bg-chef-cream border-chef-royal-blue/20">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <Camera className="w-5 h-5 text-white" />
+                <CardTitle className="flex items-center gap-2 text-chef-charcoal">
+                  <Camera className="w-5 h-5 text-chef-royal-blue" />
                   Profile Picture
                 </CardTitle>
-                <CardDescription className="text-white/60">
+                <CardDescription className="text-chef-charcoal/60">
                   Your profile picture will be visible to other users
                 </CardDescription>
               </CardHeader>
@@ -274,7 +274,7 @@ const Settings = () => {
                       src={profile.profile_image_url} 
                       alt={profile.full_name || profile.username || 'Profile'} 
                     />
-                    <AvatarFallback className="bg-chef-royal-green text-chef-warm-ivory text-lg">
+                    <AvatarFallback className="bg-chef-royal-blue text-chef-warm-ivory text-lg">
                       {profile.full_name 
                         ? getInitials(profile.full_name)
                         : profile.username 
@@ -286,15 +286,15 @@ const Settings = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="profileImage" className="text-white font-medium">Profile Image URL</Label>
+                  <Label htmlFor="profileImage" className="text-chef-charcoal font-medium">Profile Image URL</Label>
                   <Input
                     id="profileImage"
                     value={profile.profile_image_url}
                     onChange={(e) => setProfile({...profile, profile_image_url: e.target.value})}
                     placeholder="https://example.com/image.jpg"
-                    className="mt-1 bg-chef-royal-blue border-white/30 text-white placeholder:text-white/50 focus:border-white"
+                    className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />
-                  <p className="text-xs text-white/50 mt-1">
+                  <p className="text-xs text-chef-charcoal/50 mt-1">
                     Enter a URL to an image you'd like to use as your profile picture
                   </p>
                 </div>
@@ -302,62 +302,62 @@ const Settings = () => {
             </Card>
 
             {/* Profile Information */}
-            <Card className="lg:col-span-2 bg-chef-royal-blue border-white/20">
+            <Card className="lg:col-span-2 bg-chef-cream border-chef-royal-blue/20">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <User className="w-5 h-5 text-white" />
+                <CardTitle className="flex items-center gap-2 text-chef-charcoal">
+                  <User className="w-5 h-5 text-chef-royal-blue" />
                   Profile Information
                 </CardTitle>
-                <CardDescription className="text-white/60">
+                <CardDescription className="text-chef-charcoal/60">
                   Update your personal information and bio
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
-                    <Label htmlFor="email" className="text-white font-medium">Email Address</Label>
+                    <Label htmlFor="email" className="text-chef-charcoal font-medium">Email Address</Label>
                     <Input
                       id="email"
                       value={profile.email}
                       disabled
-                      className="mt-1 bg-white/5 border-white/20 text-white/60"
+                      className="mt-1 bg-chef-charcoal/5 border-chef-royal-blue/20 text-chef-charcoal/60"
                     />
-                    <p className="text-xs text-white/50 mt-1">Email cannot be changed</p>
+                    <p className="text-xs text-chef-charcoal/50 mt-1">Email cannot be changed</p>
                   </div>
                   
                   <div>
-                    <Label htmlFor="username" className="text-white font-medium">Username</Label>
+                    <Label htmlFor="username" className="text-chef-charcoal font-medium">Username</Label>
                     <Input
                       id="username"
                       value={profile.username}
                       onChange={(e) => setProfile({...profile, username: e.target.value})}
                       placeholder="Enter a unique username"
-                      className="mt-1 bg-chef-royal-blue border-white/30 text-white placeholder:text-white/50 focus:border-white"
+                      className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="fullName" className="text-white font-medium">Full Name</Label>
+                  <Label htmlFor="fullName" className="text-chef-charcoal font-medium">Full Name</Label>
                   <Input
                     id="fullName"
                     value={profile.full_name}
                     onChange={(e) => setProfile({...profile, full_name: e.target.value})}
                     placeholder="Enter your full name"
-                    className="mt-1 bg-chef-royal-blue border-white/30 text-white placeholder:text-white/50 focus:border-white"
+                    className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="bio" className="text-white font-medium">Bio</Label>
+                  <Label htmlFor="bio" className="text-chef-charcoal font-medium">Bio</Label>
                   <Textarea
                     id="bio"
                     value={profile.bio}
                     onChange={(e) => setProfile({...profile, bio: e.target.value})}
                     placeholder="Tell others about yourself..."
-                    className="min-h-[100px] mt-1 bg-chef-royal-blue border-white/30 text-white placeholder:text-white/50 focus:border-white"
+                    className="min-h-[100px] mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                   />
-                  <p className="text-xs text-white/50 mt-1">
+                  <p className="text-xs text-chef-charcoal/50 mt-1">
                     {profile.bio.length}/500 characters
                   </p>
                 </div>
@@ -374,39 +374,39 @@ const Settings = () => {
             </Card>
 
             {/* Password Section */}
-            <Card className="lg:col-span-3 bg-chef-royal-blue border-white/20">
+            <Card className="lg:col-span-3 bg-chef-cream border-chef-royal-blue/20">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-white">
-                  <Lock className="w-5 h-5 text-white" />
+                <CardTitle className="flex items-center gap-2 text-chef-charcoal">
+                  <Lock className="w-5 h-5 text-chef-royal-blue" />
                   Change Password
                 </CardTitle>
-                <CardDescription className="text-white/60">
+                <CardDescription className="text-chef-charcoal/60">
                   Update your account password
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2 max-w-2xl">
                   <div>
-                    <Label htmlFor="newPassword" className="text-white font-medium">New Password</Label>
+                    <Label htmlFor="newPassword" className="text-chef-charcoal font-medium">New Password</Label>
                     <Input
                       id="newPassword"
                       type="password"
                       value={passwords.newPassword}
                       onChange={(e) => setPasswords({...passwords, newPassword: e.target.value})}
                       placeholder="Enter new password"
-                      className="mt-1 bg-chef-royal-blue border-white/30 text-white placeholder:text-white/50 focus:border-white"
+                      className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
                   </div>
                   
                   <div>
-                    <Label htmlFor="confirmPassword" className="text-white font-medium">Confirm New Password</Label>
+                    <Label htmlFor="confirmPassword" className="text-chef-charcoal font-medium">Confirm New Password</Label>
                     <Input
                       id="confirmPassword"
                       type="password"
                       value={passwords.confirmPassword}
                       onChange={(e) => setPasswords({...passwords, confirmPassword: e.target.value})}
                       placeholder="Confirm new password"
-                      className="mt-1 bg-chef-royal-blue border-white/30 text-white placeholder:text-white/50 focus:border-white"
+                      className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
                     />
                   </div>
                 </div>
@@ -415,7 +415,7 @@ const Settings = () => {
                   onClick={handlePasswordChange} 
                   disabled={isSaving}
                   variant="outline"
-                  className="w-full max-w-xs border-white text-white hover:bg-white hover:text-chef-royal-blue"
+                  className="w-full max-w-xs border-chef-royal-blue text-chef-royal-blue hover:bg-chef-royal-blue hover:text-chef-warm-ivory"
                 >
                   <Lock className="w-4 h-4 mr-2" />
                   {isSaving ? 'Updating...' : 'Update Password'}
