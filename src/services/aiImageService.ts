@@ -1,8 +1,7 @@
 
-import { createClient } from '@/integrations/supabase/client';
+import { supabase } from '@/integrations/supabase/client';
 
 export class AIImageService {
-  private static supabase = createClient();
   private static imageCache = new Map<string, string>();
 
   static async generateRelevantImage(title: string, description: string): Promise<string> {
@@ -18,7 +17,7 @@ export class AIImageService {
     try {
       console.log(`Generating AI image for article: "${title}"`);
       
-      const { data, error } = await this.supabase.functions.invoke('generate-article-image', {
+      const { data, error } = await supabase.functions.invoke('generate-article-image', {
         body: { title, description }
       });
 
