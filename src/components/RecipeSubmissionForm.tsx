@@ -9,12 +9,12 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
-  Sheet, 
-  SheetContent, 
-  SheetDescription, 
-  SheetHeader, 
-  SheetTitle 
-} from '@/components/ui/sheet';
+  Dialog, 
+  DialogContent, 
+  DialogDescription, 
+  DialogHeader, 
+  DialogTitle 
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -171,23 +171,23 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
   };
 
   return (
-    <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent className="w-full sm:max-w-4xl bg-chef-warm-ivory overflow-y-auto">
-        <SheetHeader className="pb-6">
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-chef-warm-ivory">
+        <DialogHeader className="pb-6">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-12 h-12 bg-chef-royal-green/20 rounded-full flex items-center justify-center">
               <ChefHat className="w-6 h-6 text-chef-royal-green" />
             </div>
             <div>
-              <SheetTitle className="text-chef-charcoal text-2xl font-playfair">
+              <DialogTitle className="text-chef-charcoal text-2xl font-playfair">
                 Share Your Recipe
-              </SheetTitle>
-              <SheetDescription className="text-chef-charcoal/70">
+              </DialogTitle>
+              <DialogDescription className="text-chef-charcoal/70">
                 Share your culinary creation with the ChefCircle community
-              </SheetDescription>
+              </DialogDescription>
             </div>
           </div>
-        </SheetHeader>
+        </DialogHeader>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
@@ -198,11 +198,11 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                 name="title"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-chef-charcoal">Recipe Title *</FormLabel>
+                    <FormLabel className="text-chef-charcoal font-medium">Recipe Title *</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter recipe title"
-                        className="chef-input"
+                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 text-chef-charcoal placeholder:text-chef-charcoal/50"
                         {...field}
                       />
                     </FormControl>
@@ -216,10 +216,10 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-chef-charcoal">Category</FormLabel>
+                    <FormLabel className="text-chef-charcoal font-medium">Category</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="chef-input">
+                        <SelectTrigger className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus:ring-0 focus:ring-offset-0 px-0 py-3">
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
                       </FormControl>
@@ -242,11 +242,11 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-chef-charcoal">Description *</FormLabel>
+                  <FormLabel className="text-chef-charcoal font-medium">Description *</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Describe your recipe..."
-                      className="chef-input min-h-[100px]"
+                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 min-h-[100px] resize-none"
                       {...field}
                     />
                   </FormControl>
@@ -257,22 +257,24 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
 
             {/* Ingredients */}
             <div className="space-y-4">
-              <label className="text-sm font-medium text-chef-charcoal">Ingredients</label>
+              <label className="text-sm font-medium text-chef-charcoal">Ingredients *</label>
               {ingredients.map((ingredient, index) => (
-                <div key={index} className="flex gap-2">
-                  <Input
-                    value={ingredient}
-                    onChange={(e) => updateIngredient(index, e.target.value)}
-                    placeholder={`Ingredient ${index + 1}`}
-                    className="chef-input flex-1"
-                  />
+                <div key={index} className="flex gap-3 items-end">
+                  <div className="flex-1">
+                    <Input
+                      value={ingredient}
+                      onChange={(e) => updateIngredient(index, e.target.value)}
+                      placeholder={`Ingredient ${index + 1}`}
+                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3"
+                    />
+                  </div>
                   {ingredients.length > 1 && (
                     <Button
                       type="button"
-                      variant="outline"
+                      variant="ghost"
                       size="icon"
                       onClick={() => removeIngredient(index)}
-                      className="shrink-0"
+                      className="h-10 w-10 text-chef-charcoal/50 hover:text-chef-charcoal hover:bg-chef-royal-green/10"
                     >
                       <X className="w-4 h-4" />
                     </Button>
@@ -283,7 +285,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                 type="button"
                 variant="outline"
                 onClick={addIngredient}
-                className="chef-button-outline"
+                className="border-chef-royal-green/30 text-chef-royal-green hover:bg-chef-royal-green/10 hover:text-chef-royal-green"
               >
                 Add Ingredient
               </Button>
@@ -294,11 +296,11 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
               name="instructions"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-chef-charcoal">Instructions *</FormLabel>
+                  <FormLabel className="text-chef-charcoal font-medium">Instructions *</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Step-by-step cooking instructions..."
-                      className="chef-input min-h-[150px]"
+                      className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3 min-h-[150px] resize-none"
                       {...field}
                     />
                   </FormControl>
@@ -308,13 +310,13 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
             />
 
             {/* Additional Details */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <FormField
                 control={form.control}
                 name="cookTime"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-chef-charcoal flex items-center gap-2">
+                    <FormLabel className="text-chef-charcoal font-medium flex items-center gap-2">
                       <Clock className="w-4 h-4" />
                       Cook Time (minutes)
                     </FormLabel>
@@ -322,7 +324,7 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                       <Input
                         type="number"
                         placeholder="30"
-                        className="chef-input"
+                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3"
                         {...field}
                       />
                     </FormControl>
@@ -336,13 +338,13 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                 name="difficulty"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-chef-charcoal flex items-center gap-2">
+                    <FormLabel className="text-chef-charcoal font-medium flex items-center gap-2">
                       <Star className="w-4 h-4" />
                       Difficulty
                     </FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="chef-input">
+                        <SelectTrigger className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus:ring-0 focus:ring-offset-0 px-0 py-3">
                           <SelectValue placeholder="Select difficulty" />
                         </SelectTrigger>
                       </FormControl>
@@ -364,14 +366,14 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
                 name="imageUrl"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-chef-charcoal flex items-center gap-2">
+                    <FormLabel className="text-chef-charcoal font-medium flex items-center gap-2">
                       <Upload className="w-4 h-4" />
                       Image URL
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder="https://example.com/image.jpg"
-                        className="chef-input"
+                        className="border-0 border-b-2 border-chef-royal-green/30 rounded-none bg-transparent focus:border-chef-royal-green focus-visible:ring-0 focus-visible:ring-offset-0 px-0 py-3"
                         {...field}
                       />
                     </FormControl>
@@ -382,27 +384,27 @@ const RecipeSubmissionForm = ({ isOpen, onClose, onSubmit }: RecipeSubmissionFor
             </div>
 
             {/* Submit Button */}
-            <div className="flex gap-4 pt-6">
+            <div className="flex gap-4 pt-6 border-t border-chef-royal-green/20">
               <Button
                 type="button"
                 variant="outline"
                 onClick={onClose}
-                className="chef-button-outline flex-1"
+                className="flex-1 border-chef-royal-green/30 text-chef-charcoal hover:bg-chef-royal-green/10"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={loading}
-                className="chef-button-primary flex-1"
+                className="flex-1 bg-chef-royal-green hover:bg-chef-royal-green/90 text-white"
               >
                 {loading ? 'Submitting...' : 'Submit Recipe'}
               </Button>
             </div>
           </form>
         </Form>
-      </SheetContent>
-    </Sheet>
+      </DialogContent>
+    </Dialog>
   );
 };
 
