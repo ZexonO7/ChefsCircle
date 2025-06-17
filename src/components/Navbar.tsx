@@ -78,7 +78,7 @@ const Navbar = () => {
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-chef-royal-green to-chef-green-light flex items-center justify-center shadow-lg group-hover:shadow-chef-luxury transition-all duration-300 group-hover:scale-110">
               <ChefHat className="w-6 h-6 text-chef-warm-ivory" />
             </div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-chef-gold rounded-full animate-pulse opacity-80"></div>
+            
           </div>
           <div className="flex flex-col">
             <span className="font-playfair text-2xl text-chef-charcoal font-bold tracking-tight group-hover:text-chef-royal-green transition-colors duration-300">
