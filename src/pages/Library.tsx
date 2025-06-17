@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
-import { useQuestions } from '@/hooks/useQuestions';
+import { useQuestions, usePopularTopics } from '@/hooks/useQuestions';
 import AskQuestionModal from '@/components/AskQuestionModal';
 
 const Library = () => {
@@ -18,17 +18,9 @@ const Library = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { questions, loading, submitQuestion } = useQuestions();
+  const { popularTopics, loading: topicsLoading } = usePopularTopics();
 
   const categories = ['All', 'Techniques', 'Ingredients', 'Equipment', 'Troubleshooting', 'Nutrition', 'Food Safety'];
-
-  const popularTopics = [
-    { name: "Knife Skills", count: 156 },
-    { name: "Bread Making", count: 143 },
-    { name: "Sauce Techniques", count: 98 },
-    { name: "Food Safety", count: 87 },
-    { name: "Pasta Making", count: 76 },
-    { name: "Chocolate Work", count: 65 }
-  ];
 
   const filteredQuestions = questions.filter(question => {
     const matchesSearch = question.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -62,16 +54,25 @@ const Library = () => {
   const formatTimeAgo = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
     
-    if (diffInHours < 1) return 'Just now';
+    if (diffInMinutes < 1) return 'Just now';
+    if (diffInMinutes < 60) return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+    
+    const diffInHours = Math.floor(diffInMinutes / 60);
     if (diffInHours < 24) return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
     
     const diffInDays = Math.floor(diffInHours / 24);
     if (diffInDays < 7) return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
     
     const diffInWeeks = Math.floor(diffInDays / 7);
-    return `${diffInWeeks} week${diffInWeeks > 1 ? 's' : ''} ago`;
+    if (diffInWeeks < 4) return `${diffInWeeks} week${diffInWeeks > 1 ? 's' : ''} ago`;
+    
+    const diffInMonths = Math.floor(diffInDays / 30);
+    if (diffInMonths < 12) return `${diffInMonths} month${diffInMonths > 1 ? 's' : ''} ago`;
+    
+    const diffInYears = Math.floor(diffInDays / 365);
+    return `${diffInYears} year${diffInYears > 1 ? 's' : ''} ago`;
   };
 
   return (
@@ -146,17 +147,28 @@ const Library = () => {
 
                 <h3 className="chef-heading-sm text-chef-charcoal mb-4">Popular Topics</h3>
                 <div className="space-y-2">
-                  {popularTopics.map((topic) => (
-                    <div key={topic.name} className="flex items-center justify-between text-sm">
-                      <button 
-                        onClick={() => handleTopicClick(topic.name)}
-                        className="text-chef-charcoal hover:text-chef-royal-green cursor-pointer transition-colors"
-                      >
-                        {topic.name}
-                      </button>
-                      <span className="text-chef-charcoal/60">{topic.count}</span>
+                  {topicsLoading ? (
+                    <div className="space-y-2">
+                      {Array.from({ length: 6 }).map((_, index) => (
+                        <div key={index} className="flex items-center justify-between text-sm">
+                          <div className="h-4 bg-gray-200 rounded w-20 animate-pulse"></div>
+                          <div className="h-4 bg-gray-200 rounded w-8 animate-pulse"></div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  ) : (
+                    popularTopics.map((topic) => (
+                      <div key={topic.name} className="flex items-center justify-between text-sm">
+                        <button 
+                          onClick={() => handleTopicClick(topic.name)}
+                          className="text-chef-charcoal hover:text-chef-royal-green cursor-pointer transition-colors"
+                        >
+                          {topic.name}
+                        </button>
+                        <span className="text-chef-charcoal/60">{topic.count}</span>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>
