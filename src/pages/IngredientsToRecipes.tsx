@@ -8,7 +8,6 @@ import { useToast } from '@/hooks/use-toast';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
-
 interface AIRecipe {
   title: string;
   description: string;
@@ -18,7 +17,6 @@ interface AIRecipe {
   difficulty: string;
   servings: string;
 }
-
 const IngredientsToRecipes = () => {
   const [ingredients, setIngredients] = useState<string[]>(['']);
   const [currentIngredient, setCurrentIngredient] = useState('');
@@ -28,18 +26,15 @@ const IngredientsToRecipes = () => {
   const {
     toast
   } = useToast();
-
   const addIngredient = () => {
     if (currentIngredient.trim() && !availableIngredients.includes(currentIngredient.trim())) {
       setAvailableIngredients([...availableIngredients, currentIngredient.trim()]);
       setCurrentIngredient('');
     }
   };
-
   const removeIngredient = (ingredient: string) => {
     setAvailableIngredients(availableIngredients.filter(item => item !== ingredient));
   };
-
   const generateRecipes = async () => {
     if (availableIngredients.length === 0) {
       toast({
@@ -85,19 +80,13 @@ const IngredientsToRecipes = () => {
       setIsGenerating(false);
     }
   };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       addIngredient();
     }
   };
-
-  return (
-    <PageLayout>
-      <SEO 
-        title="Ingredients to Recipes - ChefCircle" 
-        description="Transform your available ingredients into delicious recipes with AI-powered suggestions from ChefCircle." 
-      />
+  return <PageLayout>
+      <SEO title="Ingredients to Recipes - ChefCircle" description="Transform your available ingredients into delicious recipes with AI-powered suggestions from ChefCircle." />
       
       <div className="min-h-screen bg-gradient-to-br from-chef-warm-ivory via-chef-cream to-chef-warm-ivory">
         {/* Hero Section */}
@@ -136,62 +125,34 @@ const IngredientsToRecipes = () => {
               <CardContent className="space-y-6">
                 {/* Input for adding ingredients */}
                 <div className="flex gap-3">
-                  <Input 
-                    value={currentIngredient}
-                    onChange={(e) => setCurrentIngredient(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="e.g., chicken breast, tomatoes, garlic..."
-                    className="flex-1 border-chef-royal-green/30 focus:border-chef-royal-green focus:ring-2 focus:ring-chef-royal-green/20 bg-white"
-                  />
-                  <Button 
-                    onClick={addIngredient}
-                    className="bg-chef-royal-green hover:bg-chef-royal-green/90 text-white"
-                  >
+                  <Input value={currentIngredient} onChange={e => setCurrentIngredient(e.target.value)} onKeyPress={handleKeyPress} placeholder="e.g., chicken breast, tomatoes, garlic..." className="flex-1 border-chef-royal-green/30 focus:border-chef-royal-green focus:ring-2 focus:ring-chef-royal-green/20 bg-chef-navy" />
+                  <Button onClick={addIngredient} className="bg-chef-royal-green hover:bg-chef-royal-green/90 text-white">
                     <Plus className="w-4 h-4" />
                   </Button>
                 </div>
 
                 {/* Display added ingredients */}
-                {availableIngredients.length > 0 && (
-                  <div className="space-y-3">
+                {availableIngredients.length > 0 && <div className="space-y-3">
                     <h3 className="font-medium text-chef-charcoal">Your ingredients:</h3>
                     <div className="flex flex-wrap gap-2">
-                      {availableIngredients.map((ingredient, index) => (
-                        <Badge 
-                          key={index}
-                          variant="secondary" 
-                          className="bg-chef-royal-green/10 text-chef-royal-green border-chef-royal-green/20 px-3 py-1 flex items-center gap-2"
-                        >
+                      {availableIngredients.map((ingredient, index) => <Badge key={index} variant="secondary" className="bg-chef-royal-green/10 text-chef-royal-green border-chef-royal-green/20 px-3 py-1 flex items-center gap-2">
                           {ingredient}
-                          <button 
-                            onClick={() => removeIngredient(ingredient)}
-                            className="hover:text-chef-royal-green/80"
-                          >
+                          <button onClick={() => removeIngredient(ingredient)} className="hover:text-chef-royal-green/80">
                             <X className="w-3 h-3" />
                           </button>
-                        </Badge>
-                      ))}
+                        </Badge>)}
                     </div>
-                  </div>
-                )}
+                  </div>}
 
                 {/* Generate button */}
-                <Button 
-                  onClick={generateRecipes}
-                  disabled={isGenerating || availableIngredients.length === 0}
-                  className="w-full bg-chef-royal-green hover:bg-chef-royal-green/90 text-white py-3 text-lg"
-                >
-                  {isGenerating ? (
-                    <>
+                <Button onClick={generateRecipes} disabled={isGenerating || availableIngredients.length === 0} className="w-full bg-chef-royal-green hover:bg-chef-royal-green/90 text-white py-3 text-lg">
+                  {isGenerating ? <>
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                       Generating recipes...
-                    </>
-                  ) : (
-                    <>
+                    </> : <>
                       <Sparkles className="w-5 h-5 mr-2" />
                       Generate Recipes
-                    </>
-                  )}
+                    </>}
                 </Button>
               </CardContent>
             </Card>
@@ -199,19 +160,14 @@ const IngredientsToRecipes = () => {
         </section>
 
         {/* Generated Recipes Section */}
-        {generatedRecipes.length > 0 && (
-          <section className="py-12 px-4">
+        {generatedRecipes.length > 0 && <section className="py-12 px-4">
             <div className="max-w-6xl mx-auto">
               <h2 className="text-3xl font-playfair text-chef-charcoal text-center mb-8">
                 Your AI-Generated Recipes
               </h2>
               
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {generatedRecipes.map((recipe, index) => (
-                  <Card 
-                    key={index}
-                    className="bg-white/80 backdrop-blur-sm border-chef-royal-green/20 shadow-lg"
-                  >
+                {generatedRecipes.map((recipe, index) => <Card key={index} className="bg-white/80 backdrop-blur-sm border-chef-royal-green/20 shadow-lg">
                     <CardHeader>
                       <CardTitle className="text-chef-charcoal font-playfair text-xl">
                         {recipe.title}
@@ -238,17 +194,13 @@ const IngredientsToRecipes = () => {
                       <div>
                         <h4 className="font-medium text-chef-charcoal mb-2">Ingredients:</h4>
                         <ul className="text-sm text-chef-charcoal/70 space-y-1">
-                          {recipe.ingredients.slice(0, 5).map((ingredient, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
+                          {recipe.ingredients.slice(0, 5).map((ingredient, idx) => <li key={idx} className="flex items-start gap-2">
                               <span className="text-chef-royal-green mt-1">•</span>
                               {ingredient}
-                            </li>
-                          ))}
-                          {recipe.ingredients.length > 5 && (
-                            <li className="text-chef-royal-green text-xs">
+                            </li>)}
+                          {recipe.ingredients.length > 5 && <li className="text-chef-royal-green text-xs">
                               +{recipe.ingredients.length - 5} more ingredients
-                            </li>
-                          )}
+                            </li>}
                         </ul>
                       </div>
 
@@ -256,29 +208,21 @@ const IngredientsToRecipes = () => {
                       <div>
                         <h4 className="font-medium text-chef-charcoal mb-2">Instructions:</h4>
                         <div className="text-sm text-chef-charcoal/70 space-y-1">
-                          {recipe.instructions.slice(0, 2).map((step, idx) => (
-                            <p key={idx} className="flex items-start gap-2">
+                          {recipe.instructions.slice(0, 2).map((step, idx) => <p key={idx} className="flex items-start gap-2">
                               <span className="text-chef-royal-green font-medium">{idx + 1}.</span>
                               {step}
-                            </p>
-                          ))}
-                          {recipe.instructions.length > 2 && (
-                            <p className="text-chef-royal-green text-xs">
+                            </p>)}
+                          {recipe.instructions.length > 2 && <p className="text-chef-royal-green text-xs">
                               +{recipe.instructions.length - 2} more steps
-                            </p>
-                          )}
+                            </p>}
                         </div>
                       </div>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </div>
-          </section>
-        )}
+          </section>}
       </div>
-    </PageLayout>
-  );
+    </PageLayout>;
 };
-
 export default IngredientsToRecipes;
