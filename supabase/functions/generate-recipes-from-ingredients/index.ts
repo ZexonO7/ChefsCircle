@@ -22,10 +22,10 @@ serve(async (req) => {
       )
     }
 
-    const openaiApiKey = Deno.env.get('OPENAI_API_KEY')
-    if (!openaiApiKey) {
+    const cohereApiKey = Deno.env.get('COHERE_API_KEY')
+    if (!cohereApiKey) {
       return new Response(
-        JSON.stringify({ error: 'OpenAI API key not configured' }),
+        JSON.stringify({ error: 'Cohere API key not configured' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
       )
     }
@@ -60,32 +60,24 @@ Make sure the JSON is valid and properly formatted. Only return the JSON, no add
 
     console.log('Generating recipes for ingredients:', ingredientsList)
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.cohere.ai/v1/generate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${openaiApiKey}`
+        'Authorization': `Bearer ${cohereApiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are a professional chef AI that creates practical, delicious recipes. Always respond with valid JSON only.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
+        model: 'command',
+        prompt: prompt,
+        max_tokens: 2000,
         temperature: 0.7,
-        max_tokens: 2000
+        stop_sequences: []
       })
     })
 
     if (!response.ok) {
       const errorData = await response.json()
-      console.error('OpenAI API error:', errorData)
+      console.error('Cohere API error:', errorData)
       return new Response(
         JSON.stringify({ error: 'Failed to generate recipes', details: errorData }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: response.status }
@@ -93,14 +85,17 @@ Make sure the JSON is valid and properly formatted. Only return the JSON, no add
     }
 
     const data = await response.json()
-    const generatedContent = data.choices[0].message.content
+    const generatedContent = data.generations[0].text
 
     console.log('Raw AI response:', generatedContent)
 
     // Parse the JSON response from AI
     let parsedRecipes
     try {
-      parsedRecipes = JSON.parse(generatedContent)
+      // Clean up the response in case there's extra text
+      const jsonMatch = generatedContent.match(/\{[\s\S]*\}/)
+      const jsonString = jsonMatch ? jsonMatch[0] : generatedContent
+      parsedRecipes = JSON.parse(jsonString)
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError)
       console.error('Raw content:', generatedContent)
