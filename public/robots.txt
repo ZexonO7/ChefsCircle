@@ -6,4 +6,4 @@ Allow: /
 Sitemap: https://chefscircle.in/sitemap.xml
 
 # Optimize crawling
-Crawl-delay: 10
+Crawl-delay: 5
