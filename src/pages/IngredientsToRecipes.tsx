@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ChefHat, Sparkles, Plus, X, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/components/AuthProvider';
 
 interface AIRecipe {
   title: string;
@@ -20,6 +22,7 @@ interface AIRecipe {
 }
 
 const IngredientsToRecipes = () => {
+  const { user } = useAuth();
   const [ingredients, setIngredients] = useState<string[]>(['']);
   const [currentIngredient, setCurrentIngredient] = useState('');
   const [availableIngredients, setAvailableIngredients] = useState<string[]>([]);
@@ -36,6 +39,22 @@ const IngredientsToRecipes = () => {
 
   const removeIngredient = (ingredient: string) => {
     setAvailableIngredients(availableIngredients.filter(item => item !== ingredient));
+  };
+
+  const trackAIRecipeGeneration = async () => {
+    if (user) {
+      try {
+        const { error } = await supabase.rpc('track_ai_recipe_generation', {
+          user_id_param: user.id
+        });
+        
+        if (error) {
+          console.error('Error tracking AI recipe generation:', error);
+        }
+      } catch (error) {
+        console.error('Error in trackAIRecipeGeneration:', error);
+      }
+    }
   };
 
   const generateRecipes = async () => {
@@ -65,6 +84,10 @@ const IngredientsToRecipes = () => {
       if (data?.recipes) {
         console.log('Generated recipes:', data.recipes);
         setGeneratedRecipes(data.recipes);
+        
+        // Track AI recipe generation for gamification
+        await trackAIRecipeGeneration();
+        
         toast({
           title: "Recipes generated!",
           description: `Found ${data.recipes.length} delicious recipes for your ingredients.`

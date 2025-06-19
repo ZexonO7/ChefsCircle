@@ -562,7 +562,23 @@ export type Database = {
         }
         Returns: undefined
       }
+      track_ai_recipe_generation: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
+      track_club_joining: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
+      track_course_attendance: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
       track_first_login: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
+      track_news_article_view: {
         Args: { user_id_param: string }
         Returns: undefined
       }

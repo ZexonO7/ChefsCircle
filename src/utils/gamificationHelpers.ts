@@ -38,7 +38,7 @@ export const mapAchievementsToBadges = (userAchievements: Achievement[]) => {
     {
       id: 5,
       name: "Community Leader",
-      iconName: "Clock" as const,
+      iconName: "Users" as const,
       earned: userAchievements.some(a => a.achievement_name === "Community Leader"),
       color: "chef-royal-blue"
     },
@@ -48,6 +48,34 @@ export const mapAchievementsToBadges = (userAchievements: Achievement[]) => {
       iconName: "Trophy" as const,
       earned: userAchievements.some(a => a.achievement_name === "Challenge Winner"),
       color: "chef-royal-green"
+    },
+    {
+      id: 7,
+      name: "Course Attendee",
+      iconName: "BookOpen" as const,
+      earned: userAchievements.some(a => a.achievement_name === "Course Attendee"),
+      color: "chef-royal-blue"
+    },
+    {
+      id: 8,
+      name: "AI Recipe Master",
+      iconName: "Sparkles" as const,
+      earned: userAchievements.some(a => a.achievement_name === "AI Recipe Master"),
+      color: "chef-royal-green"
+    },
+    {
+      id: 9,
+      name: "Club Member",
+      iconName: "Users" as const,
+      earned: userAchievements.some(a => a.achievement_name === "Club Member"),
+      color: "chef-gold"
+    },
+    {
+      id: 10,
+      name: "News Reader",
+      iconName: "Newspaper" as const,
+      earned: userAchievements.some(a => a.achievement_name === "News Reader"),
+      color: "chef-royal-blue"
     }
   ];
 };

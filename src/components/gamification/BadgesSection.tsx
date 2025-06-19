@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Award, ChefHat, Star, Trophy, Crown, Clock } from 'lucide-react';
+import { Award, ChefHat, Star, Trophy, Crown, Users, BookOpen, Sparkles, Newspaper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -31,8 +31,14 @@ const BadgesSection = ({ badges }: BadgesSectionProps) => {
         return <Trophy {...iconProps} />;
       case 'Crown':
         return <Crown {...iconProps} />;
-      case 'Clock':
-        return <Clock {...iconProps} />;
+      case 'Users':
+        return <Users {...iconProps} />;
+      case 'BookOpen':
+        return <BookOpen {...iconProps} />;
+      case 'Sparkles':
+        return <Sparkles {...iconProps} />;
+      case 'Newspaper':
+        return <Newspaper {...iconProps} />;
       default:
         return <Star {...iconProps} />;
     }

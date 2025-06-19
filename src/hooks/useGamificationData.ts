@@ -86,6 +86,57 @@ export const useGamificationData = () => {
     }
   };
 
+  // Function to track course attendance
+  const trackCourseAttendance = async () => {
+    if (!user) return;
+    
+    try {
+      const { error } = await supabase.rpc('track_course_attendance', {
+        user_id_param: user.id
+      });
+      
+      if (error) {
+        console.error('Error tracking course attendance:', error);
+      }
+    } catch (error) {
+      console.error('Error in trackCourseAttendance:', error);
+    }
+  };
+
+  // Function to track club joining
+  const trackClubJoining = async () => {
+    if (!user) return;
+    
+    try {
+      const { error } = await supabase.rpc('track_club_joining', {
+        user_id_param: user.id
+      });
+      
+      if (error) {
+        console.error('Error tracking club joining:', error);
+      }
+    } catch (error) {
+      console.error('Error in trackClubJoining:', error);
+    }
+  };
+
+  // Function to track news article view
+  const trackNewsArticleView = async () => {
+    if (!user) return;
+    
+    try {
+      const { error } = await supabase.rpc('track_news_article_view', {
+        user_id_param: user.id
+      });
+      
+      if (error) {
+        console.error('Error tracking news article view:', error);
+      }
+    } catch (error) {
+      console.error('Error in trackNewsArticleView:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!user) return;
@@ -241,6 +292,9 @@ export const useGamificationData = () => {
     showAchievement,
     newAchievement,
     handleDismissAchievement,
-    trackFirstLogin
+    trackFirstLogin,
+    trackCourseAttendance,
+    trackClubJoining,
+    trackNewsArticleView
   };
 };
