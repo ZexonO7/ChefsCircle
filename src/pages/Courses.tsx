@@ -147,18 +147,12 @@ const Courses = () => {
         description: `To enroll in ${course.title}, payment processing will be available soon.`,
       });
     } else {
-      toast({
-        title: "Enrollment Successful!",
-        description: `You've enrolled in ${course.title}. The course will be available in your dashboard soon.`,
-      });
+      navigate(`/courses/${course.id}`);
     }
   };
 
   const handleLearnMore = (course: any) => {
-    toast({
-      title: "Course Details",
-      description: `Detailed course page for ${course.title} is under development.`,
-    });
+    navigate(`/courses/${course.id}`);
   };
 
   return (
@@ -237,6 +231,7 @@ const Courses = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ y: -5 }}
+                    onClick={() => navigate(`/courses/${course.id}`)}
                   >
                     <div className="relative overflow-hidden rounded-t-xl">
                       <img 
@@ -306,7 +301,10 @@ const Courses = () => {
                           {course.price === 0 ? 'Free' : `$${course.price}`}
                         </div>
                         <button 
-                          onClick={() => handleEnrollment(course)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEnrollment(course);
+                          }}
                           className="chef-button-primary text-sm py-2 px-4"
                         >
                           {course.price === 0 ? 'Start Learning' : 'Enroll Now'}
@@ -335,6 +333,7 @@ const Courses = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
+                  onClick={() => navigate(`/courses/${course.id}`)}
                 >
                   <div className="relative overflow-hidden rounded-t-xl">
                     <img 
@@ -381,7 +380,10 @@ const Courses = () => {
                         {course.price === 0 ? 'Free' : `$${course.price}`}
                       </div>
                       <button 
-                        onClick={() => handleLearnMore(course)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleLearnMore(course);
+                        }}
                         className="text-chef-royal-blue hover:text-chef-royal-blue/80 font-medium text-sm"
                       >
                         Learn More →
