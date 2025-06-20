@@ -168,9 +168,9 @@ const CourseDetail = () => {
         keywords={['knife skills', 'culinary techniques', 'cooking course', 'chef training']}
       />
       
-      <div className="min-h-screen bg-chef-warm-ivory pt-20">
+      <div className="min-h-screen bg-chef-warm-ivory">
         {/* Course Header */}
-        <section className="chef-section bg-gradient-to-br from-chef-navy to-chef-royal-blue">
+        <section className="pt-20 pb-12 bg-gradient-to-br from-chef-navy to-chef-royal-blue">
           <div className="chef-container">
             <motion.div 
               className="max-w-4xl mx-auto text-center"
@@ -178,32 +178,32 @@ const CourseDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge className="mb-4 bg-chef-gold/20 text-chef-gold border-chef-gold/30">
+              <Badge className="mb-4 bg-chef-gold/20 text-chef-gold border-chef-gold/30 hover:bg-chef-gold/30">
                 {course.category}
               </Badge>
-              <h1 className="chef-heading-xl text-chef-warm-ivory mb-4">
+              <h1 className="chef-heading-xl text-white mb-4">
                 {course.title}
               </h1>
-              <p className="chef-body-lg text-chef-warm-ivory/90 mb-6">
+              <p className="chef-body-lg text-white/90 mb-6">
                 {course.description}
               </p>
               
-              <div className="flex flex-wrap items-center justify-center gap-6 text-chef-warm-ivory/80">
+              <div className="flex flex-wrap items-center justify-center gap-6 text-white/80">
                 <div className="flex items-center gap-2">
-                  <ChefHat className="w-5 h-5" />
-                  <span>by {course.instructor}</span>
+                  <ChefHat className="w-5 h-5 text-white" />
+                  <span className="text-white">by {course.instructor}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  <span>{Math.floor(course.duration / 60)}h {course.duration % 60}m</span>
+                  <Clock className="w-5 h-5 text-white" />
+                  <span className="text-white">{Math.floor(course.duration / 60)}h {course.duration % 60}m</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5" />
-                  <span>{course.students.toLocaleString()} students</span>
+                  <Users className="w-5 h-5 text-white" />
+                  <span className="text-white">{course.students.toLocaleString()} students</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-5 h-5 fill-current text-chef-gold" />
-                  <span>{course.rating}</span>
+                  <span className="text-white">{course.rating}</span>
                 </div>
               </div>
             </motion.div>
@@ -211,7 +211,7 @@ const CourseDetail = () => {
         </section>
 
         {/* Course Content */}
-        <section className="chef-section">
+        <section className="py-12 bg-chef-warm-ivory">
           <div className="chef-container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Video Player and Main Content */}
@@ -233,18 +233,21 @@ const CourseDetail = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <Card>
+                  <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div>
-                          <CardTitle className="text-chef-charcoal">
+                          <CardTitle className="text-chef-charcoal text-xl">
                             Lesson {currentLesson + 1}: {course.lessons[currentLesson]?.title}
                           </CardTitle>
-                          <p className="text-chef-charcoal/60 mt-2">
+                          <p className="text-chef-charcoal/70 mt-2">
                             {course.lessons[currentLesson]?.description}
                           </p>
                         </div>
-                        <Badge variant={completedLessons.includes(currentLesson + 1) ? "default" : "secondary"}>
+                        <Badge variant={completedLessons.includes(currentLesson + 1) ? "default" : "secondary"} 
+                               className={completedLessons.includes(currentLesson + 1) 
+                                 ? "bg-green-100 text-green-800 border-green-200" 
+                                 : "bg-gray-100 text-gray-600 border-gray-200"}>
                           {completedLessons.includes(currentLesson + 1) ? (
                             <>
                               <CheckCircle className="w-3 h-3 mr-1" />
@@ -290,20 +293,20 @@ const CourseDetail = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                  <Card>
+                  <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
                     <CardHeader>
-                      <CardTitle className="text-chef-charcoal">Your Progress</CardTitle>
+                      <CardTitle className="text-chef-charcoal text-lg">Your Progress</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-chef-charcoal/60">Completed</span>
+                          <span className="text-chef-charcoal/70">Completed</span>
                           <span className="font-medium text-chef-charcoal">
                             {completedLessons.length} / {course.totalLessons} lessons
                           </span>
                         </div>
-                        <Progress value={progress} className="h-2" />
-                        <p className="text-sm text-chef-charcoal/60">
+                        <Progress value={progress} className="h-3 bg-gray-100" />
+                        <p className="text-sm text-chef-charcoal/70">
                           {Math.round(progress)}% complete
                         </p>
                       </div>
@@ -317,36 +320,36 @@ const CourseDetail = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <Card>
+                  <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
                     <CardHeader>
-                      <CardTitle className="text-chef-charcoal">Course Lessons</CardTitle>
+                      <CardTitle className="text-chef-charcoal text-lg">Course Lessons</CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
-                      <div className="space-y-1">
+                      <div className="space-y-0">
                         {course.lessons.map((lesson, index) => (
                           <button
                             key={lesson.id}
                             onClick={() => !lesson.isLocked && setCurrentLesson(index)}
                             disabled={lesson.isLocked}
-                            className={`w-full p-4 text-left hover:bg-chef-royal-blue/5 transition-colors border-b border-chef-royal-blue/10 last:border-b-0 ${
+                            className={`w-full p-4 text-left hover:bg-chef-royal-blue/5 transition-colors border-b border-gray-100 last:border-b-0 ${
                               currentLesson === index ? 'bg-chef-royal-blue/10' : ''
                             } ${lesson.isLocked ? 'opacity-50 cursor-not-allowed' : ''}`}
                           >
                             <div className="flex items-center gap-3">
                               <div className="flex-shrink-0">
                                 {completedLessons.includes(lesson.id) ? (
-                                  <CheckCircle className="w-5 h-5 text-green-500" />
+                                  <CheckCircle className="w-5 h-5 text-green-600" />
                                 ) : lesson.isLocked ? (
-                                  <Lock className="w-5 h-5 text-chef-charcoal/40" />
+                                  <Lock className="w-5 h-5 text-gray-400" />
                                 ) : (
                                   <Play className="w-5 h-5 text-chef-royal-blue" />
                                 )}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="font-medium text-chef-charcoal truncate">
+                                <p className="font-medium text-chef-charcoal truncate text-sm">
                                   {lesson.title}
                                 </p>
-                                <p className="text-sm text-chef-charcoal/60">
+                                <p className="text-xs text-chef-charcoal/60">
                                   {lesson.duration}
                                 </p>
                               </div>
