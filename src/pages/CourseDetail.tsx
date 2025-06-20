@@ -19,84 +19,60 @@ const CourseDetail = () => {
   const [currentLesson, setCurrentLesson] = useState(0);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
 
-  // Course data (placeholder content for demo purposes)
+  // Course data with detailed structure and YouTube videos
   const course = {
     id: 1,
-    title: "Knife Skills Fundamentals",
+    title: "Knife Skills Mastery",
     instructor: "Professional Chef Instructor",
-    description: "Learn essential knife techniques and kitchen safety fundamentals. This introductory course covers basic cutting methods and proper knife handling.",
+    description: "Master essential knife techniques and kitchen safety fundamentals. This comprehensive course covers everything from basic cuts to advanced precision techniques used in professional kitchens.",
     image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80",
-    duration: 120,
-    totalLessons: 8,
+    duration: 240,
+    totalLessons: 5,
     students: 0,
     rating: 0,
     price: 0,
-    difficulty: "Beginner",
+    difficulty: "Beginner to Intermediate",
     category: "Fundamentals",
     lessons: [
       {
         id: 1,
-        title: "Introduction to Kitchen Knives",
-        duration: "8:45",
-        description: "Understanding different types of knives and their purposes",
-        videoUrl: "",
+        title: "Module 1: Introduction to Knives and Basic Safety",
+        duration: "12:30",
+        description: "Understanding different types of knives, their purposes, proper handling techniques, and essential kitchen safety practices. Learn how to hold a knife correctly and maintain a safe workspace.",
+        videoUrl: "https://www.youtube.com/watch?v=G-Fg7l7G1zw",
         isLocked: false
       },
       {
         id: 2,
-        title: "Proper Knife Grip and Stance",
-        duration: "12:30",
-        description: "Learn the fundamental grip techniques for safety and control",
-        videoUrl: "",
+        title: "Module 2: Basic Cutting Techniques",
+        duration: "15:45",
+        description: "Master fundamental cutting methods including slicing, dicing, and chopping. Learn proper knife grip, cutting board positioning, and finger placement for safety and efficiency.",
+        videoUrl: "https://www.youtube.com/watch?v=YrHpeEwk_-U",
         isLocked: false
       },
       {
         id: 3,
-        title: "Basic Cuts: Slice, Dice, and Chop",
-        duration: "15:20",
-        description: "Master the three essential cutting techniques",
-        videoUrl: "",
-        isLocked: false
+        title: "Module 3: Precision Cuts and Advanced Techniques",
+        duration: "18:20",
+        description: "Develop advanced skills with julienne, brunoise, chiffonade, and other precision cuts. Focus on consistency, speed, and professional presentation standards.",
+        videoUrl: "https://www.youtube.com/watch?v=0Kn2IOb28bc",
+        isLocked: completedLessons.length < 2
       },
       {
         id: 4,
-        title: "Precision Cuts and Techniques",
-        duration: "18:15",
-        description: "Achieve consistent and precise cuts",
-        videoUrl: "",
+        title: "Module 4: Knife Maintenance and Sharpening",
+        duration: "14:25",
+        description: "Learn proper knife care, maintenance techniques, and sharpening methods. Understand how to keep your knives in optimal condition for peak performance and longevity.",
+        videoUrl: "https://www.youtube.com/watch?v=Gl1wLtpdpKs",
         isLocked: completedLessons.length < 3
       },
       {
         id: 5,
-        title: "Vegetable Preparation Methods",
-        duration: "14:50",
-        description: "Specific techniques for different vegetables",
-        videoUrl: "",
+        title: "Bonus: Professional Tips and Troubleshooting",
+        duration: "10:15",
+        description: "Extra insights from professional chefs including common mistakes to avoid, troubleshooting techniques, and pro tips for building speed while maintaining precision.",
+        videoUrl: "https://www.youtube.com/watch?v=VJNA4vrdWec&t=3s",
         isLocked: completedLessons.length < 4
-      },
-      {
-        id: 6,
-        title: "Knife Maintenance Basics",
-        duration: "16:40",
-        description: "Keep your knives in good condition",
-        videoUrl: "",
-        isLocked: completedLessons.length < 5
-      },
-      {
-        id: 7,
-        title: "Safety and Best Practices",
-        duration: "10:25",
-        description: "Important safety guidelines for knife use",
-        videoUrl: "",
-        isLocked: completedLessons.length < 6
-      },
-      {
-        id: 8,
-        title: "Practice and Assessment",
-        duration: "20:10",
-        description: "Put your skills to practice",
-        videoUrl: "",
-        isLocked: completedLessons.length < 7
       }
     ]
   };
@@ -167,11 +143,11 @@ const CourseDetail = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-white" />
-                  <span className="text-white">Demo Course</span>
+                  <span className="text-white">New Course</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-5 h-5 fill-current text-chef-gold" />
-                  <span className="text-white">New Course</span>
+                  <span className="text-white">{course.difficulty}</span>
                 </div>
               </div>
             </motion.div>
@@ -206,7 +182,7 @@ const CourseDetail = () => {
                       <div className="flex items-start justify-between">
                         <div>
                           <CardTitle className="text-chef-charcoal text-xl">
-                            Lesson {currentLesson + 1}: {course.lessons[currentLesson]?.title}
+                            {course.lessons[currentLesson]?.title}
                           </CardTitle>
                           <p className="text-chef-charcoal/70 mt-2">
                             {course.lessons[currentLesson]?.description}
@@ -290,7 +266,7 @@ const CourseDetail = () => {
                 >
                   <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
                     <CardHeader>
-                      <CardTitle className="text-chef-charcoal text-lg">Course Lessons</CardTitle>
+                      <CardTitle className="text-chef-charcoal text-lg">Course Modules</CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
                       <div className="space-y-0">
@@ -320,6 +296,11 @@ const CourseDetail = () => {
                                 <p className="text-xs text-chef-charcoal/60">
                                   {lesson.duration}
                                 </p>
+                                {lesson.id === 5 && (
+                                  <Badge variant="secondary" className="mt-1 text-xs bg-chef-gold/10 text-chef-gold border-chef-gold/20">
+                                    Bonus
+                                  </Badge>
+                                )}
                               </div>
                             </div>
                           </button>
