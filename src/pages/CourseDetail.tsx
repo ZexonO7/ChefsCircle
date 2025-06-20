@@ -151,7 +151,7 @@ const CourseDetail = () => {
         <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center">
           <div className="text-center">
             <h1 className="chef-heading-lg text-chef-charcoal mb-4">Course Not Found</h1>
-            <Button onClick={() => navigate('/courses')} className="chef-button-primary">
+            <Button onClick={() => navigate('/courses')} className="chef-button-primary text-white">
               Back to Courses
             </Button>
           </div>
@@ -250,13 +250,13 @@ const CourseDetail = () => {
                                  : "bg-gray-100 text-gray-600 border-gray-200"}>
                           {completedLessons.includes(currentLesson + 1) ? (
                             <>
-                              <CheckCircle className="w-3 h-3 mr-1" />
-                              Completed
+                              <CheckCircle className="w-3 h-3 mr-1 text-green-800" />
+                              <span className="text-green-800">Completed</span>
                             </>
                           ) : (
                             <>
-                              <Clock className="w-3 h-3 mr-1" />
-                              {course.lessons[currentLesson]?.duration}
+                              <Clock className="w-3 h-3 mr-1 text-gray-600" />
+                              <span className="text-gray-600">{course.lessons[currentLesson]?.duration}</span>
                             </>
                           )}
                         </Badge>
@@ -265,18 +265,18 @@ const CourseDetail = () => {
                     <CardContent>
                       <Button 
                         onClick={() => handleLessonComplete(currentLesson + 1)}
-                        className="chef-button-primary"
+                        className="chef-button-primary text-white"
                         disabled={completedLessons.includes(currentLesson + 1)}
                       >
                         {completedLessons.includes(currentLesson + 1) ? (
                           <>
-                            <CheckCircle className="w-4 h-4 mr-2" />
-                            Completed
+                            <CheckCircle className="w-4 h-4 mr-2 text-white" />
+                            <span className="text-white">Completed</span>
                           </>
                         ) : (
                           <>
-                            <Award className="w-4 h-4 mr-2" />
-                            Mark as Complete
+                            <Award className="w-4 h-4 mr-2 text-white" />
+                            <span className="text-white">Mark as Complete</span>
                           </>
                         )}
                       </Button>
