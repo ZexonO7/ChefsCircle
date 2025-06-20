@@ -4,6 +4,7 @@ import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useCourseLogic } from '@/hooks/useCourseLogic';
+import { useAuth } from '@/components/AuthProvider';
 import CourseHeader from '@/components/course/CourseHeader';
 import CourseProgress from '@/components/course/CourseProgress';
 import LessonsList from '@/components/course/LessonsList';
@@ -12,12 +13,14 @@ import CurrentLesson from '@/components/course/CurrentLesson';
 const CourseDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const {
     course,
     currentLesson,
     completedLessons,
     currentLessonData,
     isCurrentLessonCompleted,
+    loading,
     handleLessonComplete,
     handleLessonSelect,
   } = useCourseLogic();
@@ -37,6 +40,19 @@ const CourseDetail = () => {
     );
   }
 
+  if (loading) {
+    return (
+      <PageLayout>
+        <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-chef-royal-blue mx-auto mb-4"></div>
+            <p className="text-chef-charcoal">Loading your progress...</p>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
+
   return (
     <PageLayout>
       <SEO 
@@ -47,6 +63,27 @@ const CourseDetail = () => {
       
       <div className="min-h-screen bg-chef-warm-ivory">
         <CourseHeader course={course} />
+
+        {!user && (
+          <div className="bg-chef-gold/10 border-l-4 border-chef-gold p-4 mx-4 mb-6">
+            <div className="flex">
+              <div>
+                <p className="text-chef-charcoal font-medium">
+                  Sign in to save your progress
+                </p>
+                <p className="text-chef-charcoal/70 text-sm mt-1">
+                  Your course progress will be lost when you refresh the page unless you're logged in.
+                </p>
+                <Button 
+                  onClick={() => navigate('/auth')} 
+                  className="mt-3 bg-chef-gold hover:bg-chef-gold/90 text-chef-charcoal"
+                >
+                  Sign In
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <section className="py-12 bg-chef-warm-ivory">
           <div className="chef-container">

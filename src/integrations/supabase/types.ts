@@ -364,6 +364,33 @@ export type Database = {
           },
         ]
       }
+      user_course_progress: {
+        Row: {
+          completed_at: string
+          course_id: number
+          created_at: string
+          id: string
+          lesson_id: number
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          course_id: number
+          created_at?: string
+          id?: string
+          lesson_id: number
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          course_id?: number
+          created_at?: string
+          id?: string
+          lesson_id?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_gamification: {
         Row: {
           created_at: string | null
