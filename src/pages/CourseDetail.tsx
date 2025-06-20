@@ -1,16 +1,14 @@
 
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
-import VideoPlayer from '@/components/VideoPlayer';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { CheckCircle, Clock, Users, Star, Play, Lock, Award, ChefHat } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import CourseHeader from '@/components/course/CourseHeader';
+import CourseProgress from '@/components/course/CourseProgress';
+import LessonsList from '@/components/course/LessonsList';
+import CurrentLesson from '@/components/course/CurrentLesson';
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -87,7 +85,9 @@ const CourseDetail = () => {
     }
   };
 
-  const progress = (completedLessons.length / course.totalLessons) * 100;
+  const handleLessonSelect = (index: number) => {
+    setCurrentLesson(index);
+  };
 
   if (!course) {
     return (
@@ -104,6 +104,9 @@ const CourseDetail = () => {
     );
   }
 
+  const currentLessonData = course.lessons[currentLesson];
+  const isCurrentLessonCompleted = completedLessons.includes(currentLessonData.id);
+
   return (
     <PageLayout>
       <SEO 
@@ -113,202 +116,33 @@ const CourseDetail = () => {
       />
       
       <div className="min-h-screen bg-chef-warm-ivory">
-        {/* Course Header */}
-        <section className="pt-20 pb-12 bg-gradient-to-br from-chef-navy to-chef-royal-blue">
-          <div className="chef-container">
-            <motion.div 
-              className="max-w-4xl mx-auto text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Badge className="mb-4 bg-chef-gold/20 text-chef-gold border-chef-gold/30 hover:bg-chef-gold/30">
-                {course.category}
-              </Badge>
-              <h1 className="chef-heading-xl text-white mb-4">
-                {course.title}
-              </h1>
-              <p className="chef-body-lg text-white/90 mb-6">
-                {course.description}
-              </p>
-              
-              <div className="flex flex-wrap items-center justify-center gap-6 text-white/80">
-                <div className="flex items-center gap-2">
-                  <ChefHat className="w-5 h-5 text-white" />
-                  <span className="text-white">by {course.instructor}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-white" />
-                  <span className="text-white">{Math.floor(course.duration / 60)}h {course.duration % 60}m</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-white" />
-                  <span className="text-white">New Course</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 fill-current text-chef-gold" />
-                  <span className="text-white">{course.difficulty}</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
+        <CourseHeader course={course} />
 
-        {/* Course Content */}
         <section className="py-12 bg-chef-warm-ivory">
           <div className="chef-container">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Video Player and Main Content */}
-              <div className="lg:col-span-2 space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  <VideoPlayer
-                    videoUrl={course.lessons[currentLesson]?.videoUrl || ""}
-                    title={course.lessons[currentLesson]?.title || ""}
-                    duration={course.lessons[currentLesson]?.duration || "0:00"}
-                  />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <CardTitle className="text-chef-charcoal text-xl">
-                            {course.lessons[currentLesson]?.title}
-                          </CardTitle>
-                          <p className="text-chef-charcoal/70 mt-2">
-                            {course.lessons[currentLesson]?.description}
-                          </p>
-                        </div>
-                        <Badge variant={completedLessons.includes(currentLesson + 1) ? "default" : "secondary"} 
-                               className={completedLessons.includes(currentLesson + 1) 
-                                 ? "bg-green-100 text-green-800 border-green-200" 
-                                 : "bg-gray-100 text-gray-600 border-gray-200"}>
-                          {completedLessons.includes(currentLesson + 1) ? (
-                            <>
-                              <CheckCircle className="w-3 h-3 mr-1 text-green-800" />
-                              <span className="text-green-800">Completed</span>
-                            </>
-                          ) : (
-                            <>
-                              <Clock className="w-3 h-3 mr-1 text-gray-600" />
-                              <span className="text-gray-600">{course.lessons[currentLesson]?.duration}</span>
-                            </>
-                          )}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <Button 
-                        onClick={() => handleLessonComplete(currentLesson + 1)}
-                        className="chef-button-primary text-white"
-                        disabled={completedLessons.includes(currentLesson + 1)}
-                      >
-                        {completedLessons.includes(currentLesson + 1) ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 mr-2 text-white" />
-                            <span className="text-white">Completed</span>
-                          </>
-                        ) : (
-                          <>
-                            <Award className="w-4 h-4 mr-2 text-white" />
-                            <span className="text-white">Mark as Complete</span>
-                          </>
-                        )}
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+              <div className="lg:col-span-2">
+                <CurrentLesson
+                  lesson={currentLessonData}
+                  isCompleted={isCurrentLessonCompleted}
+                  onLessonComplete={handleLessonComplete}
+                />
               </div>
 
               {/* Course Sidebar */}
               <div className="space-y-6">
-                {/* Progress Card */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
-                    <CardHeader>
-                      <CardTitle className="text-chef-charcoal text-lg">Your Progress</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-chef-charcoal/70">Completed</span>
-                          <span className="font-medium text-chef-charcoal">
-                            {completedLessons.length} / {course.totalLessons} lessons
-                          </span>
-                        </div>
-                        <Progress value={progress} className="h-3 bg-gray-100" />
-                        <p className="text-sm text-chef-charcoal/70">
-                          {Math.round(progress)}% complete
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-
-                {/* Lessons List */}
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <Card className="bg-white border-chef-royal-blue/20 shadow-lg">
-                    <CardHeader>
-                      <CardTitle className="text-chef-charcoal text-lg">Course Modules</CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                      <div className="space-y-0">
-                        {course.lessons.map((lesson, index) => (
-                          <button
-                            key={lesson.id}
-                            onClick={() => !lesson.isLocked && setCurrentLesson(index)}
-                            disabled={lesson.isLocked}
-                            className={`w-full p-4 text-left hover:bg-chef-royal-blue/5 transition-colors border-b border-gray-100 last:border-b-0 ${
-                              currentLesson === index ? 'bg-chef-royal-blue/10' : ''
-                            } ${lesson.isLocked ? 'opacity-50 cursor-not-allowed' : ''}`}
-                          >
-                            <div className="flex items-center gap-3">
-                              <div className="flex-shrink-0">
-                                {completedLessons.includes(lesson.id) ? (
-                                  <CheckCircle className="w-5 h-5 text-green-600" />
-                                ) : lesson.isLocked ? (
-                                  <Lock className="w-5 h-5 text-gray-400" />
-                                ) : (
-                                  <Play className="w-5 h-5 text-chef-royal-blue" />
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="font-medium text-chef-charcoal truncate text-sm">
-                                  {lesson.title}
-                                </p>
-                                <p className="text-xs text-chef-charcoal/60">
-                                  {lesson.duration}
-                                </p>
-                                {lesson.id === 5 && (
-                                  <Badge variant="secondary" className="mt-1 text-xs bg-chef-gold/10 text-chef-gold border-chef-gold/20">
-                                    Bonus
-                                  </Badge>
-                                )}
-                              </div>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                <CourseProgress
+                  completedLessons={completedLessons}
+                  totalLessons={course.totalLessons}
+                />
+                
+                <LessonsList
+                  lessons={course.lessons}
+                  currentLesson={currentLesson}
+                  completedLessons={completedLessons}
+                  onLessonSelect={handleLessonSelect}
+                />
               </div>
             </div>
           </div>
