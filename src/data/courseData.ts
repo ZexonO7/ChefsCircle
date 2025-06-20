@@ -60,7 +60,7 @@ export const getCourseData = (completedLessons: number[]): Course => ({
       duration: "18:20",
       description: "Develop advanced skills with julienne, brunoise, chiffonade, and other precision cuts. Focus on consistency, speed, and professional presentation standards.",
       videoUrl: "https://www.youtube.com/watch?v=0Kn2IOb28bc",
-      isLocked: completedLessons.length < 2
+      isLocked: !completedLessons.includes(1) || !completedLessons.includes(2)
     },
     {
       id: 4,
@@ -68,7 +68,7 @@ export const getCourseData = (completedLessons: number[]): Course => ({
       duration: "14:25",
       description: "Learn proper knife care, maintenance techniques, and sharpening methods. Understand how to keep your knives in optimal condition for peak performance and longevity.",
       videoUrl: "https://www.youtube.com/watch?v=Gl1wLtpdpKs",
-      isLocked: completedLessons.length < 3
+      isLocked: !completedLessons.includes(1) || !completedLessons.includes(2) || !completedLessons.includes(3)
     },
     {
       id: 5,
@@ -76,7 +76,7 @@ export const getCourseData = (completedLessons: number[]): Course => ({
       duration: "10:15",
       description: "Extra insights from professional chefs including common mistakes to avoid, troubleshooting techniques, and pro tips for building speed while maintaining precision.",
       videoUrl: "https://www.youtube.com/watch?v=VJNA4vrdWec&t=3s",
-      isLocked: completedLessons.length < 4
+      isLocked: !completedLessons.includes(1) || !completedLessons.includes(2) || !completedLessons.includes(3) || !completedLessons.includes(4)
     }
   ]
 });
