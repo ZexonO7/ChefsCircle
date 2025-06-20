@@ -19,17 +19,17 @@ const CourseDetail = () => {
   const [currentLesson, setCurrentLesson] = useState(0);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
 
-  // Course data (in a real app, this would come from an API)
+  // Course data (placeholder content for demo purposes)
   const course = {
     id: 1,
-    title: "Knife Skills Mastery",
-    instructor: "Chef Isabella Rodriguez",
-    description: "Master professional knife techniques, from basic cuts to advanced julienne and chiffonade. Essential skills every chef needs to develop precision, safety, and efficiency in the kitchen.",
+    title: "Knife Skills Fundamentals",
+    instructor: "Professional Chef Instructor",
+    description: "Learn essential knife techniques and kitchen safety fundamentals. This introductory course covers basic cutting methods and proper knife handling.",
     image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80",
-    duration: 180,
-    totalLessons: 12,
-    students: 3247,
-    rating: 4.9,
+    duration: 120,
+    totalLessons: 8,
+    students: 0,
+    rating: 0,
     price: 0,
     difficulty: "Beginner",
     category: "Fundamentals",
@@ -60,15 +60,15 @@ const CourseDetail = () => {
       },
       {
         id: 4,
-        title: "Precision Cuts: Brunoise and Small Dice",
+        title: "Precision Cuts and Techniques",
         duration: "18:15",
-        description: "Achieve restaurant-quality precision cuts",
+        description: "Achieve consistent and precise cuts",
         videoUrl: "",
         isLocked: completedLessons.length < 3
       },
       {
         id: 5,
-        title: "Vegetable Preparation Techniques",
+        title: "Vegetable Preparation Methods",
         duration: "14:50",
         description: "Specific techniques for different vegetables",
         videoUrl: "",
@@ -76,59 +76,27 @@ const CourseDetail = () => {
       },
       {
         id: 6,
-        title: "Julienne and Matchstick Cuts",
+        title: "Knife Maintenance Basics",
         duration: "16:40",
-        description: "Create uniform julienne cuts for professional presentations",
+        description: "Keep your knives in good condition",
         videoUrl: "",
         isLocked: completedLessons.length < 5
       },
       {
         id: 7,
-        title: "Chiffonade Technique for Herbs",
+        title: "Safety and Best Practices",
         duration: "10:25",
-        description: "Perfect herb cutting technique for garnishes",
+        description: "Important safety guidelines for knife use",
         videoUrl: "",
         isLocked: completedLessons.length < 6
       },
       {
         id: 8,
-        title: "Knife Maintenance and Sharpening",
+        title: "Practice and Assessment",
         duration: "20:10",
-        description: "Keep your knives in perfect condition",
+        description: "Put your skills to practice",
         videoUrl: "",
         isLocked: completedLessons.length < 7
-      },
-      {
-        id: 9,
-        title: "Speed and Efficiency Techniques",
-        duration: "13:35",
-        description: "Build speed while maintaining precision",
-        videoUrl: "",
-        isLocked: completedLessons.length < 8
-      },
-      {
-        id: 10,
-        title: "Advanced Protein Preparation",
-        duration: "22:15",
-        description: "Professional techniques for meat and fish",
-        videoUrl: "",
-        isLocked: completedLessons.length < 9
-      },
-      {
-        id: 11,
-        title: "Troubleshooting Common Mistakes",
-        duration: "11:20",
-        description: "Fix common knife skill problems",
-        videoUrl: "",
-        isLocked: completedLessons.length < 10
-      },
-      {
-        id: 12,
-        title: "Final Assessment and Certification",
-        duration: "25:30",
-        description: "Demonstrate your mastery and earn certification",
-        videoUrl: "",
-        isLocked: completedLessons.length < 11
       }
     ]
   };
@@ -199,11 +167,11 @@ const CourseDetail = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-white" />
-                  <span className="text-white">{course.students.toLocaleString()} students</span>
+                  <span className="text-white">Demo Course</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="w-5 h-5 fill-current text-chef-gold" />
-                  <span className="text-white">{course.rating}</span>
+                  <span className="text-white">New Course</span>
                 </div>
               </div>
             </motion.div>
