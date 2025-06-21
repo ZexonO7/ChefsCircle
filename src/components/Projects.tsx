@@ -10,7 +10,7 @@ const Projects = () => {
     price: "$29",
     period: "/month",
     description: "Perfect for culinary beginners ready to start their journey",
-    features: ["2 live cook-alongs per month", "Access to basic technique library", "Community forum access", "Monthly recipe collection", "Email support"],
+    features: ["2 courses per month", "Access to basic technique library", "Community forum access", "Monthly recipe collection", "Email support"],
     icon: <ChefHat className="w-8 h-8" />,
     color: "chef-royal-green",
     image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
@@ -19,7 +19,7 @@ const Projects = () => {
     price: "$49",
     period: "/month",
     description: "For passionate home cooks ready to elevate their skills",
-    features: ["4 live cook-alongs per month", "Advanced masterclass access", "1-on-1 chef consultations", "Premium recipe collections", "Ingredient box discounts", "Priority support"],
+    features: ["4 courses per month", "Advanced clubs access", "1-on-1 chef consultations", "Premium recipe collections", "Ingredient box discounts", "Priority support"],
     icon: <Award className="w-8 h-8" />,
     color: "chef-royal-blue",
     popular: true,
@@ -29,7 +29,7 @@ const Projects = () => {
     price: "$99",
     period: "/month",
     description: "Ultimate culinary experience for serious food enthusiasts",
-    features: ["Unlimited live cook-alongs", "Exclusive chef-led workshops", "Personal culinary coaching", "VIP event invitations", "Custom meal planning", "Premium ingredient boxes", "24/7 chef hotline"],
+    features: ["Unlimited courses", "Exclusive chef-led workshops", "Personal culinary coaching", "VIP event invitations", "Custom meal planning", "Premium ingredient boxes", "24/7 chef hotline"],
     icon: <Crown className="w-8 h-8" />,
     color: "chef-gold",
     image: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
