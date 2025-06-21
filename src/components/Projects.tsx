@@ -79,7 +79,7 @@ const Projects = () => {
             Membership Plans
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-chef-charcoal font-playfair">
-            Elevate Your Culinary Journey
+            Culinary Excellence Programs
           </h2>
           <p className="text-chef-charcoal/70 text-lg max-w-3xl mx-auto font-inter">
             Whether you're just starting your culinary journey or looking to master advanced techniques, we have the perfect membership tier to match your ambitions.
