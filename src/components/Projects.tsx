@@ -3,8 +3,10 @@ import { motion } from 'framer-motion';
 import { ChefHat, Users, Award, Clock, ArrowRight, Star, Crown, Utensils } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+
 const Projects = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
   const membershipTiers = [{
     name: "Apprentice Chef",
     price: "$29",
@@ -67,7 +69,8 @@ const Projects = () => {
       });
     }
   };
-  return <section id="projects" className="py-16 md:py-24 bg-chef-warm-ivory">
+  return (
+    <section id="projects" className="py-16 md:py-24 bg-chef-warm-ivory">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Membership Tiers Section */}
         <div className="text-center mb-16">
@@ -76,7 +79,7 @@ const Projects = () => {
             Membership Plans
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-chef-charcoal font-playfair">
-            Choose Your Culinary Path
+            Elevate Your Culinary Journey
           </h2>
           <p className="text-chef-charcoal/70 text-lg max-w-3xl mx-auto font-inter">
             Whether you're just starting your culinary journey or looking to master advanced techniques, we have the perfect membership tier to match your ambitions.
@@ -183,6 +186,8 @@ const Projects = () => {
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Projects;
