@@ -81,9 +81,7 @@ const Navbar = () => {
             
           </div>
           <div className="flex flex-col">
-            <span className="font-playfair text-2xl text-chef-charcoal font-bold tracking-tight group-hover:text-chef-royal-green transition-colors duration-300">
-              ChefCircle
-            </span>
+            <span className="font-playfair text-2xl text-chef-charcoal font-bold tracking-tight group-hover:text-chef-royal-green transition-colors duration-300">ChefsCircle</span>
             <span className="text-xs text-chef-charcoal/60 font-inter tracking-wide -mt-1">
               Culinary Excellence
             </span>
