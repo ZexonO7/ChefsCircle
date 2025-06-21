@@ -1,18 +1,17 @@
-
 import { Link } from 'react-router-dom';
 import { ArrowRight, Newspaper } from 'lucide-react';
 import NewsCard from '@/components/NewsCard';
 import { useNewsApi } from '@/hooks/useNewsApi';
 import { Skeleton } from '@/components/ui/skeleton';
-
 const BlogPreview = () => {
-  const { articles, isLoading } = useNewsApi();
-  
+  const {
+    articles,
+    isLoading
+  } = useNewsApi();
+
   // Get the 3 most recent articles
   const recentArticles = articles.slice(0, 3);
-
-  return (
-    <section id="news" className="py-16 md:py-24 px-4 md:px-12 bg-white">
+  return <section id="news" className="py-16 md:py-24 px-4 md:px-12 bg-white">
       <div className="container mx-auto max-w-6xl">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-12">
           <div>
@@ -34,47 +33,32 @@ const BlogPreview = () => {
         </div>
         
         <div className="relative">
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 3 }).map((_, index) => (
-                <Skeleton key={index} className="h-96 w-full rounded-lg" />
-              ))}
-            </div>
-          ) : (
-            <>
+          {isLoading ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({
+            length: 3
+          }).map((_, index) => <Skeleton key={index} className="h-96 w-full rounded-lg bg-chef-cream" />)}
+            </div> : <>
               {/* Mobile: Horizontal scroll */}
               <div className="md:hidden">
                 <div className="flex gap-6 pb-4 overflow-x-auto snap-x snap-mandatory pl-1">
-                  {recentArticles.map((article, index) => (
-                    <div key={index} className="flex-none w-[85%] snap-center">
+                  {recentArticles.map((article, index) => <div key={index} className="flex-none w-[85%] snap-center">
                       <NewsCard article={article} />
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
                 <div className="mt-4 flex justify-center">
                   <div className="flex gap-1">
-                    {[0, 1, 2].map(i => (
-                      <div 
-                        key={i} 
-                        className={`h-1.5 rounded-full ${i === 0 ? 'w-6 bg-chef-royal-blue' : 'w-2 bg-chef-charcoal/30'}`} 
-                      />
-                    ))}
+                    {[0, 1, 2].map(i => <div key={i} className={`h-1.5 rounded-full ${i === 0 ? 'w-6 bg-chef-royal-blue' : 'w-2 bg-chef-charcoal/30'}`} />)}
                   </div>
                 </div>
               </div>
               
               {/* Desktop: Grid layout */}
               <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recentArticles.map((article, index) => (
-                  <NewsCard key={index} article={article} />
-                ))}
+                {recentArticles.map((article, index) => <NewsCard key={index} article={article} />)}
               </div>
-            </>
-          )}
+            </>}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default BlogPreview;
