@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ChefHat, Users, BookOpen, Star, Clock4, Trophy, Sparkles, ArrowRight, Award, Target, Shield, TrendingUp } from "lucide-react";
@@ -221,7 +220,7 @@ const WhyChefCircle = () => {
           
           <motion.div variants={itemVariants} className="text-center mt-12">
             <Link 
-              to="/blog" 
+              to="/about" 
               onClick={() => window.scrollTo(0, 0)}
               className="chef-button-outline inline-flex items-center group"
             >
