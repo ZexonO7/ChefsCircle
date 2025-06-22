@@ -1,97 +1,107 @@
-import { useEffect, useRef } from 'react';
-import { ChefHat, Users, BookOpen, Crown } from "lucide-react";
-import { useIsMobile } from '@/hooks/use-mobile';
-import FeatureCard from './features/FeatureCard';
-import ProgramsCarousel from './features/ProgramsCarousel';
+
+import { motion } from 'framer-motion';
+import { Users, BookOpen, Trophy, Star, Play, Crown, MessageCircle, Sparkles } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 const Features = () => {
-  const featuresRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-  const culinaryFeatures = [
+  const features = [
     {
-      icon: <ChefHat className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+      icon: <Play className="w-8 h-8" />,
       title: "Live Cook-Alongs",
-      description: "Interactive sessions with renowned chefs, where you cook together in real-time, learning professional techniques and insider secrets.",
-      image: "https://images.unsplash.com/photo-1519864600265-d6eebd9baf02?auto=format&fit=crop&w=600&q=80", // Group cooking together
+      description: "Join world-class chefs in real-time cooking sessions. Learn techniques, ask questions, and cook alongside culinary masters from your own kitchen.",
+      stats: "3x weekly sessions"
     },
     {
-      icon: <BookOpen className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+      icon: <Crown className="w-8 h-8" />,
       title: "Master Classes",
-      description: "Deep-dive courses covering advanced culinary techniques, from knife skills to molecular gastronomy and artisanal bread making.",
-      image: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=600&q=80", // Chef teaching
+      description: "Access exclusive video masterclasses covering advanced techniques, cuisines from around the world, and professional secrets from Michelin-starred chefs.",
+      stats: "50+ premium courses"
     },
     {
-      icon: <Users className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+      icon: <Users className="w-8 h-8" />,
       title: "Elite Community",
-      description: "Connect with passionate food lovers, share your culinary creations, and get feedback from fellow members and professional chefs.",
-      image: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80", // Happy food community
+      description: "Connect with passionate home cooks and culinary enthusiasts. Share your creations, get feedback, and participate in monthly challenges.",
+      stats: "1000+ active members"
     },
     {
-      icon: <Crown className="w-10 h-10 text-white transition-transform duration-300 transform" />,
+      icon: <Sparkles className="w-8 h-8" />,
       title: "Premium Content",
-      description: "Exclusive recipes, seasonal menus, wine pairings, and access to chef-curated ingredient boxes delivered to your door.",
-      image: "https://images.unsplash.com/photo-1516685018646-5499d0a7ed93?auto=format&fit=crop&w=600&q=80", // Fancy dish, "premium"
+      description: "Get access to exclusive recipes, technique guides, ingredient spotlights, and behind-the-scenes content from top culinary destinations.",
+      stats: "New content weekly"
     }
   ];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-slide-in');
-            (entry.target as HTMLElement).style.opacity = '1';
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (featuresRef.current) {
-      const elements = featuresRef.current.querySelectorAll('.feature-item');
-      elements.forEach((el) => {
-        if (!el.classList.contains('animate-slide-in')) {
-          (el as HTMLElement).style.opacity = '0';
-          observer.observe(el);
-        }
-      });
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="features" className="relative bg-white overflow-hidden py-16 md:py-24 w-full">
-      <div className="w-full px-4 sm:px-6 lg:px-8" ref={featuresRef}> 
-        <div className="text-center mb-16 max-w-4xl mx-auto feature-item">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-gold/20 text-chef-gold rounded-full text-sm font-medium">
-            <ChefHat className="w-4 h-4" />
-            Culinary Excellence Programs
+    <section id="features" className="py-16 md:py-24 bg-chef-cream">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-sm font-medium">
+            <Trophy className="w-4 h-4" />
+            Premium Features
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-chef-charcoal font-playfair">
-            Elevate Your Culinary Journey
+            The Future of Culinary Education
           </h2>
-          <p className="text-chef-charcoal/70 text-lg font-inter">
-            Our comprehensive culinary education platform transforms passionate home cooks into confident chefs through expert instruction, community support, and hands-on learning experiences.
+          <p className="text-chef-charcoal/70 text-lg max-w-3xl mx-auto font-inter mb-4">
+            Experience a revolutionary approach to learning cooking through our interactive platform designed for the modern home chef.
           </p>
+          <div className="flex items-center justify-center gap-6 text-sm text-chef-charcoal/60">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4" />
+              <span>1000+ Active members</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-4 h-4" />
+              <span>50+ courses</span>
+            </div>
+          </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {culinaryFeatures.map((feature, index) => (
-            <FeatureCard
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {features.map((feature, index) => (
+            <motion.div
               key={index}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-              image={feature.image}
-              index={index}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="chef-card h-full group hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-8 text-center">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-chef-royal-green/10 rounded-full flex items-center justify-center text-chef-royal-green group-hover:bg-chef-royal-green group-hover:text-white transition-all duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-4 text-chef-charcoal font-playfair">
+                    {feature.title}
+                  </h3>
+                  <p className="text-chef-charcoal/70 mb-4 font-inter leading-relaxed">
+                    {feature.description}
+                  </p>
+                  <div className="text-sm font-medium text-chef-royal-green">
+                    {feature.stats}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
-        <ProgramsCarousel />
+        <div className="text-center">
+          <Button 
+            onClick={scrollToContact}
+            className="chef-button-primary text-lg px-8 py-4"
+          >
+            Start Your Culinary Journey
+          </Button>
+        </div>
       </div>
     </section>
   );
