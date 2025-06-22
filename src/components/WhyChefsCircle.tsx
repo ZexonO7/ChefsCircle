@@ -119,7 +119,7 @@ const WhyChefCircle = () => {
               <Users className="w-8 h-8 text-chef-royal-blue" />
             </div>
             <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
-              <AnimatedCounter end={2500} suffix="+" />
+              <AnimatedCounter end={50} suffix="+" />
             </h3>
             <p className="text-chef-charcoal/70 font-inter">Active members learning and growing together in our exclusive culinary community</p>
           </motion.div>
@@ -129,7 +129,7 @@ const WhyChefCircle = () => {
               <Trophy className="w-8 h-8 text-chef-royal-green" />
             </div>
             <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
-              <AnimatedCounter end={150} suffix="+" />
+              <AnimatedCounter end={5} suffix="+" />
             </h3>
             <p className="text-chef-charcoal/70 font-inter">
               Master classes and cook-alongs completed by our members, with 95% satisfaction rate
