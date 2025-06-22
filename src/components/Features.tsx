@@ -75,7 +75,7 @@ const Features = () => {
               viewport={{ once: true }}
             >
               <Card className="chef-card h-full group hover:shadow-xl transition-all duration-300">
-                <CardContent className="p-8 text-center bg-chef-warm-ivory">
+                <CardContent className="p-8 text-center bg-chef-cream">
                   <div className="w-16 h-16 mx-auto mb-6 bg-chef-royal-green/10 rounded-full flex items-center justify-center text-chef-royal-green group-hover:bg-chef-royal-green group-hover:text-white transition-all duration-300">
                     {feature.icon}
                   </div>
