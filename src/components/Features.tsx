@@ -56,11 +56,11 @@ const Features = () => {
           <div className="flex items-center justify-center gap-6 text-sm text-chef-charcoal/60">
             <div className="flex items-center gap-2">
               <Users className="w-4 h-4" />
-              <span>1000+ Active members</span>
+              <span>50+ Active members</span>
             </div>
             <div className="flex items-center gap-2">
               <BookOpen className="w-4 h-4" />
-              <span>50+ courses</span>
+              <span>5+ courses</span>
             </div>
           </div>
         </div>
