@@ -15,7 +15,7 @@ const Features = () => {
   const features = [
     {
       icon: <Play className="w-8 h-8" />,
-      title: "Live Cook-Alongs",
+      title: "Live news",
       description: "Join world-class chefs in real-time cooking sessions. Learn techniques, ask questions, and cook alongside culinary masters from your own kitchen.",
       stats: "3x weekly sessions"
     },
