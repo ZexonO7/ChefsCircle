@@ -1,46 +1,38 @@
-
 import { motion } from 'framer-motion';
 import { Users, BookOpen, Trophy, Star, Play, Crown, MessageCircle, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-
 const Features = () => {
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      contactSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  const features = [
-    {
-      icon: <Play className="w-8 h-8" />,
-      title: "Live news",
-      description: "Join world-class chefs in real-time cooking sessions. Learn techniques, ask questions, and cook alongside culinary masters from your own kitchen.",
-      stats: "3x weekly sessions"
-    },
-    {
-      icon: <Crown className="w-8 h-8" />,
-      title: "Master Classes",
-      description: "Access exclusive video masterclasses covering advanced techniques, cuisines from around the world, and professional secrets from Michelin-starred chefs.",
-      stats: "50+ premium courses"
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: "Elite Community",
-      description: "Connect with passionate home cooks and culinary enthusiasts. Share your creations, get feedback, and participate in monthly challenges.",
-      stats: "1000+ active members"
-    },
-    {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: "Premium Content",
-      description: "Get access to exclusive recipes, technique guides, ingredient spotlights, and behind-the-scenes content from top culinary destinations.",
-      stats: "New content weekly"
-    }
-  ];
-
-  return (
-    <section id="features" className="py-16 md:py-24 bg-chef-cream">
+  const features = [{
+    icon: <Play className="w-8 h-8" />,
+    title: "Live news",
+    description: "Join world-class chefs in real-time cooking sessions. Learn techniques, ask questions, and cook alongside culinary masters from your own kitchen.",
+    stats: "3x weekly sessions"
+  }, {
+    icon: <Crown className="w-8 h-8" />,
+    title: "Master Classes",
+    description: "Access exclusive video masterclasses covering advanced techniques, cuisines from around the world, and professional secrets from Michelin-starred chefs.",
+    stats: "50+ premium courses"
+  }, {
+    icon: <Users className="w-8 h-8" />,
+    title: "Elite Community",
+    description: "Connect with passionate home cooks and culinary enthusiasts. Share your creations, get feedback, and participate in monthly challenges.",
+    stats: "1000+ active members"
+  }, {
+    icon: <Sparkles className="w-8 h-8" />,
+    title: "Premium Content",
+    description: "Get access to exclusive recipes, technique guides, ingredient spotlights, and behind-the-scenes content from top culinary destinations.",
+    stats: "New content weekly"
+  }];
+  return <section id="features" className="py-16 md:py-24 bg-chef-cream">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-sm font-medium">
@@ -66,15 +58,19 @@ const Features = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="chef-card h-full group hover:shadow-xl transition-all duration-300">
+          {features.map((feature, index) => <motion.div key={index} initial={{
+          opacity: 0,
+          y: 20
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.5,
+          delay: index * 0.1
+        }} viewport={{
+          once: true
+        }}>
+              <Card className="chef-card h-full group hover:shadow-xl transition-all duration-300 bg-[chef-warm-ivory] bg-chef-cream">
                 <CardContent className="p-8 text-center bg-chef-cream">
                   <div className="w-16 h-16 mx-auto mb-6 bg-chef-royal-green/10 rounded-full flex items-center justify-center text-chef-royal-green group-hover:bg-chef-royal-green group-hover:text-white transition-all duration-300">
                     {feature.icon}
@@ -90,21 +86,15 @@ const Features = () => {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
 
         <div className="text-center">
-          <Button 
-            onClick={scrollToContact}
-            className="chef-button-primary text-lg px-8 py-4"
-          >
+          <Button onClick={scrollToContact} className="chef-button-primary text-lg px-8 py-4 text-chef-cream">
             Start Your Culinary Journey
           </Button>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Features;
