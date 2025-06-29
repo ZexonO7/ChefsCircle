@@ -107,20 +107,13 @@ const About = () => {
             }} className="mb-16">
                 <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Our Story</h2>
                 <div className="bg-white rounded-xl border border-chef-royal-green/20 p-8 shadow-chef-luxury">
-                  <p className="text-chef-charcoal/70 mb-4">
-                    ChefCircle was born from a simple observation by founder Advithya Bhardwaj: while the culinary world was experiencing a renaissance, 
-                    young food enthusiasts lacked access to truly premium culinary education and exclusive community experiences.
-                  </p>
+                  <p className="text-chef-charcoal/70 mb-4">ChefsCircle was born from a simple observation by founder Advithya Bhardwaj: while the culinary world was experiencing a renaissance, young food enthusiasts lacked access to truly premium culinary education and exclusive community experiences.</p>
                   <p className="text-chef-charcoal/70 mb-4">
                     Advithya started with the ambition to create an elite culinary club that would bridge the gap between 
                     amateur cooking and professional expertise. After connecting with renowned chefs and culinary experts 
                     worldwide, we developed our unique live cook-along format and premium membership experience.
                   </p>
-                  <p className="text-chef-charcoal/70">
-                    Today, ChefCircle serves passionate Gen Z and millennial home chefs who demand excellence in their 
-                    culinary journey. Our members gain access to exclusive techniques, premium ingredients, and a 
-                    community of like-minded culinary enthusiasts.
-                  </p>
+                  <p className="text-chef-charcoal/70">Today, ChefsCircle serves passionate Gen Z and millennial home chefs who demand excellence in their culinary journey. Our members gain access to exclusive techniques, premium ingredients, and a community of like-minded culinary enthusiasts.</p>
                 </div>
               </motion.div>
               
