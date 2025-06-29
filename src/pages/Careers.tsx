@@ -90,23 +90,23 @@ const Careers = () => {
                   </div>
                   
                   <div className="chef-card p-8 shadow-chef-luxury mt-12">
-                    <h3 className="font-bold text-xl mb-6 text-chef-charcoal font-playfair">Contact Our Community Director</h3>
+                    <h3 className="font-bold text-xl mb-6 text-chef-charcoal font-playfair">Contact Our Founder</h3>
                     <div className="chef-card bg-chef-warm-ivory p-6 border border-chef-royal-green/20">
                       <div className="flex flex-col items-center text-center">
                         <img 
-                          src="https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                          alt="Elena Dubois"
+                          src="/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
+                          alt="Advithya Bhardwaj"
                           className="w-32 h-32 rounded-full mb-4 object-cover"
                         />
-                        <h3 className="text-xl font-bold text-chef-charcoal font-playfair">Elena Dubois</h3>
-                        <p className="text-chef-royal-blue mb-4 font-medium">Community Director</p>
+                        <h3 className="text-xl font-bold text-chef-charcoal font-playfair">Advithya Bhardwaj</h3>
+                        <p className="text-chef-royal-blue mb-4 font-medium">Founder & CEO</p>
                         <div className="flex flex-col space-y-3">
-                          <a href="mailto:elena@chefcircle.com" className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors">
+                          <a href="mailto:Advithya@chefscircle.in" className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors">
                             <Mail className="w-5 h-5 mr-2" />
-                            elena@chefcircle.com
+                            Advithya@chefscircle.in
                           </a>
                           <a 
-                            href="https://www.linkedin.com/in/elena-dubois-chef/" 
+                            href="https://www.linkedin.com/in/advithya-bhardwaj-05412a313/" 
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors"
@@ -114,9 +114,9 @@ const Careers = () => {
                             <Linkedin className="w-5 h-5 mr-2" />
                             LinkedIn Profile
                           </a>
-                          <a href="tel:+1555-CHEF-123" className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors">
+                          <a href="tel:+919810273085" className="flex items-center text-chef-charcoal hover:text-chef-royal-blue transition-colors">
                             <Phone className="w-5 h-5 mr-2" />
-                            +1 (555) CHEF-123
+                            +91 98102 73085
                           </a>
                         </div>
                       </div>
