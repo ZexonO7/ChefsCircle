@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
 const ContactInfo = () => {
@@ -33,8 +34,12 @@ const ContactInfo = () => {
           {/* Chef-Founder Profile */}
           <div className="chef-card p-8 border border-chef-gold/20 max-w-md">
             <div className="flex flex-col items-center text-center">
-              <div className="w-32 h-32 rounded-full mb-6 bg-chef-royal-green/10 flex items-center justify-center">
-                <ChefHat className="w-16 h-16 text-chef-royal-green" />
+              <div className="w-32 h-32 rounded-full mb-6 overflow-hidden border-4 border-chef-royal-green/20">
+                <img 
+                  src="/lovable-uploads/ad136f24-0f60-4aaf-a6d0-06788da943c4.png" 
+                  alt="Advithya Bhardwaj - Founder & Head Chef"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="text-2xl font-bold text-chef-charcoal mb-2 font-playfair">Advithya Bhardwaj</h3>
               <p className="text-chef-gold font-semibold mb-2 font-inter">Founder & Head Chef</p>
