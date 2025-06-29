@@ -21,8 +21,8 @@ const Index = () => {
   return (
     <PageLayout>
       <SEO 
-        title="ChefCircle - Exclusive Online Culinary Club for Gen Z & Millennials" 
-        description="Join ChefCircle, the premium online culinary club for passionate home cooks. Master cooking skills through live cook-alongs, exclusive classes, and an elite community of culinary enthusiasts."
+        title="ChefsCircle - The Exclusive Culinary Club" 
+        description="Join ChefsCircle, the premium online culinary club for passionate home cooks. Master cooking skills through live cook-alongs, exclusive classes, and an elite community of culinary enthusiasts, Founded & Built by Advithya Bhardwaj."
         imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
         keywords={['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'gen z cooking', 'millennial chefs', 'gourmet cooking', 'culinary community']}
       />
