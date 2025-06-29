@@ -16,8 +16,8 @@ export default defineConfig(({ mode }) => ({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: "Chef's Circle",
-        short_name: "ChefCircle",
+        name: "ChefsCircle",
+        short_name: "ChefsCircle",
         start_url: "/",
         display: "standalone",
         theme_color: "#002366",
