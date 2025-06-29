@@ -16,15 +16,15 @@ interface SEOProps {
 }
 
 const SEO = ({ 
-  title = "ChefCircle - Exclusive Online Culinary Club", 
-  description = "Join ChefCircle, the premium online culinary club for Gen Z and millennials. Master cooking skills through live cook-alongs, exclusive classes, and an elite community of food enthusiasts.",
+  title = "ChefsCircle - Exclusive Online Culinary Club", 
+  description = "Join ChefsCircle, the premium online culinary club for Gen Z and millennials. Master cooking skills through live cook-alongs, exclusive classes, and an elite community of food enthusiasts.",
   imageUrl = "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
   keywords = ['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'cooking community', 'gourmet cooking', 'culinary skills'],
   type = "website",
   isBlogPost = false,
   publishDate,
   modifiedDate,
-  author = "ChefCircle",
+  author = "ChefsCircle",
   category
 }: SEOProps) => {
   return (

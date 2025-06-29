@@ -44,7 +44,7 @@ const platformColumns = [
 const ProductPlatform = () => {
   return (
     <div className="w-full relative">
-      {/* ChefCircle Platform Title Section */}
+      {/* ChefsCircle Platform Title Section */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,14 +52,14 @@ const ProductPlatform = () => {
         className="mb-6"
       >
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 font-playfair text-chef-royal-blue">
-          The ChefCircle Experience
+          The ChefsCircle Experience
         </h2>
         <p className="text-sm sm:text-base md:text-lg text-chef-charcoal/80 max-w-4xl">
-          ChefCircle brings together a vibrant community, world-class learning, and member-only experiences in an exclusive online club for food lovers. Discover premium benefits, interactive culinary events, and resources crafted for aspiring chefs and enthusiastic home cooks.
+          ChefsCircle brings together a vibrant community, world-class learning, and member-only experiences in an exclusive online club for food lovers. Discover premium benefits, interactive culinary events, and resources crafted for aspiring chefs and enthusiastic home cooks.
         </p>
       </motion.div>
 
-      {/* ChefCircle Platform - Three Column Layout */}
+      {/* ChefsCircle Platform - Three Column Layout */}
       <div className="flex flex-col lg:flex-row gap-6 w-full">
         {platformColumns.map((col, idx) => (
           <motion.div

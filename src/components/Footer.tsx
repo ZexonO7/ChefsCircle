@@ -29,7 +29,7 @@ const Footer = () => {
         from_name: "Website Subscriber",
         from_email: email,
         message: `New subscription request from the website footer.`,
-        to_name: 'ChefCircle Team',
+        to_name: 'ChefsCircle Team',
         reply_to: email
       };
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
@@ -94,7 +94,7 @@ const Footer = () => {
         
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} ChefCircle. All rights reserved.
+            © {new Date().getFullYear()} ChefsCircle. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>

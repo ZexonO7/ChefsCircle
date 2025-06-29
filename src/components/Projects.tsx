@@ -181,7 +181,7 @@ const Projects = () => {
 
         <div className="text-center">
           <Button onClick={scrollToContact} className="chef-button-gold inline-flex items-center group text-lg text-chef-cream bg-[c] bg-[#141c70]">
-            Join ChefCircle Today
+            Join ChefsCircle Today
             <Utensils className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
           </Button>
         </div>

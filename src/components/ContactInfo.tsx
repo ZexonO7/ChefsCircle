@@ -14,7 +14,7 @@ const ContactInfo = () => {
   };
   const handleJoinChefCircle = () => {
     // Open email to join
-    window.location.href = 'mailto:Advithya@chefscircle.in?subject=Join ChefCircle - Membership Inquiry&body=Hi, I would like to learn more about joining ChefCircle and your membership options.';
+    window.location.href = 'mailto:Advithya@chefscircle.in?subject=Join ChefsCircle - Membership Inquiry&body=Hi, I would like to learn more about joining ChefsCircle and your membership options.';
   };
   return (
     <section id="contact" className="bg-gradient-to-b from-chef-warm-ivory to-chef-royal-green text-white relative py-[25px] md:py-[40px]">

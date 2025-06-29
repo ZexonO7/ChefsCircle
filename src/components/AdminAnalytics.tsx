@@ -144,7 +144,7 @@ const AdminAnalytics = () => {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="chef-heading-lg text-chef-charcoal">Platform Analytics</h2>
-          <p className="chef-body text-chef-charcoal/60">Real-time insights into ChefCircle performance</p>
+          <p className="chef-body text-chef-charcoal/60">Real-time insights into ChefsCircle performance</p>
         </div>
         <button
           onClick={fetchAnalytics}
