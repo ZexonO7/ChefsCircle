@@ -131,7 +131,7 @@ const About = () => {
                     {
                       name: "Advithya Bhardwaj",
                       role: "Founder and CEO",
-                      bio: "Advithya Bhardwaj founder and ceo",
+                      bio: "Founder and CEO of ChefsCircle and Aspiring restaurateur",
                       image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
                     },
                     {
