@@ -129,10 +129,10 @@ const About = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
                     {
-                      name: "Chef Isabella Rodriguez",
-                      role: "Head Culinary Director",
-                      bio: "Michelin-starred chef with 15 years of experience in fine dining and culinary education.",
-                      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                      name: "Advithya Bhardwaj",
+                      role: "Founder and CEO",
+                      bio: "Advithya Bhardwaj founder and ceo",
+                      image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
                     },
                     {
                       name: "Chef Marcus Chen",
