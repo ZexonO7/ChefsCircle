@@ -39,7 +39,7 @@ const ContactInfo = () => {
               <div className="w-32 h-32 rounded-full mb-6 overflow-hidden border-4 border-chef-royal-green/20">
                 <img 
                   src="/lovable-uploads/ad136f24-0f60-4aaf-a6d0-06788da943c4.png" 
-                  alt="Advithya Bhardwaj - Founder & Head Chef"
+                  alt="Advithya Bhardwaj - Founder & CEO of ChefsCircle"
                   className="w-full h-full object-cover scale-125"
                   style={{ objectPosition: '25% 10%' }}
                 />
