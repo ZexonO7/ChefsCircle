@@ -39,7 +39,8 @@ const ContactInfo = () => {
                 <img 
                   src="/lovable-uploads/ad136f24-0f60-4aaf-a6d0-06788da943c4.png" 
                   alt="Advithya Bhardwaj - Founder & Head Chef"
-                  className="w-full h-full object-cover scale-125 object-top"
+                  className="w-full h-full object-cover scale-125"
+                  style={{ objectPosition: '30% 10%' }}
                 />
               </div>
               <h3 className="text-2xl font-bold text-chef-charcoal mb-2 font-playfair">Advithya Bhardwaj</h3>
