@@ -1,4 +1,3 @@
-
 import { ArrowLeft, CheckCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
@@ -6,15 +5,12 @@ import { useEffect } from 'react';
 import PageLayout from '@/components/PageLayout';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
-
 const About = () => {
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
-  return (
-    <PageLayout>
+  return <PageLayout>
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto">
           <div className="max-w-6xl mx-auto">
@@ -23,32 +19,38 @@ const About = () => {
               Back to Home
             </Link>
             
-            <motion.h1 
-              initial={{ opacity: 0, y: -10 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.5 }} 
-              className="text-4xl font-bold mb-6 text-chef-charcoal font-playfair"
-            >
-              About ChefCircle
-            </motion.h1>
+            <motion.h1 initial={{
+            opacity: 0,
+            y: -10
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }} className="text-4xl font-bold mb-6 text-chef-charcoal font-playfair">About ChefsCircle</motion.h1>
             
             <div className="prose prose-lg max-w-none">
-              <motion.p 
-                initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} 
-                transition={{ duration: 0.5, delay: 0.2 }} 
-                className="text-xl text-chef-charcoal/70 mb-12"
-              >
+              <motion.p initial={{
+              opacity: 0
+            }} animate={{
+              opacity: 1
+            }} transition={{
+              duration: 0.5,
+              delay: 0.2
+            }} className="text-xl text-chef-charcoal/70 mb-12">
                 Founded by Advithya Bhardwaj, we're a passionate community of culinary innovators dedicated to transforming home cooking through exclusive education and elite networking.
               </motion.p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }} 
-                  animate={{ opacity: 1, x: 0 }} 
-                  transition={{ duration: 0.6 }}
-                  className="space-y-6"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                x: -20
+              }} animate={{
+                opacity: 1,
+                x: 0
+              }} transition={{
+                duration: 0.6
+              }} className="space-y-6">
                   <h2 className="text-3xl font-bold text-chef-charcoal font-playfair">Our Mission</h2>
                   <p className="text-chef-charcoal/70">
                     At ChefCircle, we're on a mission to elevate home cooking to professional standards through 
@@ -61,12 +63,16 @@ const About = () => {
                   </p>
                 </motion.div>
                 
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }} 
-                  animate={{ opacity: 1, x: 0 }} 
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="bg-chef-warm-ivory rounded-2xl p-8 border border-chef-royal-blue/20"
-                >
+                <motion.div initial={{
+                opacity: 0,
+                x: 20
+              }} animate={{
+                opacity: 1,
+                x: 0
+              }} transition={{
+                duration: 0.6,
+                delay: 0.2
+              }} className="bg-chef-warm-ivory rounded-2xl p-8 border border-chef-royal-blue/20">
                   <h3 className="text-2xl font-bold mb-4 text-chef-charcoal font-playfair">Our Values</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
@@ -89,12 +95,16 @@ const About = () => {
                 </motion.div>
               </div>
               
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="mb-16"
-              >
+              <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6,
+              delay: 0.4
+            }} className="mb-16">
                 <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Our Story</h2>
                 <div className="bg-white rounded-xl border border-chef-royal-green/20 p-8 shadow-chef-luxury">
                   <p className="text-chef-charcoal/70 mb-4">
@@ -114,12 +124,16 @@ const About = () => {
                 </div>
               </motion.div>
               
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="mb-16"
-              >
+              <motion.div initial={{
+              opacity: 0,
+              y: 20
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              duration: 0.6,
+              delay: 0.6
+            }} className="mb-16">
                 <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Our Culinary Team</h2>
                 <p className="text-chef-charcoal/70 mb-8">
                   Our team combines Michelin-trained chefs, culinary educators, and food innovation experts to deliver 
@@ -127,49 +141,38 @@ const About = () => {
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[
-                    {
-                      name: "Advithya Bhardwaj",
-                      role: "Founder and CEO",
-                      bio: "Founder and CEO of ChefsCircle and Aspiring restaurateur",
-                      image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
-                    },
-                    {
-                      name: "Chef Marcus Chen",
-                      role: "Asian Cuisine Specialist",
-                      bio: "Expert in modern Asian fusion techniques and traditional culinary methods.",
-                      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-                    },
-                    {
-                      name: "Chef Elena Dubois",
-                      role: "Pastry & Dessert Expert",
-                      bio: "French-trained pastry chef specializing in modern dessert techniques and artisanal confections.",
-                      image: "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                    },
-                    {
-                      name: "Chef David Thompson",
-                      role: "Community Experience Manager",
-                      bio: "Culinary educator focused on creating engaging cooking experiences and building culinary communities.",
-                      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                    }
-                  ].map((member, i) => (
-                    <Card key={i} className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-shadow">
+                  {[{
+                  name: "Advithya Bhardwaj",
+                  role: "Founder and CEO",
+                  bio: "Founder and CEO of ChefsCircle and Aspiring restaurateur",
+                  image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
+                }, {
+                  name: "Chef Marcus Chen",
+                  role: "Asian Cuisine Specialist",
+                  bio: "Expert in modern Asian fusion techniques and traditional culinary methods.",
+                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                }, {
+                  name: "Chef Elena Dubois",
+                  role: "Pastry & Dessert Expert",
+                  bio: "French-trained pastry chef specializing in modern dessert techniques and artisanal confections.",
+                  image: "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                }, {
+                  name: "Chef David Thompson",
+                  role: "Community Experience Manager",
+                  bio: "Culinary educator focused on creating engaging cooking experiences and building culinary communities.",
+                  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                }].map((member, i) => <Card key={i} className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-shadow">
                       <CardContent className="p-6">
                         <div className="flex flex-col items-center text-center">
                           <div className="w-32 h-32 relative mb-4 rounded-full overflow-hidden">
-                            <img 
-                              src={member.image} 
-                              alt={member.name} 
-                              className="w-full h-full object-cover" 
-                            />
+                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
                           </div>
                           <h3 className="font-bold text-lg text-chef-charcoal font-playfair">{member.name}</h3>
                           <p className="text-chef-royal-blue text-sm mb-2 font-medium">{member.role}</p>
                           <p className="text-chef-charcoal/70 text-sm">{member.bio}</p>
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </motion.div>
             </div>
@@ -183,8 +186,6 @@ const About = () => {
           </div>
         </div>
       </section>
-    </PageLayout>
-  );
+    </PageLayout>;
 };
-
 export default About;
