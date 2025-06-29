@@ -1,4 +1,3 @@
-
 import PageLayout from '@/components/PageLayout';
 import { ArrowLeft, Mail, Linkedin, Phone, ChefHat, Users, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -96,7 +95,8 @@ const Careers = () => {
                         <img 
                           src="/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
                           alt="Advithya Bhardwaj"
-                          className="w-32 h-32 rounded-full mb-4 object-cover"
+                          className="w-32 h-32 rounded-full mb-4 object-cover scale-[1.75]"
+                          style={{ objectPosition: '20% 10%' }}
                         />
                         <h3 className="text-xl font-bold text-chef-charcoal font-playfair">Advithya Bhardwaj</h3>
                         <p className="text-chef-royal-blue mb-4 font-medium">Founder & CEO</p>
