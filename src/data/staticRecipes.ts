@@ -2,7 +2,7 @@ export const staticRecipes = [
   {
     id: 1,
     title: "Classic Beef Bourguignon",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "A rich and flavorful French stew with tender beef braised in red wine, vegetables, and herbs.",
     image: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&h=400&fit=crop",
     cookTime: 180,
@@ -41,7 +41,7 @@ export const staticRecipes = [
   {
     id: 2,
     title: "Homemade Margherita Pizza",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Authentic Italian pizza with fresh mozzarella, basil, and San Marzano tomatoes on homemade dough.",
     image: "https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=600&h=400&fit=crop",
     cookTime: 120,
@@ -78,7 +78,7 @@ export const staticRecipes = [
   {
     id: 3,
     title: "Chocolate Lava Cake",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Decadent individual chocolate cakes with molten centers, perfect for special occasions.",
     image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop",
     cookTime: 25,
@@ -114,7 +114,7 @@ export const staticRecipes = [
   {
     id: 4,
     title: "Caesar Salad with Homemade Dressing",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Classic Caesar salad with crisp romaine, parmesan, croutons, and authentic Caesar dressing.",
     image: "https://images.unsplash.com/photo-1551248429-40975aa4de74?w=600&h=400&fit=crop",
     cookTime: 20,
@@ -151,7 +151,7 @@ export const staticRecipes = [
   {
     id: 5,
     title: "Pan-Seared Salmon with Lemon Butter",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Perfectly cooked salmon with crispy skin and a rich lemon butter sauce.",
     image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&h=400&fit=crop",
     cookTime: 15,
@@ -186,7 +186,7 @@ export const staticRecipes = [
   {
     id: 6,
     title: "French Onion Soup",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Classic French soup with caramelized onions, rich beef broth, and melted Gruyère cheese.",
     image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop",
     cookTime: 90,
@@ -224,7 +224,7 @@ export const staticRecipes = [
   {
     id: 7,
     title: "Chicken Tikka Masala",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Tender chicken in a creamy, spiced tomato sauce - a beloved Indian-inspired dish.",
     image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=400&fit=crop",
     cookTime: 60,
@@ -263,7 +263,7 @@ export const staticRecipes = [
   {
     id: 8,
     title: "Classic Tiramisu",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Traditional Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.",
     image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&h=400&fit=crop",
     cookTime: 30,
@@ -300,7 +300,7 @@ export const staticRecipes = [
   {
     id: 9,
     title: "Thai Green Curry",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Fragrant and spicy Thai curry with coconut milk, vegetables, and aromatic herbs.",
     image: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=600&h=400&fit=crop",
     cookTime: 30,
@@ -338,7 +338,7 @@ export const staticRecipes = [
   {
     id: 10,
     title: "New York Cheesecake",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Rich and creamy classic New York-style cheesecake with graham cracker crust.",
     image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&h=400&fit=crop",
     cookTime: 90,
@@ -375,7 +375,7 @@ export const staticRecipes = [
   {
     id: 11,
     title: "Coq au Vin",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Classic French braised chicken dish with wine, mushrooms, and pearl onions.",
     image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=600&h=400&fit=crop",
     cookTime: 120,
@@ -414,7 +414,7 @@ export const staticRecipes = [
   {
     id: 12,
     title: "Shrimp Scampi",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Succulent shrimp in garlic, white wine, and butter sauce over pasta.",
     image: "https://images.unsplash.com/photo-1563379091339-03246963d774?w=600&h=400&fit=crop",
     cookTime: 20,
@@ -452,7 +452,7 @@ export const staticRecipes = [
   {
     id: 13,
     title: "Banana Bread",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Moist and flavorful banana bread perfect for breakfast or afternoon snack.",
     image: "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&h=400&fit=crop",
     cookTime: 75,
@@ -489,7 +489,7 @@ export const staticRecipes = [
   {
     id: 14,
     title: "Mushroom Risotto",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Creamy Italian rice dish with wild mushrooms and Parmesan cheese.",
     image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=600&h=400&fit=crop",
     cookTime: 45,
@@ -526,7 +526,7 @@ export const staticRecipes = [
   {
     id: 15,
     title: "Fish Tacos with Mango Salsa",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Fresh and vibrant fish tacos topped with tropical mango salsa and cilantro lime crema.",
     image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?w=600&h=400&fit=crop",
     cookTime: 30,
@@ -564,7 +564,7 @@ export const staticRecipes = [
   {
     id: 16,
     title: "Beef Stroganoff",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Classic Russian dish with tender beef in a rich sour cream sauce over egg noodles.",
     image: "https://images.unsplash.com/photo-1607532941433-304659e8198a?w=600&h=400&fit=crop",
     cookTime: 40,
@@ -603,7 +603,7 @@ export const staticRecipes = [
   {
     id: 17,
     title: "Caprese Salad",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Simple Italian salad showcasing fresh mozzarella, tomatoes, and basil with balsamic glaze.",
     image: "https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?w=600&h=400&fit=crop",
     cookTime: 10,
@@ -637,7 +637,7 @@ export const staticRecipes = [
   {
     id: 18,
     title: "Chocolate Chip Cookies",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Classic homemade chocolate chip cookies that are crispy on the edges and chewy in the center.",
     image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&h=400&fit=crop",
     cookTime: 25,
@@ -674,7 +674,7 @@ export const staticRecipes = [
   {
     id: 19,
     title: "Vegetable Stir Fry",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Colorful and healthy stir fry with mixed vegetables in a savory garlic ginger sauce.",
     image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop",
     cookTime: 15,
@@ -713,7 +713,7 @@ export const staticRecipes = [
   {
     id: 20,
     title: "Eggs Benedict",
-    author: "ChefCircle",
+    author: "ChefsCircle",
     description: "Classic brunch dish with poached eggs, Canadian bacon, and hollandaise sauce on English muffins.",
     image: "https://images.unsplash.com/photo-1608039829572-78524f79c4c7?w=600&h=400&fit=crop",
     cookTime: 30,

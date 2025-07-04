@@ -85,7 +85,7 @@ const WhyChefCircle = () => {
   };
 
   return (
-    <section id="why-chefcircle" className="relative py-16 md:py-24 bg-chef-warm-ivory overflow-hidden">
+    <section id="why-chefscircle" className="relative py-16 md:py-24 bg-chef-warm-ivory overflow-hidden">
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-12 md:mb-16"
@@ -96,13 +96,13 @@ const WhyChefCircle = () => {
         >
           <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-sm font-medium">
             <ChefHat className="w-4 h-4" />
-            Why Choose ChefCircle
+            Why Choose ChefsCircle
           </motion.div>
           <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-chef-charcoal mb-6 font-playfair">
             The Future of Culinary Education
           </motion.h2>
           <motion.p variants={itemVariants} className="text-chef-charcoal/70 text-lg max-w-3xl mx-auto font-inter">
-            In a world where cooking shows inspire but don't truly teach, ChefCircle bridges the gap between passion and mastery through personalized, interactive culinary education.
+            In a world where cooking shows inspire but don't truly teach, ChefsCircle bridges the gap between passion and mastery through personalized, interactive culinary education.
           </motion.p>
         </motion.div>
         
@@ -158,7 +158,7 @@ const WhyChefCircle = () => {
           <motion.div variants={itemVariants} className="text-center mb-12">
             <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-blue/20 text-chef-royal-blue rounded-full text-sm font-medium">
               <Sparkles className="w-4 h-4" />
-              What ChefCircle Offers You
+              What ChefsCircle Offers You
             </div>
             <h3 className="text-3xl md:text-4xl font-bold text-chef-charcoal mb-4 font-playfair">
               Transform Your Passion Into Mastery

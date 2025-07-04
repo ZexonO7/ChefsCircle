@@ -28,7 +28,7 @@ const ContactInfo = () => {
             Ready to Elevate Your Culinary Journey?
           </h2>
           <p className="text-chef-warm-ivory/90 text-lg max-w-3xl mx-auto font-inter">
-            Join the ChefCircle community and discover the art of exceptional cooking. Connect with our founder and start your journey to culinary mastery.
+            Join the ChefsCircle community and discover the art of exceptional cooking. Connect with our founder and start your journey to culinary mastery.
           </p>
         </div>
 

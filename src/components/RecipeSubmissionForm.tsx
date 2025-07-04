@@ -155,7 +155,7 @@ const RecipeSubmissionForm = ({
                 Share Your Recipe
               </DialogTitle>
               <DialogDescription className="text-chef-charcoal/70">
-                Share your culinary creation with the ChefCircle community
+                Share your culinary creation with the ChefsCircle community
               </DialogDescription>
             </div>
           </div>

@@ -68,7 +68,7 @@ const AdminPortal = () => {
               <h1 className="chef-heading-xl">Admin Portal</h1>
             </motion.div>
             <p className="text-center text-white/80 mt-4">
-              Welcome, {user.email} - Manage ChefCircle platform
+              Welcome, {user.email} - Manage ChefsCircle platform
             </p>
           </div>
         </section>

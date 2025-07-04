@@ -53,7 +53,7 @@ const About = () => {
               }} className="space-y-6">
                   <h2 className="text-3xl font-bold text-chef-charcoal font-playfair">Our Mission</h2>
                   <p className="text-chef-charcoal/70">
-                    At ChefCircle, we're on a mission to elevate home cooking to professional standards through 
+                    At ChefsCircle, we're on a mission to elevate home cooking to professional standards through 
                     exclusive access to world-class culinary education, premium ingredients, and an elite community 
                     of passionate food enthusiasts.
                   </p>

@@ -19,7 +19,7 @@ const RecipeGuidelines = () => {
           </h2>
           <p className="chef-body text-chef-charcoal/80 mb-6">
             All recipes go through our community approval process to ensure quality and authenticity. 
-            Our expert chefs review each submission to maintain the high standards ChefCircle is known for.
+            Our expert chefs review each submission to maintain the high standards ChefsCircle is known for.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
             <div className="flex items-start gap-3">

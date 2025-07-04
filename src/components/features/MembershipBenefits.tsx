@@ -39,7 +39,7 @@ const MembershipBenefits = () => {
           Premium Culinary Experience
         </div>
         <h3 className="text-3xl md:text-4xl font-bold mb-4 text-chef-warm-ivory font-playfair">
-          Why Choose ChefCircle?
+          Why Choose ChefsCircle?
         </h3>
         <p className="text-chef-warm-ivory/90 max-w-2xl mx-auto font-inter">
           Join an exclusive community of culinary enthusiasts and gain access to world-class instruction, premium content, and invaluable networking opportunities.
