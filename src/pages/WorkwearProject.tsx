@@ -7,7 +7,7 @@ const WorkwearProject = () => {
   return (
     <div className="min-h-screen bg-chef-warm-ivory">
       <SEO 
-        title="Seasonal Menus - ChefCircle" 
+        title="Seasonal Menus - ChefsCircle" 
         description="Discover the art of seasonal cooking with our farm-to-table menu experiences featuring the finest seasonal ingredients."
         imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
         keywords={['seasonal cooking', 'farm to table', 'seasonal menus', 'fresh ingredients', 'seasonal recipes']}
@@ -16,7 +16,7 @@ const WorkwearProject = () => {
         title="Seasonal Menus"
         subtitle="Farm-to-table cooking with seasonal ingredients"
         imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
-        brandName="ChefCircle"
+        brandName="ChefsCircle"
         darkMode={false}
       >
         <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Experience: Seasonal Menu Collection</h2>
@@ -122,7 +122,7 @@ const WorkwearProject = () => {
         
         <h3 className="text-2xl font-semibold mb-4 mt-8 text-chef-charcoal font-playfair">Cook with Nature's Calendar</h3>
         <p className="text-chef-charcoal/70 font-inter">
-          ChefCircle's seasonal menu collection teaches you to cook in harmony with nature's cycles, 
+          ChefsCircle's seasonal menu collection teaches you to cook in harmony with nature's cycles, 
           creating dishes that not only taste better but also support sustainable food systems. 
           Discover how seasonal cooking can transform your approach to food and deepen your 
           connection to the ingredients you use.

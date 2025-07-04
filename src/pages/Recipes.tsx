@@ -125,8 +125,8 @@ const Recipes = () => {
   return (
     <PageLayout>
       <SEO 
-        title="Recipe Sharing - ChefCircle Community" 
-        description="Discover and share amazing recipes with the ChefCircle community. From quick meals to gourmet dishes, find your next culinary inspiration."
+        title="Recipe Sharing - ChefsCircle Community" 
+        description="Discover and share amazing recipes with the ChefsCircle community. From quick meals to gourmet dishes, find your next culinary inspiration."
         keywords={['recipe sharing', 'cooking recipes', 'culinary community', 'chef recipes', 'food sharing']}
       />
       <div className="min-h-screen bg-chef-warm-ivory pt-20">

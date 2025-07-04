@@ -100,7 +100,7 @@ BEGIN
   
   -- If no previous login recorded, award the welcome achievement
   IF login_count = 0 THEN
-    PERFORM public.award_xp(user_id_param, 50, 'first_login', 'Welcome to ChefCircle!');
+    PERFORM public.award_xp(user_id_param, 50, 'first_login', 'Welcome to ChefsCircle!');
   END IF;
 END;
 $function$;

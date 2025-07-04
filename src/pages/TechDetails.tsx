@@ -15,8 +15,8 @@ const TechDetails = () => {
     <div className="min-h-screen bg-chef-warm-ivory">
       <PageLayout>
         <SEO 
-          title="Exclusive Culinary Clubs - ChefCircle" 
-          description="Join specialized culinary communities within ChefCircle, from pastry enthusiasts to molecular gastronomy experts."
+          title="Exclusive Culinary Clubs - ChefsCircle" 
+          description="Join specialized culinary communities within ChefsCircle, from pastry enthusiasts to molecular gastronomy experts."
           imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
           keywords={['culinary clubs', 'specialized cooking', 'culinary communities', 'expert groups', 'cooking specialties']}
         />
@@ -44,7 +44,7 @@ const TechDetails = () => {
                   transition={{ duration: 0.5, delay: 0.2 }} 
                   className="text-xl text-chef-charcoal/70 mb-12 font-inter"
                 >
-                  Join specialized culinary communities within ChefCircle, where passionate food enthusiasts 
+                  Join specialized culinary communities within ChefsCircle, where passionate food enthusiasts 
                   dive deep into specific cuisines, techniques, and culinary specialties.
                 </motion.p>
                 
@@ -164,7 +164,7 @@ const TechDetails = () => {
                   <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">How to Join</h2>
                   <div className="chef-card p-8 bg-chef-cream border border-chef-royal-blue/20">
                     <p className="text-chef-charcoal/70 mb-6 font-inter">
-                      Club membership is included with your ChefCircle subscription. Simply choose the clubs 
+                      Club membership is included with your ChefsCircle subscription. Simply choose the clubs 
                       that align with your culinary interests and start participating immediately.
                     </p>
                     

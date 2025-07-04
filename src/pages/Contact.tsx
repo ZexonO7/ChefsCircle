@@ -10,8 +10,8 @@ const Contact = () => {
   return (
     <PageLayout>
       <SEO 
-        title="Contact Us - ChefCircle"
-        description="Get in touch with ChefCircle. We'd love to hear from you about our culinary programs, courses, and community."
+        title="Contact Us - ChefsCircle"
+        description="Get in touch with ChefsCircle. We'd love to hear from you about our culinary programs, courses, and community."
       />
       
       <div className="min-h-screen bg-gradient-to-br from-chef-warm-ivory via-chef-cream to-chef-warm-ivory">

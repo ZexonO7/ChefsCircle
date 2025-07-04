@@ -120,7 +120,7 @@ const QuestionDetail = () => {
   return (
     <PageLayout>
       <SEO 
-        title={`${question.title} - ChefCircle Community`}
+        title={`${question.title} - ChefsCircle Community`}
         description={question.content}
         keywords={['cooking question', 'culinary help', 'chef advice', question.category.toLowerCase()]}
       />

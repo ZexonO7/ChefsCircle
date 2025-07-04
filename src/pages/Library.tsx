@@ -78,8 +78,8 @@ const Library = () => {
   return (
     <PageLayout>
       <SEO 
-        title="Library of Knowledge - ChefCircle Community" 
-        description="Search cooking questions and get expert answers from the ChefCircle community. Share your culinary knowledge and learn from experienced chefs."
+        title="Library of Knowledge - ChefsCircle Community" 
+        description="Search cooking questions and get expert answers from the ChefsCircle community. Share your culinary knowledge and learn from experienced chefs."
         keywords={['cooking questions', 'culinary knowledge', 'chef advice', 'cooking help', 'food Q&A']}
       />
       

@@ -160,7 +160,7 @@ const Clubs = () => {
   return (
     <PageLayout>
       <SEO 
-        title="Culinary Clubs - ChefCircle Community" 
+        title="Culinary Clubs - ChefsCircle Community" 
         description="Join exclusive culinary clubs and connect with passionate chefs from around the world. Share techniques, recipes, and culinary experiences."
         keywords={['culinary clubs', 'cooking community', 'chef forums', 'culinary discussion', 'cooking groups']}
       />

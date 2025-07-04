@@ -50,7 +50,7 @@ const RecipeDetail = () => {
   return (
     <PageLayout>
       <SEO 
-        title={`${recipe.title} - ChefCircle`}
+        title={`${recipe.title} - ChefsCircle`}
         description={recipe.description}
       />
       

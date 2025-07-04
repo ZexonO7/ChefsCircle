@@ -115,7 +115,7 @@ const IngredientsToRecipes = () => {
 
   return (
     <PageLayout>
-      <SEO title="Ingredients to Recipes - ChefCircle" description="Transform your available ingredients into delicious recipes with AI-powered suggestions from ChefCircle." />
+      <SEO title="Ingredients to Recipes - ChefsCircle" description="Transform your available ingredients into delicious recipes with AI-powered suggestions from ChefsCircle." />
       
       <div className="min-h-screen bg-gradient-to-br from-chef-warm-ivory via-chef-cream to-chef-warm-ivory">
         {/* Hero Section */}

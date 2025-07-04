@@ -93,8 +93,8 @@ const DevelopmentProcess = () => {
     <div className="min-h-screen bg-chef-warm-ivory">
       <PageLayout>
         <SEO 
-          title="Our Culinary Learning Process - ChefCircle" 
-          description="Discover how ChefCircle transforms passionate home cooks into confident chefs through our structured learning methodology and expert guidance."
+          title="Our Culinary Learning Process - ChefsCircle" 
+          description="Discover how ChefsCircle transforms passionate home cooks into confident chefs through our structured learning methodology and expert guidance."
           imageUrl="/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png"
           keywords={['culinary education', 'cooking process', 'chef training', 'skill development', 'culinary methodology']}
         />
@@ -212,7 +212,7 @@ const DevelopmentProcess = () => {
                   to="/about" 
                   className="chef-button-primary inline-flex items-center group"
                 >
-                  Learn More About ChefCircle
+                  Learn More About ChefsCircle
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

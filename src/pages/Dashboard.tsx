@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <PageLayout>
       <SEO 
-        title="Dashboard - ChefCircle" 
+        title="Dashboard - ChefsCircle" 
         description="Track your culinary progress, view achievements, and compete with fellow chefs in your personalized dashboard."
       />
       <GamificationDashboard />

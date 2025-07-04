@@ -7,7 +7,7 @@ const FireCatProject = () => {
   return (
     <div className="min-h-screen bg-chef-warm-ivory">
       <SEO 
-        title="Live Cook-Along Sessions - ChefCircle" 
+        title="Live Cook-Along Sessions - ChefsCircle" 
         description="Experience our signature live cook-along sessions where master chefs guide you through gourmet recipes in real-time."
         imageUrl="/lovable-uploads/93ab0638-8190-4ccf-897f-21fda7f4f5ad.png"
         keywords={['live cooking', 'cook-along', 'chef classes', 'culinary education', 'interactive cooking']}
@@ -16,7 +16,7 @@ const FireCatProject = () => {
         title="Live Cook-Along Sessions"
         subtitle="Interactive culinary experiences with master chefs"
         imageUrl="/lovable-uploads/93ab0638-8190-4ccf-897f-21fda7f4f5ad.png"
-        brandName="ChefCircle"
+        brandName="ChefsCircle"
         darkMode={false}
       >
         <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Experience: Live Cook-Along Sessions</h2>
@@ -24,7 +24,7 @@ const FireCatProject = () => {
         <div className="chef-card p-6 mb-8">
           <h3 className="text-xl font-semibold mb-2 text-chef-charcoal font-playfair">About Our Sessions</h3>
           <p className="text-chef-charcoal/70 font-inter">
-            ChefCircle's live cook-along sessions represent the pinnacle of interactive culinary education. 
+            ChefsCircle's live cook-along sessions represent the pinnacle of interactive culinary education. 
             Our members join renowned chefs in real-time cooking experiences, learning professional techniques 
             while preparing restaurant-quality dishes from their own kitchens.
           </p>
@@ -122,7 +122,7 @@ const FireCatProject = () => {
         
         <h3 className="text-2xl font-semibold mb-4 mt-8 text-chef-charcoal font-playfair">Transform Your Cooking</h3>
         <p className="text-chef-charcoal/70 font-inter">
-          ChefCircle's live cook-along sessions have successfully elevated thousands of home cooks to confident, 
+          ChefsCircle's live cook-along sessions have successfully elevated thousands of home cooks to confident, 
           skilled chefs. Our innovative approach combines expert instruction with community support, creating 
           an environment where culinary mastery flourishes and passion for exceptional food grows.
         </p>

@@ -7,7 +7,7 @@ const SportRetailProject = () => {
   return (
     <div className="min-h-screen bg-chef-warm-ivory">
       <SEO 
-        title="Technique Masterclasses - ChefCircle" 
+        title="Technique Masterclasses - ChefsCircle" 
         description="Master advanced culinary techniques through our exclusive technique-focused masterclasses with world-renowned chefs."
         imageUrl="/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
         keywords={['culinary techniques', 'masterclass', 'advanced cooking', 'chef skills', 'professional cooking']}
@@ -16,7 +16,7 @@ const SportRetailProject = () => {
         title="Technique Masterclasses"
         subtitle="Advanced culinary skills and professional methods"
         imageUrl="/lovable-uploads/4bfa0d71-3ed2-4693-90b6-35142468907f.png"
-        brandName="ChefCircle"
+        brandName="ChefsCircle"
         darkMode={false}
       >
         <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Experience: Technique Masterclasses</h2>
@@ -122,7 +122,7 @@ const SportRetailProject = () => {
         
         <h3 className="text-2xl font-semibold mb-4 mt-8 text-chef-charcoal font-playfair">Elevate Your Culinary Skills</h3>
         <p className="text-chef-charcoal/70 font-inter">
-          ChefCircle's technique masterclasses provide the foundation for exceptional cooking. Whether you're 
+          ChefsCircle's technique masterclasses provide the foundation for exceptional cooking. Whether you're 
           looking to improve your home cooking or pursuing professional culinary aspirations, our comprehensive 
           technique training ensures you have the skills and confidence to create extraordinary dishes.
         </p>

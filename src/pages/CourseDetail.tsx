@@ -56,7 +56,7 @@ const CourseDetail = () => {
   return (
     <PageLayout>
       <SEO 
-        title={`${course.title} - ChefCircle Learning`}
+        title={`${course.title} - ChefsCircle Learning`}
         description={course.description}
         keywords={['knife skills', 'culinary techniques', 'cooking course', 'chef training']}
       />

@@ -14,8 +14,8 @@ const Careers = () => {
     <div className="min-h-screen bg-chef-warm-ivory">
       <PageLayout showContact={false}>
         <SEO 
-          title="Join Our Culinary Team - ChefCircle Careers" 
-          description="Join ChefCircle's passionate team of culinary educators and food enthusiasts. We're looking for talented individuals to help revolutionize culinary education."
+          title="Join Our Culinary Team - ChefsCircle Careers" 
+          description="Join ChefsCircle's passionate team of culinary educators and food enthusiasts. We're looking for talented individuals to help revolutionize culinary education."
           imageUrl="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
           keywords={['culinary careers', 'chef jobs', 'cooking instructor', 'culinary education', 'food industry careers']}
         />
@@ -61,7 +61,7 @@ const Careers = () => {
                   transition={{ duration: 0.6 }}
                   className="mb-16"
                 >
-                  <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Why Join ChefCircle?</h2>
+                  <h2 className="text-3xl font-bold mb-6 text-chef-charcoal font-playfair">Why Join ChefsCircle?</h2>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     {[
                       {

@@ -42,7 +42,7 @@ const Blog = () => {
   return (
     <PageLayout>
       <SEO 
-        title="ChefCircle - Latest Culinary News" 
+        title="ChefsCircle - Latest Culinary News" 
         description="Stay updated with the latest culinary news, trends, and insights from the world of professional cooking and gastronomy." 
         keywords={['culinary news', 'cooking trends', 'chef news', 'food industry', 'restaurant news']} 
         type="website" 

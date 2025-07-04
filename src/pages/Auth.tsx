@@ -184,8 +184,8 @@ const Auth = () => {
     return (
       <PageLayout>
         <SEO 
-          title="Verify Email - ChefCircle"
-          description="Enter the verification code sent to your email to complete your ChefCircle account setup."
+          title="Verify Email - ChefsCircle"
+          description="Enter the verification code sent to your email to complete your ChefsCircle account setup."
         />
         
         <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center py-12 px-4">
@@ -245,8 +245,8 @@ const Auth = () => {
   return (
     <PageLayout>
       <SEO 
-        title={`${isLogin ? 'Sign In' : 'Sign Up'} - ChefCircle`}
-        description={`${isLogin ? 'Sign in to your' : 'Create a'} ChefCircle account to share recipes and join culinary clubs.`}
+        title={`${isLogin ? 'Sign In' : 'Sign Up'} - ChefsCircle`}
+        description={`${isLogin ? 'Sign in to your' : 'Create a'} ChefsCircle account to share recipes and join culinary clubs.`}
       />
       
       <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center py-12 px-4">
@@ -263,7 +263,7 @@ const Auth = () => {
               </div>
             </div>
             <h2 className="chef-heading-xl text-chef-charcoal">
-              {isLogin ? 'Welcome Back' : 'Join ChefCircle'}
+              {isLogin ? 'Welcome Back' : 'Join ChefsCircle'}
             </h2>
             <p className="chef-body text-chef-charcoal/70 mt-2">
               {isLogin 
@@ -383,7 +383,7 @@ const Auth = () => {
               <AlertCircle className="w-5 h-5 text-chef-royal-blue flex-shrink-0 mt-0.5" />
               <div className="text-sm text-chef-charcoal/70">
                 <p className="font-medium text-chef-charcoal mb-1">Authentication Required</p>
-                <p>You need to sign in to share recipes, join clubs, and access all ChefCircle features.</p>
+                <p>You need to sign in to share recipes, join clubs, and access all ChefsCircle features.</p>
               </div>
             </div>
           </div>

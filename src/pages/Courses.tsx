@@ -158,7 +158,7 @@ const Courses = () => {
   return (
     <PageLayout>
       <SEO 
-        title="Culinary Courses - ChefCircle Learning" 
+        title="Culinary Courses - ChefsCircle Learning" 
         description="Learn from world-class chefs with our comprehensive culinary courses. From basic techniques to advanced skills, enhance your cooking abilities."
         keywords={['culinary courses', 'cooking classes', 'chef training', 'culinary education', 'online cooking']}
       />
