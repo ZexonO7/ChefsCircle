@@ -88,8 +88,8 @@ export const blogPosts: BlogPost[] = [
     ],
     imageUrl: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
     date: 'Dec 10, 2024',
-    author: 'Chef Marcus Chen',
-    category: 'Culinary Science',
+    author: 'Hiring',
+    category: 'Social Media Manager',
     slug: 'art-of-flavor-pairing'
   },
   {

@@ -140,9 +140,9 @@ const About = () => {
                   bio: "Founder and CEO of ChefsCircle and Aspiring restaurateur",
                   image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
                 }, {
-                  name: "Chef Marcus Chen",
-                  role: "Asian Cuisine Specialist",
-                  bio: "Expert in modern Asian fusion techniques and traditional culinary methods.",
+                  name: "hiring",
+                  role: "Social Media Manager",
+                  bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
                   image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
                 }, {
                   name: "Chef Elena Dubois",
