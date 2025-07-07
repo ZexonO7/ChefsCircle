@@ -2,13 +2,16 @@ import { motion } from 'framer-motion';
 import { Award, ChefHat, Star, Trophy, Crown, Users, BookOpen, Sparkles, Newspaper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
+import { useState } from 'react';
+import BadgesModal from './BadgesModal';
 interface Badge {
   id: number;
   name: string;
   iconName: string;
   earned: boolean;
   color: string;
+  description?: string;
+  requirement?: string;
 }
 interface BadgesSectionProps {
   badges: Badge[];
@@ -16,16 +19,19 @@ interface BadgesSectionProps {
 const BadgesSection = ({
   badges
 }: BadgesSectionProps) => {
-  const {
-    toast
-  } = useToast();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const earnedBadges = badges.filter(badge => badge.earned);
   const availableBadges = badges.filter(badge => !badge.earned);
+
+  // Add descriptions and requirements to badges for the modal
+  const badgesWithDetails = badges.map(badge => ({
+    ...badge,
+    description: badge.description || "Keep cooking to earn this badge!",
+    requirement: badge.requirement || "Complete specific cooking activities"
+  }));
+
   const handleViewAllBadges = () => {
-    toast({
-      title: "Coming Soon!",
-      description: "The full badges gallery is coming soon. Keep cooking to unlock more badges!"
-    });
+    setIsModalOpen(true);
   };
   const getIcon = (iconName: string) => {
     const iconProps = {
@@ -91,6 +97,12 @@ const BadgesSection = ({
           </div>
         </CardContent>
       </Card>
+      
+      <BadgesModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        badges={badgesWithDetails}
+      />
     </motion.div>;
 };
 export default BadgesSection;
