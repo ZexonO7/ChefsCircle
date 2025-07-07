@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Award, ChefHat, Star, Trophy, Crown, Users, BookOpen, Sparkles, Newspaper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
 
 interface Badge {
   id: number;
@@ -17,8 +18,16 @@ interface BadgesSectionProps {
 }
 
 const BadgesSection = ({ badges }: BadgesSectionProps) => {
+  const { toast } = useToast();
   const earnedBadges = badges.filter(badge => badge.earned);
   const availableBadges = badges.filter(badge => !badge.earned);
+
+  const handleViewAllBadges = () => {
+    toast({
+      title: "Coming Soon!",
+      description: "The full badges gallery is coming soon. Keep cooking to unlock more badges!",
+    });
+  };
 
   const getIcon = (iconName: string) => {
     const iconProps = { className: "w-4 h-4" };
@@ -78,7 +87,11 @@ const BadgesSection = ({ badges }: BadgesSectionProps) => {
             <p className="text-sm text-chef-charcoal/60 mb-3">
               {availableBadges.length} more badges to unlock
             </p>
-            <Button variant="outline" className="chef-button-outline text-sm bg-inherit text-inherit">
+            <Button 
+              variant="outline" 
+              className="chef-button-outline text-sm text-chef-charcoal"
+              onClick={handleViewAllBadges}
+            >
               View All Badges
             </Button>
           </div>
