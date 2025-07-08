@@ -28,6 +28,7 @@ const IngredientsToRecipes = () => {
   const [availableIngredients, setAvailableIngredients] = useState<string[]>([]);
   const [generatedRecipes, setGeneratedRecipes] = useState<AIRecipe[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [expandedRecipes, setExpandedRecipes] = useState<Set<number>>(new Set());
   const { toast } = useToast();
 
   const addIngredient = () => {
@@ -111,6 +112,16 @@ const IngredientsToRecipes = () => {
     if (e.key === 'Enter') {
       addIngredient();
     }
+  };
+
+  const toggleRecipeExpansion = (recipeIndex: number) => {
+    const newExpanded = new Set(expandedRecipes);
+    if (newExpanded.has(recipeIndex)) {
+      newExpanded.delete(recipeIndex);
+    } else {
+      newExpanded.add(recipeIndex);
+    }
+    setExpandedRecipes(newExpanded);
   };
 
   return (
@@ -271,16 +282,21 @@ const IngredientsToRecipes = () => {
                       <div>
                         <h4 className="font-medium text-chef-charcoal mb-2">Instructions:</h4>
                         <div className="text-sm text-chef-charcoal/70 space-y-1">
-                          {recipe.instructions.slice(0, 2).map((step, idx) => (
+                          {(expandedRecipes.has(index) ? recipe.instructions : recipe.instructions.slice(0, 2)).map((step, idx) => (
                             <p key={idx} className="flex items-start gap-2">
                               <span className="text-chef-royal-green font-medium">{idx + 1}.</span>
                               {step}
                             </p>
                           ))}
                           {recipe.instructions.length > 2 && (
-                            <p className="text-chef-royal-green text-xs">
-                              +{recipe.instructions.length - 2} more steps
-                            </p>
+                            <button 
+                              onClick={() => toggleRecipeExpansion(index)}
+                              className="text-chef-royal-green text-xs hover:underline cursor-pointer transition-colors"
+                            >
+                              {expandedRecipes.has(index) 
+                                ? "- show less" 
+                                : `+${recipe.instructions.length - 2} more steps`}
+                            </button>
                           )}
                         </div>
                       </div>
