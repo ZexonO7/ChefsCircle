@@ -52,7 +52,7 @@ const AskQuestionModal = ({ isOpen, onClose, onSubmit }: AskQuestionModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl bg-white text-chef-charcoal border-chef-cream shadow-xl">
         <DialogHeader>
           <DialogTitle className="chef-heading-md text-chef-charcoal">Ask a Question</DialogTitle>
         </DialogHeader>
