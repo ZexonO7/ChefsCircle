@@ -3,7 +3,7 @@ import SEO from '@/components/SEO';
 import NewsCard from '@/components/NewsCard';
 import { useNewsApi } from '@/hooks/useNewsApi';
 import { RefreshCw, Newspaper } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
+import BlogArticleLoader from '@/components/BlogArticleLoader';
 import { useToast } from '@/hooks/use-toast';
 
 const Blog = () => {
@@ -83,13 +83,11 @@ const Blog = () => {
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Featured article skeleton */}
-            <div className="col-span-1 md:col-span-2 lg:col-span-3">
-              <Skeleton className="h-96 w-full rounded-lg" />
-            </div>
-            {/* Other articles skeletons */}
+            {/* Featured article loader */}
+            <BlogArticleLoader featured={true} />
+            {/* Other articles loaders */}
             {Array.from({ length: 6 }).map((_, index) => (
-              <Skeleton key={index} className="h-96 w-full rounded-lg" />
+              <BlogArticleLoader key={index} />
             ))}
           </div>
         ) : (
