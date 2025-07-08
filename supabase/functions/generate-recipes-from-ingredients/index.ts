@@ -92,15 +92,38 @@ Make sure the JSON is valid and properly formatted. Only return the JSON, no add
     // Parse the JSON response from AI
     let parsedRecipes
     try {
-      // Clean up the response in case there's extra text
-      const jsonMatch = generatedContent.match(/\{[\s\S]*\}/)
-      const jsonString = jsonMatch ? jsonMatch[0] : generatedContent
+      // Clean up the response and try multiple parsing strategies
+      let cleanedContent = generatedContent.trim()
+      
+      // Try to find JSON between code blocks if present
+      const codeBlockMatch = cleanedContent.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/)
+      if (codeBlockMatch) {
+        cleanedContent = codeBlockMatch[1]
+      }
+      
+      // Try to find the JSON object
+      const jsonMatch = cleanedContent.match(/\{[\s\S]*\}/)
+      const jsonString = jsonMatch ? jsonMatch[0] : cleanedContent
+      
+      // Parse the JSON
       parsedRecipes = JSON.parse(jsonString)
+      
+      // Validate the structure
+      if (!parsedRecipes.recipes || !Array.isArray(parsedRecipes.recipes)) {
+        throw new Error('Invalid recipe structure - missing recipes array')
+      }
+      
     } catch (parseError) {
       console.error('Failed to parse AI response as JSON:', parseError)
-      console.error('Raw content:', generatedContent)
+      console.error('Raw content length:', generatedContent.length)
+      console.error('Raw content preview:', generatedContent.substring(0, 500))
+      
+      // Return a more helpful error
       return new Response(
-        JSON.stringify({ error: 'Failed to parse recipe data' }),
+        JSON.stringify({ 
+          error: 'Failed to parse recipe data from AI response',
+          details: 'The AI response was not in the expected JSON format. Please try again.'
+        }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
       )
     }
