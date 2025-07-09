@@ -145,14 +145,14 @@ const About = () => {
                   bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
                   image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
                 }, {
-                  name: "Chef Elena Dubois",
-                  role: "Pastry & Dessert Expert",
-                  bio: "French-trained pastry chef specializing in modern dessert techniques and artisanal confections.",
+                  name: "hiring",
+                  role: "Social Media Manager",
+                  bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
                   image: "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                 }, {
-                  name: "Chef David Thompson",
-                  role: "Community Experience Manager",
-                  bio: "Culinary educator focused on creating engaging cooking experiences and building culinary communities.",
+                  name: "hiring",
+                  role: "Social Media Manager",
+                  bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
                   image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
                 }].map((member, i) => <Card key={i} className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-shadow">
                       <CardContent className="p-6">
