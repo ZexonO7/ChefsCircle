@@ -120,7 +120,7 @@ const Navbar = () => {
                   </Button>
                 </div>
               </div>
-              <div className="p-6 space-y-2">
+              <div className="p-6 space-y-2 bg-transparent">
                 {navItems.map((item, index) => <Link key={item.name} to={item.path} className={`flex items-center gap-3 px-4 py-3 rounded-xl text-chef-charcoal hover:text-chef-royal-green hover:bg-chef-royal-green/10 transition-all duration-300 transform hover:translate-x-2 ${isActivePath(item.path) ? 'bg-chef-royal-green/10 text-chef-royal-green' : ''} ${item.isSpecial ? 'bg-gradient-to-r from-chef-royal-blue/5 to-chef-royal-green/5 border border-chef-royal-blue/20' : ''}`} onClick={closeMenu} style={{
               animationDelay: `${index * 50}ms`
             }}>
