@@ -158,7 +158,7 @@ const IngredientsToRecipes = () => {
                 <CardTitle className="text-chef-charcoal font-playfair text-2xl">
                   What ingredients do you have?
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-chef-charcoal/70">
                   Add the ingredients available in your kitchen
                 </CardDescription>
               </CardHeader>
