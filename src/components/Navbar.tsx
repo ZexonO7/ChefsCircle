@@ -99,8 +99,8 @@ const Navbar = () => {
           </div>}
 
         {/* Mobile Menu Button */}
-        {isSmallScreen && <Button variant="ghost" size="icon" onClick={toggleMenu} className={`text-chef-charcoal hover:bg-chef-royal-green/10 rounded-full transition-all duration-300 ${isMenuOpen ? 'bg-chef-royal-green/10 rotate-90' : ''}`}>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        {isSmallScreen && <Button variant="ghost" size="icon" onClick={toggleMenu} className={`hover:bg-chef-royal-green/10 rounded-full transition-all duration-300 ${isMenuOpen ? 'bg-chef-royal-green/10 rotate-90' : ''}`}>
+            {isMenuOpen ? <X className="h-6 w-6 text-chef-charcoal" /> : <Menu className="h-6 w-6 text-chef-charcoal" />}
           </Button>}
 
         {/* Enhanced Mobile Menu */}
