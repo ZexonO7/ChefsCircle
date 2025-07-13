@@ -11,7 +11,7 @@ interface RecipeHeroProps {
 
 const RecipeHero = ({ searchTerm, onSearchChange, onShareRecipe }: RecipeHeroProps) => {
   return (
-    <section className="chef-section bg-gradient-to-br from-chef-royal-green to-chef-forest relative overflow-hidden">
+    <section className="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-chef-royal-green to-chef-forest relative overflow-hidden">
       <div className="absolute inset-0">
         <img 
           src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=1200&h=600&fit=crop" 
@@ -21,34 +21,34 @@ const RecipeHero = ({ searchTerm, onSearchChange, onShareRecipe }: RecipeHeroPro
       </div>
       <div className="chef-container relative z-10">
         <motion.div 
-          className="text-center max-w-4xl mx-auto"
+          className="text-center max-w-4xl mx-auto px-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="chef-heading-xl text-chef-warm-ivory mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-chef-warm-ivory mb-4 sm:mb-6">
             Share Your <span className="text-chef-gold">Recipes</span>
           </h1>
-          <p className="chef-body-lg text-chef-warm-ivory/90 mb-8">
+          <p className="text-sm sm:text-base md:text-lg text-chef-warm-ivory/90 mb-6 sm:mb-8">
             Discover amazing recipes from our community and share your own culinary creations
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
             <button 
               onClick={onShareRecipe}
-              className="chef-button bg-chef-gold text-chef-charcoal hover:bg-chef-bronze"
+              className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-chef-gold text-chef-charcoal hover:bg-chef-bronze font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
             >
-              <Plus className="w-5 h-5 mr-2" />
+              <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
               Share Recipe
             </button>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/60 w-5 h-5" />
+            <div className="relative w-full sm:w-auto sm:min-w-[280px]">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/60 w-4 h-4 sm:w-5 sm:h-5" />
               <input
                 type="text"
                 placeholder="Search recipes..."
                 value={searchTerm}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-10 pr-4 py-3 rounded-xl border border-chef-royal-green/20 focus:outline-none focus:ring-2 focus:ring-chef-gold"
+                className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl border border-chef-royal-green/20 focus:outline-none focus:ring-2 focus:ring-chef-gold"
               />
             </div>
           </div>

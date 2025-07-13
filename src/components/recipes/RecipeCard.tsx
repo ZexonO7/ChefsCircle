@@ -87,19 +87,19 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
         <img 
           src={getRecipeImage()}
           alt={recipe.title}
-          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-32 sm:h-40 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src = 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=400&fit=crop';
           }}
         />
-        <div className="absolute top-4 left-4 flex gap-2">
+        <div className="absolute top-2 sm:top-4 left-2 sm:left-4 flex gap-1 sm:gap-2">
           {recipe.isPremium && (
-            <span className="chef-badge bg-chef-gold/20 text-chef-gold border-chef-gold/30">
+            <span className="text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full bg-chef-gold/20 text-chef-gold border border-chef-gold/30 font-medium">
               Premium
             </span>
           )}
-          <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+          <span className={`text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full font-medium ${
             recipe.difficulty === 'Easy' ? 'bg-green-100 text-green-800' :
             recipe.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
             'bg-red-100 text-red-800'
@@ -107,40 +107,42 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
             {recipe.difficulty}
           </span>
         </div>
-        <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
+        <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1 text-white text-xs sm:text-sm">
           <Clock className="w-3 h-3 inline mr-1" />
           {formatCookTime(recipe.cook_time || recipe.cookTime || 30)}
         </div>
-        <div className="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm flex items-center gap-1">
+        <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1 text-white text-xs sm:text-sm flex items-center gap-1">
           <Eye className="w-3 h-3" />
           <span>{formattedViewCount}</span>
         </div>
       </div>
       
-      <div className="p-6">
-        <div className="flex items-start justify-between mb-3">
-          <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-green transition-colors">
+      <div className="p-3 sm:p-4 md:p-6">
+        <div className="flex items-start justify-between mb-2 sm:mb-3">
+          <h3 className="text-sm sm:text-base md:text-lg font-semibold text-chef-charcoal group-hover:text-chef-royal-green transition-colors leading-tight">
             {recipe.title}
           </h3>
-          <div className="flex items-center gap-1 text-sm text-chef-gold">
-            <Star className="w-4 h-4 fill-current" />
+          <div className="flex items-center gap-1 text-xs sm:text-sm text-chef-gold ml-2">
+            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
             <span>{recipe.rating}</span>
           </div>
         </div>
         
-        <p className="text-sm text-chef-royal-green font-medium mb-2">by {recipe.author}</p>
+        <p className="text-xs sm:text-sm text-chef-royal-green font-medium mb-1 sm:mb-2">by {recipe.author}</p>
         
-        <p className="chef-body-sm text-chef-charcoal/80 mb-4 line-clamp-2">
+        <p className="text-xs sm:text-sm text-chef-charcoal/80 mb-3 sm:mb-4 line-clamp-2">
           {recipe.description}
         </p>
         
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-chef-charcoal/60">
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-chef-charcoal/60">
             <div className="flex items-center gap-1">
-              <Users className="w-4 h-4" />
+              <Users className="w-3 h-3 sm:w-4 sm:h-4" />
               <span>{recipe.likes}</span>
             </div>
-            <span className="chef-badge-blue">{recipe.category}</span>
+            <span className="text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full bg-chef-royal-blue/10 text-chef-royal-blue border border-chef-royal-blue/20 font-medium">
+              {recipe.category}
+            </span>
           </div>
           
           <button 
@@ -148,9 +150,9 @@ const RecipeCard = ({ recipe, index, onViewRecipe }: RecipeCardProps) => {
               e.stopPropagation();
               onViewRecipe(recipe);
             }}
-            className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-sm"
+            className="text-chef-royal-green hover:text-chef-royal-green/80 font-medium text-xs sm:text-sm"
           >
-            View Recipe →
+            View →
           </button>
         </div>
       </div>
