@@ -85,147 +85,147 @@ const WhyChefCircle = () => {
   };
 
   return (
-    <section id="why-chefscircle" className="relative py-16 md:py-24 bg-chef-warm-ivory overflow-hidden">
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-chefscircle" className="relative py-8 sm:py-12 md:py-16 lg:py-24 bg-chef-warm-ivory overflow-hidden">
+      <div className="container relative z-10 mx-auto px-3 sm:px-4 lg:px-8">
         <motion.div
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-sm font-medium">
-            <ChefHat className="w-4 h-4" />
+          <motion.div variants={itemVariants} className="inline-flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4 px-3 py-1.5 sm:px-4 sm:py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-xs sm:text-sm font-medium">
+            <ChefHat className="w-3 h-3 sm:w-4 sm:h-4" />
             Why Choose ChefsCircle
           </motion.div>
-          <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-chef-charcoal mb-6 font-playfair">
+          <motion.h2 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-chef-charcoal mb-4 sm:mb-6 font-playfair">
             The Future of Culinary Education
           </motion.h2>
-          <motion.p variants={itemVariants} className="text-chef-charcoal/70 text-lg max-w-3xl mx-auto font-inter">
+          <motion.p variants={itemVariants} className="text-chef-charcoal/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto font-inter px-2">
             In a world where cooking shows inspire but don't truly teach, ChefsCircle bridges the gap between passion and mastery through personalized, interactive culinary education.
           </motion.p>
         </motion.div>
         
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
-            <div className="w-16 h-16 rounded-full bg-chef-royal-blue/20 flex items-center justify-center mx-auto mb-6">
-              <Users className="w-8 h-8 text-chef-royal-blue" />
+          <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 text-center chef-hover-lift">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-chef-royal-blue/20 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
             </div>
-            <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
+            <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
               <AnimatedCounter end={50} suffix="+" />
             </h3>
-            <p className="text-chef-charcoal/70 font-inter">Active members learning and growing together in our exclusive culinary community</p>
+            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Active members learning and growing together in our exclusive culinary community</p>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
-            <div className="w-16 h-16 rounded-full bg-chef-royal-green/20 flex items-center justify-center mx-auto mb-6">
-              <Trophy className="w-8 h-8 text-chef-royal-green" />
+          <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 text-center chef-hover-lift">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-chef-royal-green/20 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Trophy className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-green" />
             </div>
-            <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
+            <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
               <AnimatedCounter end={5} suffix="+" />
             </h3>
-            <p className="text-chef-charcoal/70 font-inter">
+            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">
               Master classes and cook-alongs completed by our members, with 95% satisfaction rate
             </p>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="chef-card p-8 text-center chef-hover-lift">
-            <div className="w-16 h-16 rounded-full bg-chef-royal-blue/20 flex items-center justify-center mx-auto mb-6">
-              <Star className="w-8 h-8 text-chef-royal-blue" />
+          <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 text-center chef-hover-lift sm:col-span-2 lg:col-span-1">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-chef-royal-blue/20 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Star className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
             </div>
-            <h3 className="text-chef-charcoal text-2xl lg:text-3xl font-bold mb-4 font-playfair">
+            <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
               <AnimatedCounter end={4.9} decimals={1} suffix="/5" />
             </h3>
-            <p className="text-chef-charcoal/70 font-inter">
+            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">
               Average rating from our members, reflecting the quality of our culinary education programs
             </p>
           </motion.div>
         </motion.div>
         
         <motion.div
-          className="mb-16"
+          className="mb-8 sm:mb-12 md:mb-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <motion.div variants={itemVariants} className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-royal-blue/20 text-chef-royal-blue rounded-full text-sm font-medium">
-              <Sparkles className="w-4 h-4" />
+          <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4 px-3 py-1.5 sm:px-4 sm:py-2 bg-chef-royal-blue/20 text-chef-royal-blue rounded-full text-xs sm:text-sm font-medium">
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
               What ChefsCircle Offers You
             </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-chef-charcoal mb-4 font-playfair">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-chef-charcoal mb-3 sm:mb-4 font-playfair">
               Transform Your Passion Into Mastery
             </h3>
-            <p className="text-chef-charcoal/70 max-w-3xl mx-auto font-inter">
+            <p className="text-chef-charcoal/70 max-w-3xl mx-auto font-inter text-sm sm:text-base px-2">
               We provide the structured learning, expert guidance, and supportive community that home cooks need to become confident chefs.
             </p>
           </motion.div>
           
-          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
-              <div className="flex items-start">
-                <div className="bg-chef-royal-green/20 rounded-full p-4 mr-6">
-                  <ChefHat className="w-8 h-8 text-chef-royal-green" />
+          <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 chef-hover-lift">
+              <div className="flex items-start flex-col sm:flex-row">
+                <div className="bg-chef-royal-green/20 rounded-full p-3 sm:p-4 mb-3 sm:mb-0 sm:mr-4 md:mr-6 mx-auto sm:mx-0">
+                  <ChefHat className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-green" />
                 </div>
-                <div>
-                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Expert-Led Instruction</h4>
-                  <p className="text-chef-charcoal/70 font-inter">Learn from renowned chefs and culinary experts who share their secrets, techniques, and professional insights in every session.</p>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
-              <div className="flex items-start">
-                <div className="bg-chef-royal-blue/20 rounded-full p-4 mr-6">
-                  <Users className="w-8 h-8 text-chef-royal-blue" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Vibrant Community</h4>
-                  <p className="text-chef-charcoal/70 font-inter">Connect with like-minded food enthusiasts, share your creations, and get inspired by others' culinary journeys.</p>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-bold text-chef-charcoal mb-2 sm:mb-3 font-playfair">Expert-Led Instruction</h4>
+                  <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Learn from renowned chefs and culinary experts who share their secrets, techniques, and professional insights in every session.</p>
                 </div>
               </div>
             </motion.div>
             
-            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
-              <div className="flex items-start">
-                <div className="bg-chef-royal-blue/20 rounded-full p-4 mr-6">
-                  <BookOpen className="w-8 h-8 text-chef-royal-blue" />
+            <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 chef-hover-lift">
+              <div className="flex items-start flex-col sm:flex-row">
+                <div className="bg-chef-royal-blue/20 rounded-full p-3 sm:p-4 mb-3 sm:mb-0 sm:mr-4 md:mr-6 mx-auto sm:mx-0">
+                  <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
                 </div>
-                <div>
-                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Structured Learning Path</h4>
-                  <p className="text-chef-charcoal/70 font-inter">Progress through carefully designed courses that build upon each other, ensuring comprehensive skill development.</p>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-bold text-chef-charcoal mb-2 sm:mb-3 font-playfair">Vibrant Community</h4>
+                  <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Connect with like-minded food enthusiasts, share your creations, and get inspired by others' culinary journeys.</p>
                 </div>
               </div>
             </motion.div>
             
-            <motion.div variants={itemVariants} className="chef-card p-8 chef-hover-lift">
-              <div className="flex items-start">
-                <div className="bg-chef-royal-blue/20 rounded-full p-4 mr-6">
-                  <Award className="w-8 h-8 text-chef-royal-blue" />
+            <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 chef-hover-lift">
+              <div className="flex items-start flex-col sm:flex-row">
+                <div className="bg-chef-royal-blue/20 rounded-full p-3 sm:p-4 mb-3 sm:mb-0 sm:mr-4 md:mr-6 mx-auto sm:mx-0">
+                  <BookOpen className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
                 </div>
-                <div>
-                  <h4 className="text-xl font-bold text-chef-charcoal mb-3 font-playfair">Recognition & Growth</h4>
-                  <p className="text-chef-charcoal/70 font-inter">Earn certificates, build your culinary portfolio, and track your progress as you master new skills and techniques.</p>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-bold text-chef-charcoal mb-2 sm:mb-3 font-playfair">Structured Learning Path</h4>
+                  <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Progress through carefully designed courses that build upon each other, ensuring comprehensive skill development.</p>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 chef-hover-lift">
+              <div className="flex items-start flex-col sm:flex-row">
+                <div className="bg-chef-royal-blue/20 rounded-full p-3 sm:p-4 mb-3 sm:mb-0 sm:mr-4 md:mr-6 mx-auto sm:mx-0">
+                  <Award className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h4 className="text-lg sm:text-xl font-bold text-chef-charcoal mb-2 sm:mb-3 font-playfair">Recognition & Growth</h4>
+                  <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Earn certificates, build your culinary portfolio, and track your progress as you master new skills and techniques.</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="text-center mt-12">
+          <motion.div variants={itemVariants} className="text-center mt-8 sm:mt-12">
             <Link 
               to="/about" 
               onClick={() => window.scrollTo(0, 0)}
-              className="chef-button-outline inline-flex items-center group"
+              className="inline-flex items-center px-4 py-2.5 sm:px-6 sm:py-3 border-2 border-chef-royal-green text-chef-royal-green hover:bg-chef-royal-green hover:text-chef-warm-ivory font-medium rounded-xl transition-all duration-300 group text-sm sm:text-base"
             >
               Read More About Our Approach
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </motion.div>

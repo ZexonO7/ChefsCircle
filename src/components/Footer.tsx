@@ -50,54 +50,54 @@ const Footer = () => {
       setIsSubmitting(false);
     }
   };
-  return <footer id="contact" className="bg-black text-white pt-16 pb-8 w-full">
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 pb-10 border-b border-gray-700">
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl font-bold text-white mb-6">ChefsCircle</h2>
-            <p className="text-gray-300 mb-6">ChefsCircle is the premier online culinary club for passionate home cooks and aspiring chefs. Join our exclusive community to master cooking skills, connect with fellow food enthusiasts, and elevate your culinary journey.</p>
-            <p className="text-gray-300 mb-6">
+  return <footer id="contact" className="bg-black text-white pt-8 sm:pt-12 md:pt-16 pb-6 sm:pb-8 w-full">
+      <div className="w-full px-3 sm:px-4 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10 pb-6 sm:pb-8 md:pb-10 border-b border-gray-700">
+          <div className="sm:col-span-2 lg:col-span-2">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">ChefsCircle</h2>
+            <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">ChefsCircle is the premier online culinary club for passionate home cooks and aspiring chefs. Join our exclusive community to master cooking skills, connect with fellow food enthusiasts, and elevate your culinary journey.</p>
+            <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">
               Culinary Excellence Hub<br />
               Where Passion Meets Flavor
             </p>
-            <div className="flex space-x-4">
-              <a href="https://www.linkedin.com/company/chefscircle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 transition-colors hover:bg-gray-700 hover:text-white">
-                <Linkedin size={20} />
+            <div className="flex space-x-3 sm:space-x-4">
+              <a href="https://www.linkedin.com/company/chefscircle/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 transition-colors hover:bg-gray-700 hover:text-white">
+                <Linkedin size={16} className="sm:w-5 sm:h-5" />
               </a>
             </div>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">Community</h3>
-            <ul className="space-y-3">
-              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/clubs" className="text-gray-300 hover:text-white transition-colors">Join Clubs</Link></li>
-              <li><Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</Link></li>
+            <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white">Community</h3>
+            <ul className="space-y-2 sm:space-y-3">
+              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">About Us</Link></li>
+              <li><Link to="/clubs" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">Join Clubs</Link></li>
+              <li><Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base">Privacy Policy</Link></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 text-white">Stay Connected</h3>
-            <form className="space-y-4" onSubmit={handleSubscribe}>
+            <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 text-white">Stay Connected</h3>
+            <form className="space-y-3 sm:space-y-4" onSubmit={handleSubscribe}>
               <div>
-                <input type="email" placeholder="Your email" className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 text-white placeholder-gray-400" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubmitting} />
+                <input type="email" placeholder="Your email" className="w-full px-3 py-2 sm:px-4 text-sm sm:text-base bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-600 text-white placeholder-gray-400" value={email} onChange={e => setEmail(e.target.value)} disabled={isSubmitting} />
               </div>
-              <button type="submit" className="w-full px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" disabled={isSubmitting}>
+              <button type="submit" className="w-full px-3 py-2 sm:px-4 text-sm sm:text-base bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed" disabled={isSubmitting}>
                 {isSubmitting ? "Subscribing..." : <>
                     Subscribe
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    <ArrowRight className="ml-2 w-3 h-3 sm:w-4 sm:h-4" />
                   </>}
               </button>
             </form>
           </div>
         </div>
         
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
+        <div className="pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400 text-xs sm:text-sm mb-3 md:mb-0">
             © {new Date().getFullYear()} ChefsCircle. All rights reserved.
           </p>
-          <div className="flex space-x-6">
-            <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
+          <div className="flex space-x-4 sm:space-x-6">
+            <Link to="/privacy-policy" className="text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
           </div>
         </div>
       </div>
