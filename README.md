@@ -1,69 +1,65 @@
-# Welcome to your Lovable project
+# ChefsCircle README
 
-## Project info
+👩‍🍳 **ChefsCircle – Where Chefs Connect, Create, and Grow**
 
-**URL**: https://lovable.dev/projects/ec1d4f1e-2506-4da5-a91b-34afa90cceb6
+Welcome to ChefsCircle, the ultimate AI-powered digital platform for chefs, food enthusiasts, and culinary learners worldwide. This project is designed to revolutionize how recipes are shared, learned, and created.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🚀 **About ChefsCircle**
 
-**Use Lovable**
+ChefsCircle is a gamified cooking community platform where users can:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ec1d4f1e-2506-4da5-a91b-34afa90cceb6) and start prompting.
+🍲 **Generate Recipes with AI**  
+Transform available ingredients into unique, practical recipes using advanced AI.
 
-Changes made via Lovable will be committed automatically to this repo.
+💬 **Join Community Chat Rooms**  
+Connect with other chefs, share experiences, and discuss culinary techniques.
 
-**Use your preferred IDE**
+📚 **Access Cooking Courses**  
+Learn new skills with curated courses and become a better chef each day.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🎮 **Gamified Experience**  
+Earn XP, complete cooking challenges, and level up your chef profile.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+🌐 **Global Recipe Sharing**  
+Upload, share, and explore thousands of recipes from the community.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <https://github.com/ZexonO7/w-0405.git>
+## ✨ **Key Features**
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- AI Recipe Generator  
+- Cooking Courses & Tutorials  
+- Community Chat Rooms  
+- Recipe Sharing & Uploading  
+- Gamification (XP, Levels, Challenges)
+- Personalised chef profiles
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## 🔧 **Tech Stack**
+
+- **Frontend:** React.js, Tailwind CSS  
+- **Backend:** Supabase, Deno Edge Functions  
+- **AI Integration:** OpenAI APIs
+
+---
+
+## 📲 **Try ChefsCircle**
+
+🌐 **Website:** https://chefscircle.in  
+⚠️ Beta site: https://chefscircle-beta.vercel.app
+
+---
+
+## 📝 **Setup & Contribution**
+
+1. Clone the repo  
+2. Install dependencies  
+3. Add your **OpenAI API key** and **Supabase keys** in `.env`  
+4. Run locally with:
+
+```bash
+npm install
 npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/ec1d4f1e-2506-4da5-a91b-34afa90cceb6) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
