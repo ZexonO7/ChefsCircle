@@ -241,7 +241,7 @@ const IngredientsToRecipes = () => {
       
       <div className="min-h-screen bg-gradient-to-br from-chef-warm-ivory via-chef-cream to-chef-warm-ivory">
         {/* Hero Section */}
-        <section className="py-20 px-4">
+        <section className="pt-20 pb-8 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center gap-3 mb-6">
               <div className="w-16 h-16 bg-chef-royal-green/20 rounded-full flex items-center justify-center">
@@ -271,7 +271,7 @@ const IngredientsToRecipes = () => {
         </section>
 
         {/* Ingredients Input Section */}
-        <section className="py-12 px-4">
+        <section className="pt-4 pb-12 px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="bg-white/80 backdrop-blur-sm border-chef-royal-green/20 shadow-lg">
               <CardHeader>
