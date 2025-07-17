@@ -62,6 +62,7 @@ const IngredientsToRecipes = () => {
   const loadDailyUsage = async () => {
     if (!user) return;
     
+    console.log('Loading daily usage for user:', user.id);
     setLoadingUsage(true);
     try {
       const { data, error } = await supabase.rpc('get_daily_recipe_usage', {
@@ -69,13 +70,19 @@ const IngredientsToRecipes = () => {
         max_daily_limit: 10
       });
       
+      console.log('Daily usage response:', { data, error });
+      
       if (error) {
         console.error('Error loading daily usage:', error);
         return;
       }
       
       if (data && data.length > 0) {
+        console.log('Setting daily usage:', data[0]);
         setDailyUsage(data[0]);
+      } else {
+        console.log('No usage data found, setting defaults');
+        setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
       }
     } catch (error) {
       console.error('Error in loadDailyUsage:', error);
