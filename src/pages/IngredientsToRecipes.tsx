@@ -1,15 +1,17 @@
 
-import React, { useState } from 'react';
-import { ChefHat, Sparkles, Plus, X, Loader2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChefHat, Sparkles, Plus, X, Loader2, Shield, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/components/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface AIRecipe {
   title: string;
@@ -22,13 +24,16 @@ interface AIRecipe {
 }
 
 const IngredientsToRecipes = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const [ingredients, setIngredients] = useState<string[]>(['']);
   const [currentIngredient, setCurrentIngredient] = useState('');
   const [availableIngredients, setAvailableIngredients] = useState<string[]>([]);
   const [generatedRecipes, setGeneratedRecipes] = useState<AIRecipe[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [expandedRecipes, setExpandedRecipes] = useState<Set<number>>(new Set());
+  const [dailyUsage, setDailyUsage] = useState({ current_count: 0, remaining_count: 10, can_generate: true });
+  const [loadingUsage, setLoadingUsage] = useState(true);
   const { toast } = useToast();
 
   const addIngredient = () => {
@@ -40,6 +45,43 @@ const IngredientsToRecipes = () => {
 
   const removeIngredient = (ingredient: string) => {
     setAvailableIngredients(availableIngredients.filter(item => item !== ingredient));
+  };
+
+  // Check authentication and load daily usage on component mount
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        navigate('/auth');
+        return;
+      }
+      
+      loadDailyUsage();
+    }
+  }, [user, loading, navigate]);
+
+  const loadDailyUsage = async () => {
+    if (!user) return;
+    
+    setLoadingUsage(true);
+    try {
+      const { data, error } = await supabase.rpc('get_daily_recipe_usage', {
+        user_id_param: user.id,
+        max_daily_limit: 10
+      });
+      
+      if (error) {
+        console.error('Error loading daily usage:', error);
+        return;
+      }
+      
+      if (data && data.length > 0) {
+        setDailyUsage(data[0]);
+      }
+    } catch (error) {
+      console.error('Error in loadDailyUsage:', error);
+    } finally {
+      setLoadingUsage(false);
+    }
   };
 
   const trackAIRecipeGeneration = async () => {
@@ -59,6 +101,16 @@ const IngredientsToRecipes = () => {
   };
 
   const generateRecipes = async () => {
+    if (!user) {
+      toast({
+        title: "Authentication required",
+        description: "Please log in to generate recipes.",
+        variant: "destructive"
+      });
+      navigate('/auth');
+      return;
+    }
+
     if (availableIngredients.length === 0) {
       toast({
         title: "No ingredients",
@@ -67,8 +119,45 @@ const IngredientsToRecipes = () => {
       });
       return;
     }
+
+    // Check daily usage limit before generation
+    if (!dailyUsage.can_generate) {
+      toast({
+        title: "Daily limit reached",
+        description: "You've reached your daily limit of 10 recipe generations. Try again tomorrow!",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsGenerating(true);
     try {
+      // Check and update daily usage
+      const { data: usageData, error: usageError } = await supabase.rpc('check_and_update_daily_recipe_usage', {
+        user_id_param: user.id,
+        max_daily_limit: 10
+      });
+
+      if (usageError) {
+        console.error('Error checking daily usage:', usageError);
+        throw new Error('Failed to check daily usage limit');
+      }
+
+      if (usageData && usageData.length > 0) {
+        const usage = usageData[0];
+        setDailyUsage(usage);
+        
+        if (!usage.can_generate) {
+          toast({
+            title: "Daily limit reached",
+            description: "You've reached your daily limit of 10 recipe generations. Try again tomorrow!",
+            variant: "destructive"
+          });
+          return;
+        }
+      }
+
+      console.log('Generating recipes for ingredients:', availableIngredients);
       console.log('Generating recipes for ingredients:', availableIngredients);
       const {
         data,
@@ -89,9 +178,12 @@ const IngredientsToRecipes = () => {
         // Track AI recipe generation for gamification
         await trackAIRecipeGeneration();
         
+        // Reload daily usage to show updated counts
+        await loadDailyUsage();
+        
         toast({
           title: "Recipes generated!",
-          description: `Found ${data.recipes.length} delicious recipes for your ingredients.`
+          description: `Found ${data.recipes.length} delicious recipes for your ingredients. You have ${dailyUsage.remaining_count - 1} generations left today.`
         });
       } else {
         throw new Error('No recipes were generated');
@@ -124,6 +216,25 @@ const IngredientsToRecipes = () => {
     setExpandedRecipes(newExpanded);
   };
 
+  // Show loading screen while checking authentication
+  if (loading || loadingUsage) {
+    return (
+      <PageLayout>
+        <div className="min-h-screen bg-gradient-to-br from-chef-warm-ivory via-chef-cream to-chef-warm-ivory flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-chef-royal-green mx-auto mb-4"></div>
+            <p className="text-chef-charcoal">Loading...</p>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
+
+  // Redirect to auth if not logged in
+  if (!user) {
+    return null;
+  }
+
   return (
     <PageLayout>
       <SEO title="Ingredients to Recipes - ChefsCircle" description="Transform your available ingredients into delicious recipes with AI-powered suggestions from ChefsCircle." />
@@ -147,6 +258,15 @@ const IngredientsToRecipes = () => {
               Transform your available ingredients into delicious recipes with AI-powered suggestions. 
               Just tell us what you have, and we'll create personalized recipes for you!
             </p>
+
+            {/* Daily Usage Alert */}
+            <Alert className="max-w-md mx-auto mb-8 border-chef-royal-green/30 bg-chef-royal-green/5">
+              <Shield className="h-4 w-4 text-chef-royal-green" />
+              <AlertTitle className="text-chef-charcoal">Daily Usage</AlertTitle>
+              <AlertDescription className="text-chef-charcoal/70">
+                You have <span className="font-semibold text-chef-royal-green">{dailyUsage.remaining_count}</span> recipe generations remaining today.
+              </AlertDescription>
+            </Alert>
           </div>
         </section>
 
@@ -204,21 +324,36 @@ const IngredientsToRecipes = () => {
                   </div>
                 )}
 
+                {/* Daily limit warning */}
+                {dailyUsage.remaining_count <= 2 && dailyUsage.remaining_count > 0 && (
+                  <Alert className="border-yellow-500/30 bg-yellow-500/5">
+                    <AlertCircle className="h-4 w-4 text-yellow-600" />
+                    <AlertDescription className="text-chef-charcoal/70">
+                      You only have {dailyUsage.remaining_count} recipe generation{dailyUsage.remaining_count === 1 ? '' : 's'} left today!
+                    </AlertDescription>
+                  </Alert>
+                )}
+
                 {/* Generate button */}
                 <Button 
                   onClick={generateRecipes} 
-                  disabled={isGenerating || availableIngredients.length === 0} 
-                  className="w-full bg-chef-royal-green hover:bg-chef-royal-green/90 text-white py-3 text-lg"
+                  disabled={isGenerating || availableIngredients.length === 0 || !dailyUsage.can_generate} 
+                  className="w-full bg-chef-royal-green hover:bg-chef-royal-green/90 text-white py-3 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isGenerating ? (
                     <>
                       <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                       Generating recipes...
                     </>
+                  ) : !dailyUsage.can_generate ? (
+                    <>
+                      <AlertCircle className="w-5 h-5 mr-2" />
+                      Daily limit reached
+                    </>
                   ) : (
                     <>
                       <Sparkles className="w-5 h-5 mr-2" />
-                      Generate Recipes
+                      Generate Recipes ({dailyUsage.remaining_count} left)
                     </>
                   )}
                 </Button>

@@ -44,6 +44,33 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_recipe_daily_usage: {
+        Row: {
+          created_at: string
+          generation_count: number
+          generation_date: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          generation_count?: number
+          generation_date?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          generation_count?: number
+          generation_date?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       answers: {
         Row: {
           content: string
@@ -570,9 +597,25 @@ export type Database = {
         Args: { total_xp: number }
         Returns: number
       }
+      check_and_update_daily_recipe_usage: {
+        Args: { user_id_param: string; max_daily_limit?: number }
+        Returns: {
+          can_generate: boolean
+          current_count: number
+          remaining_count: number
+        }[]
+      }
       cleanup_expired_otps: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      get_daily_recipe_usage: {
+        Args: { user_id_param: string; max_daily_limit?: number }
+        Returns: {
+          current_count: number
+          remaining_count: number
+          can_generate: boolean
+        }[]
       }
       get_recipe_analytics: {
         Args: { p_recipe_id: string; p_recipe_type: string }
