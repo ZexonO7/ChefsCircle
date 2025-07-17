@@ -32,7 +32,7 @@ const IngredientsToRecipes = () => {
   const [generatedRecipes, setGeneratedRecipes] = useState<AIRecipe[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [expandedRecipes, setExpandedRecipes] = useState<Set<number>>(new Set());
-  const [dailyUsage, setDailyUsage] = useState({ current_count: 0, remaining_count: 10, can_generate: true });
+  const [dailyUsage, setDailyUsage] = useState({ current_count: 0, remaining_count: 5, can_generate: true });
   const [loadingUsage, setLoadingUsage] = useState(true);
   const { toast } = useToast();
 
@@ -67,7 +67,7 @@ const IngredientsToRecipes = () => {
     try {
       const { data, error } = await supabase.rpc('get_daily_recipe_usage', {
         user_id_param: user.id,
-        max_daily_limit: 10
+        max_daily_limit: 5
       });
       
       console.log('Daily usage response:', { data, error });
@@ -75,7 +75,7 @@ const IngredientsToRecipes = () => {
       if (error) {
         console.error('Error loading daily usage:', error);
         // Set default values on error
-        setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
+        setDailyUsage({ current_count: 0, remaining_count: 5, can_generate: true });
         return;
       }
       
@@ -85,12 +85,12 @@ const IngredientsToRecipes = () => {
         setDailyUsage(usageData);
       } else {
         console.log('No usage data found, setting defaults');
-        setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
+        setDailyUsage({ current_count: 0, remaining_count: 5, can_generate: true });
       }
     } catch (error) {
       console.error('Error in loadDailyUsage:', error);
       // Set default values on error
-      setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
+      setDailyUsage({ current_count: 0, remaining_count: 5, can_generate: true });
     } finally {
       setLoadingUsage(false);
     }
@@ -136,7 +136,7 @@ const IngredientsToRecipes = () => {
     if (!dailyUsage.can_generate) {
       toast({
         title: "Daily limit reached",
-        description: "You've reached your daily limit of 10 recipe generations. Try again tomorrow!",
+        description: "You've reached your daily limit of 5 recipe generations. Try again tomorrow!",
         variant: "destructive"
       });
       return;
@@ -147,7 +147,7 @@ const IngredientsToRecipes = () => {
       // Check and update daily usage
       const { data: usageData, error: usageError } = await supabase.rpc('check_and_update_daily_recipe_usage', {
         user_id_param: user.id,
-        max_daily_limit: 10
+        max_daily_limit: 5
       });
 
       if (usageError) {
@@ -162,7 +162,7 @@ const IngredientsToRecipes = () => {
         if (!usage.can_generate) {
           toast({
             title: "Daily limit reached",
-            description: "You've reached your daily limit of 10 recipe generations. Try again tomorrow!",
+            description: "You've reached your daily limit of 5 recipe generations. Try again tomorrow!",
             variant: "destructive"
           });
           return;
