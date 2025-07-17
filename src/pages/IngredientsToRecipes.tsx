@@ -74,18 +74,23 @@ const IngredientsToRecipes = () => {
       
       if (error) {
         console.error('Error loading daily usage:', error);
+        // Set default values on error
+        setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
         return;
       }
       
-      if (data && data.length > 0) {
-        console.log('Setting daily usage:', data[0]);
-        setDailyUsage(data[0]);
+      if (data) {
+        console.log('Setting daily usage:', data);
+        const usageData = data as { current_count: number; remaining_count: number; can_generate: boolean };
+        setDailyUsage(usageData);
       } else {
         console.log('No usage data found, setting defaults');
         setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
       }
     } catch (error) {
       console.error('Error in loadDailyUsage:', error);
+      // Set default values on error
+      setDailyUsage({ current_count: 0, remaining_count: 10, can_generate: true });
     } finally {
       setLoadingUsage(false);
     }

@@ -611,11 +611,7 @@ export type Database = {
       }
       get_daily_recipe_usage: {
         Args: { user_id_param: string; max_daily_limit?: number }
-        Returns: {
-          current_count: number
-          remaining_count: number
-          can_generate: boolean
-        }[]
+        Returns: Json
       }
       get_recipe_analytics: {
         Args: { p_recipe_id: string; p_recipe_type: string }
