@@ -27,6 +27,7 @@ import NotFound from "./pages/NotFound";
 import IngredientsToRecipes from "./pages/IngredientsToRecipes";
 import Contact from "./pages/Contact";
 import RecipeDetail from "./pages/RecipeDetail";
+import Membership from "./pages/Membership";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
               <Route path="/development-process" element={<DevelopmentProcess />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/recipes/:id" element={<RecipeDetail />} />
+              <Route path="/membership" element={<Membership />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </PageLoadingWrapper>

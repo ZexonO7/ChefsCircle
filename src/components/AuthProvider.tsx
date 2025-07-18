@@ -8,6 +8,12 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signOut: () => Promise<void>;
+  subscriptionStatus: {
+    subscribed: boolean;
+    subscription_tier: string | null;
+    subscription_end: string | null;
+  };
+  refreshSubscription: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -24,6 +30,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [subscriptionStatus, setSubscriptionStatus] = useState({
+    subscribed: false,
+    subscription_tier: null,
+    subscription_end: null
+  });
+
+  const refreshSubscription = async () => {
+    if (!user) return;
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('check-subscription');
+      if (error) throw error;
+      setSubscriptionStatus(data);
+    } catch (error) {
+      console.error('Error refreshing subscription:', error);
+    }
+  };
 
   useEffect(() => {
     // Set up auth state listener
@@ -41,10 +64,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               await supabase.rpc('track_first_login', {
                 user_id_param: session.user.id
               });
+              // Also refresh subscription status after login
+              refreshSubscription();
             } catch (error) {
               console.error('Error tracking first login:', error);
             }
           }, 100);
+        }
+
+        // Refresh subscription when user logs out
+        if (event === 'SIGNED_OUT') {
+          setSubscriptionStatus({
+            subscribed: false,
+            subscription_tier: null,
+            subscription_end: null
+          });
         }
       }
     );
@@ -54,6 +88,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+      
+      // Refresh subscription if user is logged in
+      if (session?.user) {
+        refreshSubscription();
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -68,6 +107,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     session,
     loading,
     signOut,
+    subscriptionStatus,
+    refreshSubscription,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -62,6 +62,10 @@ const Navbar = () => {
     path: '/ingredients-to-recipes',
     isSpecial: true
   }, {
+    name: 'Membership',
+    path: '/membership',
+    isSpecial: true
+  }, {
     name: 'News',
     path: '/blog'
   }];
