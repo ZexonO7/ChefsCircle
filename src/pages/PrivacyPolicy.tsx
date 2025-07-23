@@ -2,95 +2,93 @@ import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import PageLayout from '@/components/PageLayout';
-const PrivacyPolicy = () => {
+
+const TermsAndConditions = () => {
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return <PageLayout>
-      <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto">
-            <Link to="/" className="inline-flex items-center text-gray-500 hover:text-gray-700 mb-6 transition-colors">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Link>
-            
-            <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
-            
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-600 mb-6">Last updated: April 11, 2025</p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
-              <p className="text-gray-600 mb-4">
-                At WRLDS Technologies ("we," "our," or "us"), we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">2. Information We Collect</h2>
-              <p className="text-gray-600 mb-4">
-                We may collect personal information that you voluntarily provide to us when you:
-              </p>
-              <ul className="list-disc pl-6 mb-4 text-gray-600">
-                <li>Contact us through our website</li>
-                <li>Subscribe to our newsletter</li>
-                <li>Register for our services</li>
-                <li>Participate in our surveys or promotions</li>
-              </ul>
-              <p className="text-gray-600 mb-4">
-                This information may include your name, email address, company name, phone number, and any other information you choose to provide.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">3. How We Use Your Information</h2>
-              <p className="text-gray-600 mb-4">
-                We may use the information we collect for various purposes, including to:
-              </p>
-              <ul className="list-disc pl-6 mb-4 text-gray-600">
-                <li>Provide, operate, and maintain our services</li>
-                <li>Improve, personalize, and expand our services</li>
-                <li>Understand and analyze how you use our services</li>
-                <li>Develop new products, services, features, and functionality</li>
-                <li>Communicate with you about our services, updates, and other information</li>
-                <li>Process transactions and send related information</li>
-                <li>Find and prevent fraud</li>
-              </ul>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">4. Cookies and Tracking Technologies</h2>
-              <p className="text-gray-600 mb-4">
-                We may use cookies and similar tracking technologies to track activity on our website and store certain information. Cookies are files with a small amount of data that may include an anonymous unique identifier. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">5. Third-Party Services</h2>
-              <p className="text-gray-600 mb-4">
-                We may use third-party services that collect, monitor, and analyze data to improve our services. These third parties have their own privacy policies addressing how they use such information.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">6. Data Retention</h2>
-              <p className="text-gray-600 mb-4">
-                We will retain your personal information only for as long as is necessary for the purposes set out in this Privacy Policy.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">7. Security</h2>
-              <p className="text-gray-600 mb-4">
-                The security of your data is important to us, but remember that no method of transmission over the Internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">8. Your Rights</h2>
-              <p className="text-gray-600 mb-4">
-                Depending on your location, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your personal information.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">9. Changes to This Privacy Policy</h2>
-              <p className="text-gray-600 mb-4">
-                We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. We will let you know via email and/or a prominent notice on our website prior to the change becoming effective.
-              </p>
-              
-              <h2 className="text-2xl font-semibold mt-8 mb-4">10. Contact Us</h2>
-              <p className="text-gray-600 mb-4">If you have any questions about this Privacy Policy, please contact us at hello@wrlds.com</p>
-              
-            </div>
+    <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
+        <div className="max-w-4xl mx-auto">
+          <Link to="/" className="inline-flex items-center text-gray-500 hover:text-gray-700 mb-6 transition-colors">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Link>
+
+          <h1 className="text-4xl font-bold mb-8">Terms and Conditions</h1>
+
+          <div className="prose prose-lg max-w-none">
+            <p className="text-gray-600 mb-6">Effective Date: August 1, 2025</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">1. Definitions</h2>
+            <p className="text-gray-600 mb-4">“User,” “you,” or “your” refers to any individual or entity using ChefsCircle.</p>
+            <p className="text-gray-600 mb-4">“Content” means all text, images, videos, designs, code, and other material available on ChefsCircle.</p>
+            <p className="text-gray-600 mb-4">“Services” means all features, tools, and offerings provided through ChefsCircle.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">2. Eligibility</h2>
+            <p className="text-gray-600 mb-4">You must be at least 13 years old to use ChefsCircle. By using the platform, you represent and warrant that you meet this requirement.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">3. User Accounts</h2>
+            <p className="text-gray-600 mb-4">To access certain features, you may be required to create an account. You agree to provide accurate information and keep it updated. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">4. Intellectual Property</h2>
+            <p className="text-gray-600 mb-4">All content, logos, designs, trademarks, code, and materials on ChefsCircle are the exclusive property of ChefsCircle or its licensors. All rights are reserved.</p>
+            <ul className="list-disc pl-6 mb-4 text-gray-600">
+              <li>Copy, modify, reproduce, republish, or distribute any part of ChefsCircle without prior written consent</li>
+              <li>Use any ChefsCircle trademarks without permission</li>
+              <li>Reverse engineer or attempt to extract the source code</li>
+            </ul>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">5. License to Use</h2>
+            <p className="text-gray-600 mb-4">We grant you a limited, non-exclusive, non-transferable license to access and use ChefsCircle for personal, non-commercial purposes in accordance with these Terms.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">6. Prohibited Activities</h2>
+            <ul className="list-disc pl-6 mb-4 text-gray-600">
+              <li>Use ChefsCircle for any unlawful purpose</li>
+              <li>Attempt unauthorized access to any part of ChefsCircle</li>
+              <li>Interfere with the security, functionality, or performance of the platform</li>
+              <li>Upload or distribute viruses, malware, or harmful code</li>
+              <li>Collect or store personal data about other users without consent</li>
+            </ul>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">7. AI Tools and Content</h2>
+            <p className="text-gray-600 mb-4">ChefsCircle may provide AI-powered features, suggestions, and content. While we strive for accuracy, we do not guarantee the completeness, safety, or effectiveness of AI-generated content. You use such features at your own discretion and risk.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">8. Termination</h2>
+            <p className="text-gray-600 mb-4">We reserve the right to suspend or terminate your access to ChefsCircle at any time, without notice or liability, for any reason, including violation of these Terms.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">9. Disclaimer of Warranties</h2>
+            <p className="text-gray-600 mb-4">ChefsCircle is provided on an “as is” and “as available” basis. We disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that ChefsCircle will always be available, secure, or error-free or that any content or information provided is accurate, complete, or reliable.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">10. Limitation of Liability</h2>
+            <p className="text-gray-600 mb-4">To the fullest extent permitted by law, ChefsCircle shall not be liable for any indirect, incidental, consequential, special, or punitive damages arising out of your use or inability to use the platform, even if advised of the possibility of such damages.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">11. Indemnification</h2>
+            <p className="text-gray-600 mb-4">You agree to indemnify, defend, and hold harmless ChefsCircle, its affiliates, officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses, including reasonable attorney’s fees, arising out of your violation of these Terms or your use of ChefsCircle.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">12. Changes to Terms</h2>
+            <p className="text-gray-600 mb-4">We may modify these Terms at any time. We will notify you of changes by posting the updated Terms on ChefsCircle. Your continued use after changes constitutes acceptance of the revised Terms.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">13. Governing Law</h2>
+            <p className="text-gray-600 mb-4">These Terms are governed by and construed in accordance with the laws of Delhi, India, without regard to conflict of law principles. Any disputes arising from these Terms shall be resolved in the courts of Delhi, India.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">14. Severability</h2>
+            <p className="text-gray-600 mb-4">If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">15. Entire Agreement</h2>
+            <p className="text-gray-600 mb-4">These Terms constitute the entire agreement between you and ChefsCircle regarding your use of the platform and supersede any prior agreements or understandings.</p>
+
+            <h2 className="text-2xl font-semibold mt-8 mb-4">16. Contact Us</h2>
+            <p className="text-gray-600 mb-4">For questions about these Terms, please contact us at <a href="mailto:Advithya@ChefsCircle.in" className="text-blue-600 underline">Advithya@ChefsCircle.in</a></p>
+
           </div>
         </div>
-      </section>
-    </PageLayout>;
+      </div>
+    </section>
+  </PageLayout>;
 };
-export default PrivacyPolicy;
+
+export default TermsAndConditions;
