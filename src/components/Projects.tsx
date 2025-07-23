@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChefHat, Users, Award, Clock, ArrowRight, Star, Crown, Utensils } from 'lucide-react';
+import { ChefHat, Users, Award, Clock, ArrowRight, Star, Crown, Utensils, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -180,7 +180,7 @@ const Projects = () => {
         </div>
 
         <div className="text-center">
-          <Button onClick={scrollToContact} className="chef-button-gold inline-flex items-center group text-lg text-chef-cream bg-[c] bg-[#141c70]">
+          <Button onClick={LogIn} className="chef-button-gold inline-flex items-center group text-lg text-chef-cream bg-[c] bg-[#141c70]">
             Join ChefsCircle Today
             <Utensils className="ml-2 w-5 h-5 group-hover:scale-110 transition-transform" />
           </Button>
