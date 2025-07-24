@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'ChefsCircle',
   webDir: 'dist',
   server: {
-    url: 'https://chefscircle.in', 
+    url: 'https://chefscircle.in',
     cleartext: true
   }
 };
