@@ -33,6 +33,11 @@ export default defineConfig(({ mode }) => ({
             sizes: "512x512",
             type: "image/png"
           }
+          {
+            src: "/icon-1024.png",
+            sizes: "512x512",
+            type: "image/png"
+          }
         ]
       }
     })
