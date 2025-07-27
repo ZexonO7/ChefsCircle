@@ -2,7 +2,7 @@
 
 👩‍🍳 **ChefsCircle – Where Chefs Connect, Create, and Grow**
 
-Welcome to ChefsCircle, the ultimate AI-powered digital platform for chefs, food enthusiasts, and culinary learners worldwide. This project is designed to revolutionize how recipes are shared, learned, and created.
+Welcome to ChefsCircle, the ultimate AI-powered digital platform for chefs, food enthusiasts, and culinary learners worldwide. This project is designed to revolutionize how recipes are shared, learned, and created. Founded & developed by Advithya.
 
 ---
 
@@ -50,16 +50,4 @@ Upload, share, and explore thousands of recipes from the community.
 
 🌐 **Website:** https://chefscircle.in  
 ⚠️ Beta site: https://chefscircle-beta.vercel.app
-
----
-
-## 📝 **Setup & Contribution**
-
-1. Clone the repo  
-2. Install dependencies  
-3. Add your **OpenAI API key** and **Supabase keys** in `.env`  
-4. Run locally with:
-
-```bash
-npm install
-npm run dev
+📱 **Mobile App:** Available on iOS and Android (coming soon)
