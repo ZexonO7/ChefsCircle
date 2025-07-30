@@ -1,63 +1,60 @@
 
-import { motion } from 'framer-motion';
-import { Target } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import { useState } from "react";
+import { Trophy, Calendar, Target } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ChallengeModal from "../challenges/ChallengeModal";
 
-interface WeeklyChallengeProps {
-  challenge: {
-    title: string;
-    description: string;
-    progress: number;
-    total: number;
-    reward: string;
-    timeLeft: string;
-  };
-}
+const WeeklyChallenge = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const WeeklyChallenge = ({ challenge }: WeeklyChallengeProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
-      className="lg:col-span-1"
-    >
-      <Card className="chef-card h-full bg-inherit">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-chef-charcoal">
-            <Target className="w-5 h-5 text-chef-royal-green" />
-            Weekly Challenge
-          </CardTitle>
+    <>
+      <Card className="border border-chef-charcoal/10 bg-gradient-to-br from-chef-warm-ivory to-chef-warm-ivory/95 hover:shadow-chef-luxury transition-all duration-300">
+        <CardHeader className="pb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-chef-gold/20 flex items-center justify-center">
+              <Trophy className="w-5 h-5 text-chef-gold" />
+            </div>
+            <CardTitle className="text-lg font-playfair text-chef-charcoal">
+              Daily Challenges
+            </CardTitle>
+          </div>
         </CardHeader>
-        <CardContent>
-          <div className="mb-4">
-            <h4 className="font-bold text-chef-charcoal mb-2">{challenge.title}</h4>
-            <p className="text-chef-charcoal/70 text-sm mb-3">{challenge.description}</p>
-            
-            <div className="mb-3">
-              <div className="flex justify-between text-sm mb-1">
-                <span>Progress</span>
-                <span>{challenge.progress}/{challenge.total}</span>
-              </div>
-              <Progress value={challenge.progress / challenge.total * 100} className="h-2" />
+        
+        <CardContent className="space-y-4">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-chef-charcoal/70">
+              <Calendar className="w-4 h-4" />
+              <span className="text-sm">24 Hours • 3 Days • Weekly</span>
             </div>
             
-            <div className="text-sm text-chef-royal-blue font-medium mb-2">
-              🎁 {challenge.reward}
-            </div>
-            <div className="text-sm text-chef-charcoal/60">
-              ⏰ {challenge.timeLeft} left
+            <div className="flex items-center gap-2 text-chef-charcoal/70">
+              <Target className="w-4 h-4" />
+              <span className="text-sm">Upload recipes, ask questions, complete courses</span>
             </div>
           </div>
-          
-          <Button className="w-full chef-button-primary bg-inherit text-inherit">
-            Join Challenge
-          </Button>
+
+          <div className="pt-2">
+            <p className="text-sm text-chef-charcoal/80 mb-4">
+              Join cooking challenges to earn XP, unlock achievements, and level up your culinary skills!
+            </p>
+            
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              className="w-full bg-chef-gold hover:bg-chef-gold/90 text-chef-charcoal font-medium"
+            >
+              Join Challenges
+            </Button>
+          </div>
         </CardContent>
       </Card>
-    </motion.div>
+
+      <ChallengeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
+    </>
   );
 };
 

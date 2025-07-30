@@ -693,6 +693,10 @@ export type Database = {
         Args: { user_id_param: string }
         Returns: undefined
       }
+      track_question_ask: {
+        Args: { user_id_param: string }
+        Returns: undefined
+      }
       update_challenge_progress: {
         Args: { user_id_param: string; challenge_type_param: string }
         Returns: undefined

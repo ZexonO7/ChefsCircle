@@ -29,6 +29,7 @@ import Contact from "./pages/Contact";
 import RecipeDetail from "./pages/RecipeDetail";
 import Membership from "./pages/Membership";
 import CulinaryJourney from "./pages/CulinaryJourney";
+import QuestionDetail from "./pages/QuestionDetail";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,7 @@ const App = () => (
               <Route path="/recipes/:id" element={<RecipeDetail />} />
               <Route path="/membership" element={<Membership />} />
               <Route path="/culinary-journey" element={<CulinaryJourney />} />
+              <Route path="/question-detail/:id" element={<QuestionDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </PageLoadingWrapper>
