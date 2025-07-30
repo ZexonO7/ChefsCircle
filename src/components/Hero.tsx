@@ -2,11 +2,12 @@
 import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
 const Hero = () => {
   const isMobile = useIsMobile();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const containerVariants = {
     hidden: {
       opacity: 0
@@ -42,6 +43,16 @@ const Hero = () => {
       });
     }
   };
+
+  const handleCulinaryJourneyClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log('Culinary Journey button clicked!', { user });
+    if (user) {
+      navigate('/clubs');
+    } else {
+      navigate('/culinary-journey');
+    }
+  };
   return <motion.div className="relative mt-16 md:mt-0 w-full max-w-[100vw]" initial="hidden" animate="visible" variants={containerVariants}>
       <div className="banner-container chef-gradient-blue relative overflow-hidden h-[500px] sm:h-[600px] md:h-[700px] lg:h-[750px] w-full">
         <div className="absolute inset-0 w-full">
@@ -71,12 +82,13 @@ const Hero = () => {
               </motion.p>
               
               <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center px-4" variants={itemVariants}>
-                <Link to={user ? "/clubs" : "/culinary-journey"}>
-                  <button className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base">
-                    {user ? "Join Clubs" : "Start your culinary journey"}
-                    <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </Link>
+                <button 
+                  onClick={handleCulinaryJourneyClick}
+                  className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base cursor-pointer"
+                >
+                  {user ? "Join Clubs" : "Start your culinary journey"}
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
                 {!user && (
                   <button onClick={scrollToContact} className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-transparent border-2 border-chef-warm-ivory text-chef-warm-ivory hover:bg-chef-warm-ivory hover:text-chef-charcoal font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base">
                     Get Started
