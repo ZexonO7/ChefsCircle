@@ -3,8 +3,10 @@ import { ArrowRight, ChefHat, Users, Star } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 const Hero = () => {
   const isMobile = useIsMobile();
+  const { user } = useAuth();
   const containerVariants = {
     hidden: {
       opacity: 0
@@ -69,16 +71,18 @@ const Hero = () => {
               </motion.p>
               
               <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center px-4" variants={itemVariants}>
-                <Link to="/clubs">
+                <Link to={user ? "/membership" : "/culinary-journey"}>
                   <button className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base">
-                    Join Clubs
+                    {user ? "Join our Membership" : "Start your culinary journey"}
                     <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
-                <button onClick={scrollToContact} className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-transparent border-2 border-chef-warm-ivory text-chef-warm-ivory hover:bg-chef-warm-ivory hover:text-chef-charcoal font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base">
-                  Get Started
-                  <ChefHat className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
-                </button>
+                {!user && (
+                  <button onClick={scrollToContact} className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-transparent border-2 border-chef-warm-ivory text-chef-warm-ivory hover:bg-chef-warm-ivory hover:text-chef-charcoal font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base">
+                    Get Started
+                    <ChefHat className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
+                  </button>
+                )}
               </motion.div>
               
               <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-chef-warm-ivory/80 px-4" variants={itemVariants}>
