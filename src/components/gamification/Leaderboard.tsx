@@ -18,51 +18,20 @@ interface LeaderboardProps {
 }
 
 const Leaderboard = ({ users }: LeaderboardProps) => {
-  // Updated with realistic leaderboard data
-  const defaultUsers: LeaderboardUser[] = [
+  // Fallback data in case no real users exist yet
+  const fallbackUsers: LeaderboardUser[] = [
     {
       rank: 1,
-      name: "Chef Marcus",
-      xp: 12450,
-      level: 12,
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-      isUser: false
-    },
-    {
-      rank: 2,
-      name: "Sarah Bakes",
-      xp: 11280,
-      level: 11,
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b332c77c?w=150&h=150&fit=crop&crop=face",
-      isUser: false
-    },
-    {
-      rank: 3,
-      name: "Kitchen Master",
-      xp: 10950,
-      level: 11,
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-      isUser: false
-    },
-    {
-      rank: 4,
-      name: "You",
-      xp: 8750,
-      level: 9,
-      avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face",
-      isUser: true
-    },
-    {
-      rank: 5,
-      name: "Pasta Pro",
-      xp: 7820,
-      level: 8,
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      name: "Be the first!",
+      xp: 0,
+      level: 1,
+      avatar: "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
       isUser: false
     }
   ];
 
-  const displayUsers = users.length > 0 ? users : defaultUsers;
+  // Use real user data if available, otherwise show fallback message
+  const displayUsers = users.length > 0 ? users : fallbackUsers;
 
   return (
     <motion.div
