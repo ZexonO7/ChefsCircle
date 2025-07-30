@@ -71,9 +71,9 @@ const Hero = () => {
               </motion.p>
               
               <motion.div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 sm:mt-8 justify-center px-4" variants={itemVariants}>
-                <Link to={user ? "/membership" : "/culinary-journey"}>
+                <Link to={user ? "/clubs" : "/culinary-journey"}>
                   <button className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 flex items-center justify-center group text-sm sm:text-base">
-                    {user ? "Join our Membership" : "Start your culinary journey"}
+                    {user ? "Join Clubs" : "Start your culinary journey"}
                     <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>

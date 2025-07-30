@@ -1,12 +1,12 @@
 
-
 import React, { useState, useEffect } from 'react';
-import { User, LogOut, Settings, Trophy, Shield } from 'lucide-react';
+import { User, LogOut, Settings, Trophy, Shield, Crown } from 'lucide-react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import MembershipModal from '@/components/MembershipModal';
 
 const UserMenu = () => {
   const { user, signOut } = useAuth();
@@ -18,6 +18,7 @@ const UserMenu = () => {
   });
   const [imageKey, setImageKey] = useState(0); // Force re-render of avatar
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showMembershipModal, setShowMembershipModal] = useState(false);
 
   const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
 
@@ -154,6 +155,13 @@ const UserMenu = () => {
               Admin
             </Link>
           )}
+          <button 
+            onClick={() => setShowMembershipModal(true)}
+            className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
+          >
+            <Crown className="w-4 h-4" />
+            Membership
+          </button>
           <Link 
             to="/settings"
             className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
@@ -170,6 +178,11 @@ const UserMenu = () => {
           </button>
         </div>
       </div>
+
+      <MembershipModal 
+        isOpen={showMembershipModal}
+        onClose={() => setShowMembershipModal(false)}
+      />
     </div>
   );
 };
