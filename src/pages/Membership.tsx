@@ -204,7 +204,7 @@ const Membership = () => {
         description="Choose the perfect membership plan for your culinary journey. Get access to courses, AI recipe generation, and exclusive features."
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-chef-sage via-background to-chef-terracotta/20 py-20">
+      <div className="min-h-screen bg-gradient-to-br from-chef-warm-ivory via-chef-warm-ivory/95 to-chef-gold/10 py-20">
         <div className="container mx-auto px-4">
           {/* Header */}
           <motion.div 
@@ -229,7 +229,7 @@ const Membership = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <Card className="max-w-2xl mx-auto">
+              <Card className="max-w-2xl mx-auto bg-chef-warm-ivory border border-chef-royal-green/20 shadow-lg">
                 <CardHeader className="text-center">
                   <CardTitle className="flex items-center justify-center gap-2">
                     <BadgeIcon className="w-5 h-5" />
@@ -239,7 +239,7 @@ const Membership = () => {
                 <CardContent className="text-center">
                   {subscriptionStatus.subscribed && currentTier ? (
                     <div className="space-y-4">
-                      <Badge variant="default" className="text-lg px-4 py-2">
+                      <Badge variant="default" className="text-lg px-4 py-2 bg-chef-royal-green text-chef-warm-ivory">
                         {currentTier.name} Member
                       </Badge>
                       <p className="text-chef-charcoal/70">
@@ -248,13 +248,13 @@ const Membership = () => {
                           new Date(subscriptionStatus.subscription_end).toLocaleDateString()
                         }
                       </p>
-                      <Button onClick={handleManageSubscription} disabled={loading}>
+                      <Button onClick={handleManageSubscription} disabled={loading} className="bg-chef-royal-green hover:bg-chef-forest text-chef-warm-ivory">
                         Manage Subscription
                       </Button>
                     </div>
                   ) : (
                     <div className="space-y-4">
-                      <Badge variant="outline" className="text-lg px-4 py-2">
+                      <Badge variant="outline" className="text-lg px-4 py-2 border-chef-charcoal/30 text-chef-charcoal">
                         Free Member
                       </Badge>
                       <p className="text-chef-charcoal/70">
@@ -277,12 +277,12 @@ const Membership = () => {
                 transition={{ delay: index * 0.1 + 0.3 }}
                 className="relative"
               >
-                <Card className={`h-full border-2 transition-all duration-300 hover:shadow-xl ${
+                <Card className={`h-full border-2 transition-all duration-300 hover:shadow-xl bg-chef-warm-ivory ${
                   tier.popular 
                     ? 'border-chef-gold shadow-lg scale-105' 
-                    : 'border-chef-sage/20 hover:border-chef-sage/40'
+                    : 'border-chef-charcoal/20 hover:border-chef-royal-green/40'
                 } ${
-                  currentTier?.id === tier.id ? 'ring-2 ring-chef-gold' : ''
+                  currentTier?.id === tier.id ? 'ring-2 ring-chef-gold bg-chef-gold/5' : ''
                 }`}>
                   {tier.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -314,7 +314,7 @@ const Membership = () => {
                     <ul className="space-y-3">
                       {tier.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start gap-3">
-                          <Check className="w-5 h-5 text-chef-sage mt-0.5 flex-shrink-0" />
+                          <Check className="w-5 h-5 text-chef-royal-green mt-0.5 flex-shrink-0" />
                           <span className="text-chef-charcoal/80">{feature}</span>
                         </li>
                       ))}
@@ -324,7 +324,7 @@ const Membership = () => {
                       {currentTier?.id === tier.id ? (
                         <Button 
                           variant="outline" 
-                          className="w-full" 
+                          className="w-full border-chef-gold text-chef-gold hover:bg-chef-gold hover:text-chef-charcoal" 
                           disabled
                         >
                           Current Plan
@@ -335,10 +335,9 @@ const Membership = () => {
                           disabled={loading || !user}
                           className={`w-full ${
                             tier.popular 
-                              ? 'bg-gradient-to-r from-chef-gold to-chef-terracotta hover:from-chef-gold/90 hover:to-chef-terracotta/90 text-white' 
-                              : ''
+                              ? 'bg-chef-gold hover:bg-chef-gold/90 text-chef-charcoal font-medium' 
+                              : 'bg-chef-royal-green hover:bg-chef-forest text-chef-warm-ivory'
                           }`}
-                          variant={tier.popular ? "default" : "outline"}
                         >
                           {!user ? 'Login to Subscribe' : 'Choose This Plan'}
                         </Button>
