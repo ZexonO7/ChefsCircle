@@ -6,13 +6,8 @@ import { useAuth } from './AuthProvider';
 const ContactInfo = () => {
   const { user } = useAuth();
   const handleScheduleConsultation = () => {
-    // Scroll to the contact card or open email
-    const contactCard = document.querySelector('.chef-card');
-    if (contactCard) {
-      contactCard.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    // Open email to schedule a consultation
+    window.location.href = 'mailto:Advithya@chefscircle.in?subject=Schedule a Culinary Consultation&body=Hi Advithya,%0D%0A%0D%0AI would like to schedule a consultation to discuss my culinary goals and how ChefsCircle can help me improve my cooking skills.%0D%0A%0D%0APlease let me know your availability.%0D%0A%0D%0AThank you!';
   };
   const handleJoinChefCircle = () => {
     // Open email to join
