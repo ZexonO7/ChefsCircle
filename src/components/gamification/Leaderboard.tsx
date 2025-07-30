@@ -71,7 +71,7 @@ const Leaderboard = ({ users }: LeaderboardProps) => {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="lg:col-span-1"
     >
-      <Card className="chef-card h-full bg-inherit">
+      <Card className="chef-card h-full bg-chef-warm-ivory border border-chef-royal-green/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-chef-charcoal">
             <Users className="w-5 h-5 text-chef-royal-blue" />
@@ -121,7 +121,7 @@ const Leaderboard = ({ users }: LeaderboardProps) => {
             ))}
           </div>
           
-          <Button variant="outline" className="w-full mt-4 chef-button-outline text-sm bg-inherit text-inherit">
+          <Button variant="outline" className="w-full mt-4 chef-button-outline text-sm bg-chef-warm-ivory border-chef-royal-green text-chef-royal-green hover:bg-chef-royal-green hover:text-chef-warm-ivory">
             View Full Leaderboard
           </Button>
         </CardContent>
