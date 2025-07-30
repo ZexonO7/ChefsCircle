@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
+import { useAuth } from './AuthProvider';
 
 const ContactInfo = () => {
+  const { user } = useAuth();
   const handleScheduleConsultation = () => {
     // Scroll to the contact card or open email
     const contactCard = document.querySelector('.chef-card');
@@ -68,9 +70,11 @@ const ContactInfo = () => {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <div className="inline-flex flex-col sm:flex-row gap-4">
-            <button onClick={handleScheduleConsultation} className="chef-button-gold text-lg cursor-pointer hover:scale-105 transition-transform">
-              Schedule a Consultation
-            </button>
+            {user && (
+              <button onClick={handleScheduleConsultation} className="chef-button-gold text-lg cursor-pointer hover:scale-105 transition-transform">
+                Schedule a Consultation
+              </button>
+            )}
             <button onClick={handleJoinChefCircle} className="chef-button-primary text-lg cursor-pointer hover:scale-105 transition-transform">Join ChefsCircle Today</button>
           </div>
         </div>
