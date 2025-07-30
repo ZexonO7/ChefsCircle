@@ -93,7 +93,7 @@ const ChallengeModal = ({ isOpen, onClose }: ChallengeModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-chef-warm-ivory border border-chef-royal-green/20">
         <DialogHeader>
           <DialogTitle className="text-2xl font-playfair text-chef-charcoal">
             Join Cooking Challenges
@@ -104,24 +104,24 @@ const ChallengeModal = ({ isOpen, onClose }: ChallengeModalProps) => {
         </DialogHeader>
 
         {loading ? (
-          <div className="flex items-center justify-center py-12">
+          <div className="flex items-center justify-center py-12 bg-chef-warm-ivory">
             <Loader2 className="w-8 h-8 animate-spin text-chef-royal-green" />
           </div>
         ) : (
-          <Tabs defaultValue="daily" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-6">
-              <TabsTrigger value="daily" className="text-sm">
+          <Tabs defaultValue="daily" className="w-full bg-chef-warm-ivory">
+            <TabsList className="grid w-full grid-cols-3 mb-6 bg-chef-charcoal/5 border border-chef-charcoal/10">
+              <TabsTrigger value="daily" className="text-sm data-[state=active]:bg-chef-royal-green data-[state=active]:text-chef-warm-ivory">
                 24 Hours ({categorizedChallenges.daily.length})
               </TabsTrigger>
-              <TabsTrigger value="threeDays" className="text-sm">
+              <TabsTrigger value="threeDays" className="text-sm data-[state=active]:bg-chef-royal-blue data-[state=active]:text-chef-warm-ivory">
                 3 Days ({categorizedChallenges.threeDays.length})
               </TabsTrigger>
-              <TabsTrigger value="weekly" className="text-sm">
+              <TabsTrigger value="weekly" className="text-sm data-[state=active]:bg-chef-gold data-[state=active]:text-chef-charcoal">
                 Weekly ({categorizedChallenges.weekly.length})
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="daily" className="space-y-4">
+            <TabsContent value="daily" className="space-y-4 bg-chef-warm-ivory">
               <div className="grid gap-4 md:grid-cols-2">
                 {categorizedChallenges.daily.map((challenge) => (
                   <ChallengeCard
@@ -133,13 +133,15 @@ const ChallengeModal = ({ isOpen, onClose }: ChallengeModalProps) => {
                 ))}
               </div>
               {categorizedChallenges.daily.length === 0 && (
-                <p className="text-center text-chef-charcoal/60 py-8">
-                  No 24-hour challenges available at the moment.
-                </p>
+                <div className="text-center bg-chef-warm-ivory border border-chef-charcoal/10 rounded-lg py-8">
+                  <p className="text-chef-charcoal/60">
+                    No 24-hour challenges available at the moment.
+                  </p>
+                </div>
               )}
             </TabsContent>
 
-            <TabsContent value="threeDays" className="space-y-4">
+            <TabsContent value="threeDays" className="space-y-4 bg-chef-warm-ivory">
               <div className="grid gap-4 md:grid-cols-2">
                 {categorizedChallenges.threeDays.map((challenge) => (
                   <ChallengeCard
@@ -151,13 +153,15 @@ const ChallengeModal = ({ isOpen, onClose }: ChallengeModalProps) => {
                 ))}
               </div>
               {categorizedChallenges.threeDays.length === 0 && (
-                <p className="text-center text-chef-charcoal/60 py-8">
-                  No 3-day challenges available at the moment.
-                </p>
+                <div className="text-center bg-chef-warm-ivory border border-chef-charcoal/10 rounded-lg py-8">
+                  <p className="text-chef-charcoal/60">
+                    No 3-day challenges available at the moment.
+                  </p>
+                </div>
               )}
             </TabsContent>
 
-            <TabsContent value="weekly" className="space-y-4">
+            <TabsContent value="weekly" className="space-y-4 bg-chef-warm-ivory">
               <div className="grid gap-4 md:grid-cols-2">
                 {categorizedChallenges.weekly.map((challenge) => (
                   <ChallengeCard
@@ -169,9 +173,11 @@ const ChallengeModal = ({ isOpen, onClose }: ChallengeModalProps) => {
                 ))}
               </div>
               {categorizedChallenges.weekly.length === 0 && (
-                <p className="text-center text-chef-charcoal/60 py-8">
-                  No weekly challenges available at the moment.
-                </p>
+                <div className="text-center bg-chef-warm-ivory border border-chef-charcoal/10 rounded-lg py-8">
+                  <p className="text-chef-charcoal/60">
+                    No weekly challenges available at the moment.
+                  </p>
+                </div>
               )}
             </TabsContent>
           </Tabs>

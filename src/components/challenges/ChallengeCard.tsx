@@ -122,7 +122,7 @@ const ChallengeCard = ({ challenge, userProgress, onJoin }: ChallengeCardProps) 
   const isJoined = !!userProgress;
 
   return (
-    <Card className="overflow-hidden border border-chef-charcoal/10 hover:border-chef-royal-green/30 transition-all duration-300 hover:shadow-chef-luxury">
+    <Card className="overflow-hidden border border-chef-charcoal/10 hover:border-chef-royal-green/30 transition-all duration-300 hover:shadow-chef-luxury bg-chef-warm-ivory">
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1">
@@ -145,7 +145,7 @@ const ChallengeCard = ({ challenge, userProgress, onJoin }: ChallengeCardProps) 
           >
             {getDuration()}
           </Badge>
-          <Badge variant="outline" className="border-chef-charcoal/20">
+          <Badge variant="outline" className="border-chef-charcoal/20 bg-chef-warm-ivory text-chef-charcoal">
             <Trophy className="w-3 h-3 mr-1" />
             {challenge.xp_reward} XP
           </Badge>
