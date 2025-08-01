@@ -2,16 +2,22 @@
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
 import { useAuth } from './AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const ContactInfo = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  
   const handleScheduleConsultation = () => {
     // Open email to schedule a consultation
     window.location.href = 'mailto:Advithya@chefscircle.in?subject=Schedule a Culinary Consultation&body=Hi Advithya,%0D%0A%0D%0AI would like to schedule a consultation to discuss my culinary goals and how ChefsCircle can help me improve my cooking skills.%0D%0A%0D%0APlease let me know your availability.%0D%0A%0D%0AThank you!';
   };
+  
   const handleJoinChefCircle = () => {
-    // Open email to join
-    window.location.href = 'mailto:Advithya@chefscircle.in?subject=Join ChefsCircle - Membership Inquiry&body=Hi, I would like to learn more about joining ChefsCircle and your membership options.';
+    if (user) {
+      return; // Button shouldn't be visible when logged in
+    }
+    navigate('/auth');
   };
   return (
     <section id="contact" className="bg-gradient-to-b from-chef-warm-ivory to-chef-royal-green text-white relative py-[25px] md:py-[40px]">
@@ -70,7 +76,11 @@ const ContactInfo = () => {
                 Schedule a Consultation
               </button>
             )}
-            <button onClick={handleJoinChefCircle} className="chef-button-primary text-lg cursor-pointer hover:scale-105 transition-transform">Join ChefsCircle Today</button>
+            {!user && (
+              <button onClick={handleJoinChefCircle} className="chef-button-primary text-lg cursor-pointer hover:scale-105 transition-transform">
+                Join ChefsCircle Today
+              </button>
+            )}
           </div>
         </div>
       </div>
