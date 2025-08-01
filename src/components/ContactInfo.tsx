@@ -1,26 +1,23 @@
-
 import React from 'react';
 import { Mail, Linkedin, Phone, ChefHat } from 'lucide-react';
 import { useAuth } from './AuthProvider';
 import { useNavigate } from 'react-router-dom';
-
 const ContactInfo = () => {
-  const { user } = useAuth();
+  const {
+    user
+  } = useAuth();
   const navigate = useNavigate();
-  
   const handleScheduleConsultation = () => {
     // Open email to schedule a consultation
     window.location.href = 'mailto:Advithya@chefscircle.in?subject=Schedule a Culinary Consultation&body=Hi Advithya,%0D%0A%0D%0AI would like to schedule a consultation to discuss my culinary goals and how ChefsCircle can help me improve my cooking skills.%0D%0A%0D%0APlease let me know your availability.%0D%0A%0D%0AThank you!';
   };
-  
   const handleJoinChefCircle = () => {
     if (user) {
       return; // Button shouldn't be visible when logged in
     }
     navigate('/auth');
   };
-  return (
-    <section id="contact" className="bg-gradient-to-b from-chef-warm-ivory to-chef-royal-green text-white relative py-[25px] md:py-[40px]">
+  return <section id="contact" className="bg-gradient-to-b from-chef-warm-ivory to-chef-royal-green text-white relative py-[25px] md:py-[40px]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-chef-warm-ivory text-chef-royal-green rounded-full text-sm font-medium font-inter">
@@ -40,12 +37,9 @@ const ContactInfo = () => {
           <div className="chef-card p-8 border border-chef-gold/20 max-w-md">
             <div className="flex flex-col items-center text-center">
               <div className="w-32 h-32 rounded-full mb-6 overflow-hidden border-4 border-chef-royal-green/20">
-                <img 
-                  src="/lovable-uploads/ad136f24-0f60-4aaf-a6d0-06788da943c4.png" 
-                  alt="Advithya Bhardwaj - Founder & CEO of ChefsCircle"
-                  className="w-full h-full object-cover scale-125"
-                  style={{ objectPosition: '25% 10%' }}
-                />
+                <img src="/lovable-uploads/ad136f24-0f60-4aaf-a6d0-06788da943c4.png" alt="Advithya Bhardwaj - Founder & CEO of ChefsCircle" className="w-full h-full object-cover scale-125" style={{
+                objectPosition: '25% 10%'
+              }} />
               </div>
               <h3 className="text-2xl font-bold text-chef-charcoal mb-2 font-playfair">Advithya Bhardwaj</h3>
               <p className="text-chef-gold font-semibold mb-2 font-inter">Founder & Head Chef</p>
@@ -70,22 +64,9 @@ const ContactInfo = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <div className="inline-flex flex-col sm:flex-row gap-4">
-            {user && (
-              <button onClick={handleScheduleConsultation} className="chef-button-gold text-lg cursor-pointer hover:scale-105 transition-transform">
-                Schedule a Consultation
-              </button>
-            )}
-            {!user && (
-              <button onClick={handleJoinChefCircle} className="chef-button-primary text-lg cursor-pointer hover:scale-105 transition-transform">
-                Join ChefsCircle Today
-              </button>
-            )}
-          </div>
+          
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactInfo;
