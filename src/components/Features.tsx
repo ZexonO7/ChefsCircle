@@ -2,14 +2,12 @@ import { motion } from 'framer-motion';
 import { Users, BookOpen, Trophy, Star, Play, Crown, MessageCircle, Sparkles } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 const Features = () => {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+  const navigate = useNavigate();
+  
+  const handleCulinaryJourneyClick = () => {
+    navigate('/culinary-journey');
   };
   const features = [{
     icon: <Play className="w-8 h-8" />,
@@ -93,7 +91,7 @@ const Features = () => {
         </div>
 
         <div className="text-center">
-          <Button onClick={scrollToContact} className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 text-sm sm:text-base">
+          <Button onClick={handleCulinaryJourneyClick} className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 text-sm sm:text-base">
             Start Your Culinary Journey
           </Button>
         </div>
