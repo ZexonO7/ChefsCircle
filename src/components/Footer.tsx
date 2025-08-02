@@ -2,7 +2,7 @@ import { ArrowRight, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from 'emailjs-com';
+import { supabase } from "@/integrations/supabase/client";
 const Footer = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,29 +21,25 @@ const Footer = () => {
     }
     setIsSubmitting(true);
     try {
-      // EmailJS configuration
-      const EMAILJS_SERVICE_ID = "service_i3h66xg";
-      const EMAILJS_TEMPLATE_ID = "template_fgq53nh";
-      const EMAILJS_PUBLIC_KEY = "wQmcZvoOqTAhGnRZ3";
-      const templateParams = {
-        from_name: "Website Subscriber",
-        from_email: email,
-        message: `New subscription request from the website footer.`,
-        to_name: 'ChefsCircle Team',
-        reply_to: email
-      };
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+      const { data, error } = await supabase.functions.invoke('newsletter-subscribe', {
+        body: { email }
+      });
+
+      if (error) {
+        throw error;
+      }
+
       toast({
         title: "Success!",
-        description: "Thank you for subscribing to our newsletter.",
+        description: data.message || "Please check your email to verify your subscription.",
         variant: "default"
       });
       setEmail("");
-    } catch (error) {
-      console.error("Error sending subscription:", error);
+    } catch (error: any) {
+      console.error("Error subscribing to newsletter:", error);
       toast({
         title: "Error",
-        description: "There was a problem subscribing. Please try again later.",
+        description: error.message || "There was a problem subscribing. Please try again later.",
         variant: "destructive"
       });
     } finally {
