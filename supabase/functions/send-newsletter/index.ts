@@ -92,7 +92,7 @@ const handler = async (req: Request): Promise<Response> => {
         const unsubscribeUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/newsletter-unsubscribe?email=${encodeURIComponent(subscriber.email)}`;
         
         const emailResponse = await resend.emails.send({
-          from: "ChefsCircle Newsletter <onboarding@resend.dev>",
+          from: "ChefsCircle Newsletter <advithya@chefscircle.in>", // Use your verified domain
           to: [subscriber.email],
           subject: article.title,
           html: `

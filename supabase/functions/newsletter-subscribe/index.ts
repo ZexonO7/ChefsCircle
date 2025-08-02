@@ -55,49 +55,71 @@ const handler = async (req: Request): Promise<Response> => {
 
     const verificationToken = tokenData;
 
-    // Check if email already exists and is verified
+    // Check if email already exists
     const { data: existingSubscriber } = await supabase
       .from("newsletter_subscribers")
       .select("*")
       .eq("email", email)
       .single();
 
-    if (existingSubscriber && existingSubscriber.verified) {
-      return new Response(
-        JSON.stringify({ message: "You are already subscribed to our newsletter!" }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
-        }
-      );
-    }
+    if (existingSubscriber) {
+      if (existingSubscriber.verified) {
+        return new Response(
+          JSON.stringify({ message: "You are already subscribed to our newsletter!" }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+          }
+        );
+      } else {
+        // Update existing unverified subscriber with new token
+        const { error: updateError } = await supabase
+          .from("newsletter_subscribers")
+          .update({
+            verification_token: verificationToken,
+            subscribed_at: new Date().toISOString(),
+          })
+          .eq("email", email);
 
-    // Insert or update subscriber
-    const { error: insertError } = await supabase
-      .from("newsletter_subscribers")
-      .upsert({
-        email,
-        verification_token: verificationToken,
-        verified: false,
-        subscribed_at: new Date().toISOString(),
-      });
-
-    if (insertError) {
-      console.error("Error inserting subscriber:", insertError);
-      return new Response(
-        JSON.stringify({ error: "Failed to save subscription" }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json", ...corsHeaders },
+        if (updateError) {
+          console.error("Error updating subscriber:", updateError);
+          return new Response(
+            JSON.stringify({ error: "Failed to update subscription" }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json", ...corsHeaders },
+            }
+          );
         }
-      );
+      }
+    } else {
+      // Insert new subscriber
+      const { error: insertError } = await supabase
+        .from("newsletter_subscribers")
+        .insert({
+          email,
+          verification_token: verificationToken,
+          verified: false,
+          subscribed_at: new Date().toISOString(),
+        });
+
+      if (insertError) {
+        console.error("Error inserting subscriber:", insertError);
+        return new Response(
+          JSON.stringify({ error: "Failed to save subscription" }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json", ...corsHeaders },
+          }
+        );
+      }
     }
 
     // Send verification email
     const verificationUrl = `${Deno.env.get("SUPABASE_URL")}/functions/v1/newsletter-verify?token=${verificationToken}`;
     
     const emailResponse = await resend.emails.send({
-      from: "ChefsCircle <onboarding@resend.dev>",
+      from: "ChefsCircle <advithya@chefscircle.in>", // Use your verified domain
       to: [email],
       subject: "Please verify your ChefsCircle newsletter subscription",
       html: `
