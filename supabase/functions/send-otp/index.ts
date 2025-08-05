@@ -1,6 +1,9 @@
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.0.0';
+import { Resend } from "npm:resend@2.0.0";
+
+const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -48,23 +51,38 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error(`Database error: ${dbError.message}`);
     }
 
-    // In a real implementation, you would send the OTP via email service like Resend
-    // For now, we'll just log it to console (in production, remove this!)
-    console.log(`OTP for ${email}: ${otpCode}`);
+    // Send OTP via email using Resend
+    const emailResponse = await resend.emails.send({
+      from: "ChefsCircle <noreply@chefsdevkit.com>",
+      to: [email],
+      subject: "Your ChefsCircle Verification Code",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #2563eb; text-align: center;">Welcome to ChefsCircle!</h1>
+          <p>Hi there,</p>
+          <p>Thank you for signing up for ChefsCircle. To complete your account setup, please use the verification code below:</p>
+          <div style="background-color: #f3f4f6; padding: 20px; text-align: center; margin: 20px 0; border-radius: 8px;">
+            <h2 style="color: #1f2937; font-size: 32px; letter-spacing: 4px; margin: 0;">${otpCode}</h2>
+          </div>
+          <p>This code will expire in 10 minutes for security reasons.</p>
+          <p>If you didn't request this verification code, please ignore this email.</p>
+          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;">
+          <p style="color: #6b7280; font-size: 14px;">
+            Best regards,<br>
+            The ChefsCircle Team
+          </p>
+        </div>
+      `,
+    });
 
-    // Simulate email sending
-    const emailSent = true; // Replace with actual email sending logic
-
-    if (!emailSent) {
-      throw new Error("Failed to send email");
+    if (!emailResponse.data) {
+      throw new Error("Failed to send verification email");
     }
 
     return new Response(
       JSON.stringify({ 
         success: true, 
-        message: "OTP sent successfully",
-        // Remove this in production - only for demo purposes
-        debug_otp: otpCode 
+        message: "Verification code sent to your email"
       }),
       {
         status: 200,
