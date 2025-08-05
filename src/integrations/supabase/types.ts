@@ -194,6 +194,120 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_articles: {
+        Row: {
+          author: string | null
+          content: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          published_at: string | null
+          sent_at: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author?: string | null
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          sent_at?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author?: string | null
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          published_at?: string | null
+          sent_at?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      newsletter_email_sends: {
+        Row: {
+          article_id: string | null
+          error_message: string | null
+          id: string
+          sent_at: string
+          status: string
+          subscriber_id: string | null
+        }
+        Insert: {
+          article_id?: string | null
+          error_message?: string | null
+          id?: string
+          sent_at?: string
+          status?: string
+          subscriber_id?: string | null
+        }
+        Update: {
+          article_id?: string | null
+          error_message?: string | null
+          id?: string
+          sent_at?: string
+          status?: string
+          subscriber_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "newsletter_email_sends_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "newsletter_articles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "newsletter_email_sends_subscriber_id_fkey"
+            columns: ["subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "newsletter_subscribers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      newsletter_subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          subscribed_at: string
+          unsubscribed_at: string | null
+          updated_at: string
+          verification_token: string | null
+          verified: boolean
+          verified_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+          updated_at?: string
+          verification_token?: string | null
+          verified?: boolean
+          verified_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+          updated_at?: string
+          verification_token?: string | null
+          verified?: boolean
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           content: string
@@ -644,6 +758,10 @@ export type Database = {
       cleanup_expired_otps: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      generate_verification_token: {
+        Args: Record<PropertyKey, never>
+        Returns: string
       }
       get_daily_recipe_usage: {
         Args: { user_id_param: string; max_daily_limit?: number }
