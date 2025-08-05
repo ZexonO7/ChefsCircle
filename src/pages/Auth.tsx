@@ -31,20 +31,11 @@ const Auth = () => {
   const sendOTP = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`https://syamxswsyylzvvcdmpjz.supabase.co/functions/v1/send-otp`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YW14c3dzeXlsenZ2Y2RtcGp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5NzAwODgsImV4cCI6MjA2NDU0NjA4OH0.NahrbwV-cv4uKbygo1aCLNnnMeBqj_kvyPuVn7sZ-g8`,
-        },
-        body: JSON.stringify({ email }),
+      const { data, error } = await supabase.functions.invoke('send-otp', {
+        body: { email },
       });
 
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send OTP');
-      }
+      if (error) throw error;
 
       toast({
         title: "Verification code sent!",
@@ -79,25 +70,16 @@ const Auth = () => {
     setOtpError('');
     
     try {
-      const response = await fetch(`https://syamxswsyylzvvcdmpjz.supabase.co/functions/v1/verify-otp`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YW14c3dzeXlsenZ2Y2RtcGp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg5NzAwODgsImV4cCI6MjA2NDU0NjA4OH0.NahrbwV-cv4uKbygo1aCLNnnMeBqj_kvyPuVn7sZ-g8`,
-        },
-        body: JSON.stringify({ 
+      const { data, error } = await supabase.functions.invoke('verify-otp', {
+        body: { 
           email, 
           otp: otpCode, 
           password, 
           fullName 
-        }),
+        },
       });
 
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || 'Verification failed');
-      }
+      if (error) throw error;
 
       toast({
         title: "Account created successfully!",
