@@ -53,7 +53,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send OTP via email using Resend
     const emailResponse = await resend.emails.send({
-      from: "ChefsCircle <noreply@chefsdevkit.com>",
+      from: "ChefsCircle <onboarding@resend.dev>",
       to: [email],
       subject: "Your ChefsCircle Verification Code",
       html: `
