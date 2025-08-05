@@ -1,5 +1,11 @@
 project_id = "syamxswsyylzvvcdmpjz"
 
+[functions.send-otp]
+verify_jwt = false
+
+[functions.verify-otp]
+verify_jwt = false
+
 [functions.newsletter-verify]
 verify_jwt = false
 
