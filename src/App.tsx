@@ -29,6 +29,7 @@ import Contact from "./pages/Contact";
 import RecipeDetail from "./pages/RecipeDetail";
 import Membership from "./pages/Membership";
 import CulinaryJourney from "./pages/CulinaryJourney";
+import QuestionDetail from "./pages/QuestionDetail";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
               <Route path="/courses/:id" element={<CourseDetail />} />
               <Route path="/clubs" element={<Clubs />} />
               <Route path="/library" element={<Library />} />
+              <Route path="/library/question/:id" element={<QuestionDetail />} />
               <Route path="/recipes" element={<Recipes />} />
               <Route path="/ingredients-to-recipes" element={<IngredientsToRecipes />} />
               <Route path="/settings" element={<Settings />} />
