@@ -32,21 +32,35 @@ const handler = async (req: Request): Promise<Response> => {
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Verify OTP
-    const { data: otpRecord, error: otpError } = await supabase
+    // First, check if there's any OTP for this email
+    const { data: emailOtps, error: emailError } = await supabase
       .from('email_verification_otps')
       .select('*')
       .eq('email', email)
-      .eq('otp_code', otp)
       .eq('used', false)
-      .gt('expires_at', new Date().toISOString())
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+      .order('created_at', { ascending: false });
 
-    if (otpError || !otpRecord) {
-      throw new Error("Invalid or expired OTP");
+    if (emailError) {
+      throw new Error("Failed to verify OTP");
     }
+
+    if (!emailOtps || emailOtps.length === 0) {
+      throw new Error("No verification code found for this email. Please request a new code.");
+    }
+
+    // Check if the OTP matches
+    const matchingOtp = emailOtps.find(record => record.otp_code === otp);
+    
+    if (!matchingOtp) {
+      throw new Error("The verification code you entered is incorrect. Please try again.");
+    }
+
+    // Check if the OTP is expired
+    if (new Date(matchingOtp.expires_at) <= new Date()) {
+      throw new Error("This verification code has expired. Please request a new one.");
+    }
+
+    const otpRecord = matchingOtp;
 
     // Mark OTP as used
     const { error: updateError } = await supabase
