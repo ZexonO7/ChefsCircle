@@ -242,7 +242,7 @@ const QuestionDetail = () => {
                 value={newAnswer}
                 onChange={(e) => setNewAnswer(e.target.value)}
                 placeholder="Share your knowledge and help the community..."
-                className="w-full h-32 p-4 border border-chef-royal-blue/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chef-gold resize-none"
+                className="w-full h-32 p-4 border border-chef-royal-blue/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chef-gold resize-none bg-white"
               />
               <div className="flex justify-end mt-4">
                 <button
