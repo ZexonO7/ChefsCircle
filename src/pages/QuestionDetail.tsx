@@ -216,7 +216,7 @@ const QuestionDetail = () => {
             delay: 0.3
           }}>
               <h3 className="chef-heading-sm text-chef-charcoal mb-4">Your Answer</h3>
-              <Textarea value={newAnswer} onChange={e => setNewAnswer(e.target.value)} placeholder="Share your knowledge and help the community..." className="w-full h-32 p-4 border border-chef-royal-blue/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chef-gold resize-none bg-[chef-royal-blue] bg-chef-cream" />
+              <Textarea value={newAnswer} onChange={e => setNewAnswer(e.target.value)} placeholder="Share your knowledge and help the community..." className="w-full h-32 p-4 border border-chef-royal-blue/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-chef-gold resize-none bg-chef-cream text-chef-charcoal" />
               <div className="flex justify-end mt-4">
                 <button onClick={handleSubmitAnswer} className="chef-button-primary" disabled={!newAnswer.trim()}>
                   <MessageCircle className="w-5 h-5 mr-2" />
