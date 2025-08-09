@@ -8,6 +8,7 @@ import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { useQuestionDetail } from '@/hooks/useQuestions';
 import { Textarea } from '@/components/ui/textarea';
+import { AnswerVoting } from '@/components/AnswerVoting';
 const QuestionDetail = () => {
   const {
     id
@@ -64,12 +65,6 @@ const QuestionDetail = () => {
     if (success) {
       setNewAnswer('');
     }
-  };
-  const handleLike = (answerId: string) => {
-    toast({
-      title: "Coming Soon",
-      description: "Answer voting feature is under development."
-    });
   };
   if (loading) {
     return <PageLayout>
@@ -156,7 +151,7 @@ const QuestionDetail = () => {
                 {answers.length} {answers.length === 1 ? 'Answer' : 'Answers'}
               </h2>
               
-              <div className="space-y-6">
+                <div className="space-y-6">
                 {answers.map((answer, index) => <motion.div key={answer.id} className={`chef-card p-6 ${answer.is_accepted ? 'border-l-4 border-chef-royal-green' : ''}`} initial={{
                 opacity: 0,
                 y: 20
@@ -168,6 +163,7 @@ const QuestionDetail = () => {
                 delay: index * 0.1
               }}>
                     <div className="flex items-start gap-4">
+                      <AnswerVoting answerId={answer.id} />
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="font-medium text-chef-charcoal">
@@ -186,10 +182,10 @@ const QuestionDetail = () => {
                           {answer.content}
                         </p>
                         <div className="flex items-center gap-4">
-                          <button onClick={() => handleLike(answer.id)} className="flex items-center gap-1 text-sm text-chef-charcoal/60 hover:text-chef-royal-blue transition-colors">
+                          <div className="flex items-center gap-1 text-sm text-chef-charcoal/60">
                             <ThumbsUp className="w-4 h-4" />
-                            <span>{answer.likes}</span>
-                          </button>
+                            <span>{answer.likes} likes</span>
+                          </div>
                         </div>
                       </div>
                     </div>

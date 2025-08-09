@@ -71,6 +71,41 @@ export type Database = {
         }
         Relationships: []
       }
+      answer_votes: {
+        Row: {
+          answer_id: string
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+          vote_type: string
+        }
+        Insert: {
+          answer_id: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+          vote_type: string
+        }
+        Update: {
+          answer_id?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id?: string
+          vote_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "answer_votes_answer_id_fkey"
+            columns: ["answer_id"]
+            isOneToOne: false
+            referencedRelation: "answers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       answers: {
         Row: {
           content: string
@@ -763,6 +798,14 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      get_answer_vote_counts: {
+        Args: { answer_id_param: string }
+        Returns: {
+          upvotes: number
+          downvotes: number
+          net_votes: number
+        }[]
+      }
       get_daily_recipe_usage: {
         Args: { user_id_param: string; max_daily_limit?: number }
         Returns: Json
@@ -773,6 +816,10 @@ export type Database = {
           view_count: number
           like_count: number
         }[]
+      }
+      get_user_answer_vote: {
+        Args: { answer_id_param: string; user_id_param: string }
+        Returns: string
       }
       increment_recipe_views: {
         Args: { p_recipe_id: string; p_recipe_type: string }
