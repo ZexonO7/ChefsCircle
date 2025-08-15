@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -771,10 +771,10 @@ export type Database = {
     Functions: {
       award_xp: {
         Args: {
+          action_description_param?: string
+          action_type_param: string
           user_id_param: string
           xp_amount: number
-          action_type_param: string
-          action_description_param?: string
         }
         Returns: undefined
       }
@@ -783,7 +783,7 @@ export type Database = {
         Returns: number
       }
       check_and_update_daily_recipe_usage: {
-        Args: { user_id_param: string; max_daily_limit?: number }
+        Args: { max_daily_limit?: number; user_id_param: string }
         Returns: {
           can_generate: boolean
           current_count: number
@@ -801,20 +801,20 @@ export type Database = {
       get_answer_vote_counts: {
         Args: { answer_id_param: string }
         Returns: {
-          upvotes: number
           downvotes: number
           net_votes: number
+          upvotes: number
         }[]
       }
       get_daily_recipe_usage: {
-        Args: { user_id_param: string; max_daily_limit?: number }
+        Args: { max_daily_limit?: number; user_id_param: string }
         Returns: Json
       }
       get_recipe_analytics: {
         Args: { p_recipe_id: string; p_recipe_type: string }
         Returns: {
-          view_count: number
           like_count: number
+          view_count: number
         }[]
       }
       get_user_answer_vote: {
@@ -828,9 +828,9 @@ export type Database = {
       log_admin_action: {
         Args: {
           action_text: string
-          target_type_text: string
-          target_id_param?: string
           details_param?: Json
+          target_id_param?: string
+          target_type_text: string
         }
         Returns: undefined
       }
@@ -863,7 +863,7 @@ export type Database = {
         Returns: undefined
       }
       update_challenge_progress: {
-        Args: { user_id_param: string; challenge_type_param: string }
+        Args: { challenge_type_param: string; user_id_param: string }
         Returns: undefined
       }
       xp_for_next_level: {
