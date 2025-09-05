@@ -16,18 +16,38 @@ const AdminPortal = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminCheckLoading, setAdminCheckLoading] = useState(true);
 
-  const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
-
   useEffect(() => {
-    if (user?.email) {
-      console.log('Checking admin status for email:', user.email);
-      console.log('Admin emails list:', adminEmails);
-      const adminStatus = adminEmails.includes(user.email);
-      console.log('Is admin?', adminStatus);
-      setIsAdmin(adminStatus);
+    if (user) {
+      checkAdminStatus();
+    } else {
+      setAdminCheckLoading(false);
     }
-    setAdminCheckLoading(false);
   }, [user]);
+
+  const checkAdminStatus = async () => {
+    if (!user) {
+      setAdminCheckLoading(false);
+      return;
+    }
+    
+    try {
+      console.log('Checking admin status for user:', user.email);
+      const { data, error } = await supabase.functions.invoke('check-admin-status');
+      
+      if (error) {
+        console.error('Error checking admin status:', error);
+        setIsAdmin(false);
+      } else {
+        console.log('Admin status response:', data);
+        setIsAdmin(data?.isAdmin || false);
+      }
+    } catch (error) {
+      console.error('Error checking admin status:', error);
+      setIsAdmin(false);
+    } finally {
+      setAdminCheckLoading(false);
+    }
+  };
 
   // Show loading while auth is loading OR while we're checking admin status
   if (loading || adminCheckLoading) {

@@ -825,6 +825,10 @@ export type Database = {
         Args: { p_recipe_id: string; p_recipe_type: string }
         Returns: number
       }
+      is_admin: {
+        Args: { user_id_param?: string }
+        Returns: boolean
+      }
       log_admin_action: {
         Args: {
           action_text: string

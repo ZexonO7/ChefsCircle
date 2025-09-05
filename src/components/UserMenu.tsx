@@ -20,15 +20,31 @@ const UserMenu = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showMembershipModal, setShowMembershipModal] = useState(false);
 
-  const adminEmails = ['advithya07@gmail.com', 'advithya@chefscircle.in'];
-
   useEffect(() => {
     if (user) {
       fetchProfile();
-      // Check if user is admin
-      setIsAdmin(adminEmails.includes(user.email || ''));
+      checkAdminStatus();
     }
   }, [user]);
+
+  const checkAdminStatus = async () => {
+    if (!user) return;
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('check-admin-status');
+      
+      if (error) {
+        console.error('Error checking admin status:', error);
+        setIsAdmin(false);
+        return;
+      }
+      
+      setIsAdmin(data?.isAdmin || false);
+    } catch (error) {
+      console.error('Error checking admin status:', error);
+      setIsAdmin(false);
+    }
+  };
 
   // Listen for profile updates
   useEffect(() => {
