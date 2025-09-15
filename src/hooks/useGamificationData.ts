@@ -245,7 +245,7 @@ export const useGamificationData = () => {
           const userIds = gamificationLeaderboard.map(item => item.user_id);
           const { data: profilesData, error: profilesError } = await supabase
             .from('profiles')
-            .select('id, full_name, avatar_url')
+            .select('id, full_name, username, email, avatar_url')
             .in('id', userIds);
 
           if (profilesError) {
@@ -255,9 +255,16 @@ export const useGamificationData = () => {
           // Combine the data
           const formattedLeaderboard = gamificationLeaderboard.map((item, index) => {
             const profile = profilesData?.find(p => p.id === item.user_id);
+            
+            // Try different name sources in order of preference
+            const displayName = profile?.full_name || 
+                               profile?.username || 
+                               profile?.email?.split('@')[0] || 
+                               `Chef ${index + 1}`;
+            
             return {
               rank: index + 1,
-              name: profile?.full_name || 'Chef User',
+              name: displayName,
               xp: item.total_xp,
               level: item.level,
               avatar: profile?.avatar_url || "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
