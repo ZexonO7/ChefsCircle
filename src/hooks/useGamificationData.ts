@@ -231,46 +231,22 @@ export const useGamificationData = () => {
           });
         }
 
-        // Fetch leaderboard data - first get gamification data
-        const { data: gamificationLeaderboard, error: leaderboardError } = await supabase
-          .from('user_gamification')
-          .select('total_xp, level, user_id')
-          .order('total_xp', { ascending: false })
-          .limit(5);
+        // Fetch leaderboard data using secure RPC
+        const { data: leaderboardData, error: leaderboardError } = await supabase
+          .rpc('get_leaderboard', { limit_count: 5 });
 
         if (leaderboardError) {
           console.error('Error fetching leaderboard:', leaderboardError);
-        } else if (gamificationLeaderboard) {
-          // Now fetch profile data for these users
-          const userIds = gamificationLeaderboard.map(item => item.user_id);
-          const { data: profilesData, error: profilesError } = await supabase
-            .from('profiles')
-            .select('id, full_name, username, email, avatar_url')
-            .in('id', userIds);
-
-          if (profilesError) {
-            console.error('Error fetching profiles:', profilesError);
-          }
-
-          // Combine the data
-          const formattedLeaderboard = gamificationLeaderboard.map((item, index) => {
-            const profile = profilesData?.find(p => p.id === item.user_id);
-            
-            // Try different name sources in order of preference
-            const displayName = profile?.full_name || 
-                               profile?.username || 
-                               profile?.email?.split('@')[0] || 
-                               `Chef ${index + 1}`;
-            
-            return {
-              rank: index + 1,
-              name: displayName,
-              xp: item.total_xp,
-              level: item.level,
-              avatar: profile?.avatar_url || "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
-              isUser: item.user_id === user.id
-            };
-          });
+        } else if (leaderboardData) {
+          // Format the leaderboard data
+          const formattedLeaderboard = leaderboardData.map((item, index) => ({
+            rank: index + 1,
+            name: item.display_name || `Chef ${index + 1}`,
+            xp: item.total_xp,
+            level: item.level,
+            avatar: item.avatar_url || "/lovable-uploads/526dc38a-25fa-40d4-b520-425b23ae0464.png",
+            isUser: item.user_id === user.id
+          }));
           
           setLeaderboardData(formattedLeaderboard);
         }

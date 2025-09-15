@@ -810,6 +810,16 @@ export type Database = {
         Args: { max_daily_limit?: number; user_id_param: string }
         Returns: Json
       }
+      get_leaderboard: {
+        Args: { limit_count?: number }
+        Returns: {
+          avatar_url: string
+          display_name: string
+          level: number
+          total_xp: number
+          user_id: string
+        }[]
+      }
       get_recipe_analytics: {
         Args: { p_recipe_id: string; p_recipe_type: string }
         Returns: {
