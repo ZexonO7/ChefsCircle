@@ -31,7 +31,7 @@ const UserSearch: React.FC = () => {
     clearSearch();
   };
   return <div className="relative w-full max-w-md">
-      <div className="relative">
+      <div className="relative bg-chef-cream">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input type="text" placeholder="Search for chefs..." value={searchTerm} onChange={handleInputChange} aria-label="Search for chef profiles" className="pl-10 pr-4 bg-[chef-warm-ivory] bg-chef-cream" />
       </div>
