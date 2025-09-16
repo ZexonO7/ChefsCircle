@@ -27,64 +27,35 @@ const UserSearch: React.FC = () => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     updateSearchTerm(event.target.value);
   };
-
   const handleResultClick = (): void => {
     clearSearch();
   };
-
-  return (
-    <div className="relative w-full max-w-md">
+  return <div className="relative w-full max-w-md">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          type="text"
-          placeholder="Search for chefs..."
-          value={searchTerm}
-          onChange={handleInputChange}
-          className="pl-10 pr-4"
-          aria-label="Search for chef profiles"
-        />
+        <Input type="text" placeholder="Search for chefs..." value={searchTerm} onChange={handleInputChange} aria-label="Search for chef profiles" className="pl-10 pr-4 bg-[chef-warm-ivory] bg-chef-cream" />
       </div>
 
-      {shouldShowResults && (
-        <Card className="absolute top-full left-0 right-0 mt-2 max-h-96 overflow-y-auto z-50 shadow-lg">
+      {shouldShowResults && <Card className="absolute top-full left-0 right-0 mt-2 max-h-96 overflow-y-auto z-50 shadow-lg">
           <CardContent className="p-2">
-            {isLoading && (
-              <div className="p-4 text-center text-muted-foreground">
+            {isLoading && <div className="p-4 text-center text-muted-foreground">
                 Searching...
-              </div>
-            )}
+              </div>}
             
-            {error && (
-              <div className="p-4 text-center text-destructive">
+            {error && <div className="p-4 text-center text-destructive">
                 {error}
-              </div>
-            )}
+              </div>}
             
-            {!isLoading && !error && isEmpty && (
-              <div className="p-4 text-center text-muted-foreground">
+            {!isLoading && !error && isEmpty && <div className="p-4 text-center text-muted-foreground">
                 No users found
-              </div>
-            )}
+              </div>}
             
-            {!isLoading && !error && hasResults && (
-              <div className="space-y-2">
-                {searchResults.map((user) => {
-                  const displayName = getExplicitDisplayName(user);
-                  const avatarUrl = getExplicitAvatarUrl(user);
-                  
-                  return (
-                    <Link
-                      key={user.id}
-                      to={`/profile/${user.id}`}
-                      className="block"
-                      onClick={handleResultClick}
-                      aria-label={`View ${displayName}'s profile`}
-                    >
-                      <div className={cn(
-                        "flex items-center gap-3 p-3 rounded-lg transition-colors",
-                        "hover:bg-muted cursor-pointer"
-                      )}>
+            {!isLoading && !error && hasResults && <div className="space-y-2">
+                {searchResults.map(user => {
+            const displayName = getExplicitDisplayName(user);
+            const avatarUrl = getExplicitAvatarUrl(user);
+            return <Link key={user.id} to={`/profile/${user.id}`} className="block" onClick={handleResultClick} aria-label={`View ${displayName}'s profile`}>
+                      <div className={cn("flex items-center gap-3 p-3 rounded-lg transition-colors", "hover:bg-muted cursor-pointer")}>
                         <Avatar className="h-10 w-10">
                           <AvatarImage src={avatarUrl} alt={`${displayName}'s avatar`} />
                           <AvatarFallback>
@@ -110,24 +81,17 @@ const UserSearch: React.FC = () => {
                               <Award className="h-3 w-3" />
                               {user.total_xp} XP
                             </div>
-                            {user.bio && user.bio.trim() && (
-                              <p className="text-xs text-muted-foreground truncate">
+                            {user.bio && user.bio.trim() && <p className="text-xs text-muted-foreground truncate">
                                 {user.bio.trim()}
-                              </p>
-                            )}
+                              </p>}
                           </div>
                         </div>
                       </div>
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
+                    </Link>;
+          })}
+              </div>}
           </CardContent>
-        </Card>
-      )}
-    </div>
-  );
+        </Card>}
+    </div>;
 };
-
 export default UserSearch;
