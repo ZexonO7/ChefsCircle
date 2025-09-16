@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import UserMenu from "./UserMenu";
 import NotificationBell from "./NotificationBell";
+import UserSearch from "./UserSearch";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -134,6 +135,7 @@ const Navbar = () => {
 
         {/* Enhanced User Actions */}
         {user ? <div className="hidden md:flex items-center gap-3">
+            <UserSearch />
             <NotificationBell />
             <UserMenu />
           </div> : <div className="hidden md:block">

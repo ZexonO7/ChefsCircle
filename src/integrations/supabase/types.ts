@@ -848,6 +848,20 @@ export type Database = {
         }
         Returns: undefined
       }
+      search_users: {
+        Args: { limit_count?: number; search_term: string }
+        Returns: {
+          avatar_url: string
+          bio: string
+          email: string
+          full_name: string
+          id: string
+          level: number
+          profile_image_url: string
+          total_xp: number
+          username: string
+        }[]
+      }
       track_ai_recipe_generation: {
         Args: { user_id_param: string }
         Returns: undefined
