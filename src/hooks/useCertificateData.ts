@@ -28,7 +28,7 @@ export const useCertificateData = (certificateId: string | undefined) => {
       }
 
       const { data, error } = await supabase
-        .from('certificates')
+        .from('certificates' as any)
         .select('*')
         .eq('certificate_id', certificateId)
         .maybeSingle();
