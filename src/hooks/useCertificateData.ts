@@ -31,7 +31,7 @@ export const useCertificateData = (certificateId: string | undefined) => {
         .from('certificates' as any)
         .select('*')
         .eq('certificate_id', certificateId)
-        .maybeSingle();
+        .maybeSingle() as { data: any; error: any };
 
       if (error) {
         throw new Error(`Certificate not found: ${error.message}`);
@@ -41,7 +41,7 @@ export const useCertificateData = (certificateId: string | undefined) => {
         throw new Error('Certificate not found');
       }
 
-      return data as any as CertificateData;
+      return data as CertificateData;
     },
     enabled: !!certificateId,
     retry: false,
