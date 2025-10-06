@@ -154,6 +154,54 @@ export type Database = {
           },
         ]
       }
+      certificates: {
+        Row: {
+          certificate_id: string
+          created_at: string
+          description: string | null
+          document_url: string | null
+          id: string
+          issued_date: string
+          issuer_name: string
+          metadata: Json | null
+          recipient_email: string
+          recipient_name: string
+          status: string
+          title: string
+          type: string
+        }
+        Insert: {
+          certificate_id: string
+          created_at?: string
+          description?: string | null
+          document_url?: string | null
+          id?: string
+          issued_date: string
+          issuer_name: string
+          metadata?: Json | null
+          recipient_email: string
+          recipient_name: string
+          status?: string
+          title: string
+          type: string
+        }
+        Update: {
+          certificate_id?: string
+          created_at?: string
+          description?: string | null
+          document_url?: string | null
+          id?: string
+          issued_date?: string
+          issuer_name?: string
+          metadata?: Json | null
+          recipient_email?: string
+          recipient_name?: string
+          status?: string
+          title?: string
+          type?: string
+        }
+        Relationships: []
+      }
       club_memberships: {
         Row: {
           club_name: string
