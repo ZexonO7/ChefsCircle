@@ -148,6 +148,15 @@ const CertificateVerify = () => {
                         </div>
                       </div>
                       <div className="pt-4">
+                        <p className="text-sm text-muted-foreground mb-3">Image Preview</p>
+                        <img 
+                          src={`/documents/${certificate.certificate_id}.jpg`}
+                          alt={`Preview of document ${certificate.certificate_id}`}
+                          className="w-full rounded-lg border"
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
+                      </div>
+                      <div className="pt-4">
                         <a 
                           href={certificate.document_url} 
                           download={`${certificate.certificate_id}.pdf`}
