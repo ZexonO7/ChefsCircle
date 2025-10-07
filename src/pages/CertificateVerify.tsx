@@ -141,9 +141,14 @@ const CertificateVerify = () => {
                             type="application/pdf"
                             className="w-full h-[600px]"
                           >
-                            <p className="p-4 text-center">
-                              Unable to display PDF. Please download the document to view it.
-                            </p>
+                            <div className="p-4 text-center space-y-3">
+                              <p>Unable to display PDF in your browser.</p>
+                              <img 
+                                src={`/documents/${certificate.certificate_id}.jpg`}
+                                alt={`Image preview of ${certificate.certificate_id}`}
+                                className="w-full rounded-lg border"
+                              />
+                            </div>
                           </object>
                         </div>
                       </div>
