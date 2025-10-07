@@ -134,25 +134,6 @@ const CertificateVerify = () => {
                   {certificate.document_url && (
                     <>
                       <div className="pt-4 border-t">
-                        <p className="text-sm text-muted-foreground mb-3">Document Preview</p>
-                        <div className="rounded-lg border overflow-hidden bg-white">
-                          <object
-                            data={certificate.document_url}
-                            type="application/pdf"
-                            className="w-full h-[600px]"
-                          >
-                            <div className="p-4 text-center space-y-3">
-                              <p>Unable to display PDF in your browser.</p>
-                              <img 
-                                src={`/documents/${certificate.certificate_id}.jpg`}
-                                alt={`Image preview of ${certificate.certificate_id}`}
-                                className="w-full rounded-lg border"
-                              />
-                            </div>
-                          </object>
-                        </div>
-                      </div>
-                      <div className="pt-4">
                         <p className="text-sm text-muted-foreground mb-3">Image Preview</p>
                         <img 
                           src={`/documents/${certificate.certificate_id}.jpg`}
