@@ -132,14 +132,29 @@ const CertificateVerify = () => {
                   </div>
 
                   {certificate.document_url && (
-                    <div className="pt-4">
-                      <Button asChild className="w-full">
-                        <a href={certificate.document_url} target="_blank" rel="noopener noreferrer">
-                          <Download className="w-4 h-4 mr-2" />
-                          Download Document
-                        </a>
-                      </Button>
-                    </div>
+                    <>
+                      <div className="pt-4 border-t">
+                        <p className="text-sm text-muted-foreground mb-3">Document Preview</p>
+                        <div className="rounded-lg border overflow-hidden bg-white">
+                          <iframe
+                            src={certificate.document_url}
+                            className="w-full h-[600px]"
+                            title="Certificate Document"
+                          />
+                        </div>
+                      </div>
+                      <div className="pt-4">
+                        <Button asChild className="w-full">
+                          <a 
+                            href={certificate.document_url} 
+                            download={`${certificate.certificate_id}.pdf`}
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            Download Document
+                          </a>
+                        </Button>
+                      </div>
+                    </>
                   )}
                 </>
               )}
