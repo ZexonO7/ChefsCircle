@@ -138,34 +138,52 @@ const About = () => {
                   name: "Advithya Bhardwaj",
                   role: "Founder and CEO",
                   bio: "Founder and CEO of ChefsCircle and Aspiring restaurateur",
-                  image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png"
+                  image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png",
+                  link: "https://www.linkedin.com/in/advithya-bhardwaj"
                 }, {
                   name: "hiring",
                   role: "Social Media Manager",
                   bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
-                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                  link: "/careers"
                 }, {
                   name: "hiring",
                   role: "Social Media Manager",
                   bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
-                  image: "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                  image: "https://images.unsplash.com/photo-1494790108755-2616b612b098?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                  link: "/careers"
                 }, {
                   name: "hiring",
                   role: "Social Media Manager",
                   bio: "Please contact Advithya Bhardwaj or view the details for the internship on Linkedin.",
-                  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
-                }].map((member, i) => <Card key={i} className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-shadow">
-                      <CardContent className="p-4 sm:p-6">
-                        <div className="flex flex-col items-center text-center">
-                          <div className="w-24 h-24 sm:w-32 sm:h-32 relative mb-3 sm:mb-4 rounded-full overflow-hidden">
-                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                  link: "/careers"
+                }].map((member, i) => {
+                    const cardContent = (
+                      <Card className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-all hover:scale-105 cursor-pointer">
+                        <CardContent className="p-4 sm:p-6">
+                          <div className="flex flex-col items-center text-center">
+                            <div className="w-24 h-24 sm:w-32 sm:h-32 relative mb-3 sm:mb-4 rounded-full overflow-hidden">
+                              <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                            </div>
+                            <h3 className="font-bold text-base sm:text-lg text-chef-charcoal font-playfair">{member.name}</h3>
+                            <p className="text-chef-royal-blue text-xs sm:text-sm mb-2 font-medium">{member.role}</p>
+                            <p className="text-chef-charcoal/70 text-xs sm:text-sm leading-relaxed">{member.bio}</p>
                           </div>
-                          <h3 className="font-bold text-base sm:text-lg text-chef-charcoal font-playfair">{member.name}</h3>
-                          <p className="text-chef-royal-blue text-xs sm:text-sm mb-2 font-medium">{member.role}</p>
-                          <p className="text-chef-charcoal/70 text-xs sm:text-sm leading-relaxed">{member.bio}</p>
-                        </div>
-                      </CardContent>
-                    </Card>)}
+                        </CardContent>
+                      </Card>
+                    );
+
+                    return member.link.startsWith('http') ? (
+                      <a key={i} href={member.link} target="_blank" rel="noopener noreferrer" className="block no-underline">
+                        {cardContent}
+                      </a>
+                    ) : (
+                      <Link key={i} to={member.link} className="block no-underline">
+                        {cardContent}
+                      </Link>
+                    );
+                  })}
                 </div>
               </motion.div>
             </div>
