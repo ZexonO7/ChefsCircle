@@ -13,7 +13,7 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    if (req.method !== "GET") {
+    if (req.method !== "POST" && req.method !== "GET") {
       return new Response(
         JSON.stringify({ error: "Method not allowed" }),
         { status: 405, headers: { "Content-Type": "application/json", ...corsHeaders } }

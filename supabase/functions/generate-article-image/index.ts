@@ -22,10 +22,10 @@ serve(async (req) => {
       )
     }
 
-    const openaiApiKey = Deno.env.get('OPENAI_API_KEY')
-    if (!openaiApiKey) {
+    const lovableApiKey = Deno.env.get('LOVABLE_API_KEY')
+    if (!lovableApiKey) {
       return new Response(
-        JSON.stringify({ error: 'OpenAI API key not configured' }),
+        JSON.stringify({ error: 'Lovable API key not configured' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
       )
     }
@@ -35,25 +35,27 @@ serve(async (req) => {
 
     console.log('Generating image with prompt:', prompt)
 
-    const response = await fetch('https://api.openai.com/v1/images/generations', {
+    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${openaiApiKey}`
+        'Authorization': `Bearer ${lovableApiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-image-1',
-        prompt: prompt,
-        n: 1,
-        size: '1024x1024',
-        quality: 'high',
-        output_format: 'png'
+        model: 'google/gemini-2.5-flash-image-preview',
+        messages: [
+          {
+            role: 'user',
+            content: prompt
+          }
+        ],
+        modalities: ['image', 'text']
       })
     })
 
     if (!response.ok) {
       const errorData = await response.json()
-      console.error('OpenAI API error:', errorData)
+      console.error('Lovable AI Gateway error:', errorData)
       return new Response(
         JSON.stringify({ error: 'Failed to generate image', details: errorData }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: response.status }
@@ -63,10 +65,20 @@ serve(async (req) => {
     const data = await response.json()
     console.log('Successfully generated image')
 
+    // Extract image from Lovable AI Gateway response format
+    const imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url
+
+    if (!imageUrl) {
+      return new Response(
+        JSON.stringify({ error: 'No image URL in response' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
+      )
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true,
-        imageUrl: data.data[0].b64_json ? `data:image/png;base64,${data.data[0].b64_json}` : data.data[0].url
+        imageUrl: imageUrl
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     )
