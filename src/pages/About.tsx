@@ -139,7 +139,7 @@ const About = () => {
                   role: "Founder and CEO",
                   bio: "Founder and CEO of ChefsCircle and Aspiring restaurateur",
                   image: "/lovable-uploads/6ee4e578-88a2-4aed-b6ff-ac4750539739.png",
-                  link: "https://www.linkedin.com/in/advithya-bhardwaj"
+                  link: "/team/advithya-bhardwaj"
                 }, {
                   name: "hiring",
                   role: "Social Media Manager",

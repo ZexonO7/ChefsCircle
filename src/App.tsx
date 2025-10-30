@@ -8,6 +8,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import PageLoadingWrapper from "@/components/PageLoadingWrapper";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import AdvithyaBhardwaj from "./pages/team/AdvithyaBhardwaj";
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 import BlogPostDetail from "./pages/BlogPostDetail";
@@ -46,6 +47,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
+              <Route path="/team/advithya-bhardwaj" element={<AdvithyaBhardwaj />} />
               <Route path="/careers" element={<Careers />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPostDetail />} />
