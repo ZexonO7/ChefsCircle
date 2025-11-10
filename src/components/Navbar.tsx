@@ -8,6 +8,12 @@ import { useToast } from "@/hooks/use-toast";
 import UserMenu from "./UserMenu";
 import NotificationBell from "./NotificationBell";
 import UserSearch from "./UserSearch";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -89,14 +95,34 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        {!isSmallScreen && <div className="hidden md:flex items-center gap-1">
-            {navItems.map(item => <Link key={item.name} to={item.path} className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 group ${isActivePath(item.path) ? 'text-chef-royal-green bg-chef-royal-green/10' : 'text-chef-charcoal hover:text-chef-royal-green hover:bg-chef-royal-green/5'} ${item.isSpecial ? 'bg-gradient-to-r from-chef-royal-blue/10 to-chef-royal-green/10 border border-chef-royal-blue/20' : ''}`}>
-                {item.isSpecial && <Sparkles className="w-3 h-3 inline-block mr-1 text-chef-royal-blue animate-pulse" />}
-                {item.name}
-                {item.isSpecial}
-                <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-chef-royal-green transition-all duration-300 group-hover:w-full ${isActivePath(item.path) ? 'w-full' : ''}`}></div>
-              </Link>)}
+        {/* Desktop Navigation Dropdown */}
+        {!isSmallScreen && <div className="hidden md:block">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="border-chef-royal-green/20 hover:bg-chef-royal-green/10 hover:border-chef-royal-green/40 transition-all duration-300">
+                  <Menu className="w-4 h-4 mr-2 text-chef-royal-green" />
+                  <span className="text-chef-charcoal font-medium">Menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56 bg-chef-warm-ivory border-chef-royal-green/20 shadow-chef-luxury z-50">
+                {navItems.map(item => (
+                  <DropdownMenuItem key={item.name} asChild>
+                    <Link
+                      to={item.path}
+                      className={`flex items-center gap-2 px-3 py-2 cursor-pointer ${
+                        isActivePath(item.path) 
+                          ? 'text-chef-royal-green bg-chef-royal-green/10 font-medium' 
+                          : 'text-chef-charcoal hover:text-chef-royal-green hover:bg-chef-royal-green/5'
+                      } ${item.isSpecial ? 'bg-gradient-to-r from-chef-royal-blue/5 to-chef-royal-green/5' : ''}`}
+                    >
+                      {item.isSpecial && <Sparkles className="w-4 h-4 text-chef-royal-blue animate-pulse" />}
+                      <span>{item.name}</span>
+                      {item.isSpecial && <span className="ml-auto text-xs bg-chef-gold/20 text-chef-gold px-2 py-1 rounded-full">AI</span>}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>}
 
         {/* Mobile Menu Button */}
