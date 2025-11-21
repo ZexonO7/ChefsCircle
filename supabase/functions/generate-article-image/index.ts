@@ -1,5 +1,5 @@
-
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { HfInference } from 'https://esm.sh/@huggingface/inference@2.3.2'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -22,10 +22,10 @@ serve(async (req) => {
       )
     }
 
-    const lovableApiKey = Deno.env.get('LOVABLE_API_KEY')
-    if (!lovableApiKey) {
+    const hfToken = Deno.env.get('HUGGING_FACE_ACCESS_TOKEN')
+    if (!hfToken) {
       return new Response(
-        JSON.stringify({ error: 'Lovable API key not configured' }),
+        JSON.stringify({ error: 'HuggingFace API token not configured' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
       )
     }
@@ -35,45 +35,19 @@ serve(async (req) => {
 
     console.log('Generating image with prompt:', prompt)
 
-    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${lovableApiKey}`
-      },
-      body: JSON.stringify({
-        model: 'google/gemini-2.5-flash-image-preview',
-        messages: [
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        modalities: ['image', 'text']
-      })
+    const hf = new HfInference(hfToken)
+
+    const image = await hf.textToImage({
+      inputs: prompt,
+      model: 'black-forest-labs/FLUX.1-schnell',
     })
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      console.error('Lovable AI Gateway error:', errorData)
-      return new Response(
-        JSON.stringify({ error: 'Failed to generate image', details: errorData }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: response.status }
-      )
-    }
+    // Convert the blob to a base64 string
+    const arrayBuffer = await image.arrayBuffer()
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
+    const imageUrl = `data:image/png;base64,${base64}`
 
-    const data = await response.json()
     console.log('Successfully generated image')
-
-    // Extract image from Lovable AI Gateway response format
-    const imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url
-
-    if (!imageUrl) {
-      return new Response(
-        JSON.stringify({ error: 'No image URL in response' }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
-      )
-    }
 
     return new Response(
       JSON.stringify({ 
