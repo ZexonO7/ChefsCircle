@@ -16,6 +16,16 @@ interface ContactEmailRequest {
   timestamp: number;
 }
 
+// HTML escaping function to prevent injection attacks
+const escapeHtml = (str: string): string => {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 // Input validation
 const validateInput = (data: ContactEmailRequest): string[] => {
   const errors: string[] = [];
@@ -80,11 +90,11 @@ const handler = async (req: Request): Promise<Response> => {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2D5016;">New Contact Form Submission</h2>
           <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong>Name:</strong> ${data.name}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
             <p><strong>Message:</strong></p>
             <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 10px;">
-              ${data.message.replace(/\n/g, '<br>')}
+              ${escapeHtml(data.message).replace(/\n/g, '<br>')}
             </div>
           </div>
           <p style="color: #666; font-size: 12px;">
@@ -102,13 +112,13 @@ const handler = async (req: Request): Promise<Response> => {
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2D5016;">Thank you for reaching out!</h2>
-          <p>Hello ${data.name},</p>
+          <p>Hello ${escapeHtml(data.name)},</p>
           <p>We've received your message and appreciate you taking the time to contact us. Our team will review your inquiry and get back to you as soon as possible.</p>
           
           <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
             <p><strong>Your message:</strong></p>
             <div style="font-style: italic;">
-              ${data.message.replace(/\n/g, '<br>')}
+              ${escapeHtml(data.message).replace(/\n/g, '<br>')}
             </div>
           </div>
           
