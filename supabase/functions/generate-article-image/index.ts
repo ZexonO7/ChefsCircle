@@ -1,66 +1,66 @@
-import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
-import { HfInference } from 'https://esm.sh/@huggingface/inference@2.3.2'
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { HfInference } from "https://esm.sh/@huggingface/inference@2.3.2";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+};
 
 serve(async (req) => {
   // Handle CORS preflight requests
-  if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders })
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { title, description } = await req.json()
-    
+    const { title, description } = await req.json();
+
     if (!title || !description) {
       return new Response(
-        JSON.stringify({ error: 'Title and description are required' }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 400 }
-      )
+        JSON.stringify({ error: "Title and description are required" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
+      );
     }
 
-    const hfToken = Deno.env.get('HUGGING_FACE_ACCESS_TOKEN')
+    const hfToken = Deno.env.get("HUGGING_FACE_ACCESS_TOKEN");
     if (!hfToken) {
       return new Response(
-        JSON.stringify({ error: 'HuggingFace API token not configured' }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
-      )
+        JSON.stringify({ error: "HuggingFace API token not configured" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+      );
     }
 
     // Create a detailed prompt for culinary image generation
-    const prompt = `Professional culinary photography: ${title}. ${description}. High-quality food photography, professional kitchen setting, vibrant colors, appetizing presentation, restaurant quality, natural lighting, depth of field, culinary artistry.`
+    const prompt = `Professional culinary photography: ${title}. ${description}. High-quality food photography, professional kitchen setting, vibrant colors, appetizing presentation, restaurant quality, natural lighting, depth of field, culinary artistry.`;
 
-    console.log('Generating image with prompt:', prompt)
+    console.log("Generating image with HuggingFace for prompt:", prompt);
 
-    const hf = new HfInference(hfToken)
+    const hf = new HfInference(hfToken);
 
     const image = await hf.textToImage({
       inputs: prompt,
-      model: 'black-forest-labs/FLUX.1-schnell',
-    })
+      model: "black-forest-labs/FLUX.1-schnell",
+    });
 
     // Convert the blob to a base64 string
-    const arrayBuffer = await image.arrayBuffer()
-    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))
-    const imageUrl = `data:image/png;base64,${base64}`
+    const arrayBuffer = await image.arrayBuffer();
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    const imageUrl = `data:image/png;base64,${base64}`;
 
-    console.log('Successfully generated image')
+    console.log("Successfully generated image with HuggingFace");
 
     return new Response(
-      JSON.stringify({ 
+      JSON.stringify({
         success: true,
-        imageUrl: imageUrl
+        imageUrl,
       }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-    )
+      { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   } catch (error) {
-    console.error('Error generating image:', error)
+    console.error("Error generating image with HuggingFace:", error);
     return new Response(
-      JSON.stringify({ error: 'An unexpected error occurred', details: error.message }),
-      { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
-    )
+      JSON.stringify({ error: "An unexpected error occurred", details: (error as Error).message }),
+      { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+    );
   }
-})
+});
