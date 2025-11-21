@@ -16,10 +16,10 @@ export interface RSSItem {
 }
 
 const cleanDescription = (description: string): string => {
-  // Remove HTML tags and clean up the description
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = description;
-  const cleanText = tempDiv.textContent || tempDiv.innerText || '';
+  // Safely parse HTML without executing scripts using DOMParser
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(description, 'text/html');
+  const cleanText = doc.body.textContent || '';
   
   // Limit to reasonable length
   return cleanText.length > 200 ? cleanText.substring(0, 200) + '...' : cleanText;
