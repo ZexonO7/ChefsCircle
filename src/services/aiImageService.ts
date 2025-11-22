@@ -22,7 +22,13 @@ export class AIImageService {
       });
 
       if (error) {
-        console.error('Error calling image generation function:', error);
+        console.warn('Image generation unavailable, using fallback:', error.message);
+        return this.getFallbackImage();
+      }
+
+      // Check if edge function returned a fallback flag (e.g., HuggingFace credits exhausted)
+      if (data?.usesFallback) {
+        console.warn('Image generation unavailable (credits/payment issue), using fallback');
         return this.getFallbackImage();
       }
 
