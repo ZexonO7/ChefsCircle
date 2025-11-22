@@ -33,7 +33,7 @@ const UserSearch: React.FC = () => {
   return <div className="relative w-full max-w-md">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input type="text" placeholder="Search for chefs..." value={searchTerm} onChange={handleInputChange} aria-label="Search for chef profiles" className="pl-10 pr-4 bg-background/60 backdrop-blur-md border-border/40" />
+        <Input type="text" placeholder="Search members..." value={searchTerm} onChange={handleInputChange} aria-label="Search for member profiles" className="pl-10 pr-4 bg-background/60 backdrop-blur-md border-border/40" />
       </div>
 
       {shouldShowResults && <Card className="absolute top-full left-0 right-0 mt-2 max-h-96 overflow-y-auto z-50 shadow-lg">
