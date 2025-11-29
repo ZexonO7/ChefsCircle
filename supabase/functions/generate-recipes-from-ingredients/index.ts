@@ -59,6 +59,7 @@ For each recipe, provide the response in this exact JSON format:
 Make sure the JSON is valid and properly formatted. Only return the JSON, no additional text.`
 
     console.log('Generating recipes for ingredients:', ingredientsList)
+    console.log('Using Cohere Chat API v2')
 
     const response = await fetch('https://api.cohere.ai/v2/chat', {
       method: 'POST',
