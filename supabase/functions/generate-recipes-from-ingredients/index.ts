@@ -1,4 +1,5 @@
-// Updated: Force redeploy with Lovable AI
+// Version 2.0 - Using Lovable AI Gateway (not Cohere)
+// Last updated: 2025-11-29
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const corsHeaders = {
