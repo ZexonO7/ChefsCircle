@@ -5,39 +5,8 @@ export class AIImageService {
   private static imageCache = new Map<string, string>();
 
   static async generateRelevantImage(title: string, description: string): Promise<string> {
-    const cacheKey = `${title}_${description}`.toLowerCase().replace(/[^a-z0-9]/g, '_');
-    
-    // Check cache first
-    if (this.imageCache.has(cacheKey)) {
-      const cachedUrl = this.imageCache.get(cacheKey)!;
-      console.log(`Using cached AI-generated image for: "${title}"`);
-      return cachedUrl;
-    }
-
-    try {
-      console.log(`Generating AI image for article: "${title}"`);
-      
-      const { data, error } = await supabase.functions.invoke('generate-article-image', {
-        body: { title, description }
-      });
-
-      // Silently fall back for any error (including 402 payment required)
-      if (error || data?.usesFallback || data?.error) {
-        console.log('Using fallback image (AI generation unavailable)');
-        return this.getFallbackImage();
-      }
-
-      if (data?.success && data?.imageUrl) {
-        console.log(`Successfully generated AI image for: "${title}"`);
-        this.imageCache.set(cacheKey, data.imageUrl);
-        return data.imageUrl;
-      }
-      
-      return this.getFallbackImage();
-    } catch (error) {
-      console.error('Error generating AI image:', error);
-      return this.getFallbackImage();
-    }
+    // Use free Unsplash images - no API key needed
+    return this.getFallbackImage();
   }
 
   private static getFallbackImage(): string {
