@@ -21,28 +21,19 @@ export class AIImageService {
         body: { title, description }
       });
 
-      if (error) {
-        console.warn('Image generation unavailable, using fallback:', error.message);
-        return this.getFallbackImage();
-      }
-
-      // Check if edge function returned a fallback flag (e.g., HuggingFace credits exhausted)
-      if (data?.usesFallback) {
-        console.warn('Image generation unavailable (credits/payment issue), using fallback');
+      // Silently fall back for any error (including 402 payment required)
+      if (error || data?.usesFallback || data?.error) {
+        console.log('Using fallback image (AI generation unavailable)');
         return this.getFallbackImage();
       }
 
       if (data?.success && data?.imageUrl) {
         console.log(`Successfully generated AI image for: "${title}"`);
-        
-        // Cache the result
         this.imageCache.set(cacheKey, data.imageUrl);
-        
         return data.imageUrl;
-      } else {
-        console.log(`No image generated for: "${title}"`);
-        return this.getFallbackImage();
       }
+      
+      return this.getFallbackImage();
     } catch (error) {
       console.error('Error generating AI image:', error);
       return this.getFallbackImage();
