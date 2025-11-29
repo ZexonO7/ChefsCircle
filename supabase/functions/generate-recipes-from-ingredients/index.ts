@@ -60,18 +60,20 @@ Make sure the JSON is valid and properly formatted. Only return the JSON, no add
 
     console.log('Generating recipes for ingredients:', ingredientsList)
 
-    const response = await fetch('https://api.cohere.ai/v1/generate', {
+    const response = await fetch('https://api.cohere.ai/v2/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${cohereApiKey}`
       },
       body: JSON.stringify({
-        model: 'command',
-        prompt: prompt,
-        max_tokens: 2000,
-        temperature: 0.7,
-        stop_sequences: []
+        model: 'command-r',
+        messages: [
+          {
+            role: 'user',
+            content: prompt
+          }
+        ]
       })
     })
 
@@ -85,7 +87,7 @@ Make sure the JSON is valid and properly formatted. Only return the JSON, no add
     }
 
     const data = await response.json()
-    const generatedContent = data.generations[0].text
+    const generatedContent = data.message?.content?.[0]?.text || ''
 
     console.log('Raw AI response:', generatedContent)
 
