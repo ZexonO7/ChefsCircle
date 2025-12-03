@@ -24,6 +24,7 @@ const Settings = () => {
     email: ''
   });
   const [passwords, setPasswords] = useState({
+    currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
@@ -205,7 +206,7 @@ const Settings = () => {
   };
 
   const handlePasswordChange = async () => {
-    if (!passwords.newPassword || !passwords.confirmPassword) {
+    if (!passwords.currentPassword || !passwords.newPassword || !passwords.confirmPassword) {
       toast({
         title: "Error",
         description: "Please fill in all password fields",
@@ -234,6 +235,23 @@ const Settings = () => {
 
     setIsSaving(true);
     try {
+      // First verify the current password by re-authenticating
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: user?.email || '',
+        password: passwords.currentPassword
+      });
+
+      if (signInError) {
+        toast({
+          title: "Incorrect password",
+          description: "Your current password is incorrect.",
+          variant: "destructive"
+        });
+        setIsSaving(false);
+        return;
+      }
+
+      // Now update to the new password
       const { error } = await supabase.auth.updateUser({
         password: passwords.newPassword
       });
@@ -246,6 +264,7 @@ const Settings = () => {
       });
 
       setPasswords({
+        currentPassword: '',
         newPassword: '',
         confirmPassword: ''
       });
@@ -527,6 +546,18 @@ const Settings = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="max-w-md">
+                  <Label htmlFor="currentPassword" className="text-chef-charcoal font-medium">Current Password</Label>
+                  <Input
+                    id="currentPassword"
+                    type="password"
+                    value={passwords.currentPassword}
+                    onChange={(e) => setPasswords({ ...passwords, currentPassword: e.target.value })}
+                    placeholder="Enter your current password"
+                    className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                  />
+                </div>
+
                 <div className="grid gap-4 md:grid-cols-2 max-w-2xl">
                   <div>
                     <Label htmlFor="newPassword" className="text-chef-charcoal font-medium">New Password</Label>
