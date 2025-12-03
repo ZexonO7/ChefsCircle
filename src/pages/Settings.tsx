@@ -10,7 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Lock, Camera, Save } from 'lucide-react';
+import { User, Lock, Camera, Save, Upload, Loader2 } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 
 const Settings = () => {
@@ -29,7 +29,9 @@ const Settings = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [imageKey, setImageKey] = useState(0); // Force re-render of avatar
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (user) {
@@ -273,10 +275,69 @@ const Settings = () => {
     return 'U';
   };
 
-  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newUrl = e.target.value;
-    setProfile({ ...profile, profile_image_url: newUrl });
-    console.log('Image URL changed to:', newUrl);
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file type",
+        description: "Please upload an image file (JPG, PNG, etc.)",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Validate file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Please upload an image smaller than 2MB",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsUploadingImage(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+      const filePath = `avatars/${fileName}`;
+
+      // Upload to Supabase storage
+      const { error: uploadError } = await supabase.storage
+        .from('avatars')
+        .upload(filePath, file, { upsert: true });
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('avatars')
+        .getPublicUrl(filePath);
+
+      // Update profile with new image URL
+      setProfile(prev => ({ ...prev, profile_image_url: publicUrl }));
+      setImageKey(prev => prev + 1);
+
+      toast({
+        title: "Image uploaded",
+        description: "Click 'Save Profile Changes' to save your new profile picture."
+      });
+    } catch (error: any) {
+      console.error('Image upload error:', error);
+      toast({
+        title: "Upload failed",
+        description: error.message || "There was an error uploading your image.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsUploadingImage(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
   };
 
   if (!user) {
@@ -346,19 +407,36 @@ const Settings = () => {
                   </Avatar>
                 </div>
                 
-                <div>
-                  <Label htmlFor="profileImage" className="text-chef-charcoal font-medium">
-                    Profile Image URL
-                  </Label>
-                  <Input
-                    id="profileImage"
-                    value={profile.profile_image_url}
-                    onChange={handleImageUrlChange}
-                    placeholder="https://example.com/image.jpg"
-                    className="mt-1 bg-chef-cream border-chef-royal-blue/30 text-chef-charcoal placeholder:text-chef-charcoal/50 focus:border-chef-royal-blue"
+                <div className="space-y-2">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    id="avatar-upload"
                   />
-                  <p className="text-xs text-chef-charcoal/50 mt-1">
-                    Enter a URL to an image you'd like to use as your profile picture
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploadingImage}
+                    className="w-full border-chef-royal-blue/30 text-chef-charcoal hover:bg-chef-royal-blue/10"
+                  >
+                    {isUploadingImage ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-4 h-4 mr-2" />
+                        Upload Image
+                      </>
+                    )}
+                  </Button>
+                  <p className="text-xs text-chef-charcoal/50 text-center">
+                    JPG, PNG up to 2MB
                   </p>
                 </div>
               </CardContent>
