@@ -70,7 +70,7 @@ const App = () => (
               <Route path="/membership" element={<Membership />} />
               <Route path="/culinary-journey" element={<CulinaryJourney />} />
           <Route path="/profile/:userId" element={<UserProfile />} />
-          <Route path="/:certificateId" element={<CertificateVerify />} />
+          <Route path="/id/:certificateId" element={<CertificateVerify />} />
           <Route path="*" element={<NotFound />} />
             </Routes>
           </PageLoadingWrapper>
