@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useCourseEnrollments } from '@/hooks/useCourseEnrollments';
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +14,7 @@ const Courses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { getEnrollmentCount } = useCourseEnrollments();
 
   const filters = ['All', 'Free', 'Premium', 'Beginner', 'Intermediate', 'Advanced'];
 
@@ -267,8 +269,8 @@ const Courses = () => {
                             <span>{formatDuration(course.duration)}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <BookOpen className="w-4 h-4" />
-                            <span>{course.lessons} lessons</span>
+                            <Users className="w-4 h-4" />
+                            <span>{getEnrollmentCount(course.id)} enrolled</span>
                           </div>
                         </div>
                         <span className={`text-xs px-2 py-1 rounded-full font-medium ${
@@ -349,9 +351,15 @@ const Courses = () => {
                     <p className="text-sm text-chef-royal-blue font-medium mb-3">by {course.instructor}</p>
                     
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-1 text-sm text-chef-charcoal/60">
-                        <Clock className="w-4 h-4" />
-                        <span>{formatDuration(course.duration)}</span>
+                      <div className="flex items-center gap-3 text-sm text-chef-charcoal/60">
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{formatDuration(course.duration)}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Users className="w-4 h-4" />
+                          <span>{getEnrollmentCount(course.id)} enrolled</span>
+                        </div>
                       </div>
                       <span className={`text-xs px-2 py-1 rounded-full font-medium ${
                         course.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
