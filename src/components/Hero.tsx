@@ -100,17 +100,17 @@ const Hero = () => {
               <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-chef-warm-ivory/80 px-4" variants={itemVariants}>
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="text-xs sm:text-sm">100+ Active Members</span>
+                  <span className="text-xs sm:text-sm">Growing Community</span>
                 </div>
                 <div className="hidden sm:block w-1 h-1 bg-chef-warm-ivory/40 rounded-full"></div>
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <ChefHat className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="text-xs sm:text-sm">10+ Expert Chefs</span>
+                  <span className="text-xs sm:text-sm">Expert-Led Courses</span>
                 </div>
                 <div className="hidden sm:block w-1 h-1 bg-chef-warm-ivory/40 rounded-full"></div>
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
-                  <span className="text-xs sm:text-sm">4.9/5 Rating</span>
+                  <span className="text-xs sm:text-sm">Quality Education</span>
                 </div>
               </motion.div>
             </motion.div>
