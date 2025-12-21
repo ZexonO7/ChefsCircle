@@ -3,8 +3,10 @@ import { Users, BookOpen, Trophy, Star, Play, Crown, MessageCircle, Sparkles } f
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useMemberCount } from '@/hooks/useMemberCount';
 const Features = () => {
   const navigate = useNavigate();
+  const { memberCount, formatCount } = useMemberCount();
   
   const handleCulinaryJourneyClick = () => {
     navigate('/culinary-journey');
@@ -46,7 +48,7 @@ const Features = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-chef-charcoal/60">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Growing community</span>
+              <span>{memberCount !== null && memberCount > 0 ? `${formatCount(memberCount)} members` : 'Growing community'}</span>
             </div>
             <div className="hidden sm:block w-1 h-1 bg-chef-charcoal/20 rounded-full"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
