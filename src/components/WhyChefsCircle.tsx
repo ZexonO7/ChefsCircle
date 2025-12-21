@@ -118,9 +118,9 @@ const WhyChefCircle = () => {
               <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
             </div>
             <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
-              <AnimatedCounter end={50} suffix="+" />
+              Growing
             </h3>
-            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Active members learning and growing together in our exclusive culinary community</p>
+            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Community of passionate cooks learning and growing together</p>
           </motion.div>
           
           <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 text-center chef-hover-lift">
@@ -128,10 +128,10 @@ const WhyChefCircle = () => {
               <Trophy className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-green" />
             </div>
             <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
-              <AnimatedCounter end={5} suffix="+" />
+              Expert-Led
             </h3>
             <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">
-              Master classes and cook-alongs completed by our members, with 95% satisfaction rate
+              Master classes and cook-alongs designed by culinary professionals
             </p>
           </motion.div>
           
@@ -140,10 +140,10 @@ const WhyChefCircle = () => {
               <Star className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
             </div>
             <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
-              <AnimatedCounter end={4.9} decimals={1} suffix="/5" />
+              Quality First
             </h3>
             <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">
-              Average rating from our members, reflecting the quality of our culinary education programs
+              Committed to delivering high-quality culinary education programs
             </p>
           </motion.div>
         </motion.div>
