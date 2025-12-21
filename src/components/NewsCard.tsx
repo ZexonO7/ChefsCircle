@@ -58,9 +58,13 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
       <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20 col-span-1 md:col-span-2 lg:col-span-3 bg-white">
         <div className="grid md:grid-cols-2 h-full">
           <div 
-            className="bg-cover bg-center h-64 md:h-full p-8 flex items-center justify-center"
+            className="bg-cover bg-center h-64 md:h-full p-8 flex items-center justify-center relative"
             style={{ backgroundImage: `url('${article.urlToImage}')` }}
           >
+            {/* ChefsCircle Branding */}
+            <div className="absolute top-4 right-4 bg-chef-gold/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg">
+              <span className="text-chef-charcoal font-playfair font-bold text-sm">ChefsCircle</span>
+            </div>
             <div className="text-white text-center bg-chef-charcoal/60 backdrop-blur-sm p-4 rounded-lg">
               <span className="px-3 py-1 bg-chef-royal-blue/20 rounded-full text-sm font-medium inline-block mb-4">
                 Featured News
@@ -106,9 +110,13 @@ const NewsCard = ({ article, featured = false }: NewsCardProps) => {
     <Card className="overflow-hidden hover:shadow-chef-luxury transition-shadow duration-300 h-full border border-chef-royal-green/20 bg-white">
       <div className="grid grid-rows-[200px,1fr]">
         <div 
-          className="bg-cover bg-center"
+          className="bg-cover bg-center relative"
           style={{ backgroundImage: `url('${article.urlToImage}')` }}
         >
+          {/* ChefsCircle Branding */}
+          <div className="absolute top-3 right-3 bg-chef-gold/90 backdrop-blur-sm px-2.5 py-1 rounded-md shadow-lg">
+            <span className="text-chef-charcoal font-playfair font-bold text-xs">ChefsCircle</span>
+          </div>
           <div className="w-full h-full bg-chef-charcoal/20 flex items-center justify-center">
             <span className="px-3 py-1 bg-chef-royal-blue/20 backdrop-blur-sm rounded-full text-sm font-medium text-white inline-block">
               {article.source.name}
