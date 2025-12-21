@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { ChefHat, Users, BookOpen, Star, Clock4, Trophy, Sparkles, ArrowRight, Award, Target, Shield, TrendingUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
+import { useMemberCount } from "@/hooks/useMemberCount";
 
 const AnimatedCounter = ({
   end,
@@ -62,6 +63,7 @@ const AnimatedCounter = ({
 
 const WhyChefCircle = () => {
   const isMobile = useIsMobile();
+  const { memberCount, formatCount } = useMemberCount();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -118,9 +120,9 @@ const WhyChefCircle = () => {
               <Users className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-chef-royal-blue" />
             </div>
             <h3 className="text-chef-charcoal text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 font-playfair">
-              Growing
+              {memberCount !== null && memberCount > 0 ? formatCount(memberCount) : 'Growing'}
             </h3>
-            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Community of passionate cooks learning and growing together</p>
+            <p className="text-chef-charcoal/70 font-inter text-xs sm:text-sm md:text-base">Active members learning and growing together in our culinary community</p>
           </motion.div>
           
           <motion.div variants={itemVariants} className="chef-card p-4 sm:p-6 md:p-8 text-center chef-hover-lift">

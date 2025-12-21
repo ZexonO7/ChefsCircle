@@ -4,10 +4,12 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
+import { useMemberCount } from "@/hooks/useMemberCount";
 const Hero = () => {
   const isMobile = useIsMobile();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { memberCount, formatCount } = useMemberCount();
   const containerVariants = {
     hidden: {
       opacity: 0
@@ -100,7 +102,7 @@ const Hero = () => {
               <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8 text-chef-warm-ivory/80 px-4" variants={itemVariants}>
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="text-xs sm:text-sm">Growing Community</span>
+                  <span className="text-xs sm:text-sm">{memberCount !== null && memberCount > 0 ? `${formatCount(memberCount)} Members` : 'Growing Community'}</span>
                 </div>
                 <div className="hidden sm:block w-1 h-1 bg-chef-warm-ivory/40 rounded-full"></div>
                 <div className="flex items-center gap-1.5 sm:gap-2">
