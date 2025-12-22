@@ -59,26 +59,14 @@ serve(async (req) => {
   } catch (error) {
     console.error("Error generating image with HuggingFace:", error);
     
-    // Check if it's a payment/credits error from HuggingFace
-    const errorMessage = (error as Error).message || '';
-    if (errorMessage.includes('payment') || errorMessage.includes('credits') || errorMessage.includes('402')) {
-      return new Response(
-        JSON.stringify({ 
-          error: "HuggingFace API credits exhausted", 
-          details: "Please add credits to your HuggingFace account or use fallback images",
-          usesFallback: true
-        }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 402 }
-      );
-    }
-    
+    // Return success with fallback flag - don't throw errors for image generation failures
     return new Response(
       JSON.stringify({ 
-        error: "Failed to generate image", 
-        details: (error as Error).message,
+        success: false,
+        imageUrl: null,
         usesFallback: true
       }),
-      { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+      { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
     );
   }
 });
