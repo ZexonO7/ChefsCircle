@@ -107,7 +107,7 @@ const About = () => {
             }} className="mb-12 sm:mb-16 px-2 sm:px-0">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-chef-charcoal font-playfair text-center sm:text-left">Our Story</h2>
                 <div className="bg-white rounded-xl border border-chef-royal-green/20 p-4 sm:p-6 lg:p-8 shadow-chef-luxury">
-                  <p className="text-chef-charcoal/70 mb-4 text-sm sm:text-base">ChefsCircle was born from a simple observation by founder Advithya Bhardwaj: while the culinary world was experiencing a renaissance, young food enthusiasts lacked access to truly premium culinary education and exclusive community experiences.</p>
+                  <p className="text-chef-charcoal/70 mb-4 text-sm sm:text-base">ChefsCircle is something Advithya Bhardwaj started with the passion for culinary arts, to make cooking feel natural for those who think it can't. It’s a space where people can share recipes, join challenges, learn new things, and connect with others who love food. It is not just an app, it is a community built around creativity, learning, and the joy of cooking together ✨</p>
                   <p className="text-chef-charcoal/70 mb-4 text-sm sm:text-base">
                     Advithya started with the ambition to create an elite culinary club that would bridge the gap between 
                     amateur cooking and professional expertise. After connecting with renowned chefs and culinary experts 
@@ -159,8 +159,7 @@ const About = () => {
                   image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
                   link: "/careers"
                 }].map((member, i) => {
-                    const cardContent = (
-                      <Card className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-all hover:scale-105 cursor-pointer">
+                  const cardContent = <Card className="bg-chef-warm-ivory border border-chef-royal-green/20 overflow-hidden hover:shadow-chef-luxury transition-all hover:scale-105 cursor-pointer">
                         <CardContent className="p-4 sm:p-6">
                           <div className="flex flex-col items-center text-center">
                             <div className="w-24 h-24 sm:w-32 sm:h-32 relative mb-3 sm:mb-4 rounded-full overflow-hidden">
@@ -171,19 +170,13 @@ const About = () => {
                             <p className="text-chef-charcoal/70 text-xs sm:text-sm leading-relaxed">{member.bio}</p>
                           </div>
                         </CardContent>
-                      </Card>
-                    );
-
-                    return member.link.startsWith('http') ? (
-                      <a key={i} href={member.link} target="_blank" rel="noopener noreferrer" className="block no-underline">
+                      </Card>;
+                  return member.link.startsWith('http') ? <a key={i} href={member.link} target="_blank" rel="noopener noreferrer" className="block no-underline">
                         {cardContent}
-                      </a>
-                    ) : (
-                      <Link key={i} to={member.link} className="block no-underline">
+                      </a> : <Link key={i} to={member.link} className="block no-underline">
                         {cardContent}
-                      </Link>
-                    );
-                  })}
+                      </Link>;
+                })}
                 </div>
               </motion.div>
             </div>
