@@ -24,9 +24,15 @@ serve(async (req) => {
 
     const hfToken = Deno.env.get("HUGGING_FACE_ACCESS_TOKEN");
     if (!hfToken) {
+      console.warn("HUGGING_FACE_ACCESS_TOKEN not configured; using fallback images");
       return new Response(
-        JSON.stringify({ error: "HuggingFace API token not configured" }),
-        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+        JSON.stringify({
+          success: false,
+          imageUrl: null,
+          usesFallback: true,
+          error: "Image generation is temporarily unavailable",
+        }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
       );
     }
 
@@ -53,6 +59,7 @@ serve(async (req) => {
       JSON.stringify({
         success: true,
         imageUrl,
+        usesFallback: false,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );

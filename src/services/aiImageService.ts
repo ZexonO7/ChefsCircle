@@ -3,7 +3,15 @@ import { supabase } from '@/integrations/supabase/client';
 
 export class AIImageService {
   private static imageCache = new Map<string, string>();
+  private static aiEnabled = true;
+  private static aiDisabledReason: string | null = null;
 
+  private static disableAI(reason: string) {
+    if (!this.aiEnabled) return;
+    this.aiEnabled = false;
+    this.aiDisabledReason = reason;
+    console.warn('AI image generation disabled:', reason);
+  }
   static async generateRelevantImage(title: string, description: string): Promise<string> {
     // Check cache first
     const cacheKey = `${title}-${description}`.substring(0, 100);
@@ -12,15 +20,34 @@ export class AIImageService {
       return this.imageCache.get(cacheKey)!;
     }
 
+    // If AI is disabled (e.g., credits exhausted), skip calling the function entirely.
+    if (!this.aiEnabled) {
+      console.log('AI image generation disabled, using fallback:', this.aiDisabledReason);
+      return this.getFallbackImage();
+    }
+
     try {
       console.log('Generating AI image for:', title);
-      
+
       const { data, error } = await supabase.functions.invoke('generate-article-image', {
-        body: { title, description }
+        body: { title, description },
       });
 
       if (error) {
+        const status = (error as any)?.context?.status ?? (error as any)?.status;
+        const message = String((error as any)?.message ?? '');
+        const normalized = message.toLowerCase();
+
         console.error('Error calling generate-article-image function:', error);
+
+        if (
+          status === 402 ||
+          normalized.includes('payment_required') ||
+          normalized.includes('not enough credits')
+        ) {
+          this.disableAI('Not enough credits for AI image generation');
+        }
+
         return this.getFallbackImage();
       }
 
@@ -32,12 +59,22 @@ export class AIImageService {
 
       if (data?.usesFallback || data?.error) {
         console.log('AI generation unavailable, using fallback:', data?.error);
+        // If backend tells us it's unavailable, don't keep retrying every article.
+        this.disableAI(String(data?.error ?? 'AI image generation unavailable'));
         return this.getFallbackImage();
       }
 
       return this.getFallbackImage();
     } catch (error) {
+      const message = String((error as any)?.message ?? error ?? '');
+      const normalized = message.toLowerCase();
+
       console.error('Failed to generate AI image:', error);
+
+      if (normalized.includes('payment_required') || normalized.includes('not enough credits')) {
+        this.disableAI('Not enough credits for AI image generation');
+      }
+
       return this.getFallbackImage();
     }
   }
