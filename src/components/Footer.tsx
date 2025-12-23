@@ -21,14 +21,17 @@ const Footer = () => {
     }
     setIsSubmitting(true);
     try {
-      const { data, error } = await supabase.functions.invoke('newsletter-subscribe', {
-        body: { email }
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('newsletter-subscribe', {
+        body: {
+          email
+        }
       });
-
       if (error) {
         throw error;
       }
-
       toast({
         title: "Success!",
         description: data.message || "Please check your email to verify your subscription.",

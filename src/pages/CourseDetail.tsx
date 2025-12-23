@@ -2,7 +2,7 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useCourseLogic } from '@/hooks/useCourseLogic';
 import { useAuth } from '@/components/AuthProvider';
 import CourseHeader from '@/components/course/CourseHeader';
@@ -11,11 +11,11 @@ import LessonsList from '@/components/course/LessonsList';
 import CurrentLesson from '@/components/course/CurrentLesson';
 
 const CourseDetail = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const {
     course,
+    courseId,
     currentLesson,
     completedLessons,
     currentLessonData,

@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import { useCourseEnrollments } from '@/hooks/useCourseEnrollments';
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,6 +14,7 @@ const Courses = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { getEnrollmentCount } = useCourseEnrollments();
 
   const filters = ['All', 'Free', 'Premium', 'Beginner', 'Intermediate', 'Advanced'];
 
@@ -25,8 +27,6 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2128&q=80",
       duration: 180, // minutes
       lessons: 12,
-      students: 3247,
-      rating: 4.9,
       price: 0,
       difficulty: "Beginner",
       category: "Fundamentals",
@@ -40,8 +40,6 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       duration: 240,
       lessons: 8,
-      students: 1892,
-      rating: 4.8,
       price: 89,
       difficulty: "Intermediate",
       category: "International",
@@ -55,8 +53,6 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
       duration: 360,
       lessons: 15,
-      students: 567,
-      rating: 4.7,
       price: 199,
       difficulty: "Advanced",
       category: "Innovation",
@@ -70,8 +66,6 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       duration: 150,
       lessons: 10,
-      students: 2134,
-      rating: 4.6,
       price: 0,
       difficulty: "Beginner",
       category: "Healthy",
@@ -85,8 +79,6 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
       duration: 480,
       lessons: 20,
-      students: 823,
-      rating: 4.9,
       price: 299,
       difficulty: "Advanced",
       category: "Baking",
@@ -100,8 +92,6 @@ const Courses = () => {
       image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1081&q=80",
       duration: 120,
       lessons: 6,
-      students: 4156,
-      rating: 4.5,
       price: 0,
       difficulty: "Beginner",
       category: "Quick & Easy",
@@ -264,10 +254,6 @@ const Courses = () => {
                         <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-blue transition-colors">
                           {course.title}
                         </h3>
-                        <div className="flex items-center gap-1 text-sm text-chef-gold">
-                          <Star className="w-4 h-4 fill-current" />
-                          <span>{course.rating}</span>
-                        </div>
                       </div>
                       
                       <p className="text-sm text-chef-royal-blue font-medium mb-2">by {course.instructor}</p>
@@ -284,7 +270,7 @@ const Courses = () => {
                           </div>
                           <div className="flex items-center gap-1">
                             <Users className="w-4 h-4" />
-                            <span>{course.students.toLocaleString()}</span>
+                            <span>{getEnrollmentCount(course.id)} enrolled</span>
                           </div>
                         </div>
                         <span className={`text-xs px-2 py-1 rounded-full font-medium ${
@@ -365,14 +351,23 @@ const Courses = () => {
                     <p className="text-sm text-chef-royal-blue font-medium mb-3">by {course.instructor}</p>
                     
                     <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-1 text-sm text-chef-gold">
-                        <Star className="w-4 h-4 fill-current" />
-                        <span>{course.rating}</span>
-                      </div>
                       <div className="flex items-center gap-3 text-sm text-chef-charcoal/60">
-                        <span>{formatDuration(course.duration)}</span>
-                        <span>{course.students.toLocaleString()} students</span>
+                        <div className="flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          <span>{formatDuration(course.duration)}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Users className="w-4 h-4" />
+                          <span>{getEnrollmentCount(course.id)} enrolled</span>
+                        </div>
                       </div>
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                        course.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
+                        course.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }`}>
+                        {course.difficulty}
+                      </span>
                     </div>
                     
                     <div className="flex items-center justify-between">

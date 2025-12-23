@@ -3,8 +3,10 @@ import { Users, BookOpen, Trophy, Star, Play, Crown, MessageCircle, Sparkles } f
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { useMemberCount } from '@/hooks/useMemberCount';
 const Features = () => {
   const navigate = useNavigate();
+  const { memberCount, formatCount } = useMemberCount();
   
   const handleCulinaryJourneyClick = () => {
     navigate('/culinary-journey');
@@ -13,17 +15,17 @@ const Features = () => {
     icon: <Play className="w-8 h-8" />,
     title: "Live news",
     description: "Join world-class chefs in real-time cooking sessions. Learn techniques, ask questions, and cook alongside culinary masters from your own kitchen.",
-    stats: "3x weekly sessions"
+    stats: "Weekly sessions"
   }, {
     icon: <Crown className="w-8 h-8" />,
     title: "Master Classes",
     description: "Access exclusive video masterclasses covering advanced techniques, cuisines from around the world, and professional secrets from Michelin-starred chefs.",
-    stats: "50+ premium courses"
+    stats: "Growing library"
   }, {
     icon: <Users className="w-8 h-8" />,
     title: "Elite Community",
     description: "Connect with passionate home cooks and culinary enthusiasts. Share your creations, get feedback, and participate in monthly challenges.",
-    stats: "1000+ active members"
+    stats: "Active community"
   }, {
     icon: <Sparkles className="w-8 h-8" />,
     title: "Premium Content",
@@ -46,12 +48,12 @@ const Features = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-chef-charcoal/60">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>50+ Active members</span>
+              <span>{memberCount !== null && memberCount > 0 ? `${formatCount(memberCount)} members` : 'Growing community'}</span>
             </div>
             <div className="hidden sm:block w-1 h-1 bg-chef-charcoal/20 rounded-full"></div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>5+ courses</span>
+              <span>Free courses available</span>
             </div>
           </div>
         </div>

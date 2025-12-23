@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { getCourseData, type Course } from '@/data/courseData';
 import { supabase } from '@/integrations/supabase/client';
@@ -8,11 +9,14 @@ import { useAuth } from '@/components/AuthProvider';
 export const useCourseLogic = () => {
   const { toast } = useToast();
   const { user } = useAuth();
+  const { id } = useParams();
+  const courseId = parseInt(id || '1', 10);
+  
   const [currentLesson, setCurrentLesson] = useState(0);
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const course = getCourseData(completedLessons);
+  const course = getCourseData(completedLessons, courseId);
 
   // Load user's course progress from database
   useEffect(() => {
@@ -27,7 +31,7 @@ export const useCourseLogic = () => {
           .from('user_course_progress')
           .select('lesson_id')
           .eq('user_id', user.id)
-          .eq('course_id', 1); // Current course ID
+          .eq('course_id', courseId);
 
         if (error) {
           console.error('Error loading progress:', error);
@@ -48,7 +52,12 @@ export const useCourseLogic = () => {
     };
 
     loadProgress();
-  }, [user, toast]);
+  }, [user, toast, courseId]);
+
+  // Reset state when course changes
+  useEffect(() => {
+    setCurrentLesson(0);
+  }, [courseId]);
 
   const handleLessonComplete = async (lessonId: number) => {
     if (completedLessons.includes(lessonId)) {
@@ -70,7 +79,7 @@ export const useCourseLogic = () => {
         .from('user_course_progress')
         .insert({
           user_id: user.id,
-          course_id: 1, // Current course ID
+          course_id: courseId,
           lesson_id: lessonId,
         });
 
@@ -94,12 +103,11 @@ export const useCourseLogic = () => {
         });
       } catch (gamificationError) {
         console.error('Error tracking course attendance:', gamificationError);
-        // Don't show error to user for gamification issues
       }
 
       toast({
         title: "Lesson Completed!",
-        description: `Great job completing "${course.lessons[lessonId - 1].title}"`,
+        description: `Great job completing "${course?.lessons[lessonId - 1]?.title}"`,
       });
     } catch (error) {
       console.error('Error completing lesson:', error);
@@ -115,11 +123,12 @@ export const useCourseLogic = () => {
     setCurrentLesson(index);
   };
 
-  const currentLessonData = course.lessons[currentLesson];
-  const isCurrentLessonCompleted = completedLessons.includes(currentLessonData.id);
+  const currentLessonData = course?.lessons[currentLesson];
+  const isCurrentLessonCompleted = currentLessonData ? completedLessons.includes(currentLessonData.id) : false;
 
   return {
     course,
+    courseId,
     currentLesson,
     completedLessons,
     currentLessonData,

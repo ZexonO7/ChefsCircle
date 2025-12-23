@@ -1,4 +1,5 @@
-
+// Version 2.0 - Using Lovable AI Gateway (not Cohere)
+// Last updated: 2025-11-29
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const corsHeaders = {
@@ -22,10 +23,10 @@ serve(async (req) => {
       )
     }
 
-    const cohereApiKey = Deno.env.get('COHERE_API_KEY')
-    if (!cohereApiKey) {
+    const lovableApiKey = Deno.env.get('LOVABLE_API_KEY')
+    if (!lovableApiKey) {
       return new Response(
-        JSON.stringify({ error: 'Cohere API key not configured' }),
+        JSON.stringify({ error: 'Lovable API key not configured' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
       )
     }
@@ -59,33 +60,50 @@ For each recipe, provide the response in this exact JSON format:
 Make sure the JSON is valid and properly formatted. Only return the JSON, no additional text.`
 
     console.log('Generating recipes for ingredients:', ingredientsList)
+    console.log('Using Lovable AI Gateway')
 
-    const response = await fetch('https://api.cohere.ai/v1/generate', {
+    const response = await fetch('https://ai.gateway.lovable.dev/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${cohereApiKey}`
+        'Authorization': `Bearer ${lovableApiKey}`
       },
       body: JSON.stringify({
-        model: 'command',
-        prompt: prompt,
-        max_tokens: 2000,
-        temperature: 0.7,
-        stop_sequences: []
+        model: 'google/gemini-2.5-flash',
+        messages: [
+          {
+            role: 'user',
+            content: prompt
+          }
+        ]
       })
     })
 
     if (!response.ok) {
-      const errorData = await response.json()
-      console.error('Cohere API error:', errorData)
+      const errorText = await response.text()
+      console.error('Lovable AI error:', response.status, errorText)
+      
+      if (response.status === 429) {
+        return new Response(
+          JSON.stringify({ error: 'Rate limit exceeded. Please try again later.' }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 429 }
+        )
+      }
+      if (response.status === 402) {
+        return new Response(
+          JSON.stringify({ error: 'AI credits exhausted. Please add credits to continue.' }),
+          { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 402 }
+        )
+      }
+      
       return new Response(
-        JSON.stringify({ error: 'Failed to generate recipes', details: errorData }),
+        JSON.stringify({ error: 'Failed to generate recipes', details: errorText }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: response.status }
       )
     }
 
     const data = await response.json()
-    const generatedContent = data.generations[0].text
+    const generatedContent = data.choices?.[0]?.message?.content || ''
 
     console.log('Raw AI response:', generatedContent)
 
