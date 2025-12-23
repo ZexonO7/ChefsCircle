@@ -24,7 +24,7 @@ const Courses = () => {
       title: "Knife Skills Mastery",
       instructor: "Chef Isabella Rodriguez",
       description: "Master professional knife techniques, from basic cuts to advanced julienne and chiffonade. Essential skills every chef needs.",
-      image: "https://images.unsplash.com/photo-1593618998160-e34014e67f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      image: "https://images.unsplash.com/photo-1566454419290-57a0589c9b17?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
       duration: 180,
       lessons: 12,
       price: 0,
