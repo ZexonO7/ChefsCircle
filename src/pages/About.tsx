@@ -1,4 +1,4 @@
-import { ArrowLeft, CheckCircle, ArrowRight } from 'lucide-react';
+import { ArrowLeft, CheckCircle, ArrowRight, Award, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from "framer-motion";
 import { useEffect } from 'react';
@@ -114,6 +114,47 @@ const About = () => {
                     worldwide, we developed our unique live cook-along format and premium membership experience.
                   </p>
                   <p className="text-chef-charcoal/70 text-sm sm:text-base">Today, ChefsCircle serves passionate Gen Z and millennial home chefs who demand excellence in their culinary journey. Our members gain access to exclusive techniques, premium ingredients, and a community of like-minded culinary enthusiasts.</p>
+                </div>
+              </motion.div>
+              
+              {/* Award Section */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.6, delay: 0.5 }} 
+                className="mb-12 sm:mb-16 px-2 sm:px-0"
+              >
+                <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-chef-charcoal font-playfair text-center sm:text-left">Awards & Recognition</h2>
+                <div className="bg-gradient-to-br from-chef-warm-ivory to-amber-50 rounded-xl border border-amber-200 p-6 sm:p-8 shadow-chef-luxury">
+                  <div className="flex flex-col md:flex-row items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
+                        <Award className="w-12 h-12 sm:w-16 sm:h-16 text-white" />
+                      </div>
+                    </div>
+                    <div className="flex-1 text-center md:text-left">
+                      <div className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full mb-3">
+                        Corporate Vision Small Business Awards
+                      </div>
+                      <h3 className="text-xl sm:text-2xl font-bold text-chef-charcoal font-playfair mb-2">
+                        Best Culinary Media Platform 2025 - India
+                      </h3>
+                      <p className="text-chef-charcoal/70 text-sm sm:text-base mb-4">
+                        ChefsCircle was recognized by Corporate Vision for excellence in culinary media, 
+                        honoring our commitment to building a space where cooking feels more than just "cooking" — 
+                        where people actually "feel" that genuine emotion and connection through food.
+                      </p>
+                      <a 
+                        href="https://www.corporatevision-news.com/winners/chefscircle/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-amber-700 hover:text-amber-900 font-medium transition-colors text-sm sm:text-base"
+                      >
+                        View Award Details
+                        <ExternalLink className="ml-2 w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
               
