@@ -1,7 +1,24 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Resend } from "npm:resend@2.0.0";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+
+const sendEmail = async (to: string[], from: string, subject: string, html: string) => {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+    },
+    body: JSON.stringify({ from, to, subject, html }),
+  });
+  
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Failed to send email: ${error}`);
+  }
+  
+  return response.json();
+};
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -82,11 +99,11 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // Send email to admin
-    const adminEmailResponse = await resend.emails.send({
-      from: "ChefCircle Contact <contact@chefscircle.com>",
-      to: ["advithya07@gmail.com"],
-      subject: `New Contact Form Message from ${data.name}`,
-      html: `
+    const adminEmailResponse = await sendEmail(
+      ["advithya07@gmail.com"],
+      "ChefCircle Contact <contact@chefscircle.com>",
+      `New Contact Form Message from ${data.name}`,
+      `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2D5016;">New Contact Form Submission</h2>
           <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -101,15 +118,15 @@ const handler = async (req: Request): Promise<Response> => {
             This message was sent from the ChefCircle contact form.
           </p>
         </div>
-      `,
-    });
+      `
+    );
 
     // Send confirmation email to user
-    const userEmailResponse = await resend.emails.send({
-      from: "ChefCircle <contact@chefscircle.com>",
-      to: [data.email],
-      subject: "Thank you for contacting ChefCircle!",
-      html: `
+    const userEmailResponse = await sendEmail(
+      [data.email],
+      "ChefCircle <contact@chefscircle.com>",
+      "Thank you for contacting ChefCircle!",
+      `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2D5016;">Thank you for reaching out!</h2>
           <p>Hello ${escapeHtml(data.name)},</p>
@@ -134,8 +151,8 @@ const handler = async (req: Request): Promise<Response> => {
             This is an automated confirmation email. Please do not reply to this message.
           </p>
         </div>
-      `,
-    });
+      `
+    );
 
     console.log("Contact emails sent successfully:", { 
       admin: adminEmailResponse.data?.id, 
