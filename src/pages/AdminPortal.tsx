@@ -8,6 +8,7 @@ import { Shield, BarChart3, FileText, Users, Clock, CheckCircle, XCircle } from 
 import { motion } from 'framer-motion';
 import AdminRecipeReview from '@/components/AdminRecipeReview';
 import AdminAnalytics from '@/components/AdminAnalytics';
+import AdminEnrollments from '@/components/AdminEnrollments';
 
 const AdminPortal = () => {
   const { user, loading } = useAuth();
@@ -69,7 +70,8 @@ const AdminPortal = () => {
 
   const tabs = [
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'recipes', label: 'Recipe Reviews', icon: FileText }
+    { id: 'recipes', label: 'Recipe Reviews', icon: FileText },
+    { id: 'enrollments', label: 'Enrollments', icon: Users }
   ];
 
   return (
@@ -123,6 +125,7 @@ const AdminPortal = () => {
           <div className="chef-container">
             {activeTab === 'analytics' && <AdminAnalytics />}
             {activeTab === 'recipes' && <AdminRecipeReview />}
+            {activeTab === 'enrollments' && <AdminEnrollments />}
           </div>
         </section>
       </div>

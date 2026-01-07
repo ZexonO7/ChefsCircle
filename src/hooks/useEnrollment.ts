@@ -1,32 +1,53 @@
 import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/components/AuthProvider';
 import { EnrollmentData } from '@/components/course/EnrollmentModal';
 
-const ENROLLMENT_STORAGE_KEY = 'course_enrollments';
-
-interface StoredEnrollment extends EnrollmentData {
-  courseId: number;
-  enrolledAt: string;
+interface StoredEnrollment {
+  id: string;
+  user_id: string;
+  course_id: number;
+  certificate_name: string;
+  email: string;
+  phone: string | null;
+  enrolled_at: string;
 }
 
 export const useEnrollment = (courseId: number) => {
+  const { user } = useAuth();
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentData, setEnrollmentData] = useState<StoredEnrollment | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    checkEnrollment();
-  }, [courseId]);
+    if (user) {
+      checkEnrollment();
+    } else {
+      setIsEnrolled(false);
+      setEnrollmentData(null);
+      setLoading(false);
+    }
+  }, [courseId, user]);
 
-  const checkEnrollment = () => {
+  const checkEnrollment = async () => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      const stored = localStorage.getItem(ENROLLMENT_STORAGE_KEY);
-      if (stored) {
-        const enrollments: StoredEnrollment[] = JSON.parse(stored);
-        const existing = enrollments.find(e => e.courseId === courseId);
-        if (existing) {
-          setIsEnrolled(true);
-          setEnrollmentData(existing);
-        }
+      const { data, error } = await supabase
+        .from('course_enrollments' as any)
+        .select('*')
+        .eq('course_id', courseId)
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (error) {
+        console.error('Error checking enrollment:', error);
+      } else if (data) {
+        setIsEnrolled(true);
+        setEnrollmentData(data as unknown as StoredEnrollment);
       }
     } catch (error) {
       console.error('Error checking enrollment:', error);
@@ -36,21 +57,30 @@ export const useEnrollment = (courseId: number) => {
   };
 
   const enroll = async (data: EnrollmentData): Promise<void> => {
+    if (!user) {
+      throw new Error('User must be logged in to enroll');
+    }
+
     try {
-      const stored = localStorage.getItem(ENROLLMENT_STORAGE_KEY);
-      const enrollments: StoredEnrollment[] = stored ? JSON.parse(stored) : [];
-      
-      const newEnrollment: StoredEnrollment = {
-        ...data,
-        courseId,
-        enrolledAt: new Date().toISOString(),
-      };
-      
-      enrollments.push(newEnrollment);
-      localStorage.setItem(ENROLLMENT_STORAGE_KEY, JSON.stringify(enrollments));
-      
+      const { data: insertedData, error } = await supabase
+        .from('course_enrollments' as any)
+        .insert({
+          user_id: user.id,
+          course_id: courseId,
+          certificate_name: data.certificateName,
+          email: data.email,
+          phone: data.phone || null,
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error saving enrollment:', error);
+        throw error;
+      }
+
       setIsEnrolled(true);
-      setEnrollmentData(newEnrollment);
+      setEnrollmentData(insertedData as unknown as StoredEnrollment);
     } catch (error) {
       console.error('Error saving enrollment:', error);
       throw error;
@@ -62,5 +92,6 @@ export const useEnrollment = (courseId: number) => {
     enrollmentData,
     loading,
     enroll,
+    requiresAuth: !user,
   };
 };

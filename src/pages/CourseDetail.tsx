@@ -103,12 +103,26 @@ const CourseDetail = () => {
                   </div>
                 </div>
 
-                <Button
-                  onClick={() => setShowEnrollmentModal(true)}
-                  className="bg-chef-gold hover:bg-chef-gold/90 text-chef-charcoal font-medium px-8 py-3 text-lg"
-                >
-                  Enroll in This Course
-                </Button>
+                {!user ? (
+                  <div className="space-y-4">
+                    <p className="text-sm text-chef-charcoal/60">
+                      Please sign in to enroll in this course
+                    </p>
+                    <Button
+                      onClick={() => navigate('/auth')}
+                      className="bg-chef-gold hover:bg-chef-gold/90 text-chef-charcoal font-medium px-8 py-3 text-lg"
+                    >
+                      Sign In to Enroll
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={() => setShowEnrollmentModal(true)}
+                    className="bg-chef-gold hover:bg-chef-gold/90 text-chef-charcoal font-medium px-8 py-3 text-lg"
+                  >
+                    Enroll in This Course
+                  </Button>
+                )}
               </div>
             </div>
           </section>
