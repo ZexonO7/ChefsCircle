@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' && componentTagger(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MB limit
+      },
       manifest: {
         name: "ChefsCircle",
         short_name: "ChefsCircle",
