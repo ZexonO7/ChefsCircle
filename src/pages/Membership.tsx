@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Check, Crown, Star, Sparkles, Wallet, Copy, QrCode, ArrowRight, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -29,6 +30,7 @@ const MoneroIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
 const Membership = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState<'btc' | 'xmr'>('btc');
@@ -123,6 +125,24 @@ const Membership = () => {
     setSelectedTier(tierId);
     setPaymentModalOpen(true);
   };
+
+  useEffect(() => {
+    const tierFromUrl = searchParams.get('tier');
+    if (!tierFromUrl) return;
+
+    const isValidTier = membershipTiers.some(t => t.id === tierFromUrl);
+    if (isValidTier) {
+      handleSelectPlan(tierFromUrl);
+    }
+
+    // clean up the URL so refresh/back doesn't keep reopening
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.delete('tier');
+      return next;
+    }, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, searchParams, setSearchParams]);
 
   const copyAddress = () => {
     const address = selectedCrypto === 'btc' ? walletAddresses.btc : walletAddresses.xmr;
