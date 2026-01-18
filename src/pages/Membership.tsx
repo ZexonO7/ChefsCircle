@@ -43,6 +43,7 @@ const Membership = () => {
       priceBTC: '0.00042',
       priceXMR: '0.028',
       priceUSD: '~$17',
+      priceINR: '~₹1,400',
       period: '/month',
       description: 'Perfect for cooking enthusiasts',
       features: [
@@ -63,6 +64,7 @@ const Membership = () => {
       priceBTC: '0.00125',
       priceXMR: '0.084',
       priceUSD: '~$50',
+      priceINR: '~₹4,200',
       period: '/month',
       description: 'For serious culinary students',
       features: [
@@ -84,6 +86,7 @@ const Membership = () => {
       priceBTC: '0.00417',
       priceXMR: '0.28',
       priceUSD: '~$167',
+      priceINR: '~₹14,000',
       period: '/month',
       description: 'For culinary professionals',
       features: [
@@ -363,7 +366,7 @@ const Membership = () => {
                       <p className="font-bold text-background">
                         {selectedCrypto === 'btc' ? selectedTierData.priceBTC + ' BTC' : selectedTierData.priceXMR + ' XMR'}
                       </p>
-                      <p className="text-sm text-background/50">{selectedTierData.priceUSD}</p>
+                      <p className="text-sm text-background/50">{selectedTierData.priceUSD} / {selectedTierData.priceINR}</p>
                     </div>
                   </div>
                 </div>
@@ -397,6 +400,7 @@ const Membership = () => {
                       </div>
                       <p className="text-sm text-background/50 mb-2">Send exactly:</p>
                       <p className="text-2xl font-bold text-orange-400">{selectedTierData.priceBTC} BTC</p>
+                      <p className="text-sm text-background/60 mt-1">{selectedTierData.priceUSD} / {selectedTierData.priceINR}</p>
                     </div>
                   </TabsContent>
 
@@ -409,6 +413,7 @@ const Membership = () => {
                       </div>
                       <p className="text-sm text-background/50 mb-2">Send exactly:</p>
                       <p className="text-2xl font-bold text-orange-400">{selectedTierData.priceXMR} XMR</p>
+                      <p className="text-sm text-background/60 mt-1">{selectedTierData.priceUSD} / {selectedTierData.priceINR}</p>
                     </div>
                   </TabsContent>
                 </Tabs>
