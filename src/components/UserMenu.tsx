@@ -6,7 +6,6 @@ import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import MembershipModal from '@/components/MembershipModal';
 
 const UserMenu = () => {
   const { user, signOut } = useAuth();
@@ -16,9 +15,8 @@ const UserMenu = () => {
     full_name: '',
     profile_image_url: ''
   });
-  const [imageKey, setImageKey] = useState(0); // Force re-render of avatar
+  const [imageKey, setImageKey] = useState(0);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [showMembershipModal, setShowMembershipModal] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -46,12 +44,11 @@ const UserMenu = () => {
     }
   };
 
-  // Listen for profile updates
   useEffect(() => {
     const handleProfileUpdate = () => {
       console.log('UserMenu: Profile update event received');
       fetchProfile();
-      setImageKey(prev => prev + 1); // Force avatar re-render
+      setImageKey(prev => prev + 1);
     };
 
     window.addEventListener('profileUpdated', handleProfileUpdate);
@@ -110,7 +107,6 @@ const UserMenu = () => {
   };
 
   const getDisplayName = () => {
-    // Prioritize username over full name
     return profile.username || profile.full_name || user.email?.split('@')[0] || 'Chef';
   };
 
@@ -171,13 +167,13 @@ const UserMenu = () => {
               Admin
             </Link>
           )}
-          <button 
-            onClick={() => setShowMembershipModal(true)}
+          <Link 
+            to="/membership"
             className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
           >
             <Crown className="w-4 h-4" />
             Membership
-          </button>
+          </Link>
           <Link 
             to="/settings"
             className="w-full px-4 py-2 text-left text-sm text-chef-charcoal hover:bg-chef-royal-blue/5 flex items-center gap-2"
@@ -194,11 +190,6 @@ const UserMenu = () => {
           </button>
         </div>
       </div>
-
-      <MembershipModal 
-        isOpen={showMembershipModal}
-        onClose={() => setShowMembershipModal(false)}
-      />
     </div>
   );
 };
