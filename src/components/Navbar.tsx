@@ -26,6 +26,10 @@ const Navbar = () => {
     toast
   } = useToast();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  
+  // Check if on membership page for dark theme
+  const isMembershipPage = location.pathname === '/membership';
+  
   useEffect(() => {
     const checkScreenSize = () => {
       setIsSmallScreen(window.innerWidth < 768);
@@ -77,7 +81,13 @@ const Navbar = () => {
     if (path !== '/' && location.pathname.startsWith(path)) return true;
     return false;
   };
-  return <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-xl border-b border-border/40' : 'bg-background/60 backdrop-blur-md'}`}>
+  
+  // Dynamic navbar styles based on page
+  const navbarClasses = isMembershipPage
+    ? `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-foreground/95 backdrop-blur-xl border-b border-background/10' : 'bg-foreground/80 backdrop-blur-md'}`
+    : `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/80 backdrop-blur-xl border-b border-border/40' : 'bg-background/60 backdrop-blur-md'}`;
+  
+  return <nav className={navbarClasses}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Desktop Menu Button - Left */}
         {!isSmallScreen && <div className="hidden md:block">
@@ -86,7 +96,7 @@ const Navbar = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  className="gap-2 font-medium hover:bg-accent transition-colors"
+                  className={`gap-2 font-medium transition-colors ${isMembershipPage ? 'text-background hover:bg-background/10' : 'hover:bg-accent'}`}
                 >
                   <Menu className="w-4 h-4" />
                   Menu
@@ -114,11 +124,11 @@ const Navbar = () => {
           </div>}
 
         {/* Modern Logo - Center */}
-        <Link to="/" className="flex items-center gap-2.5 group absolute left-1/2 transform -translate-x-1/2">
+        <Link to="/" className={`flex items-center gap-2.5 group absolute left-1/2 transform -translate-x-1/2 ${isMembershipPage ? 'text-background' : ''}`}>
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-105 transition-all duration-300 shadow-lg">
             <ChefHat className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="font-playfair text-xl font-bold tracking-tight group-hover:text-primary transition-colors duration-300">ChefsCircle</span>
+          <span className={`font-playfair text-xl font-bold tracking-tight transition-colors duration-300 ${isMembershipPage ? 'text-background group-hover:text-background/80' : 'group-hover:text-primary'}`}>ChefsCircle</span>
         </Link>
 
         {/* Mobile Menu Button */}
@@ -126,7 +136,7 @@ const Navbar = () => {
             variant="ghost" 
             size="icon" 
             onClick={toggleMenu} 
-            className={`hover:bg-accent rounded-xl transition-all duration-300 ${isMenuOpen ? 'bg-accent' : ''}`}
+            className={`rounded-xl transition-all duration-300 ${isMenuOpen ? 'bg-accent' : ''} ${isMembershipPage ? 'text-background hover:bg-background/10' : 'hover:bg-accent'}`}
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>}
