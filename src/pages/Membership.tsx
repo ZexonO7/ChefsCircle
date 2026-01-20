@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Crown, Star, Sparkles, Wallet, Copy, QrCode, ArrowRight, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -27,6 +27,152 @@ const MoneroIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
   </svg>
 );
 
+// Premium Page Transition Component
+const PremiumTransition = ({ onComplete }: { onComplete: () => void }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onComplete();
+    }, 2200);
+    return () => clearTimeout(timer);
+  }, [onComplete]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
+      {/* Dark luxurious background */}
+      <div className="absolute inset-0 bg-foreground" />
+      
+      {/* Animated gold shimmer lines */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-[1px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"
+            style={{ top: `${20 + i * 15}%`, width: '100%' }}
+            initial={{ x: '-100%', opacity: 0 }}
+            animate={{ x: '100%', opacity: [0, 1, 1, 0] }}
+            transition={{
+              duration: 1.2,
+              delay: i * 0.15,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </motion.div>
+
+      {/* Central glow burst */}
+      <motion.div
+        className="absolute w-[600px] h-[600px] rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(245,158,11,0.3) 0%, rgba(245,158,11,0.1) 30%, transparent 70%)',
+        }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: [0, 1.5, 1.2], opacity: [0, 0.8, 0.4] }}
+        transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
+      />
+
+      {/* Crown icon with shimmer */}
+      <motion.div
+        className="relative z-10 flex flex-col items-center"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.4, ease: "backOut" }}
+      >
+        <motion.div
+          className="relative"
+          animate={{ 
+            filter: ['brightness(1)', 'brightness(1.5)', 'brightness(1)'],
+          }}
+          transition={{ duration: 1.5, repeat: 1, ease: "easeInOut" }}
+        >
+          {/* Glow behind crown */}
+          <div className="absolute inset-0 blur-2xl bg-gradient-to-r from-orange-500/50 via-amber-400/50 to-yellow-500/50 rounded-full scale-150" />
+          
+          <motion.div
+            className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-orange-500 via-amber-400 to-yellow-500 flex items-center justify-center shadow-2xl"
+            animate={{ 
+              boxShadow: [
+                '0 0 30px rgba(245,158,11,0.4)',
+                '0 0 60px rgba(245,158,11,0.6)',
+                '0 0 30px rgba(245,158,11,0.4)',
+              ]
+            }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Crown className="w-12 h-12 text-foreground" />
+          </motion.div>
+        </motion.div>
+
+        {/* Premium text */}
+        <motion.div
+          className="mt-8 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.5 }}
+        >
+          <h2 className="text-3xl font-playfair font-bold bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-400 bg-clip-text text-transparent">
+            Premium Access
+          </h2>
+          <motion.p
+            className="text-background/50 mt-2 text-sm tracking-widest uppercase"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
+            Unlocking exclusive benefits
+          </motion.p>
+        </motion.div>
+
+        {/* Shimmer loading bar */}
+        <motion.div
+          className="mt-8 w-48 h-1 rounded-full bg-background/10 overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+        >
+          <motion.div
+            className="h-full bg-gradient-to-r from-orange-500 via-amber-400 to-yellow-500"
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{ duration: 1.2, delay: 1, ease: "easeInOut" }}
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Particle sparkles */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-1 h-1 rounded-full bg-amber-400"
+          style={{
+            left: `${20 + Math.random() * 60}%`,
+            top: `${20 + Math.random() * 60}%`,
+          }}
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ 
+            opacity: [0, 1, 0],
+            scale: [0, 1.5, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            delay: 0.5 + i * 0.1,
+            ease: "easeOut",
+          }}
+        />
+      ))}
+    </motion.div>
+  );
+};
+
 const Membership = () => {
   const { user } = useAuth();
   const { toast } = useToast();
@@ -35,6 +181,7 @@ const Membership = () => {
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState<'btc' | 'xmr'>('btc');
   const [copied, setCopied] = useState(false);
+  const [showTransition, setShowTransition] = useState(true);
 
   const membershipTiers = [
     {
@@ -161,13 +308,26 @@ const Membership = () => {
   const selectedTierData = selectedTier ? getTierData(selectedTier) : null;
 
   return (
-    <PageLayout>
-      <SEO 
-        title="Membership Plans - Pay with Crypto"
-        description="Choose the perfect membership plan for your culinary journey. Pay securely with Bitcoin or Monero."
-      />
-      
-      <div className="min-h-screen bg-foreground relative overflow-hidden">
+    <>
+      {/* Premium Page Transition */}
+      <AnimatePresence>
+        {showTransition && (
+          <PremiumTransition onComplete={() => setShowTransition(false)} />
+        )}
+      </AnimatePresence>
+
+      <PageLayout>
+        <SEO 
+          title="Membership Plans - Pay with Crypto"
+          description="Choose the perfect membership plan for your culinary journey. Pay securely with Bitcoin or Monero."
+        />
+        
+        <motion.div 
+          className="min-h-screen bg-foreground relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showTransition ? 0 : 1 }}
+          transition={{ duration: 0.5 }}
+        >
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-full blur-3xl animate-pulse-slow" />
@@ -467,8 +627,9 @@ const Membership = () => {
             )}
           </DialogContent>
         </Dialog>
-      </div>
-    </PageLayout>
+        </motion.div>
+      </PageLayout>
+    </>
   );
 };
 
