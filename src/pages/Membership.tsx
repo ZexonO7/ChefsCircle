@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Crown, Star, Sparkles, Wallet, Copy, QrCode, ArrowRight, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
+import { Check, Crown, Star, Sparkles, Wallet, Copy, ArrowRight, Shield, Zap, Clock, CheckCircle2 } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
+import { QRCodeSVG } from 'qrcode.react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -552,11 +553,17 @@ const Membership = () => {
 
                   <TabsContent value="btc" className="mt-6 space-y-4">
                     <div className="text-center">
-                      {/* QR placeholder */}
-                      <div className="w-48 h-48 mx-auto bg-background rounded-xl p-4 mb-4">
-                        <div className="w-full h-full bg-foreground rounded-lg flex items-center justify-center">
-                          <QrCode className="w-24 h-24 text-background/30" />
-                        </div>
+                      {/* Bitcoin QR Code */}
+                      <div className="w-52 h-52 mx-auto bg-background rounded-xl p-3 mb-4 shadow-lg">
+                        <QRCodeSVG 
+                          value={`bitcoin:${walletAddresses.btc}?amount=${selectedTierData.priceBTC}`}
+                          size={184}
+                          level="H"
+                          includeMargin={false}
+                          className="w-full h-full"
+                          bgColor="#ffffff"
+                          fgColor="#1c1c1c"
+                        />
                       </div>
                       <p className="text-sm text-background/50 mb-2">Send exactly:</p>
                       <p className="text-2xl font-bold text-orange-400">{selectedTierData.priceBTC} BTC</p>
@@ -566,10 +573,17 @@ const Membership = () => {
 
                   <TabsContent value="xmr" className="mt-6 space-y-4">
                     <div className="text-center">
-                      <div className="w-48 h-48 mx-auto bg-background rounded-xl p-4 mb-4">
-                        <div className="w-full h-full bg-foreground rounded-lg flex items-center justify-center">
-                          <QrCode className="w-24 h-24 text-background/30" />
-                        </div>
+                      {/* Monero QR Code */}
+                      <div className="w-52 h-52 mx-auto bg-background rounded-xl p-3 mb-4 shadow-lg">
+                        <QRCodeSVG 
+                          value={`monero:${walletAddresses.xmr}?tx_amount=${selectedTierData.priceXMR}`}
+                          size={184}
+                          level="H"
+                          includeMargin={false}
+                          className="w-full h-full"
+                          bgColor="#ffffff"
+                          fgColor="#1c1c1c"
+                        />
                       </div>
                       <p className="text-sm text-background/50 mb-2">Send exactly:</p>
                       <p className="text-2xl font-bold text-orange-400">{selectedTierData.priceXMR} XMR</p>
