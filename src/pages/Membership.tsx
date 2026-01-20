@@ -497,7 +497,7 @@ const Membership = () => {
 
         {/* Payment Modal */}
         <Dialog open={paymentModalOpen} onOpenChange={setPaymentModalOpen}>
-          <DialogContent className="bg-foreground border border-background/20 text-background max-w-lg">
+          <DialogContent className="bg-foreground border border-background/20 text-background max-w-lg max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-2xl font-playfair text-background flex items-center gap-3">
                 <Wallet className="w-6 h-6 text-orange-400" />
