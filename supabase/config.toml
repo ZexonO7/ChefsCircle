@@ -1,16 +1,1 @@
 project_id = "syamxswsyylzvvcdmpjz"
-
-[functions.send-otp]
-verify_jwt = false
-
-[functions.verify-otp]
-verify_jwt = false
-
-[functions.newsletter-verify]
-verify_jwt = false
-
-[functions.newsletter-unsubscribe]
-verify_jwt = false
-
-[functions.generate-recipes-from-ingredients]
-verify_jwt = true

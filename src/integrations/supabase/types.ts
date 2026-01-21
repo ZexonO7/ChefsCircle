@@ -743,6 +743,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
       website_analytics: {
         Row: {
           created_at: string | null
@@ -826,10 +847,7 @@ export type Database = {
         }
         Returns: undefined
       }
-      calculate_level: {
-        Args: { total_xp: number }
-        Returns: number
-      }
+      calculate_level: { Args: { total_xp: number }; Returns: number }
       check_and_update_daily_recipe_usage: {
         Args: { max_daily_limit?: number; user_id_param: string }
         Returns: {
@@ -838,14 +856,8 @@ export type Database = {
           remaining_count: number
         }[]
       }
-      cleanup_expired_otps: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      generate_verification_token: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
+      cleanup_expired_otps: { Args: never; Returns: undefined }
+      generate_verification_token: { Args: never; Returns: string }
       get_answer_vote_counts: {
         Args: { answer_id_param: string }
         Returns: {
@@ -879,14 +891,18 @@ export type Database = {
         Args: { answer_id_param: string; user_id_param: string }
         Returns: string
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       increment_recipe_views: {
         Args: { p_recipe_id: string; p_recipe_type: string }
         Returns: number
       }
-      is_admin: {
-        Args: { user_id_param?: string }
-        Returns: boolean
-      }
+      is_admin: { Args: { user_id_param?: string }; Returns: boolean }
       log_admin_action: {
         Args: {
           action_text: string
@@ -922,10 +938,7 @@ export type Database = {
         Args: { user_id_param: string }
         Returns: undefined
       }
-      track_first_login: {
-        Args: { user_id_param: string }
-        Returns: undefined
-      }
+      track_first_login: { Args: { user_id_param: string }; Returns: undefined }
       track_news_article_view: {
         Args: { user_id_param: string }
         Returns: undefined
@@ -942,13 +955,10 @@ export type Database = {
         Args: { challenge_type_param: string; user_id_param: string }
         Returns: undefined
       }
-      xp_for_next_level: {
-        Args: { current_level: number }
-        Returns: number
-      }
+      xp_for_next_level: { Args: { current_level: number }; Returns: number }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1075,6 +1085,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
