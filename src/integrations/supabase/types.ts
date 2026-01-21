@@ -418,6 +418,57 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_submissions: {
+        Row: {
+          admin_notes: string | null
+          amount: string
+          created_at: string
+          crypto_type: string
+          id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          tier_id: string
+          tier_name: string
+          transaction_id: string | null
+          updated_at: string
+          user_email: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          amount: string
+          created_at?: string
+          crypto_type: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          tier_id: string
+          tier_name: string
+          transaction_id?: string | null
+          updated_at?: string
+          user_email: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          amount?: string
+          created_at?: string
+          crypto_type?: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          tier_id?: string
+          tier_name?: string
+          transaction_id?: string | null
+          updated_at?: string
+          user_email?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
