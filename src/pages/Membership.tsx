@@ -132,7 +132,7 @@ const PremiumTransition = ({ onComplete }: { onComplete: () => void }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 0.5 }}
           >
-            Unlocking exclusive benefits
+            Unlock exclusive benefits
           </motion.p>
         </motion.div>
 
