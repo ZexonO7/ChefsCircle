@@ -254,9 +254,9 @@ const Membership = () => {
     }
   ];
 
-  // Crypto wallet addresses (placeholder - replace with real addresses)
+  // Crypto wallet addresses
   const walletAddresses = {
-    btc: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+    btc: 'bc1qx49kxsr2dufqjrl6q3jlzjegsfwl0mqtf9ejf2',
     xmr: '888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H'
   };
 
