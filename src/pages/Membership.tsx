@@ -8,8 +8,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 
@@ -183,6 +186,8 @@ const Membership = () => {
   const [selectedCrypto, setSelectedCrypto] = useState<'btc' | 'xmr'>('btc');
   const [copied, setCopied] = useState(false);
   const [showTransition, setShowTransition] = useState(true);
+  const [transactionId, setTransactionId] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const membershipTiers = [
     {
@@ -611,6 +616,23 @@ const Membership = () => {
                   </div>
                 </div>
 
+                {/* Transaction ID Input */}
+                <div className="space-y-2">
+                  <Label htmlFor="transactionId" className="text-background/60">
+                    Transaction ID (optional but recommended)
+                  </Label>
+                  <Input
+                    id="transactionId"
+                    placeholder="Enter your transaction hash/ID"
+                    value={transactionId}
+                    onChange={(e) => setTransactionId(e.target.value)}
+                    className="bg-background/5 border-background/10 text-background placeholder:text-background/40 font-mono text-sm"
+                  />
+                  <p className="text-xs text-background/40">
+                    Providing your transaction ID helps us verify your payment faster
+                  </p>
+                </div>
+
                 {/* Instructions */}
                 <div className="p-4 bg-orange-500/10 border border-orange-500/20 rounded-xl">
                   <h5 className="font-semibold text-orange-300 mb-2 flex items-center gap-2">
@@ -620,22 +642,53 @@ const Membership = () => {
                   <ul className="text-sm text-background/60 space-y-1">
                     <li>• Send the exact amount shown above</li>
                     <li>• Payment confirms within 10-30 minutes</li>
-                    <li>• Your account will be upgraded automatically</li>
+                    <li>• Your account will be upgraded after admin verification</li>
                     <li>• Contact support if payment isn't reflected within 1 hour</li>
                   </ul>
                 </div>
 
                 <Button 
                   className="w-full py-6 bg-gradient-to-r from-orange-500 to-amber-500 text-foreground font-semibold rounded-xl"
-                  onClick={() => {
-                    toast({
-                      title: "Payment Submitted",
-                      description: "We'll verify your transaction and activate your membership shortly.",
-                    });
-                    setPaymentModalOpen(false);
+                  disabled={submitting}
+                  onClick={async () => {
+                    if (!user || !selectedTierData) return;
+                    
+                    setSubmitting(true);
+                    try {
+                      const { error } = await supabase
+                        .from('payment_submissions')
+                        .insert({
+                          user_id: user.id,
+                          user_email: user.email || '',
+                          tier_id: selectedTierData.id,
+                          tier_name: selectedTierData.name,
+                          crypto_type: selectedCrypto,
+                          amount: selectedCrypto === 'btc' ? selectedTierData.priceBTC : selectedTierData.priceXMR,
+                          transaction_id: transactionId || null,
+                          status: 'pending'
+                        });
+
+                      if (error) throw error;
+
+                      toast({
+                        title: "Payment Submitted!",
+                        description: "We'll verify your transaction and activate your membership shortly.",
+                      });
+                      setPaymentModalOpen(false);
+                      setTransactionId('');
+                    } catch (error) {
+                      console.error('Error submitting payment:', error);
+                      toast({
+                        title: "Submission Failed",
+                        description: "Failed to submit payment. Please try again or contact support.",
+                        variant: "destructive",
+                      });
+                    } finally {
+                      setSubmitting(false);
+                    }
                   }}
                 >
-                  I've Sent the Payment
+                  {submitting ? 'Submitting...' : "I've Sent the Payment"}
                 </Button>
               </div>
             )}

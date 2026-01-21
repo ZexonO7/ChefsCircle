@@ -4,11 +4,12 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Navigate } from 'react-router-dom';
 import PageLayout from '@/components/PageLayout';
-import { Shield, BarChart3, FileText, Users, Clock, CheckCircle, XCircle } from 'lucide-react';
+import { Shield, BarChart3, FileText, Users, Wallet } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AdminRecipeReview from '@/components/AdminRecipeReview';
 import AdminAnalytics from '@/components/AdminAnalytics';
 import AdminEnrollments from '@/components/AdminEnrollments';
+import AdminPayments from '@/components/AdminPayments';
 
 const AdminPortal = () => {
   const { user, loading } = useAuth();
@@ -70,6 +71,7 @@ const AdminPortal = () => {
 
   const tabs = [
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+    { id: 'payments', label: 'Payments', icon: Wallet },
     { id: 'recipes', label: 'Recipe Reviews', icon: FileText },
     { id: 'enrollments', label: 'Enrollments', icon: Users }
   ];
@@ -124,6 +126,7 @@ const AdminPortal = () => {
         <section className="chef-section">
           <div className="chef-container">
             {activeTab === 'analytics' && <AdminAnalytics />}
+            {activeTab === 'payments' && <AdminPayments />}
             {activeTab === 'recipes' && <AdminRecipeReview />}
             {activeTab === 'enrollments' && <AdminEnrollments />}
           </div>
