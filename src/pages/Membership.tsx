@@ -655,20 +655,38 @@ const Membership = () => {
                     
                     setSubmitting(true);
                     try {
+                      const paymentData = {
+                        user_id: user.id,
+                        user_email: user.email || '',
+                        tier_id: selectedTierData.id,
+                        tier_name: selectedTierData.name,
+                        crypto_type: selectedCrypto,
+                        amount: selectedCrypto === 'btc' ? selectedTierData.priceBTC : selectedTierData.priceXMR,
+                        transaction_id: transactionId || null,
+                        status: 'pending'
+                      };
+
                       const { error } = await supabase
                         .from('payment_submissions')
-                        .insert({
-                          user_id: user.id,
-                          user_email: user.email || '',
-                          tier_id: selectedTierData.id,
-                          tier_name: selectedTierData.name,
-                          crypto_type: selectedCrypto,
-                          amount: selectedCrypto === 'btc' ? selectedTierData.priceBTC : selectedTierData.priceXMR,
-                          transaction_id: transactionId || null,
-                          status: 'pending'
-                        });
+                        .insert(paymentData);
 
                       if (error) throw error;
+
+                      // Send email notification to admin
+                      try {
+                        await supabase.functions.invoke('notify-payment-submission', {
+                          body: {
+                            userEmail: user.email || '',
+                            tierName: selectedTierData.name,
+                            amount: selectedCrypto === 'btc' ? `${selectedTierData.priceBTC} BTC` : `${selectedTierData.priceXMR} XMR`,
+                            cryptoType: selectedCrypto,
+                            transactionId: transactionId || undefined
+                          }
+                        });
+                      } catch (emailError) {
+                        console.error('Failed to send admin notification:', emailError);
+                        // Don't fail the submission if email fails
+                      }
 
                       toast({
                         title: "Payment Submitted!",
