@@ -25,7 +25,8 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { userEmail, tierName, amount, cryptoType, transactionId }: PaymentNotificationRequest = await req.json();
 
-    const emailResponse = await resend.emails.send({
+    // Send notification to admin
+    const adminEmailResponse = await resend.emails.send({
       from: "ChefsCircle <noreply@chefscircle.in>",
       to: ["Advithya@ChefsCircle.in"],
       subject: `New Payment Submission - ${tierName}`,
@@ -58,9 +59,55 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Payment notification email sent:", emailResponse);
+    console.log("Admin notification email sent:", adminEmailResponse);
 
-    return new Response(JSON.stringify(emailResponse), {
+    // Send confirmation email to user
+    const userEmailResponse = await resend.emails.send({
+      from: "ChefsCircle <noreply@chefscircle.in>",
+      to: [userEmail],
+      subject: `Payment Received - ${tierName} Membership`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #f97316, #eab308); padding: 30px; text-align: center; border-radius: 12px 12px 0 0;">
+            <h1 style="color: #1a1a1a; margin: 0;">Payment Received! 🎉</h1>
+          </div>
+          
+          <div style="background: #1a1a1a; padding: 30px; color: #ffffff; border-radius: 0 0 12px 12px;">
+            <p style="font-size: 16px; line-height: 1.6;">
+              Thank you for submitting your payment for the <strong style="color: #f97316;">${tierName}</strong> membership!
+            </p>
+            
+            <div style="background: #2a2a2a; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #f97316; margin-top: 0;">Payment Details</h3>
+              <p style="margin: 8px 0;"><strong>Plan:</strong> ${tierName}</p>
+              <p style="margin: 8px 0;"><strong>Amount:</strong> ${amount}</p>
+              <p style="margin: 8px 0;"><strong>Payment Method:</strong> ${cryptoType.toUpperCase()}</p>
+              ${transactionId ? `<p style="margin: 8px 0;"><strong>Transaction ID:</strong> <code style="background: #3a3a3a; padding: 2px 6px; border-radius: 4px; font-size: 12px;">${transactionId}</code></p>` : ''}
+            </div>
+            
+            <div style="background: #2d4a3e; border-left: 4px solid #10b981; padding: 15px; border-radius: 4px; margin: 20px 0;">
+              <p style="margin: 0; color: #6ee7b7;">
+                <strong>What's next?</strong><br>
+                Our team will verify your transaction and activate your membership within 24 hours. You'll receive another email once your account is upgraded.
+              </p>
+            </div>
+            
+            <p style="color: #888; font-size: 14px;">
+              If you have any questions, feel free to contact us at <a href="mailto:support@chefscircle.in" style="color: #f97316;">support@chefscircle.in</a>
+            </p>
+            
+            <p style="margin-top: 30px; color: #888;">
+              Happy cooking! 🍳<br>
+              <strong style="color: #f97316;">The ChefsCircle Team</strong>
+            </p>
+          </div>
+        </div>
+      `,
+    });
+
+    console.log("User confirmation email sent:", userEmailResponse);
+
+    return new Response(JSON.stringify({ admin: adminEmailResponse, user: userEmailResponse }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
