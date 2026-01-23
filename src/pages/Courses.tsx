@@ -19,6 +19,7 @@ const Courses = () => {
   const filters = ['All', 'Free', 'Premium', 'Beginner', 'Intermediate', 'Advanced'];
 
   const courses = [
+    // Free courses first
     {
       id: 1,
       title: "Knife Skills Mastery",
@@ -31,32 +32,6 @@ const Courses = () => {
       difficulty: "Beginner",
       category: "Fundamentals",
       isFeatured: true
-    },
-    {
-      id: 2,
-      title: "Italian Pasta Making",
-      instructor: "Nonna Maria Giuseppe",
-      description: "Authentic Italian pasta from scratch. Learn traditional techniques passed down through generations in Tuscany.",
-      image: "https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      duration: 240,
-      lessons: 8,
-      price: 89,
-      difficulty: "Intermediate",
-      category: "International",
-      isFeatured: true
-    },
-    {
-      id: 3,
-      title: "Molecular Gastronomy Basics",
-      instructor: "Dr. James Chen",
-      description: "Introduction to molecular gastronomy techniques. Transform ordinary ingredients into extraordinary culinary art.",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      duration: 360,
-      lessons: 15,
-      price: 199,
-      difficulty: "Advanced",
-      category: "Innovation",
-      isFeatured: false
     },
     {
       id: 4,
@@ -72,19 +47,6 @@ const Courses = () => {
       isFeatured: false
     },
     {
-      id: 5,
-      title: "French Pastry Techniques",
-      instructor: "Maître Patissier Laurent",
-      description: "Master classic French pastry techniques. From pâte choux to laminated doughs, elevate your baking skills.",
-      image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      duration: 480,
-      lessons: 20,
-      price: 299,
-      difficulty: "Advanced",
-      category: "Baking",
-      isFeatured: true
-    },
-    {
       id: 6,
       title: "Quick Weeknight Dinners",
       instructor: "Chef Busy Mom Sarah",
@@ -96,6 +58,46 @@ const Courses = () => {
       difficulty: "Beginner",
       category: "Quick & Easy",
       isFeatured: false
+    },
+    // Premium courses ($10 each or with membership)
+    {
+      id: 2,
+      title: "Italian Pasta Making",
+      instructor: "Nonna Maria Giuseppe",
+      description: "Authentic Italian pasta from scratch. Learn traditional techniques passed down through generations in Tuscany.",
+      image: "https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      duration: 240,
+      lessons: 8,
+      price: 10,
+      difficulty: "Intermediate",
+      category: "International",
+      isFeatured: true
+    },
+    {
+      id: 3,
+      title: "Molecular Gastronomy Basics",
+      instructor: "Dr. James Chen",
+      description: "Introduction to molecular gastronomy techniques. Transform ordinary ingredients into extraordinary culinary art.",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      duration: 360,
+      lessons: 15,
+      price: 10,
+      difficulty: "Advanced",
+      category: "Innovation",
+      isFeatured: false
+    },
+    {
+      id: 5,
+      title: "French Pastry Techniques",
+      instructor: "Maître Patissier Laurent",
+      description: "Master classic French pastry techniques. From pâte choux to laminated doughs, elevate your baking skills.",
+      image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      duration: 480,
+      lessons: 20,
+      price: 10,
+      difficulty: "Advanced",
+      category: "Baking",
+      isFeatured: true
     }
   ];
 
@@ -283,8 +285,15 @@ const Courses = () => {
                       </div>
                       
                       <div className="flex items-center justify-between">
-                        <div className="text-lg font-bold text-chef-charcoal">
-                          {course.price === 0 ? 'Free' : `$${course.price}`}
+                        <div className="text-chef-charcoal">
+                          {course.price === 0 ? (
+                            <span className="text-lg font-bold">Free</span>
+                          ) : (
+                            <div className="flex flex-col">
+                              <span className="text-lg font-bold">${course.price}</span>
+                              <span className="text-xs text-chef-charcoal/60">or with membership</span>
+                            </div>
+                          )}
                         </div>
                         <button 
                           onClick={(e) => {
@@ -371,8 +380,15 @@ const Courses = () => {
                     </div>
                     
                     <div className="flex items-center justify-between">
-                      <div className="text-lg font-bold text-chef-charcoal">
-                        {course.price === 0 ? 'Free' : `$${course.price}`}
+                      <div className="text-chef-charcoal">
+                        {course.price === 0 ? (
+                          <span className="text-lg font-bold">Free</span>
+                        ) : (
+                          <div className="flex flex-col">
+                            <span className="text-lg font-bold">${course.price}</span>
+                            <span className="text-xs text-chef-charcoal/60">or with membership</span>
+                          </div>
+                        )}
                       </div>
                       <button 
                         onClick={(e) => {
