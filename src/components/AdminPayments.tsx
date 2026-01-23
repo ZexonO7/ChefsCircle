@@ -84,6 +84,10 @@ const AdminPayments = () => {
   const updatePaymentStatus = async (paymentId: string, newStatus: 'approved' | 'rejected') => {
     setProcessingId(paymentId);
     try {
+      const payment = payments.find(p => p.id === paymentId);
+      if (!payment) throw new Error('Payment not found');
+
+      // Update payment status
       const { error } = await supabase
         .from('payment_submissions')
         .update({ 
@@ -95,9 +99,84 @@ const AdminPayments = () => {
 
       if (error) throw error;
 
+      // If approved, update user's subscription
+      if (newStatus === 'approved') {
+        // Map tier_id to subscription tier
+        const tierMapping: { [key: string]: string } = {
+          'apprentice': 'basic',
+          'sous-chef': 'premium', 
+          'executive': 'enterprise'
+        };
+        const subscriptionTier = tierMapping[payment.tier_id] || 'basic';
+        
+        // Set subscription end date (1 year from now)
+        const subscriptionEnd = new Date();
+        subscriptionEnd.setFullYear(subscriptionEnd.getFullYear() + 1);
+
+        // Upsert subscriber record
+        const { error: subError } = await supabase
+          .from('subscribers')
+          .upsert({
+            user_id: payment.user_id,
+            email: payment.user_email,
+            subscribed: true,
+            subscription_tier: subscriptionTier,
+            subscription_end: subscriptionEnd.toISOString(),
+            updated_at: new Date().toISOString()
+          }, { 
+            onConflict: 'user_id',
+            ignoreDuplicates: false
+          });
+
+        if (subError) {
+          console.error('Error updating subscription:', subError);
+          // Try insert if upsert fails
+          const { error: insertError } = await supabase
+            .from('subscribers')
+            .insert({
+              user_id: payment.user_id,
+              email: payment.user_email,
+              subscribed: true,
+              subscription_tier: subscriptionTier,
+              subscription_end: subscriptionEnd.toISOString()
+            });
+          
+          if (insertError) console.error('Error inserting subscription:', insertError);
+        }
+
+        // Send approval notification email
+        try {
+          await supabase.functions.invoke('notify-payment-approval', {
+            body: {
+              userEmail: payment.user_email,
+              tierName: payment.tier_name,
+              status: 'approved'
+            }
+          });
+        } catch (emailError) {
+          console.error('Error sending approval email:', emailError);
+        }
+      } else {
+        // Send rejection notification email
+        try {
+          await supabase.functions.invoke('notify-payment-approval', {
+            body: {
+              userEmail: payment.user_email,
+              tierName: payment.tier_name,
+              status: 'rejected',
+              reason: adminNotes[paymentId] || 'No reason provided'
+            }
+          });
+        } catch (emailError) {
+          console.error('Error sending rejection email:', emailError);
+        }
+      }
+
       toast({
         title: newStatus === 'approved' ? "Payment Approved" : "Payment Rejected",
-        description: `The payment has been ${newStatus}.`,
+        description: newStatus === 'approved' 
+          ? `Payment approved and membership activated for ${payment.user_email}`
+          : `The payment has been rejected.`,
       });
 
       fetchPayments();
