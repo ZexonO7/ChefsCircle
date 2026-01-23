@@ -601,17 +601,18 @@ const Membership = () => {
                 <div className="space-y-2">
                   <label className="text-sm text-background/60">Wallet Address:</label>
                   <div className="flex gap-2">
-                    <div className="flex-1 p-3 bg-background/5 border border-background/10 rounded-xl overflow-hidden">
-                      <p className="text-sm text-background/80 truncate font-mono">
+                    <div className="flex-1 p-2 bg-background/5 border border-background/10 rounded-lg overflow-hidden max-w-[280px]">
+                      <p className="text-xs text-background/80 font-mono break-all leading-tight" style={{ wordBreak: 'break-all' }}>
                         {selectedCrypto === 'btc' ? walletAddresses.btc : walletAddresses.xmr}
                       </p>
                     </div>
                     <Button
                       onClick={copyAddress}
                       variant="outline"
-                      className="border-background/20 text-background hover:bg-background/10"
+                      size="sm"
+                      className="border-background/20 text-background hover:bg-background/10 shrink-0"
                     >
-                      {copied ? <CheckCircle2 className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
+                      {copied ? <CheckCircle2 className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
                     </Button>
                   </div>
                 </div>
