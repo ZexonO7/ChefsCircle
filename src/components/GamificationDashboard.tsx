@@ -46,8 +46,15 @@ const GamificationDashboard = () => {
   const formattedChallenge = formatChallengeData(weeklyChallenge);
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-24 bg-chef-warm-ivory">
-      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
+    <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 bg-background overflow-hidden">
+      {/* Subtle ambient gold glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-[50rem] h-[50rem] rounded-full opacity-[0.04] blur-3xl"
+        style={{ background: 'var(--gradient-gold)' }}
+      />
+
+      <div className="relative container mx-auto px-3 sm:px-4 lg:px-8">
         <GamificationHeader />
 
         {/* XP & Level Widget */}
