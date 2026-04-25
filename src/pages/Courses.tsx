@@ -1,12 +1,27 @@
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
-import { Play, Clock, Users, Star, Crown, BookOpen, Filter, Search } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Play, Clock, Users, Crown, BookOpen, Search, ArrowRight, Sparkles } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/components/AuthProvider';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
 import { useCourseEnrollments } from '@/hooks/useCourseEnrollments';
+import Reveal from '@/components/motion/Reveal';
+import TextReveal from '@/components/motion/TextReveal';
+
+interface CourseCardData {
+  id: number;
+  title: string;
+  instructor: string;
+  description: string;
+  image: string;
+  duration: number;
+  lessons: number;
+  price: number;
+  difficulty: string;
+  category: string;
+  isFeatured: boolean;
+}
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,399 +33,345 @@ const Courses = () => {
 
   const filters = ['All', 'Free', 'Premium', 'Beginner', 'Intermediate', 'Advanced'];
 
-  const courses = [
-    // Free courses first
+  const courses: CourseCardData[] = [
+    // Free first
     {
       id: 1,
-      title: "Knife Skills Mastery",
-      instructor: "Chef Isabella Rodriguez",
-      description: "Master professional knife techniques, from basic cuts to advanced julienne and chiffonade. Essential skills every chef needs.",
-      image: "https://images.unsplash.com/photo-1566454419290-57a0589c9b17?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: 'Knife Skills Mastery',
+      instructor: 'Chef Isabella Rodriguez',
+      description:
+        'Master professional knife technique, from basic cuts to advanced julienne. The foundation every cook needs.',
+      image:
+        'https://images.unsplash.com/photo-1566454419290-57a0589c9b17?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       duration: 180,
       lessons: 12,
       price: 0,
-      difficulty: "Beginner",
-      category: "Fundamentals",
-      isFeatured: true
+      difficulty: 'Beginner',
+      category: 'Fundamentals',
+      isFeatured: true,
     },
     {
       id: 4,
-      title: "Plant-Based Protein Power",
-      instructor: "Chef Green Thompson",
-      description: "Discover the world of plant-based proteins. Create satisfying, nutritious meals without meat.",
-      image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: 'Plant-Based Protein Power',
+      instructor: 'Chef Green Thompson',
+      description:
+        'Discover the world of plant proteins. Build satisfying, nutritious meals without compromise.',
+      image:
+        'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       duration: 150,
       lessons: 10,
       price: 0,
-      difficulty: "Beginner",
-      category: "Healthy",
-      isFeatured: false
+      difficulty: 'Beginner',
+      category: 'Healthy',
+      isFeatured: false,
     },
     {
       id: 6,
-      title: "Quick Weeknight Dinners",
-      instructor: "Chef Busy Mom Sarah",
-      description: "Delicious, healthy meals in 30 minutes or less. Perfect for busy professionals and families.",
-      image: "https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: 'Quick Weeknight Dinners',
+      instructor: 'Chef Sarah Williams',
+      description:
+        'Beautiful, healthy meals in 30 minutes or less. Designed for the busiest of weeks.',
+      image:
+        'https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       duration: 120,
       lessons: 6,
       price: 0,
-      difficulty: "Beginner",
-      category: "Quick & Easy",
-      isFeatured: false
+      difficulty: 'Beginner',
+      category: 'Quick & Easy',
+      isFeatured: false,
     },
-    // Premium courses ($10 each or with membership)
+    // Premium
     {
       id: 2,
-      title: "Italian Pasta Making",
-      instructor: "Nonna Maria Giuseppe",
-      description: "Authentic Italian pasta from scratch. Learn traditional techniques passed down through generations in Tuscany.",
-      image: "https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: 'Italian Pasta Making',
+      instructor: 'Nonna Maria Giuseppe',
+      description:
+        'Authentic Tuscan pasta from scratch — traditional techniques passed down for generations.',
+      image:
+        'https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       duration: 240,
       lessons: 8,
       price: 10,
-      difficulty: "Intermediate",
-      category: "International",
-      isFeatured: true
+      difficulty: 'Intermediate',
+      category: 'International',
+      isFeatured: true,
     },
     {
       id: 3,
-      title: "Molecular Gastronomy Basics",
-      instructor: "Dr. James Chen",
-      description: "Introduction to molecular gastronomy techniques. Transform ordinary ingredients into extraordinary culinary art.",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: 'Molecular Gastronomy Basics',
+      instructor: 'Dr. James Chen',
+      description:
+        'Transform ordinary ingredients into extraordinary culinary art with science-led techniques.',
+      image:
+        'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       duration: 360,
       lessons: 15,
       price: 10,
-      difficulty: "Advanced",
-      category: "Innovation",
-      isFeatured: false
+      difficulty: 'Advanced',
+      category: 'Innovation',
+      isFeatured: false,
     },
     {
       id: 5,
-      title: "French Pastry Techniques",
-      instructor: "Maître Patissier Laurent",
-      description: "Master classic French pastry techniques. From pâte choux to laminated doughs, elevate your baking skills.",
-      image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: 'French Pastry Techniques',
+      instructor: 'Maître Pâtissier Laurent',
+      description:
+        'Master classic French pastry — from pâte choux to laminated doughs and macarons.',
+      image:
+        'https://images.unsplash.com/photo-1509365465985-25d11c17e812?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
       duration: 480,
       lessons: 20,
       price: 10,
-      difficulty: "Advanced",
-      category: "Baking",
-      isFeatured: true
-    }
+      difficulty: 'Advanced',
+      category: 'Baking',
+      isFeatured: true,
+    },
   ];
 
-  const filteredCourses = courses.filter(course => {
-    const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.instructor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
+  const filteredCourses = courses.filter((course) => {
+    const matchesSearch =
+      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.instructor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.description.toLowerCase().includes(searchTerm.toLowerCase());
+
     let matchesFilter = true;
     if (selectedFilter === 'Free') matchesFilter = course.price === 0;
     else if (selectedFilter === 'Premium') matchesFilter = course.price > 0;
-    else if (['Beginner', 'Intermediate', 'Advanced'].includes(selectedFilter)) {
+    else if (['Beginner', 'Intermediate', 'Advanced'].includes(selectedFilter))
       matchesFilter = course.difficulty === selectedFilter;
-    }
-    
+
     return matchesSearch && matchesFilter;
   });
 
   const formatDuration = (minutes: number) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return h > 0 ? `${h}h ${m}m` : `${m}m`;
   };
 
-  const handleEnrollment = (course: any) => {
+  const handleEnrollment = (course: CourseCardData) => {
     if (!user && course.price > 0) {
       toast({
-        title: "Authentication required",
-        description: "Please sign in to enroll in premium courses.",
-        variant: "destructive",
+        title: 'Sign in required',
+        description: 'Please sign in to enroll in premium courses.',
+        variant: 'destructive',
       });
       navigate('/auth');
       return;
     }
-    
-    if (course.price > 0) {
-      toast({
-        title: "Payment Required",
-        description: `To enroll in ${course.title}, payment processing will be available soon.`,
-      });
-    } else {
-      navigate(`/courses/${course.id}`);
-    }
-  };
-
-  const handleLearnMore = (course: any) => {
     navigate(`/courses/${course.id}`);
   };
 
+  const renderCourseCard = (course: CourseCardData, index: number, featured = false) => (
+    <Reveal key={course.id} delay={Math.min(index * 0.07, 0.4)}>
+      <article
+        onClick={() => navigate(`/courses/${course.id}`)}
+        className="premium-card group cursor-pointer overflow-hidden"
+      >
+        <div className="relative aspect-[16/10] overflow-hidden">
+          <img
+            src={course.image}
+            alt={course.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/10 to-transparent" />
+          <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+            {featured && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/15 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-accent backdrop-blur-md">
+                <Sparkles className="h-3 w-3" />
+                Featured
+              </span>
+            )}
+            {course.price === 0 ? (
+              <span className="rounded-full border border-background/30 bg-background/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-foreground backdrop-blur-md">
+                Free
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-background/80 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em] text-accent backdrop-blur-md">
+                <Crown className="h-3 w-3" />
+                Premium
+              </span>
+            )}
+          </div>
+          <div className="absolute bottom-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-background/85 px-3 py-1 text-xs font-medium text-foreground backdrop-blur-md">
+            <Play className="h-3 w-3" />
+            {course.lessons} lessons
+          </div>
+        </div>
+
+        <div className="p-6">
+          <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-foreground/40">
+            <span>{course.category}</span>
+            <span>{course.difficulty}</span>
+          </div>
+          <h3 className="mt-3 font-playfair text-xl font-semibold text-foreground transition-colors group-hover:text-accent">
+            {course.title}
+          </h3>
+          <p className="mt-1 text-xs font-medium uppercase tracking-[0.16em] text-foreground/50">
+            {course.instructor}
+          </p>
+          <p className="mt-3 line-clamp-2 font-inter text-sm leading-relaxed text-foreground/60">
+            {course.description}
+          </p>
+
+          <div className="mt-5 flex items-center justify-between">
+            <div className="flex items-center gap-4 text-xs text-foreground/55">
+              <span className="inline-flex items-center gap-1">
+                <Clock className="h-3.5 w-3.5" />
+                {formatDuration(course.duration)}
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Users className="h-3.5 w-3.5" />
+                {getEnrollmentCount(course.id)}
+              </span>
+            </div>
+            {course.price === 0 ? (
+              <span className="text-sm font-semibold text-foreground">Free</span>
+            ) : (
+              <div className="text-right">
+                <div className="text-sm font-semibold text-foreground">${course.price}</div>
+                <div className="text-[10px] uppercase tracking-[0.18em] text-foreground/40">
+                  or with membership
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEnrollment(course);
+            }}
+            className="btn-glow group/btn mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+          >
+            {course.price === 0 ? 'Start Learning' : 'Enroll Now'}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+          </button>
+        </div>
+      </article>
+    </Reveal>
+  );
+
+  const featuredCourses = courses.filter((c) => c.isFeatured);
+
   return (
     <PageLayout>
-      <SEO 
-        title="Culinary Courses - ChefsCircle Learning" 
-        description="Learn from world-class chefs with our comprehensive culinary courses. From basic techniques to advanced skills, enhance your cooking abilities."
-        keywords={['culinary courses', 'cooking classes', 'chef training', 'culinary education', 'online cooking']}
+      <SEO
+        title="Culinary Courses — ChefsCircle"
+        description="Learn from world-class chefs with cinematic, considered courses. From foundations to mastery."
+        keywords={['culinary courses', 'cooking classes', 'chef training', 'culinary education']}
       />
-      
-      <div className="min-h-screen bg-chef-warm-ivory pt-20">
-        {/* Hero Section */}
-        <section className="chef-section bg-gradient-to-br from-chef-navy to-chef-royal-blue">
-          <div className="chef-container">
-            <motion.div 
-              className="text-center max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="chef-heading-xl text-chef-warm-ivory mb-6">
-                Master <span className="text-chef-gold">Culinary Arts</span>
-              </h1>
-              <p className="chef-body-lg text-chef-warm-ivory/90 mb-8">
-                Learn from world-renowned chefs with our comprehensive courses, from free basics to premium masterclasses
+
+      <div className="min-h-screen bg-background pt-24">
+        {/* Hero */}
+        <section className="relative overflow-hidden border-b border-border/40 bg-secondary/30">
+          <div className="pointer-events-none absolute -right-24 top-12 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
+          <div className="pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-foreground/5 blur-3xl" />
+
+          <div className="relative mx-auto max-w-5xl px-6 py-20 text-center">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/70 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-accent backdrop-blur-md">
+                <Sparkles className="h-3 w-3" />
+                Courses
+              </span>
+            </Reveal>
+            <h1 className="mt-6 font-playfair text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
+              <TextReveal text="Master the" as="span" className="block" />
+              <TextReveal
+                text="culinary arts."
+                as="span"
+                className="block italic text-gold-gradient"
+                delay={0.25}
+              />
+            </h1>
+            <Reveal delay={0.4}>
+              <p className="mx-auto mt-6 max-w-xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
+                Cinematic masterclasses from world-renowned chefs. Free foundations.
+                Premium depth. Always considered.
               </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/60 w-5 h-5" />
+            </Reveal>
+
+            <Reveal delay={0.55}>
+              <div className="mx-auto mt-10 max-w-md">
+                <div className="glass-panel relative overflow-hidden rounded-full">
+                  <Search className="pointer-events-none absolute left-5 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40" />
                   <input
                     type="text"
-                    placeholder="Search courses..."
+                    placeholder="Search courses, chefs, techniques…"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-4 py-3 rounded-xl border border-chef-royal-blue/20 focus:outline-none focus:ring-2 focus:ring-chef-gold"
+                    className="h-12 w-full bg-transparent pl-12 pr-5 text-sm text-foreground placeholder:text-foreground/40 focus:outline-none"
                   />
                 </div>
               </div>
-            </motion.div>
+            </Reveal>
           </div>
         </section>
 
-        {/* Filter Bar */}
-        <section className="py-8 bg-chef-warm-ivory border-b border-chef-royal-blue/10">
-          <div className="chef-container">
-            <div className="flex flex-wrap gap-3 justify-center">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => setSelectedFilter(filter)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                    selectedFilter === filter
-                      ? 'bg-chef-royal-blue text-chef-warm-ivory'
-                      : 'bg-chef-royal-blue/10 text-chef-royal-blue hover:bg-chef-royal-blue/20'
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
+        {/* Filters */}
+        <section className="sticky top-16 z-20 border-b border-border/40 bg-background/85 backdrop-blur-md">
+          <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto px-6 py-4 scrollbar-hide">
+            {filters.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setSelectedFilter(filter)}
+                className={`shrink-0 rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.16em] transition-all ${
+                  selectedFilter === filter
+                    ? 'border-foreground bg-foreground text-background'
+                    : 'border-border bg-transparent text-foreground/60 hover:border-foreground/40 hover:text-foreground'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
         </section>
 
-        {/* Featured Courses */}
-        {selectedFilter === 'All' && (
-          <section className="chef-section bg-chef-royal-blue/5">
-            <div className="chef-container">
-              <h2 className="chef-heading-lg text-chef-charcoal text-center mb-12">Featured Courses</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                {courses.filter(course => course.isFeatured).map((course, index) => (
-                  <motion.div
-                    key={course.id}
-                    className="chef-card-luxury group cursor-pointer"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    onClick={() => navigate(`/courses/${course.id}`)}
-                  >
-                    <div className="relative overflow-hidden rounded-t-xl">
-                      <img 
-                        src={course.image} 
-                        alt={course.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        <span className="chef-badge bg-chef-gold/20 text-chef-gold border-chef-gold/30">
-                          <Star className="w-3 h-3 fill-current" />
-                          Featured
-                        </span>
-                        {course.price === 0 ? (
-                          <span className="chef-badge-green">Free</span>
-                        ) : (
-                          <span className="chef-badge bg-chef-royal-blue/20 text-chef-royal-blue border-chef-royal-blue/30">
-                            <Crown className="w-3 h-3 fill-current" />
-                            Premium
-                          </span>
-                        )}
-                      </div>
-                      <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
-                        <Play className="w-3 h-3 inline mr-1" />
-                        {course.lessons} lessons
-                      </div>
-                    </div>
-                    
-                    <div className="p-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-blue transition-colors">
-                          {course.title}
-                        </h3>
-                      </div>
-                      
-                      <p className="text-sm text-chef-royal-blue font-medium mb-2">by {course.instructor}</p>
-                      
-                      <p className="chef-body-sm text-chef-charcoal/80 mb-4 line-clamp-2">
-                        {course.description}
-                      </p>
-                      
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-4 text-sm text-chef-charcoal/60">
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            <span>{formatDuration(course.duration)}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Users className="w-4 h-4" />
-                            <span>{getEnrollmentCount(course.id)} enrolled</span>
-                          </div>
-                        </div>
-                        <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                          course.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
-                          course.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-red-100 text-red-800'
-                        }`}>
-                          {course.difficulty}
-                        </span>
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="text-chef-charcoal">
-                          {course.price === 0 ? (
-                            <span className="text-lg font-bold">Free</span>
-                          ) : (
-                            <div className="flex flex-col">
-                              <span className="text-lg font-bold">${course.price}</span>
-                              <span className="text-xs text-chef-charcoal/60">or with membership</span>
-                            </div>
-                          )}
-                        </div>
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleEnrollment(course);
-                          }}
-                          className="chef-button-primary text-sm py-2 px-4"
-                        >
-                          {course.price === 0 ? 'Start Learning' : 'Enroll Now'}
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+        {/* Featured */}
+        {selectedFilter === 'All' && featuredCourses.length > 0 && (
+          <section className="mx-auto max-w-6xl px-6 py-20">
+            <Reveal>
+              <div className="mb-10 flex items-end justify-between">
+                <div>
+                  <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-accent">
+                    Editor&apos;s pick
+                  </span>
+                  <h2 className="mt-2 font-playfair text-3xl font-semibold text-foreground sm:text-4xl">
+                    Featured Courses
+                  </h2>
+                </div>
               </div>
+            </Reveal>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {featuredCourses.map((c, i) => renderCourseCard(c, i, true))}
             </div>
           </section>
         )}
 
-        {/* All Courses */}
-        <section className="chef-section">
-          <div className="chef-container">
-            <h2 className="chef-heading-lg text-chef-charcoal text-center mb-12">
-              {selectedFilter === 'All' ? 'All Courses' : `${selectedFilter} Courses`}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredCourses.map((course, index) => (
-                <motion.div
-                  key={course.id}
-                  className="chef-card group cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  onClick={() => navigate(`/courses/${course.id}`)}
-                >
-                  <div className="relative overflow-hidden rounded-t-xl">
-                    <img 
-                      src={course.image} 
-                      alt={course.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      {course.price === 0 ? (
-                        <span className="chef-badge-green">Free</span>
-                      ) : (
-                        <span className="chef-badge bg-chef-royal-blue/20 text-chef-royal-blue border-chef-royal-blue/30">
-                          <Crown className="w-3 h-3 fill-current" />
-                          Premium
-                        </span>
-                      )}
-                    </div>
-                    <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
-                      <BookOpen className="w-3 h-3 inline mr-1" />
-                      {course.lessons} lessons
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <h3 className="chef-heading-sm text-chef-charcoal group-hover:text-chef-royal-blue transition-colors mb-2">
-                      {course.title}
-                    </h3>
-                    
-                    <p className="text-sm text-chef-royal-blue font-medium mb-3">by {course.instructor}</p>
-                    
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3 text-sm text-chef-charcoal/60">
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{formatDuration(course.duration)}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>{getEnrollmentCount(course.id)} enrolled</span>
-                        </div>
-                      </div>
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                        course.difficulty === 'Beginner' ? 'bg-green-100 text-green-800' :
-                        course.difficulty === 'Intermediate' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-red-100 text-red-800'
-                      }`}>
-                        {course.difficulty}
-                      </span>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="text-chef-charcoal">
-                        {course.price === 0 ? (
-                          <span className="text-lg font-bold">Free</span>
-                        ) : (
-                          <div className="flex flex-col">
-                            <span className="text-lg font-bold">${course.price}</span>
-                            <span className="text-xs text-chef-charcoal/60">or with membership</span>
-                          </div>
-                        )}
-                      </div>
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleLearnMore(course);
-                        }}
-                        className="text-chef-royal-blue hover:text-chef-royal-blue/80 font-medium text-sm"
-                      >
-                        Learn More →
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+        {/* All */}
+        <section className="mx-auto max-w-6xl px-6 pb-28">
+          <Reveal>
+            <div className="mb-10">
+              <span className="text-[10px] font-medium uppercase tracking-[0.22em] text-foreground/50">
+                Library
+              </span>
+              <h2 className="mt-2 font-playfair text-3xl font-semibold text-foreground sm:text-4xl">
+                {selectedFilter === 'All' ? 'All Courses' : `${selectedFilter} Courses`}
+              </h2>
             </div>
-            
-            {filteredCourses.length === 0 && (
-              <div className="text-center py-12">
-                <p className="chef-body text-chef-charcoal/60">No courses found matching your criteria.</p>
-              </div>
-            )}
-          </div>
+          </Reveal>
+
+          {filteredCourses.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-border bg-secondary/20 py-20 text-center">
+              <BookOpen className="mx-auto mb-4 h-8 w-8 text-foreground/30" />
+              <p className="text-sm text-foreground/60">No courses match your search.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {filteredCourses.map((c, i) => renderCourseCard(c, i))}
+            </div>
+          )}
         </section>
       </div>
     </PageLayout>
