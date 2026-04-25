@@ -170,39 +170,42 @@ const Auth = () => {
           description="Enter the verification code sent to your email to complete your ChefsCircle account setup."
         />
         
-        <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center py-12 px-4">
+        <div className="min-h-screen bg-background pt-24 flex items-center justify-center py-12 px-4">
           <motion.div
             className="max-w-md w-full space-y-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="text-center">
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-chef-royal-blue rounded-full flex items-center justify-center">
-                  <Mail className="w-8 h-8 text-chef-warm-ivory" />
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-elevated"
+                  style={{ background: 'var(--gradient-charcoal)' }}
+                >
+                  <Mail className="w-7 h-7 text-background" />
                 </div>
               </div>
-              <h2 className="chef-heading-xl text-chef-charcoal">
-                Check Your Email
+              <h2 className="font-playfair text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
+                Check your email
               </h2>
-              <p className="chef-body text-chef-charcoal/70 mt-2">
+              <p className="text-muted-foreground mt-3 font-light">
                 We've sent a 6-digit verification code to
               </p>
-              <p className="font-semibold text-chef-royal-blue">{email}</p>
+              <p className="font-medium text-foreground mt-1">{email}</p>
             </div>
 
-            <div className="chef-card p-8">
+            <div className="premium-card p-8">
               <OTPInput
                 onComplete={verifyOTPAndCreateAccount}
                 loading={otpLoading}
                 error={otpError}
               />
 
-              <div className="mt-6 space-y-4">
+              <div className="mt-6 space-y-3">
                 <button
                   onClick={goBackToForm}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-chef-royal-blue/20 rounded-xl text-chef-charcoal hover:bg-chef-royal-blue/5 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-xl text-foreground hover:bg-secondary transition-colors text-sm font-medium"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Back to Sign Up
@@ -211,7 +214,7 @@ const Auth = () => {
                 <button
                   onClick={sendOTP}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 text-chef-royal-blue hover:text-chef-royal-blue/80 text-sm"
+                  className="w-full flex items-center justify-center gap-2 text-muted-foreground hover:text-accent text-sm transition-colors"
                 >
                   <Send className="w-4 h-4" />
                   Resend Code
@@ -231,45 +234,49 @@ const Auth = () => {
         description={`${isLogin ? 'Sign in to your' : 'Create a'} ChefsCircle account to share recipes and join culinary clubs.`}
       />
       
-      <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center py-12 px-4">
+      <div className="min-h-screen bg-background pt-24 flex items-center justify-center py-12 px-4">
         <motion.div
           className="max-w-md w-full space-y-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="text-center">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-chef-royal-blue rounded-full flex items-center justify-center">
-                <ChefHat className="w-8 h-8 text-chef-warm-ivory" />
+              <div
+                className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-elevated"
+                style={{ background: 'var(--gradient-charcoal)' }}
+              >
+                <ChefHat className="w-7 h-7 text-background" />
               </div>
             </div>
-            <h2 className="chef-heading-xl text-chef-charcoal">
-              {isLogin ? 'Welcome Back' : 'Join ChefsCircle'}
+            <h2 className="font-playfair text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
+              {isLogin ? 'Welcome back' : (
+                <>Join <span className="text-gold-gradient">ChefsCircle</span></>
+              )}
             </h2>
-            <p className="chef-body text-chef-charcoal/70 mt-2">
+            <p className="text-muted-foreground mt-3 font-light">
               {isLogin 
-                ? 'Sign in to your account to continue your culinary journey'
-                : 'Create your account to start sharing recipes and joining clubs'
-              }
+                ? 'Sign in to continue your culinary journey'
+                : 'Create your account to share recipes and join clubs'}
             </p>
           </div>
 
-          <div className="chef-card p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="premium-card p-8">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {!isLogin && (
                 <div>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-chef-charcoal mb-2">
+                  <label htmlFor="fullName" className="block text-xs font-medium text-foreground/70 mb-2 uppercase tracking-wider">
                     Full Name
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/40 w-5 h-5" />
+                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
                     <input
                       id="fullName"
                       type="text"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-chef-royal-blue/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-chef-royal-blue"
+                      className="w-full pl-11 pr-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all"
                       placeholder="Enter your full name"
                       required={!isLogin}
                     />
@@ -278,36 +285,36 @@ const Auth = () => {
               )}
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-chef-charcoal mb-2">
-                  Email Address
+                <label htmlFor="email" className="block text-xs font-medium text-foreground/70 mb-2 uppercase tracking-wider">
+                  Email
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/40 w-5 h-5" />
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
                   <input
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-chef-royal-blue/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-chef-royal-blue"
-                    placeholder="Enter your email"
+                    className="w-full pl-11 pr-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all"
+                    placeholder="you@example.com"
                     required
                   />
                 </div>
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-chef-charcoal mb-2">
+                <label htmlFor="password" className="block text-xs font-medium text-foreground/70 mb-2 uppercase tracking-wider">
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/40 w-5 h-5" />
+                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
                   <input
                     id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-chef-royal-blue/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-chef-royal-blue"
-                    placeholder="Enter your password"
+                    className="w-full pl-11 pr-4 py-3 bg-secondary/50 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all"
+                    placeholder="••••••••"
                     required
                     minLength={6}
                   />
@@ -317,27 +324,27 @@ const Auth = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full chef-button-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn-glow w-full py-3.5 rounded-xl bg-foreground text-background font-medium hover:bg-foreground/90 transition-all shadow-soft disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Send Verification Code')}
               </button>
             </form>
 
-            <div className="mt-6">
+            <div className="mt-7">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-chef-royal-blue/20" />
+                  <div className="w-full border-t border-border" />
                 </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-chef-warm-ivory text-chef-charcoal/60">Or continue with</span>
+                <div className="relative flex justify-center text-xs uppercase tracking-wider">
+                  <span className="px-3 bg-card text-muted-foreground">Or</span>
                 </div>
               </div>
 
               <button
                 onClick={handleGoogleLogin}
-                className="mt-4 w-full flex justify-center items-center px-4 py-3 border border-chef-royal-blue/20 rounded-xl text-chef-charcoal hover:bg-chef-royal-blue/5 transition-colors"
+                className="mt-5 w-full flex justify-center items-center px-4 py-3 border border-border rounded-xl text-foreground hover:bg-secondary transition-colors text-sm font-medium"
               >
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 mr-2.5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                   <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
@@ -350,22 +357,21 @@ const Auth = () => {
             <div className="mt-6 text-center">
               <button
                 onClick={() => setIsLogin(!isLogin)}
-                className="text-chef-royal-blue hover:text-chef-royal-blue/80 text-sm font-medium"
+                className="text-sm text-muted-foreground hover:text-accent transition-colors"
               >
                 {isLogin 
                   ? "Don't have an account? Sign up"
-                  : "Already have an account? Sign in"
-                }
+                  : "Already have an account? Sign in"}
               </button>
             </div>
           </div>
 
-          <div className="chef-card p-4 bg-chef-royal-blue/5">
+          <div className="rounded-2xl p-4 bg-secondary/40 border border-border">
             <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-chef-royal-blue flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-chef-charcoal/70">
-                <p className="font-medium text-chef-charcoal mb-1">Authentication Required</p>
-                <p>You need to sign in to share recipes, join clubs, and access all ChefsCircle features.</p>
+              <AlertCircle className="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+              <div className="text-xs text-muted-foreground leading-relaxed">
+                <p className="font-medium text-foreground mb-1">Authentication required</p>
+                <p>Sign in to share recipes, join clubs, and access all ChefsCircle features.</p>
               </div>
             </div>
           </div>
