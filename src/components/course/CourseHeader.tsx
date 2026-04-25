@@ -1,7 +1,6 @@
-
-import { Badge } from '@/components/ui/badge';
 import { Clock, Users, Star, ChefHat } from 'lucide-react';
-import { motion } from 'framer-motion';
+import Reveal from '@/components/motion/Reveal';
+import TextReveal from '@/components/motion/TextReveal';
 
 interface CourseHeaderProps {
   course: {
@@ -18,43 +17,48 @@ interface CourseHeaderProps {
 
 const CourseHeader = ({ course }: CourseHeaderProps) => {
   return (
-    <section className="pt-20 pb-12 bg-gradient-to-br from-chef-navy to-chef-royal-blue">
-      <div className="chef-container">
-        <motion.div 
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Badge className="mb-4 bg-chef-gold/20 text-chef-gold border-chef-gold/30 hover:bg-chef-gold/30">
+    <section className="relative overflow-hidden border-b border-border/40 bg-secondary/30 pt-28 pb-16">
+      <div className="pointer-events-none absolute -right-24 top-12 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
+      <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-foreground/5 blur-3xl" />
+
+      <div className="relative mx-auto max-w-4xl px-6 text-center">
+        <Reveal>
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/70 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-accent backdrop-blur-md">
             {course.category}
-          </Badge>
-          <h1 className="chef-heading-xl text-white mb-4">
-            {course.title}
-          </h1>
-          <p className="chef-body-lg text-white/90 mb-6">
+          </span>
+        </Reveal>
+        <h1 className="mt-6 font-playfair text-4xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+          <TextReveal text={course.title} as="span" className="block" />
+        </h1>
+        <Reveal delay={0.4}>
+          <p className="mx-auto mt-5 max-w-2xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
             {course.description}
           </p>
-          
-          <div className="flex flex-wrap items-center justify-center gap-6 text-white/80">
-            <div className="flex items-center gap-2">
-              <ChefHat className="w-5 h-5 text-white" />
-              <span className="text-white">by {course.instructor}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-white" />
-              <span className="text-white">{Math.floor(course.duration / 60)}h {course.duration % 60}m</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="w-5 h-5 text-white" />
-              <span className="text-white">New Course</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 fill-current text-chef-gold" />
-              <span className="text-white">{course.difficulty}</span>
-            </div>
+        </Reveal>
+
+        <Reveal delay={0.55}>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs uppercase tracking-[0.18em] text-foreground/50">
+            <span className="inline-flex items-center gap-2">
+              <ChefHat className="h-3.5 w-3.5" />
+              {course.instructor}
+            </span>
+            <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
+            <span className="inline-flex items-center gap-2">
+              <Clock className="h-3.5 w-3.5" />
+              {Math.floor(course.duration / 60)}h {course.duration % 60}m
+            </span>
+            <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
+            <span className="inline-flex items-center gap-2">
+              <Users className="h-3.5 w-3.5" />
+              New course
+            </span>
+            <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
+            <span className="inline-flex items-center gap-2">
+              <Star className="h-3.5 w-3.5 text-accent" />
+              {course.difficulty}
+            </span>
           </div>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );
