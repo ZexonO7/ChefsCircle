@@ -7,6 +7,9 @@ import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import Reveal from '@/components/motion/Reveal';
+import Parallax from '@/components/motion/Parallax';
+import TextReveal from '@/components/motion/TextReveal';
 
 const Clubs = () => {
   const [searchTerm, setSearchTerm] = useState('');
