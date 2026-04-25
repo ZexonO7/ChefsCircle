@@ -170,39 +170,42 @@ const Auth = () => {
           description="Enter the verification code sent to your email to complete your ChefsCircle account setup."
         />
         
-        <div className="min-h-screen bg-chef-warm-ivory pt-20 flex items-center justify-center py-12 px-4">
+        <div className="min-h-screen bg-background pt-24 flex items-center justify-center py-12 px-4">
           <motion.div
             className="max-w-md w-full space-y-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="text-center">
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-chef-royal-blue rounded-full flex items-center justify-center">
-                  <Mail className="w-8 h-8 text-chef-warm-ivory" />
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-elevated"
+                  style={{ background: 'var(--gradient-charcoal)' }}
+                >
+                  <Mail className="w-7 h-7 text-background" />
                 </div>
               </div>
-              <h2 className="chef-heading-xl text-chef-charcoal">
-                Check Your Email
+              <h2 className="font-playfair text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
+                Check your email
               </h2>
-              <p className="chef-body text-chef-charcoal/70 mt-2">
+              <p className="text-muted-foreground mt-3 font-light">
                 We've sent a 6-digit verification code to
               </p>
-              <p className="font-semibold text-chef-royal-blue">{email}</p>
+              <p className="font-medium text-foreground mt-1">{email}</p>
             </div>
 
-            <div className="chef-card p-8">
+            <div className="premium-card p-8">
               <OTPInput
                 onComplete={verifyOTPAndCreateAccount}
                 loading={otpLoading}
                 error={otpError}
               />
 
-              <div className="mt-6 space-y-4">
+              <div className="mt-6 space-y-3">
                 <button
                   onClick={goBackToForm}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-chef-royal-blue/20 rounded-xl text-chef-charcoal hover:bg-chef-royal-blue/5 transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-xl text-foreground hover:bg-secondary transition-colors text-sm font-medium"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Back to Sign Up
@@ -211,7 +214,7 @@ const Auth = () => {
                 <button
                   onClick={sendOTP}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 text-chef-royal-blue hover:text-chef-royal-blue/80 text-sm"
+                  className="w-full flex items-center justify-center gap-2 text-muted-foreground hover:text-accent text-sm transition-colors"
                 >
                   <Send className="w-4 h-4" />
                   Resend Code
