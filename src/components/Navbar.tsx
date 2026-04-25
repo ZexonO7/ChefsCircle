@@ -125,10 +125,15 @@ const Navbar = () => {
 
         {/* Modern Logo - Center */}
         <Link to="/" className={`flex items-center gap-2.5 group absolute left-1/2 transform -translate-x-1/2 ${isMembershipPage ? 'text-background' : ''}`}>
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center group-hover:scale-105 transition-all duration-300 shadow-lg">
-            <ChefHat className="w-5 h-5 text-primary-foreground" />
+          <div
+            className="w-9 h-9 rounded-xl flex items-center justify-center group-hover:scale-105 transition-all duration-500 shadow-soft"
+            style={{ background: 'var(--gradient-charcoal)' }}
+          >
+            <ChefHat className="w-5 h-5 text-background" />
           </div>
-          <span className={`font-playfair text-xl font-bold tracking-tight transition-colors duration-300 ${isMembershipPage ? 'text-background group-hover:text-background/80' : 'group-hover:text-primary'}`}>ChefsCircle</span>
+          <span className={`font-playfair text-xl font-semibold tracking-tight transition-colors duration-500 ${isMembershipPage ? 'text-background group-hover:text-accent' : 'group-hover:text-accent'}`}>
+            Chefs<span className="text-gold-gradient">Circle</span>
+          </span>
         </Link>
 
         {/* Mobile Menu Button */}
