@@ -1,103 +1,125 @@
-import { motion } from 'framer-motion';
-import { Users, BookOpen, Trophy, Star, Play, Crown, MessageCircle, Sparkles } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Users, BookOpen, Crown, Sparkles, Play, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useMemberCount } from '@/hooks/useMemberCount';
+import Reveal from '@/components/motion/Reveal';
+import TextReveal from '@/components/motion/TextReveal';
+
 const Features = () => {
   const navigate = useNavigate();
   const { memberCount, formatCount } = useMemberCount();
-  
-  const handleCulinaryJourneyClick = () => {
-    navigate('/culinary-journey');
-  };
-  const features = [{
-    icon: <Play className="w-8 h-8" />,
-    title: "Live news",
-    description: "Join world-class chefs in real-time cooking sessions. Learn techniques, ask questions, and cook alongside culinary masters from your own kitchen.",
-    stats: "Weekly sessions"
-  }, {
-    icon: <Crown className="w-8 h-8" />,
-    title: "Master Classes",
-    description: "Access exclusive video masterclasses covering advanced techniques, cuisines from around the world, and professional secrets from Michelin-starred chefs.",
-    stats: "Growing library"
-  }, {
-    icon: <Users className="w-8 h-8" />,
-    title: "Elite Community",
-    description: "Connect with passionate home cooks and culinary enthusiasts. Share your creations, get feedback, and participate in monthly challenges.",
-    stats: "Active community"
-  }, {
-    icon: <Sparkles className="w-8 h-8" />,
-    title: "Premium Content",
-    description: "Get access to exclusive recipes, technique guides, ingredient spotlights, and behind-the-scenes content from top culinary destinations.",
-    stats: "New content weekly"
-  }];
-  return <section id="features" className="py-8 sm:py-12 md:py-16 lg:py-24 bg-chef-cream">
-      <div className="container mx-auto px-3 sm:px-4 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-4 px-3 py-1.5 sm:px-4 sm:py-2 bg-chef-royal-green/20 text-chef-royal-green rounded-full text-xs sm:text-sm font-medium">
-            <Trophy className="w-3 h-3 sm:w-4 sm:h-4" />
-            Premium Features
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-chef-charcoal font-playfair">
-            The Future of Culinary Education
+
+  const features = [
+    {
+      icon: Play,
+      title: 'Live Cook-Alongs',
+      description:
+        'Cook in real time with world-class chefs. Ask questions, taste together, and learn the why behind every move.',
+      tag: 'Weekly',
+    },
+    {
+      icon: Crown,
+      title: 'Master Classes',
+      description:
+        'A growing library of cinematic masterclasses — covering technique, regional cuisines, and modern craft.',
+      tag: 'Premium',
+    },
+    {
+      icon: Users,
+      title: 'A Considered Community',
+      description:
+        'A small, thoughtful circle of home cooks who care. Share creations, get sharp feedback, and grow together.',
+      tag: 'Members',
+    },
+    {
+      icon: Sparkles,
+      title: 'Editorial Recipes',
+      description:
+        'Every recipe is tested and styled with care — from quick weeknight wins to weekend showpieces.',
+      tag: 'Curated',
+    },
+  ];
+
+  return (
+    <section id="features" className="relative bg-background py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-accent">
+              <Sparkles className="h-3 w-3" />
+              The Platform
+            </span>
+          </Reveal>
+          <h2 className="mt-6 font-playfair text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            <TextReveal text="A new home for" as="span" className="block" />
+            <TextReveal
+              text="modern culinary craft."
+              as="span"
+              className="block italic text-foreground/70"
+              delay={0.25}
+            />
           </h2>
-          <p className="text-chef-charcoal/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto font-inter mb-3 sm:mb-4 px-2">
-            Experience a revolutionary approach to learning cooking through our interactive platform designed for the modern home chef.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-chef-charcoal/60">
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>{memberCount !== null && memberCount > 0 ? `${formatCount(memberCount)} members` : 'Growing community'}</span>
+          <Reveal delay={0.4}>
+            <p className="mx-auto mt-6 max-w-xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
+              Everything you need to grow as a cook — beautifully designed, quietly
+              powerful, and built around real people in real kitchens.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.5}>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-[0.2em] text-foreground/40">
+              <span className="inline-flex items-center gap-2">
+                <Users className="h-3.5 w-3.5" />
+                {memberCount && memberCount > 0
+                  ? `${formatCount(memberCount)} Members`
+                  : 'Growing community'}
+              </span>
+              <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
+              <span className="inline-flex items-center gap-2">
+                <BookOpen className="h-3.5 w-3.5" />
+                Free courses available
+              </span>
             </div>
-            <div className="hidden sm:block w-1 h-1 bg-chef-charcoal/20 rounded-full"></div>
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Free courses available</span>
-            </div>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12">
-          {features.map((feature, index) => <motion.div key={index} initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.5,
-          delay: index * 0.1
-        }} viewport={{
-          once: true
-        }}>
-              <Card className="chef-card h-full group hover:shadow-xl transition-all duration-300 bg-chef-cream">
-                <CardContent className="p-4 sm:p-6 md:p-8 text-center bg-chef-cream">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 mx-auto mb-4 sm:mb-6 bg-chef-royal-green/10 rounded-full flex items-center justify-center text-chef-royal-green group-hover:bg-chef-royal-green group-hover:text-white transition-all duration-300">
-                    <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
-                      {feature.icon}
+        <div className="mt-20 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {features.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <Reveal key={f.title} delay={0.1 + i * 0.08}>
+                <div className="premium-card group h-full p-7">
+                  <div className="flex items-start justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/[0.04] text-foreground transition-colors group-hover:bg-accent/15 group-hover:text-accent">
+                      <Icon className="h-5 w-5" />
                     </div>
+                    <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-foreground/40">
+                      {f.tag}
+                    </span>
                   </div>
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-4 text-chef-charcoal font-playfair">
-                    {feature.title}
+                  <h3 className="mt-6 font-playfair text-xl font-semibold text-foreground">
+                    {f.title}
                   </h3>
-                  <p className="text-chef-charcoal/70 mb-3 sm:mb-4 font-inter leading-relaxed text-xs sm:text-sm md:text-base">
-                    {feature.description}
+                  <p className="mt-3 font-inter text-sm leading-relaxed text-foreground/60">
+                    {f.description}
                   </p>
-                  <div className="text-xs sm:text-sm font-medium text-chef-royal-green">
-                    {feature.stats}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>)}
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
 
-        <div className="text-center">
-          <Button onClick={handleCulinaryJourneyClick} className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-4 bg-chef-royal-green text-chef-warm-ivory hover:bg-chef-forest font-medium rounded-xl transition-all duration-300 text-sm sm:text-base">
-            Start Your Culinary Journey
-          </Button>
-        </div>
+        <Reveal delay={0.4} className="mt-16 text-center">
+          <button
+            onClick={() => navigate('/culinary-journey')}
+            className="btn-glow group inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+          >
+            Begin your culinary journey
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </button>
+        </Reveal>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Features;
