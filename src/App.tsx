@@ -34,6 +34,7 @@ import CulinaryJourney from "./pages/CulinaryJourney";
 import QuestionDetail from "./pages/QuestionDetail";
 import UserProfile from "./pages/UserProfile";
 import CertificateVerify from "./pages/CertificateVerify";
+import PageTransition from "@/components/motion/PageTransition";
 
 const queryClient = new QueryClient();
 
@@ -45,35 +46,37 @@ const App = () => (
       <BrowserRouter>
         <AuthProvider>
           <PageLoadingWrapper>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/team/advithya-bhardwaj" element={<AdvithyaBhardwaj />} />
-              <Route path="/careers" element={<Careers />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPostDetail />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:id" element={<CourseDetail />} />
-              <Route path="/clubs" element={<Clubs />} />
-              <Route path="/library" element={<Library />} />
-              <Route path="/library/question/:id" element={<QuestionDetail />} />
-              <Route path="/recipes" element={<Recipes />} />
-              <Route path="/ingredients-to-recipes" element={<IngredientsToRecipes />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/admin" element={<AdminPortal />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/tech-details" element={<TechDetails />} />
-              <Route path="/development-process" element={<DevelopmentProcess />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/recipes/:id" element={<RecipeDetail />} />
-              <Route path="/membership" element={<Membership />} />
-              <Route path="/culinary-journey" element={<CulinaryJourney />} />
-          <Route path="/profile/:userId" element={<UserProfile />} />
-          <Route path="/id/:certificateId" element={<CertificateVerify />} />
-          <Route path="*" element={<NotFound />} />
-            </Routes>
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/team/advithya-bhardwaj" element={<AdvithyaBhardwaj />} />
+                <Route path="/careers" element={<Careers />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPostDetail />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/courses/:id" element={<CourseDetail />} />
+                <Route path="/clubs" element={<Clubs />} />
+                <Route path="/library" element={<Library />} />
+                <Route path="/library/question/:id" element={<QuestionDetail />} />
+                <Route path="/recipes" element={<Recipes />} />
+                <Route path="/ingredients-to-recipes" element={<IngredientsToRecipes />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/admin" element={<AdminPortal />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/tech-details" element={<TechDetails />} />
+                <Route path="/development-process" element={<DevelopmentProcess />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/recipes/:id" element={<RecipeDetail />} />
+                <Route path="/membership" element={<Membership />} />
+                <Route path="/culinary-journey" element={<CulinaryJourney />} />
+                <Route path="/profile/:userId" element={<UserProfile />} />
+                <Route path="/id/:certificateId" element={<CertificateVerify />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </PageTransition>
           </PageLoadingWrapper>
         </AuthProvider>
       </BrowserRouter>
