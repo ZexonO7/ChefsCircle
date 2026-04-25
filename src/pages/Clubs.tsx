@@ -171,7 +171,7 @@ const Clubs = () => {
       <div className="min-h-screen bg-background pt-20">
         {/* Hero Section — premium charcoal with parallax + gold accent */}
         <section className="relative overflow-hidden grain py-24 md:py-32" style={{ background: 'var(--gradient-charcoal)' }}>
-          <Parallax speed={-0.3} className="absolute inset-0 opacity-[0.18]">
+          <Parallax offset={60} className="absolute inset-0 opacity-[0.18]">
             <img
               src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=2128&q=80"
               alt=""
