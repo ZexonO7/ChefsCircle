@@ -31,8 +31,7 @@ export const useMemberCount = () => {
 
     // Create channel and bind listener BEFORE subscribing.
     const channel = supabase.channel(`profiles-count-${Math.random().toString(36).slice(2)}`);
-    channel.on(
-      // @ts-expect-error - postgres_changes is a valid event
+    (channel as any).on(
       'postgres_changes',
       { event: '*', schema: 'public', table: 'profiles' },
       () => {
