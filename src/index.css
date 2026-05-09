@@ -7,49 +7,49 @@
 
 @layer base {
   :root {
-    /* Warm ivory canvas, deep charcoal ink, gold accent */
-    --background: 38 40% 97%;
-    --foreground: 24 10% 12%;
+    /* Beige canvas, black ink, brown accent, white surfaces */
+    --background: 36 30% 94%;
+    --foreground: 0 0% 8%;
 
-    --card: 38 40% 98%;
-    --card-foreground: 24 10% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
 
-    --popover: 38 40% 98%;
-    --popover-foreground: 24 10% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 8%;
 
-    --primary: 24 12% 14%;
-    --primary-foreground: 38 40% 97%;
+    --primary: 0 0% 8%;
+    --primary-foreground: 36 30% 96%;
 
-    --secondary: 35 35% 92%;
-    --secondary-foreground: 24 12% 14%;
+    --secondary: 32 25% 88%;
+    --secondary-foreground: 0 0% 8%;
 
-    --muted: 35 25% 93%;
-    --muted-foreground: 24 8% 38%;
+    --muted: 34 22% 90%;
+    --muted-foreground: 25 12% 32%;
 
-    --accent: 38 55% 52%;
-    --accent-foreground: 24 12% 14%;
+    --accent: 26 38% 32%;
+    --accent-foreground: 36 30% 96%;
 
-    --destructive: 0 70% 48%;
-    --destructive-foreground: 38 40% 97%;
+    --destructive: 0 70% 42%;
+    --destructive-foreground: 36 30% 96%;
 
-    --border: 30 18% 86%;
-    --input: 30 18% 86%;
-    --ring: 38 55% 52%;
+    --border: 30 18% 82%;
+    --input: 30 18% 82%;
+    --ring: 26 38% 32%;
 
     --radius: 0.875rem;
 
-    /* Brand-extended tokens */
-    --gold: 38 55% 52%;
-    --gold-soft: 38 60% 70%;
-    --warm-orange: 22 78% 56%;
-    --ivory: 38 40% 97%;
-    --charcoal: 24 12% 14%;
+    /* Brand-extended tokens (brown / beige / black / white) */
+    --gold: 26 38% 32%;
+    --gold-soft: 28 32% 55%;
+    --warm-orange: 22 30% 40%;
+    --ivory: 36 30% 96%;
+    --charcoal: 0 0% 8%;
 
     /* Premium gradients & shadows */
-    --gradient-luxury: linear-gradient(135deg, hsl(38 40% 98%) 0%, hsl(35 35% 94%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(38 55% 52%) 0%, hsl(38 60% 68%) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(38 40% 97%) 0%, hsl(22 60% 90%) 100%);
-    --gradient-charcoal: linear-gradient(135deg, hsl(24 12% 14%) 0%, hsl(24 8% 22%) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(36 30% 96%) 0%, hsl(32 25% 90%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(26 38% 28%) 0%, hsl(28 32% 50%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(36 30% 94%) 0%, hsl(28 28% 82%) 100%);
+    --gradient-charcoal: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 18%) 100%);
 
     --shadow-soft: 0 1px 2px hsl(24 12% 14% / 0.04), 0 8px 24px -8px hsl(24 12% 14% / 0.08);
     --shadow-elevated: 0 4px 12px hsl(24 12% 14% / 0.06), 0 24px 48px -16px hsl(24 12% 14% / 0.12);
