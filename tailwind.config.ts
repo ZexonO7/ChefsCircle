@@ -64,17 +64,17 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				chef: {
-					'royal-green': 'hsl(149, 97%, 13%)',
-					'royal-blue': 'hsl(226, 81%, 22%)',
-					'warm-ivory': 'hsl(42, 39%, 96%)',
-					'charcoal': 'hsl(0, 0%, 11%)',
-					'gold': 'hsl(47, 54%, 50%)',
-					'green-light': 'hsl(149, 97%, 22%)',
-					'blue-light': 'hsl(226, 70%, 32%)',
-					'cream': 'hsl(44, 71%, 97%)',
-					'forest': 'hsl(149, 75%, 14%)',
-					'navy': 'hsl(226, 81%, 18%)',
-					'bronze': 'hsl(47, 44%, 48%)'
+					'royal-green': 'hsl(26, 38%, 28%)',
+					'royal-blue': 'hsl(0, 0%, 8%)',
+					'warm-ivory': 'hsl(36, 30%, 96%)',
+					'charcoal': 'hsl(0, 0%, 8%)',
+					'gold': 'hsl(28, 32%, 45%)',
+					'green-light': 'hsl(26, 32%, 38%)',
+					'blue-light': 'hsl(0, 0%, 18%)',
+					'cream': 'hsl(36, 30%, 94%)',
+					'forest': 'hsl(26, 38%, 22%)',
+					'navy': 'hsl(0, 0%, 4%)',
+					'bronze': 'hsl(28, 32%, 38%)'
 				}
 			},
 			borderRadius: {
