@@ -88,9 +88,9 @@ export default {
 				'space': ['Space Grotesk', 'sans-serif'],
 			},
 			backgroundImage: {
-				'chef-gradient': 'linear-gradient(135deg, #014421 0%, #0B1F66 100%)',
-				'gold-gradient': 'linear-gradient(135deg, #C2A83E 0%, #A8944D 100%)',
-				'luxury-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)',
+				'chef-gradient': 'linear-gradient(135deg, #2B1D14 0%, #000000 100%)',
+				'gold-gradient': 'linear-gradient(135deg, #6B4A2B 0%, #A8845A 100%)',
+				'luxury-gradient': 'linear-gradient(135deg, #F5EFE6 0%, #EFE6D6 100%)',
 			},
 			boxShadow: {
 				'chef-luxury': '0 20px 25px -5px rgba(1, 68, 33, 0.1), 0 10px 10px -5px rgba(1, 68, 33, 0.04)',
