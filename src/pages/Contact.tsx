@@ -40,7 +40,7 @@ const Contact = () => {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              <ContactInfo />
+
               
               {/* Additional Info */}
               <div className="bg-chef-royal-green/10 rounded-lg p-6 border border-chef-royal-green/20">
