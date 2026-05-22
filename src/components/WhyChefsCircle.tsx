@@ -14,27 +14,27 @@ const stats = [
 const pillars = [
   {
     icon: ChefHat,
-    title: 'Expert-led instruction',
+    title: 'Real chefs, real talk',
     body:
-      'Renowned chefs share the why behind the craft — not just recipes, but real, applied technique.',
+      "Lessons from people who actually cook for a living. They'll show you the why, not just the recipe.",
   },
   {
     icon: Users,
-    title: 'A considered community',
+    title: 'A crew that gets it',
     body:
-      'A small, kind, ambitious group of home cooks. Share what you cooked, get thoughtful feedback.',
+      "Small group of home cooks who are kind, curious, and into it. Post what you made, get useful notes back.",
   },
   {
     icon: BookOpen,
-    title: 'Structured paths',
+    title: 'Go at your pace',
     body:
-      'Move from fundamentals to mastery through carefully sequenced courses and live sessions.',
+      "Start with the basics or jump straight to the fun stuff. Courses build on each other when you're ready.",
   },
   {
     icon: Award,
-    title: 'Recognition that matters',
+    title: 'Stuff to be proud of',
     body:
-      'Earn beautiful, verifiable certificates and build a portfolio of work you can be proud of.',
+      "Earn nice little certificates and build a collection of dishes you actually want to cook again.",
   },
 ];
 
