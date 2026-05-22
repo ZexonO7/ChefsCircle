@@ -11,30 +11,30 @@ const Features = () => {
   const features = [
     {
       icon: Play,
-      title: 'Live Cook-Alongs',
+      title: 'Live cook-alongs',
       description:
-        'Cook in real time with world-class chefs. Ask questions, taste together, and learn the why behind every move.',
+        "Hop in your kitchen with a chef on screen. Ask dumb questions, taste as you go, learn why stuff works.",
       tag: 'Weekly',
     },
     {
       icon: Crown,
-      title: 'Master Classes',
+      title: 'Masterclasses',
       description:
-        'A growing library of cinematic masterclasses — covering technique, regional cuisines, and modern craft.',
-      tag: 'Premium',
-    },
-    {
-      icon: Users,
-      title: 'A Considered Community',
-      description:
-        'A small, thoughtful circle of home cooks who care. Share creations, get sharp feedback, and grow together.',
+        'A growing stash of beautifully shot classes — techniques, regional food, modern twists. Watch anytime.',
       tag: 'Members',
     },
     {
-      icon: Sparkles,
-      title: 'Editorial Recipes',
+      icon: Users,
+      title: 'A friendly crew',
       description:
-        'Every recipe is tested and styled with care — from quick weeknight wins to weekend showpieces.',
+        "A small group of home cooks who actually care. Share what you made, get real feedback, level up together.",
+      tag: 'Community',
+    },
+    {
+      icon: Sparkles,
+      title: 'Recipes worth keeping',
+      description:
+        "Every recipe is tested in real kitchens — quick weeknight stuff and the occasional show-off dinner.",
       tag: 'Curated',
     },
   ];
@@ -46,13 +46,13 @@ const Features = () => {
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-accent">
               <Sparkles className="h-3 w-3" />
-              The Platform
+              What's inside
             </span>
           </Reveal>
           <h2 className="mt-6 font-playfair text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            <TextReveal text="A new home for" as="span" className="block" />
+            <TextReveal text="Everything you need" as="span" className="block" />
             <TextReveal
-              text="modern culinary craft."
+              text="to actually get good."
               as="span"
               className="block italic text-foreground/70"
               delay={0.25}
@@ -60,10 +60,11 @@ const Features = () => {
           </h2>
           <Reveal delay={0.4}>
             <p className="mx-auto mt-6 max-w-xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
-              Everything you need to grow as a cook — beautifully designed, quietly
-              powerful, and built around real people in real kitchens.
+              No fluff, no gatekeeping. Just good lessons, good people, and a kitchen
+              that feels a little more fun to be in.
             </p>
           </Reveal>
+
 
           <Reveal delay={0.5}>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs uppercase tracking-[0.2em] text-foreground/40">
