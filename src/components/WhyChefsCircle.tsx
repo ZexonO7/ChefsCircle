@@ -58,13 +58,13 @@ const WhyChefsCircle = () => {
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/70 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-foreground/70 backdrop-blur-md">
               <ChefHat className="h-3 w-3" />
-              Why ChefsCircle
+              Why us
             </span>
           </Reveal>
           <h2 className="mt-6 font-playfair text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            <TextReveal text="The future of" as="span" className="block" />
+            <TextReveal text="Learning to cook," as="span" className="block" />
             <TextReveal
-              text="culinary education."
+              text="minus the fuss."
               as="span"
               className="block italic text-gold-gradient"
               delay={0.25}
@@ -72,9 +72,8 @@ const WhyChefsCircle = () => {
           </h2>
           <Reveal delay={0.4}>
             <p className="mx-auto mt-6 max-w-2xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
-              Cooking shows inspire — but they don&apos;t teach. ChefsCircle bridges
-              that gap with intimate, personalized, deeply considered culinary
-              education.
+              Cooking shows look cool but don't really teach. We do the opposite —
+              small classes, real chefs, and a community that's hyped when your dinner turns out.
             </p>
           </Reveal>
         </div>
