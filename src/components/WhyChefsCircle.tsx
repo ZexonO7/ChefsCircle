@@ -136,7 +136,7 @@ const WhyChefsCircle = () => {
             onClick={() => window.scrollTo(0, 0)}
             className="btn-glow group inline-flex items-center gap-2 rounded-full border border-foreground/20 bg-background/60 px-7 py-3.5 text-sm font-medium text-foreground backdrop-blur-md transition-colors hover:border-accent/50 hover:text-accent"
           >
-            Read our approach
+            More about us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </Reveal>
