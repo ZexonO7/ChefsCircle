@@ -14,27 +14,27 @@ const stats = [
 const pillars = [
   {
     icon: ChefHat,
-    title: 'Expert-led instruction',
+    title: 'Real chefs, real talk',
     body:
-      'Renowned chefs share the why behind the craft — not just recipes, but real, applied technique.',
+      "Lessons from people who actually cook for a living. They'll show you the why, not just the recipe.",
   },
   {
     icon: Users,
-    title: 'A considered community',
+    title: 'A crew that gets it',
     body:
-      'A small, kind, ambitious group of home cooks. Share what you cooked, get thoughtful feedback.',
+      "Small group of home cooks who are kind, curious, and into it. Post what you made, get useful notes back.",
   },
   {
     icon: BookOpen,
-    title: 'Structured paths',
+    title: 'Go at your pace',
     body:
-      'Move from fundamentals to mastery through carefully sequenced courses and live sessions.',
+      "Start with the basics or jump straight to the fun stuff. Courses build on each other when you're ready.",
   },
   {
     icon: Award,
-    title: 'Recognition that matters',
+    title: 'Stuff to be proud of',
     body:
-      'Earn beautiful, verifiable certificates and build a portfolio of work you can be proud of.',
+      "Earn nice little certificates and build a collection of dishes you actually want to cook again.",
   },
 ];
 
@@ -58,13 +58,13 @@ const WhyChefsCircle = () => {
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/70 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-foreground/70 backdrop-blur-md">
               <ChefHat className="h-3 w-3" />
-              Why ChefsCircle
+              Why us
             </span>
           </Reveal>
           <h2 className="mt-6 font-playfair text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            <TextReveal text="The future of" as="span" className="block" />
+            <TextReveal text="Learning to cook," as="span" className="block" />
             <TextReveal
-              text="culinary education."
+              text="minus the fuss."
               as="span"
               className="block italic text-gold-gradient"
               delay={0.25}
@@ -72,9 +72,8 @@ const WhyChefsCircle = () => {
           </h2>
           <Reveal delay={0.4}>
             <p className="mx-auto mt-6 max-w-2xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
-              Cooking shows inspire — but they don&apos;t teach. ChefsCircle bridges
-              that gap with intimate, personalized, deeply considered culinary
-              education.
+              Cooking shows look cool but don't really teach. We do the opposite —
+              small classes, real chefs, and a community that's hyped when your dinner turns out.
             </p>
           </Reveal>
         </div>
@@ -137,7 +136,7 @@ const WhyChefsCircle = () => {
             onClick={() => window.scrollTo(0, 0)}
             className="btn-glow group inline-flex items-center gap-2 rounded-full border border-foreground/20 bg-background/60 px-7 py-3.5 text-sm font-medium text-foreground backdrop-blur-md transition-colors hover:border-accent/50 hover:text-accent"
           >
-            Read our approach
+            More about us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </Reveal>
