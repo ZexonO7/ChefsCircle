@@ -14,8 +14,8 @@ type PageLayoutProps = {
 const PageLayout = ({ children, showContact = true }: PageLayoutProps) => {
   const location = useLocation();
 
-  // Only show ContactInfo on Home and About pages
-  const showContactInfo = showContact && (location.pathname === '/' || location.pathname === '/about');
+  // Only show ContactInfo on About page
+  const showContactInfo = showContact && location.pathname === '/about';
 
   // Effect to scroll to top when route changes
   useEffect(() => {
