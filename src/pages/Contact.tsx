@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ContactForm from '@/components/ContactForm';
-import ContactInfo from '@/components/ContactInfo';
+
 
 const Contact = () => {
   return (
