@@ -83,14 +83,14 @@ const Hero = () => {
           className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-foreground/80 backdrop-blur-md"
         >
           <Sparkles className="h-3.5 w-3.5 text-accent" />
-          The Culinary Circle
+          Hey, welcome in 👋
         </motion.div>
 
         <h1 className="font-playfair text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[88px]">
-          <TextReveal text="Cook What You" as="span" className="block" />
+          <TextReveal text="Cook stuff you" as="span" className="block" />
           <span className="mt-2 block">
             <TextReveal
-              text="Crave."
+              text="actually crave."
               as="span"
               className="text-gold-gradient italic"
               delay={0.35}
@@ -104,9 +104,8 @@ const Hero = () => {
           transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 max-w-xl font-inter text-base text-foreground/70 sm:text-lg md:text-xl"
         >
-          <span className="font-medium text-foreground">Cook. Create. Connect.</span>{' '}
-          A private circle for the world&apos;s most curious home chefs — masterclasses,
-          live cook-alongs, and a community that shares your craving for craft.
+          A chill little club for people who love food. Cook along with great chefs,
+          swap recipes, and hang out with folks who geek out over dinner as much as you do.
         </motion.p>
 
         <motion.div
@@ -119,14 +118,14 @@ const Hero = () => {
             onClick={handlePrimaryCta}
             className="btn-glow group inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-8 py-4 text-sm font-medium tracking-wide text-background transition-colors hover:bg-foreground/90 sm:text-base"
           >
-            {user ? 'Enter the Circle' : 'Join the Circle'}
+            {user ? "Let's cook" : 'Jump in'}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button
             onClick={handleSecondaryCta}
             className="btn-glow group inline-flex items-center justify-center gap-2 rounded-full border border-foreground/15 bg-background/60 px-8 py-4 text-sm font-medium tracking-wide text-foreground backdrop-blur-md transition-colors hover:border-accent/50 hover:text-accent sm:text-base"
           >
-            Explore Courses
+            Peek at courses
             <ChefHat className="h-4 w-4 transition-transform group-hover:rotate-6" />
           </button>
         </motion.div>
@@ -140,12 +139,12 @@ const Hero = () => {
         >
           <span className="flex items-center gap-2">
             <Users className="h-3.5 w-3.5" />
-            {memberCount && memberCount > 0 ? `${formatCount(memberCount)} Members` : 'Growing Circle'}
+            {memberCount && memberCount > 0 ? `${formatCount(memberCount)} cooking with us` : 'Growing crew'}
           </span>
           <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
-          <span>Expert-Led Masterclasses</span>
+          <span>Live cook-alongs</span>
           <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
-          <span>Members Only</span>
+          <span>No gatekeeping</span>
         </motion.div>
       </motion.div>
 
