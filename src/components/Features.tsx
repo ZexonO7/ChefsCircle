@@ -11,30 +11,30 @@ const Features = () => {
   const features = [
     {
       icon: Play,
-      title: 'Live cook-alongs',
+      title: 'Live masterclasses',
       description:
-        "Hop in your kitchen with a chef on screen. Ask dumb questions, taste as you go, learn why stuff works.",
+        'Cook in real time with chefs on screen. Ask questions, taste as you go, understand the why behind every technique.',
       tag: 'Weekly',
     },
     {
       icon: Crown,
-      title: 'Masterclasses',
+      title: 'On-demand library',
       description:
-        'A growing stash of beautifully shot classes — techniques, regional food, modern twists. Watch anytime.',
+        'A growing archive of beautifully shot classes — techniques, regional cuisines, and modern interpretations.',
       tag: 'Members',
     },
     {
       icon: Users,
-      title: 'A friendly crew',
+      title: 'A considered community',
       description:
-        "A small group of home cooks who actually care. Share what you made, get real feedback, level up together.",
+        'A focused circle of home cooks who care about craft. Share your work, get thoughtful feedback, refine your practice.',
       tag: 'Community',
     },
     {
       icon: Sparkles,
       title: 'Recipes worth keeping',
       description:
-        "Every recipe is tested in real kitchens — quick weeknight stuff and the occasional show-off dinner.",
+        'Every recipe is tested in real kitchens — from quick weeknight dishes to refined occasion menus.',
       tag: 'Curated',
     },
   ];
@@ -46,13 +46,13 @@ const Features = () => {
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-accent">
               <Sparkles className="h-3 w-3" />
-              What's inside
+              The platform
             </span>
           </Reveal>
           <h2 className="mt-6 font-playfair text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
             <TextReveal text="Everything you need" as="span" className="block" />
             <TextReveal
-              text="to actually get good."
+              text="to master your craft."
               as="span"
               className="block italic text-foreground/70"
               delay={0.25}
@@ -60,8 +60,8 @@ const Features = () => {
           </h2>
           <Reveal delay={0.4}>
             <p className="mx-auto mt-6 max-w-xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
-              No fluff, no gatekeeping. Just good lessons, good people, and a kitchen
-              that feels a little more fun to be in.
+              A focused set of tools and experiences, designed for cooks who want
+              to go deeper.
             </p>
           </Reveal>
 
@@ -114,7 +114,7 @@ const Features = () => {
             onClick={() => navigate('/culinary-journey')}
             className="btn-glow group inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
           >
-            Start cooking
+            Begin your journey
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
         </Reveal>
