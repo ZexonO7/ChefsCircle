@@ -80,18 +80,17 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-foreground/80 backdrop-blur-md"
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.22em] text-foreground/80 backdrop-blur-md"
         >
           <Sparkles className="h-3.5 w-3.5 text-accent" />
-          Hey, welcome in 👋
+          ChefsCircle
         </motion.div>
 
         <h1 className="font-playfair text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[88px]">
-          <TextReveal text="Cook stuff you" as="span" className="block" />
+          <TextReveal text="The art of" as="span" className="block" />
           <span className="mt-2 block">
             <TextReveal
-              text="actually crave."
-              as="span"
+              text="cooking, refined."
               className="text-gold-gradient italic"
               delay={0.35}
             />
@@ -104,8 +103,8 @@ const Hero = () => {
           transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 max-w-xl font-inter text-base text-foreground/70 sm:text-lg md:text-xl"
         >
-          A chill little club for people who love food. Cook along with great chefs,
-          swap recipes, and hang out with folks who geek out over dinner as much as you do.
+          A modern culinary platform — masterclasses, live sessions, and a
+          considered community for people who take food seriously.
         </motion.p>
 
         <motion.div
@@ -118,14 +117,14 @@ const Hero = () => {
             onClick={handlePrimaryCta}
             className="btn-glow group inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-8 py-4 text-sm font-medium tracking-wide text-background transition-colors hover:bg-foreground/90 sm:text-base"
           >
-            {user ? "Let's cook" : 'Jump in'}
+            {user ? 'Enter' : 'Get started'}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button
             onClick={handleSecondaryCta}
             className="btn-glow group inline-flex items-center justify-center gap-2 rounded-full border border-foreground/15 bg-background/60 px-8 py-4 text-sm font-medium tracking-wide text-foreground backdrop-blur-md transition-colors hover:border-accent/50 hover:text-accent sm:text-base"
           >
-            Peek at courses
+            Explore courses
             <ChefHat className="h-4 w-4 transition-transform group-hover:rotate-6" />
           </button>
         </motion.div>
