@@ -46,13 +46,13 @@ const Features = () => {
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-accent">
               <Sparkles className="h-3 w-3" />
-              What's inside
+              The platform
             </span>
           </Reveal>
           <h2 className="mt-6 font-playfair text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
             <TextReveal text="Everything you need" as="span" className="block" />
             <TextReveal
-              text="to actually get good."
+              text="to master your craft."
               as="span"
               className="block italic text-foreground/70"
               delay={0.25}
@@ -60,8 +60,8 @@ const Features = () => {
           </h2>
           <Reveal delay={0.4}>
             <p className="mx-auto mt-6 max-w-xl font-inter text-base leading-relaxed text-foreground/60 sm:text-lg">
-              No fluff, no gatekeeping. Just good lessons, good people, and a kitchen
-              that feels a little more fun to be in.
+              A focused set of tools and experiences, designed for cooks who want
+              to go deeper.
             </p>
           </Reveal>
 
