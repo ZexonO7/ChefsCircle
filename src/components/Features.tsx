@@ -11,30 +11,30 @@ const Features = () => {
   const features = [
     {
       icon: Play,
-      title: 'Live cook-alongs',
+      title: 'Live masterclasses',
       description:
-        "Hop in your kitchen with a chef on screen. Ask dumb questions, taste as you go, learn why stuff works.",
+        'Cook in real time with chefs on screen. Ask questions, taste as you go, understand the why behind every technique.',
       tag: 'Weekly',
     },
     {
       icon: Crown,
-      title: 'Masterclasses',
+      title: 'On-demand library',
       description:
-        'A growing stash of beautifully shot classes — techniques, regional food, modern twists. Watch anytime.',
+        'A growing archive of beautifully shot classes — techniques, regional cuisines, and modern interpretations.',
       tag: 'Members',
     },
     {
       icon: Users,
-      title: 'A friendly crew',
+      title: 'A considered community',
       description:
-        "A small group of home cooks who actually care. Share what you made, get real feedback, level up together.",
+        'A focused circle of home cooks who care about craft. Share your work, get thoughtful feedback, refine your practice.',
       tag: 'Community',
     },
     {
       icon: Sparkles,
       title: 'Recipes worth keeping',
       description:
-        "Every recipe is tested in real kitchens — quick weeknight stuff and the occasional show-off dinner.",
+        'Every recipe is tested in real kitchens — from quick weeknight dishes to refined occasion menus.',
       tag: 'Curated',
     },
   ];
