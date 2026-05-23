@@ -138,12 +138,12 @@ const Hero = () => {
         >
           <span className="flex items-center gap-2">
             <Users className="h-3.5 w-3.5" />
-            {memberCount && memberCount > 0 ? `${formatCount(memberCount)} cooking with us` : 'Growing crew'}
+            {memberCount && memberCount > 0 ? `${formatCount(memberCount)} members` : 'A growing community'}
           </span>
           <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
-          <span>Live cook-alongs</span>
+          <span>Live masterclasses</span>
           <span className="hidden h-1 w-1 rounded-full bg-foreground/20 sm:block" />
-          <span>No gatekeeping</span>
+          <span>Curated by chefs</span>
         </motion.div>
       </motion.div>
 
