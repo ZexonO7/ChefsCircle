@@ -45,7 +45,7 @@ const loadYouTubeAPI = (): Promise<void> => {
 const VideoPlayer = ({ videoUrl, title, duration, onVideoComplete, onProgressUpdate }: VideoPlayerProps) => {
   const playerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const progressIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [isAPIReady, setIsAPIReady] = useState(false);
   const [hasCompleted, setHasCompleted] = useState(false);
   const playerId = useRef(`yt-player-${Math.random().toString(36).substr(2, 9)}`);

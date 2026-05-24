@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import PageLayout from '@/components/PageLayout';
 import SEO from '@/components/SEO';
 import ContactForm from '@/components/ContactForm';
-import ContactInfo from '@/components/ContactInfo';
+
 
 const Contact = () => {
   return (
@@ -40,7 +40,7 @@ const Contact = () => {
 
             {/* Contact Information */}
             <div className="space-y-8">
-              <ContactInfo />
+
               
               {/* Additional Info */}
               <div className="bg-chef-royal-green/10 rounded-lg p-6 border border-chef-royal-green/20">

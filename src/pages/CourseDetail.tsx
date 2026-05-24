@@ -10,6 +10,7 @@ import CourseHeader from '@/components/course/CourseHeader';
 import CourseProgress from '@/components/course/CourseProgress';
 import LessonsList from '@/components/course/LessonsList';
 import CurrentLesson from '@/components/course/CurrentLesson';
+import CertificateCard from '@/components/course/CertificateCard';
 import EnrollmentModal, { EnrollmentData } from '@/components/course/EnrollmentModal';
 import { GraduationCap, Clock, BookOpen } from 'lucide-react';
 
@@ -188,7 +189,19 @@ const CourseDetail = () => {
                   completedLessons={completedLessons}
                   totalLessons={course.totalLessons}
                 />
-                
+
+                {completedLessons.length >= course.totalLessons && (
+                  <CertificateCard
+                    recipientName={
+                      (user?.user_metadata as { full_name?: string } | undefined)?.full_name ||
+                      user?.email?.split('@')[0] ||
+                      'ChefsCircle Member'
+                    }
+                    courseTitle={course.title}
+                    instructor={course.instructor}
+                  />
+                )}
+
                 <LessonsList
                   lessons={course.lessons}
                   currentLesson={currentLesson}

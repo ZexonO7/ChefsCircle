@@ -7,6 +7,9 @@ import { useAuth } from '@/components/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useNavigate } from 'react-router-dom';
+import Reveal from '@/components/motion/Reveal';
+import Parallax from '@/components/motion/Parallax';
+import TextReveal from '@/components/motion/TextReveal';
 
 const Clubs = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -165,139 +168,158 @@ const Clubs = () => {
         keywords={['culinary clubs', 'cooking community', 'chef forums', 'culinary discussion', 'cooking groups']}
       />
       
-      <div className="min-h-screen bg-chef-warm-ivory pt-20">
-        {/* Hero Section */}
-        <section className="chef-section bg-gradient-to-br from-chef-royal-blue to-chef-navy">
-          <div className="chef-container">
-            <motion.div 
-              className="text-center max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="chef-heading-xl text-chef-warm-ivory mb-6">
-                Join Culinary <span className="text-chef-gold">Clubs</span>
+      <div className="min-h-screen bg-background pt-20">
+        {/* Hero Section — premium charcoal with parallax + gold accent */}
+        <section className="relative overflow-hidden grain py-24 md:py-32" style={{ background: 'var(--gradient-charcoal)' }}>
+          <Parallax offset={60} className="absolute inset-0 opacity-[0.18]">
+            <img
+              src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?auto=format&fit=crop&w=2128&q=80"
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </Parallax>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-40 left-1/2 -translate-x-1/2 w-[60rem] h-[60rem] rounded-full opacity-20 blur-3xl"
+            style={{ background: 'var(--gradient-gold)' }}
+          />
+
+          <div className="relative chef-container">
+            <div className="text-center max-w-3xl mx-auto">
+              <Reveal>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs uppercase tracking-[0.25em] text-background/70 border border-background/15 mb-6">
+                  <Crown className="w-3 h-3 text-accent" /> Exclusive Communities
+                </span>
+              </Reveal>
+
+              <h1 className="font-playfair text-5xl md:text-7xl font-semibold leading-[1.05] text-background mb-6">
+                <TextReveal text="Join culinary" />
+                <span className="block text-gold-gradient">
+                  <TextReveal text="circles." delay={0.2} />
+                </span>
               </h1>
-              <p className="chef-body-lg text-chef-warm-ivory/90 mb-8">
-                Connect with passionate chefs, share techniques, and grow your culinary skills in specialized communities
-              </p>
-              
-              {/* Search Bar */}
-              <div className="relative max-w-md mx-auto">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-chef-charcoal/60 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search clubs..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-chef-royal-blue/20 focus:outline-none focus:ring-2 focus:ring-chef-royal-green"
-                />
-              </div>
-            </motion.div>
+
+              <Reveal delay={0.3}>
+                <p className="text-lg md:text-xl text-background/70 mb-10 leading-relaxed font-light">
+                  Connect with passionate chefs, share techniques, and grow your craft inside intimate, curated communities.
+                </p>
+              </Reveal>
+
+              <Reveal delay={0.4}>
+                <div className="relative max-w-md mx-auto">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-background/50 w-5 h-5" />
+                  <input
+                    type="text"
+                    placeholder="Search clubs..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-background/8 border border-background/15 text-background placeholder-background/40 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 backdrop-blur-md transition-all"
+                  />
+                </div>
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* Clubs Grid */}
-        <section className="chef-section">
+        <section className="py-20 md:py-28">
           <div className="chef-container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredClubs.map((club, index) => (
-                <motion.div
-                  key={club.id}
-                  className="chef-card-luxury group cursor-pointer"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="relative overflow-hidden rounded-t-xl">
-                    <img 
-                      src={club.image} 
-                      alt={club.name}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4 flex gap-2">
-                      {club.isPopular && (
-                        <span className="chef-badge-green">
-                          <Star className="w-3 h-3 fill-current" />
-                          Popular
-                        </span>
-                      )}
-                      {club.isPremium && (
-                        <span className="chef-badge bg-chef-gold/20 text-chef-gold border-chef-gold/30">
-                          <Crown className="w-3 h-3 fill-current" />
-                          Premium
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="chef-heading-sm text-chef-charcoal">{club.name}</h3>
-                      <span className="text-sm text-chef-charcoal/60 font-inter">{club.difficulty}</span>
-                    </div>
-                    
-                    <p className="chef-body-sm text-chef-charcoal/80 mb-4 line-clamp-3">
-                      {club.description}
-                    </p>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 text-sm text-chef-charcoal/60">
-                        <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>{club.members.toLocaleString()}</span>
-                        </div>
-                        <span className="chef-badge-blue">{club.category}</span>
-                      </div>
-                      
-                      <button 
-                        onClick={() => handleJoinClub(club.name)}
-                        disabled={joiningClub === club.name}
-                        className="chef-button-primary text-sm py-2 px-4 group disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        {joiningClub === club.name ? 'Joining...' : 'Join Club'}
-                        {joiningClub !== club.name && (
-                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Reveal key={club.id} delay={index * 0.06}>
+                  <motion.div
+                    className="premium-card overflow-hidden group cursor-pointer h-full flex flex-col"
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={club.image}
+                        alt={club.name}
+                        className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-[1200ms] ease-out"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        {club.isPopular && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-background/90 backdrop-blur text-foreground">
+                            <Star className="w-3 h-3 fill-current text-accent" />
+                            Popular
+                          </span>
                         )}
-                      </button>
+                        {club.isPremium && (
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-accent/95 text-accent-foreground">
+                            <Crown className="w-3 h-3 fill-current" />
+                            Premium
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
+
+                    <div className="p-6 flex-1 flex flex-col">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-playfair text-xl font-semibold text-foreground">{club.name}</h3>
+                        <span className="text-xs uppercase tracking-wider text-muted-foreground">{club.difficulty}</span>
+                      </div>
+
+                      <p className="text-sm text-muted-foreground leading-relaxed mb-6 line-clamp-3 flex-1">
+                        {club.description}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-4 border-t border-border/60">
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-1.5">
+                            <Users className="w-3.5 h-3.5" />
+                            <span className="font-medium">{club.members.toLocaleString()}</span>
+                          </div>
+                          <span className="text-muted-foreground/50">·</span>
+                          <span>{club.category}</span>
+                        </div>
+
+                        <button
+                          onClick={() => handleJoinClub(club.name)}
+                          disabled={joiningClub === club.name}
+                          className="btn-glow inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed group/btn"
+                        >
+                          {joiningClub === club.name ? 'Joining...' : 'Join'}
+                          {joiningClub !== club.name && (
+                            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+                </Reveal>
               ))}
             </div>
-            
+
             {filteredClubs.length === 0 && (
-              <div className="text-center py-12">
-                <p className="chef-body text-chef-charcoal/60">No clubs found matching your search.</p>
+              <div className="text-center py-16">
+                <p className="text-muted-foreground">No clubs found matching your search.</p>
               </div>
             )}
           </div>
         </section>
 
         {/* Create Club CTA */}
-        <section className="chef-section bg-chef-royal-green/5">
+        <section className="py-24 bg-secondary/40">
           <div className="chef-container">
-            <motion.div 
-              className="text-center max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <h2 className="chef-heading-lg text-chef-charcoal mb-6">
-                Want to Start Your Own Club?
-              </h2>
-              <p className="chef-body text-chef-charcoal/80 mb-8">
-                Have a unique culinary perspective or specialty? Create your own club and lead a community of passionate chefs.
-              </p>
-              <button 
-                onClick={handleCreateClub}
-                className="chef-button-primary"
-              >
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Create New Club
-              </button>
-            </motion.div>
+            <Reveal>
+              <div className="text-center max-w-2xl mx-auto">
+                <h2 className="font-playfair text-4xl md:text-5xl font-semibold text-foreground mb-5 leading-tight">
+                  Want to start your own <span className="text-gold-gradient">circle?</span>
+                </h2>
+                <p className="text-lg text-muted-foreground mb-10 leading-relaxed font-light">
+                  Have a unique culinary perspective? Lead a community of passionate chefs and shape the conversation.
+                </p>
+                <button
+                  onClick={handleCreateClub}
+                  className="btn-glow inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-foreground text-background font-medium hover:bg-foreground/90 transition-all shadow-elevated"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Create new club
+                </button>
+              </div>
+            </Reveal>
           </div>
         </section>
       </div>

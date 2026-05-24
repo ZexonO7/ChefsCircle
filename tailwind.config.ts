@@ -64,17 +64,17 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				chef: {
-					'royal-green': 'hsl(149, 97%, 13%)',
-					'royal-blue': 'hsl(226, 81%, 22%)',
-					'warm-ivory': 'hsl(42, 39%, 96%)',
-					'charcoal': 'hsl(0, 0%, 11%)',
-					'gold': 'hsl(47, 54%, 50%)',
-					'green-light': 'hsl(149, 97%, 22%)',
-					'blue-light': 'hsl(226, 70%, 32%)',
-					'cream': 'hsl(44, 71%, 97%)',
-					'forest': 'hsl(149, 75%, 14%)',
-					'navy': 'hsl(226, 81%, 18%)',
-					'bronze': 'hsl(47, 44%, 48%)'
+					'royal-green': 'hsl(26, 38%, 28%)',
+					'royal-blue': 'hsl(0, 0%, 8%)',
+					'warm-ivory': 'hsl(36, 30%, 96%)',
+					'charcoal': 'hsl(0, 0%, 8%)',
+					'gold': 'hsl(28, 32%, 45%)',
+					'green-light': 'hsl(26, 32%, 38%)',
+					'blue-light': 'hsl(0, 0%, 18%)',
+					'cream': 'hsl(36, 30%, 94%)',
+					'forest': 'hsl(26, 38%, 22%)',
+					'navy': 'hsl(0, 0%, 4%)',
+					'bronze': 'hsl(28, 32%, 38%)'
 				}
 			},
 			borderRadius: {
@@ -88,9 +88,9 @@ export default {
 				'space': ['Space Grotesk', 'sans-serif'],
 			},
 			backgroundImage: {
-				'chef-gradient': 'linear-gradient(135deg, #014421 0%, #0B1F66 100%)',
-				'gold-gradient': 'linear-gradient(135deg, #C2A83E 0%, #A8944D 100%)',
-				'luxury-gradient': 'linear-gradient(135deg, #F9F6F1 0%, #FDF8F0 100%)',
+				'chef-gradient': 'linear-gradient(135deg, #2B1D14 0%, #000000 100%)',
+				'gold-gradient': 'linear-gradient(135deg, #6B4A2B 0%, #A8845A 100%)',
+				'luxury-gradient': 'linear-gradient(135deg, #F5EFE6 0%, #EFE6D6 100%)',
 			},
 			boxShadow: {
 				'chef-luxury': '0 20px 25px -5px rgba(1, 68, 33, 0.1), 0 10px 10px -5px rgba(1, 68, 33, 0.04)',
