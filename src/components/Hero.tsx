@@ -63,12 +63,22 @@ const Hero = () => {
       {/* Floating gold orbs (depth) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-accent/20 blur-3xl animate-float-slow"
+        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-float-slow"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 bottom-24 h-80 w-80 rounded-full bg-accent/10 blur-3xl animate-float-slow"
+        className="pointer-events-none absolute -right-32 bottom-24 h-80 w-80 rounded-full bg-accent/20 blur-3xl animate-float-slow"
         style={{ animationDelay: '2s' }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/15 blur-3xl animate-float-slow"
+        style={{ animationDelay: '1s' }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-1/4 top-20 h-64 w-64 rounded-full bg-accent/25 blur-3xl animate-float-slow"
+        style={{ animationDelay: '3s' }}
       />
 
       {/* Content */}
