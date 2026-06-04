@@ -86,12 +86,12 @@ const Hero = () => {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-6 pt-32 pb-24 text-center md:min-h-[92vh]"
       >
-        <h1 className="font-playfair text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[88px]">
+        <h1 className="font-cursive text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[88px]">
           <TextReveal text="Cook wat" as="span" className="block" />
           <span className="mt-2 block">
             <TextReveal
               text="u crave"
-              className="font-cursive text-gold-gradient italic text-6xl sm:text-7xl md:text-8xl lg:text-[100px]"
+              className="text-gold-gradient italic"
               delay={0.35}
             />
           </span>
