@@ -1,4 +1,4 @@
-import { ArrowRight, ChefHat, Users, Sparkles } from "lucide-react";
+import { ArrowRight, ChefHat, Users } from "lucide-react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
@@ -86,22 +86,12 @@ const Hero = () => {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-6 pt-32 pb-24 text-center md:min-h-[92vh]"
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-background/70 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.22em] text-foreground/80 backdrop-blur-md"
-        >
-          <Sparkles className="h-3.5 w-3.5 text-accent" />
-          ChefsCircle
-        </motion.div>
-
         <h1 className="font-playfair text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[88px]">
           <TextReveal text="Cook wat" as="span" className="block" />
           <span className="mt-2 block">
             <TextReveal
               text="u crave"
-              className="text-gold-gradient italic"
+              className="font-cursive text-gold-gradient italic text-6xl sm:text-7xl md:text-8xl lg:text-[100px]"
               delay={0.35}
             />
           </span>
