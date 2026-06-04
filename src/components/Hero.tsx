@@ -101,7 +101,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 max-w-xl font-inter text-base text-foreground/70 sm:text-lg md:text-xl"
+          className="mt-8 max-w-xl font-cursive text-base text-foreground/70 sm:text-lg md:text-xl"
         >
           A modern culinary platform — masterclasses, live sessions, and a
           considered community for people who take food seriously.
