@@ -402,6 +402,12 @@
     background-clip: text;
     color: transparent;
   }
+  .text-gold-gradient > span > span {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-elevated { box-shadow: var(--shadow-elevated); }
