@@ -97,10 +97,10 @@ const Hero = () => {
         </motion.div>
 
         <h1 className="font-playfair text-5xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-[88px]">
-          <TextReveal text="The art of" as="span" className="block" />
+          <TextReveal text="Cook what" as="span" className="block" />
           <span className="mt-2 block">
             <TextReveal
-              text="cooking, refined."
+              text="you crave."
               className="text-gold-gradient italic"
               delay={0.35}
             />
