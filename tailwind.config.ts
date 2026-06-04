@@ -86,7 +86,7 @@ export default {
 				'playfair': ['Playfair Display', 'serif'],
 				'inter': ['Inter', 'sans-serif'],
 				'space': ['Space Grotesk', 'sans-serif'],
-				'cursive': ['Great Vibes', 'cursive'],
+				'cursive': ['Satisfy', 'cursive'],
 			},
 			backgroundImage: {
 				'chef-gradient': 'linear-gradient(135deg, #2B1D14 0%, #000000 100%)',
