@@ -6,6 +6,7 @@ import WhyChefCircle from '@/components/WhyChefsCircle';
 import GamificationDashboard from '@/components/GamificationDashboard';
 import BlogPreview from '@/components/BlogPreview';
 import SEO from '@/components/SEO';
+import ScrollMarquee from '@/components/motion/ScrollMarquee';
 import { useEffect } from 'react';
 
 const Index = () => {
@@ -27,8 +28,17 @@ const Index = () => {
         keywords={['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'gen z cooking', 'millennial chefs', 'gourmet cooking', 'culinary community']}
       />
       <Hero />
+      <ScrollMarquee />
       <Features />
       <WhyChefCircle />
+
+      {/* Accent divider line */}
+      <div className="relative py-6 overflow-hidden">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+        </div>
+      </div>
+
       <GamificationDashboard />
       <BlogPreview />
     </PageLayout>

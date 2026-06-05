@@ -60,25 +60,15 @@ const Hero = () => {
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-foreground/40 via-transparent to-transparent" />
 
-      {/* Floating gold orbs (depth) */}
+      {/* Floating gold orbs — reduced to 2 for minimal feel */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-accent/30 blur-3xl animate-float-slow"
+        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full bg-accent/25 blur-3xl animate-float-slow"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-32 bottom-24 h-80 w-80 rounded-full bg-accent/20 blur-3xl animate-float-slow"
+        className="pointer-events-none absolute -right-32 bottom-24 h-80 w-80 rounded-full bg-accent/15 blur-3xl animate-float-slow"
         style={{ animationDelay: '2s' }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/15 blur-3xl animate-float-slow"
-        style={{ animationDelay: '1s' }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-1/4 top-20 h-64 w-64 rounded-full bg-accent/25 blur-3xl animate-float-slow"
-        style={{ animationDelay: '3s' }}
       />
 
       {/* Content */}
@@ -86,9 +76,9 @@ const Hero = () => {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-6 pt-32 pb-24 text-center md:min-h-[92vh]"
       >
-        <h1 className="mx-auto max-w-[14ch] font-playfair text-4xl font-semibold leading-[1.02] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl lg:text-[68px]">
-          <TextReveal text="Cook wat" as="span" className="block" />
-          <span className="mt-2 block text-accent">u crave</span>
+        <h1 className="mx-auto max-w-[16ch] font-playfair text-4xl font-semibold leading-[1.02] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl lg:text-[68px]">
+          <TextReveal text="The art of cooking," as="span" className="block" />
+          <span className="mt-2 block italic text-accent">made personal.</span>
         </h1>
 
         <motion.p
@@ -141,17 +131,18 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Subtle scroll affordance */}
+      {/* Pulsing scroll indicator line */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.4 }}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-foreground/40"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        Scroll
+        <div className="scroll-indicator" />
       </motion.div>
     </section>
   );
 };
 
 export default Hero;
+

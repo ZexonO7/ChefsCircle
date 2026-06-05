@@ -496,4 +496,28 @@
     display: inline-block;
     animation: word-rise 0.9s var(--transition-smooth, ease) both;
   }
+
+  /* Editorial marquee text */
+  .marquee-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: hsl(var(--foreground) / 0.06);
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* Scroll indicator — pulsing vertical line */
+  @keyframes scroll-pulse {
+    0%, 100% { transform: scaleY(0.4); opacity: 0.3; }
+    50%      { transform: scaleY(1);   opacity: 1; }
+  }
+  .scroll-indicator {
+    width: 1px;
+    height: 40px;
+    background: hsl(var(--foreground) / 0.35);
+    transform-origin: top center;
+    animation: scroll-pulse 2.4s ease-in-out infinite;
+  }
 }
