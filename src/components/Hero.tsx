@@ -86,24 +86,18 @@ const Hero = () => {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-6 pt-32 pb-24 text-center md:min-h-[92vh]"
       >
-        <h1 className="font-cursive text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+        <h1 className="mx-auto max-w-[14ch] font-playfair text-4xl font-semibold leading-[1.02] tracking-[-0.03em] text-foreground sm:text-5xl md:text-6xl lg:text-[68px]">
           <TextReveal text="Cook wat" as="span" className="block" />
-          <span className="mt-2 block">
-            <TextReveal
-              text="u crave"
-              className="text-gold-gradient italic"
-              delay={0.35}
-            />
-          </span>
+          <span className="mt-2 block text-accent">u crave</span>
         </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 max-w-xl font-cursive text-base text-foreground/70 sm:text-lg md:text-xl"
+          className="mt-8 max-w-2xl text-base text-foreground/70 sm:text-lg md:text-xl"
         >
-          A modern culinary platform — masterclasses, live sessions, and a
+          A modern culinary platform for masterclasses, live sessions, and a
           considered community for people who take food seriously.
         </motion.p>
 
