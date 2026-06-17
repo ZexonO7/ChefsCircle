@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoadingScreen from './LoadingScreen';
@@ -14,27 +13,16 @@ const PageLoadingWrapper = ({ children }: PageLoadingWrapperProps) => {
   return (
     <>
       <AnimatePresence mode="wait">
-        {isLoading && (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50"
-          >
-            <LoadingScreen />
-          </motion.div>
-        )}
+        {isLoading && <LoadingScreen key="loading" />}
       </AnimatePresence>
 
       <AnimatePresence mode="wait">
         {!isLoading && (
           <motion.div
             key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
             {children}
           </motion.div>

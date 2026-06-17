@@ -1,4 +1,3 @@
-
 import PageLayout from '@/components/PageLayout';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
@@ -7,6 +6,7 @@ import GamificationDashboard from '@/components/GamificationDashboard';
 import BlogPreview from '@/components/BlogPreview';
 import SEO from '@/components/SEO';
 import ScrollMarquee from '@/components/motion/ScrollMarquee';
+import Reveal from '@/components/motion/Reveal';
 import { useEffect } from 'react';
 
 const Index = () => {
@@ -28,19 +28,35 @@ const Index = () => {
         keywords={['culinary club', 'cooking classes', 'online cooking', 'chef training', 'culinary education', 'gen z cooking', 'millennial chefs', 'gourmet cooking', 'culinary community']}
       />
       <Hero />
-      <ScrollMarquee />
-      <Features />
-      <WhyChefCircle />
+      
+      <Reveal variant="fade" duration={1.2}>
+        <ScrollMarquee />
+      </Reveal>
+
+      <Reveal variant="up" y={40} delay={0.1}>
+        <Features />
+      </Reveal>
+
+      <Reveal variant="scale" delay={0.1}>
+        <WhyChefCircle />
+      </Reveal>
 
       {/* Accent divider line */}
-      <div className="relative py-6 overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+      <Reveal variant="fade" delay={0.2}>
+        <div className="relative py-6 overflow-hidden">
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+          </div>
         </div>
-      </div>
+      </Reveal>
 
-      <GamificationDashboard />
-      <BlogPreview />
+      <Reveal variant="up" y={50}>
+        <GamificationDashboard />
+      </Reveal>
+
+      <Reveal variant="up" y={30} delay={0.2}>
+        <BlogPreview />
+      </Reveal>
     </PageLayout>
   );
 };

@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import PageLayout from '@/components/PageLayout';
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
+import Reveal from '@/components/motion/Reveal';
+
 const About = () => {
   // Scroll to top on mount
   useEffect(() => {
@@ -95,16 +97,7 @@ const About = () => {
                 </motion.div>
               </div>
               
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.6,
-              delay: 0.4
-            }} className="mb-12 sm:mb-16 px-2 sm:px-0">
+              <Reveal variant="up" y={30} delay={0.4} className="mb-12 sm:mb-16 px-2 sm:px-0">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-chef-charcoal font-playfair text-center sm:text-left">Our Story</h2>
                 <div className="bg-white rounded-xl border border-chef-royal-green/20 p-4 sm:p-6 lg:p-8 shadow-chef-luxury">
                   <p className="text-chef-charcoal/70 mb-4 text-sm sm:text-base">ChefsCircle is something Advithya Bhardwaj started with the passion for culinary arts, to make cooking feel natural for those who think it can't. It’s a space where people can share recipes, join challenges, learn new things, and connect with others who love food. It is not just an app, it is a community built around creativity, learning, and the joy of cooking together ✨</p>
@@ -115,15 +108,10 @@ const About = () => {
                   </p>
                   <p className="text-chef-charcoal/70 text-sm sm:text-base">Today, ChefsCircle serves passionate Gen Z and millennial home chefs who demand excellence in their culinary journey. Our members gain access to exclusive techniques, premium ingredients, and a community of like-minded culinary enthusiasts.</p>
                 </div>
-              </motion.div>
+              </Reveal>
               
               {/* Award Section */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                transition={{ duration: 0.6, delay: 0.5 }} 
-                className="mb-12 sm:mb-16 px-2 sm:px-0"
-              >
+              <Reveal variant="scale" delay={0.3} className="mb-12 sm:mb-16 px-2 sm:px-0">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-chef-charcoal font-playfair text-center sm:text-left">Awards & Recognition</h2>
                 <div className="bg-gradient-to-br from-chef-warm-ivory to-amber-50 rounded-xl border border-amber-200 p-6 sm:p-8 shadow-chef-luxury">
                   <div className="flex flex-col md:flex-row items-center gap-6">
@@ -156,18 +144,9 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </Reveal>
               
-              <motion.div initial={{
-              opacity: 0,
-              y: 20
-            }} animate={{
-              opacity: 1,
-              y: 0
-            }} transition={{
-              duration: 0.6,
-              delay: 0.6
-            }} className="mb-12 sm:mb-16 px-2 sm:px-0">
+              <Reveal variant="up" y={40} delay={0.2} className="mb-12 sm:mb-16 px-2 sm:px-0">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-chef-charcoal font-playfair text-center sm:text-left">Our Culinary Team</h2>
                 <p className="text-chef-charcoal/70 mb-6 sm:mb-8 text-center sm:text-left text-sm sm:text-base">
                   Our team combines Michelin-trained chefs, culinary educators, and food innovation experts to deliver 
@@ -219,7 +198,7 @@ const About = () => {
                       </Link>;
                 })}
                 </div>
-              </motion.div>
+              </Reveal>
             </div>
             
             <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-chef-royal-green/20 text-center sm:text-left px-2 sm:px-0">

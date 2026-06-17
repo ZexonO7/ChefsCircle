@@ -16,6 +16,8 @@ import { useRecipeAnalytics } from '@/hooks/useRecipeAnalytics';
 import { useUserRecipes } from '@/hooks/useUserRecipes';
 import { supabase } from '@/integrations/supabase/client';
 
+import Reveal from '@/components/motion/Reveal';
+
 const Recipes = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -130,25 +132,33 @@ const Recipes = () => {
         keywords={['recipe sharing', 'cooking recipes', 'culinary community', 'chef recipes', 'food sharing']}
       />
       <div className="min-h-screen bg-chef-warm-ivory pt-20">
-        <RecipeHero
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          onShareRecipe={handleShareRecipe}
-        />
+        <Reveal variant="fade" duration={1}>
+          <RecipeHero
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            onShareRecipe={handleShareRecipe}
+          />
+        </Reveal>
 
-        <RecipeFilters
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
+        <Reveal variant="up" y={20} delay={0.2}>
+          <RecipeFilters
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+          />
+        </Reveal>
 
-        <RecipeGrid
-          recipes={filteredRecipes}
-          loading={loading}
-          onViewRecipe={handleViewRecipe}
-        />
+        <Reveal variant="up" y={40} delay={0.3}>
+          <RecipeGrid
+            recipes={filteredRecipes}
+            loading={loading}
+            onViewRecipe={handleViewRecipe}
+          />
+        </Reveal>
 
-        <RecipeGuidelines />
+        <Reveal variant="scale" delay={0.4}>
+          <RecipeGuidelines />
+        </Reveal>
       </div>
 
       <RecipeSubmissionForm
